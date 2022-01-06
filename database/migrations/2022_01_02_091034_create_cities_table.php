@@ -16,6 +16,7 @@ class CreateCitiesTable extends Migration
         Schema::create('cities', function (Blueprint $table) {
             $table->id();
             $table->string('city')->unique();
+            $table->string('slug_city');
             $table->enum('status', [0, 1])->default(0)->comment("1 = active, 0 = disabled");
             $table->timestamps();
         });

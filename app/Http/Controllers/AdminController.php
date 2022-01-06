@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 use phpDocumentor\Reflection\Types\This;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class AdminController extends Controller
 {
@@ -109,8 +110,9 @@ class AdminController extends Controller
         ]);
         $cate = new Category;
         $cate->name = $request->name;
+        $cate->slug_name = str_slug($request->name);
         $image = $request->file('image');
-        $iname = $image->hashName();
+        $iname = date('Ym') . '-' . rand() . '.' . $image->extension();
         $store = $image->storeAs('public/images', $iname);
         if ($store) {
             $cate->image = $iname;
@@ -175,9 +177,10 @@ class AdminController extends Controller
         // dd($request);
         $cate = Category::findorfail($id);
         $cate->name = $request->name;
+        $cate->slug_name = str_slug($request->name);
         if ($request->hasFile('image')) {
             $image = $request->file('image');
-            $iname = $image->hashName();
+            $iname = date('Ym') . '-' . rand() . '.' . $image->extension();
             Storage::delete('public/images/' . $cate->image);
             $store = $image->storeAs('public/images', $iname);
             if ($store) {
@@ -228,6 +231,7 @@ class AdminController extends Controller
         // dd($request);
         $city = new City;
         $city->city = $request->city;
+        $city->slug_city = str_slug($request->city);
         if ($request->status == 1) {
             $city->status = $request->status;
         } else {
@@ -286,6 +290,7 @@ class AdminController extends Controller
         // dd($request);
         $city = City::findorfail($id);
         $city->city = $request->city;
+        $city->slug_city = str_slug($request->city);
         if ($request->status == 1) {
             $city->status = $request->status;
         } else {
