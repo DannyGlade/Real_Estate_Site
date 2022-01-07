@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\City;
+use App\Models\Facilities;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
@@ -140,6 +141,8 @@ class AdminController extends Controller
             Storage::delete('public/images/' . $image);
             $cate->delete();
         }
+        $request->session()->flash('msg', 'Deleted...');
+        $request->session()->flash('msgst', 'danger');
         return redirect(route('list_category'));
     }
 
@@ -212,7 +215,7 @@ class AdminController extends Controller
     }
     public function add_cities(Request $request)
     {
-        $title = "Cities List";
+        $title = "Add Cities";
         $menu = "cities";
         $user = $request->session()->get('AdminUser');
         if ($user) {
@@ -255,6 +258,8 @@ class AdminController extends Controller
             $city = City::findorfail($id);
             $city->delete();
         }
+        $request->session()->flash('msg', 'Deleted...');
+        $request->session()->flash('msgst', 'danger');
         return redirect(route('list_cities'));
     }
     public function edit_cities(Request $request)
@@ -303,4 +308,102 @@ class AdminController extends Controller
         return redirect(route('list_cities'));
     }
     //Cities Ends
+
+    //Facilities starts
+    public function list_facilities(Request $request)
+    {
+        $title = "Facilities List";
+        $menu = "facilities";
+        $user = $request->session()->get('AdminUser');
+        if ($user) {
+            $status = true;
+        }
+        $faci = Facilities::all();
+        $data = compact('status', 'user', 'title', 'menu', 'faci');
+
+        return view('AdminPanel.facilities.list', $data);
+    }
+    public function add_facilities(Request $request)
+    {
+        $title = "Add Facility";
+        $menu = "facilities";
+        $user = $request->session()->get('AdminUser');
+        if ($user) {
+            $status = true;
+        }
+        $data = compact('status', 'user', 'title', 'menu');
+
+        return view('AdminPanel.facilities.form', $data);
+    }
+    public function facilities_added(Request $request)
+    {
+        $valid = $request->validate([
+            'faci' => 'required|unique:facilities,faci',
+        ]);
+        // dd($request);
+        $faci = new Facilities;
+        $faci->faci = $request->faci;
+        $faci->slug_faci = str_slug($request->faci);
+        $faci->save();
+        $request->session()->flash('msg', 'Added...');
+        $request->session()->flash('msgst', 'success');
+        return redirect(route('list_facilities'));
+    }
+    public function del_facilities(Request $request)
+    {
+        $valid = validator($request->route()->parameters(), [
+            'id' => 'exists:facilities,id'
+        ])->validate();
+        $id = $request->route()->parameter('id');
+
+        // dd($valid);
+        if ($valid) {
+            $faci = Facilities::findorfail($id);
+            $faci->delete();
+        }
+        $request->session()->flash('msg', 'Deleted...');
+        $request->session()->flash('msgst', 'danger');
+        return redirect(route('list_facilities'));
+    }
+    public function edit_facilities(Request $request)
+    {
+        $valid = validator($request->route()->parameters(), [
+            'id' => 'exists:facilities,id'
+        ])->validate();
+        $id = $request->route()->parameter('id');
+
+        if ($valid) {
+            $faci = Facilities::findorfail($id);
+        }
+
+        $title = "Edit Facility";
+        $menu = "facilities";
+        $user = $request->session()->get('AdminUser');
+        if ($user) {
+            $status = true;
+        }
+        $data = compact('status', 'user', 'title', 'menu', 'faci');
+        return view('AdminPanel.facilities.form', $data);
+    }
+    public function facilities_edited(Request $request)
+    {
+        $valid = validator($request->route()->parameters(), [
+            'id' => 'exists:facilities,id'
+        ])->validate();
+        $id = $request->route()->parameter('id');
+        $request->validate([
+            'faci' => 'required|unique:facilities,faci,' . $id,
+        ]);
+        // dd($request);
+        $faci = Facilities::findorfail($id);
+        $faci->faci = $request->faci;
+        $faci->slug_faci = str_slug($request->faci);
+        $faci->save();
+
+        $request->session()->flash('msg', 'Edited...');
+        $request->session()->flash('msgst', 'success');
+        return redirect(route('list_facilities'));
+    }
+    //Facilities ends
+
 }

@@ -2,21 +2,27 @@
     <div class="position-sticky pt-3">
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link @if ($menu == 'dashboard') active @endif " aria-current="page" href="{{ route('AdminHome') }}">
+                <a class="nav-link @if ($menu == 'dashboard')fw-bolder fs-6 active @endif " aria-current="page" href="{{ route('AdminHome') }}">
                     <span data-feather="home"></span>
                     Dashboard
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link @if ($menu == 'category') active @endif " aria-current="page" href="{{ route('list_category') }}">
+                <a class="nav-link @if ($menu == 'category')fw-bolder fs-6 active @endif " aria-current="page" href="{{ route('list_category') }}">
                     <span data-feather="home"></span>
                     Category
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link @if ($menu == 'cities') active @endif " aria-current="page" href="{{ route('list_cities') }}">
+                <a class="nav-link @if ($menu == 'cities')fw-bolder fs-6 active @endif " aria-current="page" href="{{ route('list_cities') }}">
                     <span data-feather="home"></span>
                     Cities
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @if ($menu == 'facilities')fw-bolder fs-6 active @endif " aria-current="page" href="{{ route('list_facilities') }}">
+                    <span data-feather="home"></span>
+                    Facilities
                 </a>
             </li>
             {{-- <li class="nav-item">

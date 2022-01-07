@@ -35,22 +35,19 @@
                                 <div class="col-12">
                                     <label for="" class="form-label">City Status</label>
                                     <div class="form-check">
-                                      <input class="form-check-input" type="checkbox" value="1" name="status" @if(!empty($city)) @if($city->status == 1) checked @endif @endif >
-                                      <label class="form-check-label">
-                                        Check to enable this city
-                                      </label>
+                                        <input class="form-check-input" type="checkbox" value="1" name="status"
+                                            @if (!empty($city)) @if ($city->status == 1) checked @endif @endif>
+                                        <label class="form-check-label">
+                                            Check to enable this city
+                                        </label>
                                     </div>
-                                  </div>
+                                </div>
                             </div>
                             <div class="col-12">
                                 <button class="btn @if (!empty($city)) btn-success @else btn-primary @endif" type="submit">@if (!empty($city)) Update @else Submit @endif</button>
-                                </div>
+                            </div>
 
-                            </form>
-                        {{-- <h5 class="card-title">Card title</h5>
-                        <h6 class="card-subtitle mb-2 text-muted ">Card subtitle</h6>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p> --}}
+                        </form>
                     </div>
                 </div>
             </div>

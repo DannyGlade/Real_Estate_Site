@@ -59,4 +59,14 @@ Route::middleware([AuthCheck::class])->group(function () {
     Route::get('/admin/cities/{id}/edit', [AdminController::class, 'edit_cities'])->name('edit_cities');
     Route::post('/admin/cities/{id}/edit', [AdminController::class, 'cities_edited'])->name('cities_edited');
     //cities ends
+
+    //Facilities starts
+    Route::get('/admin/facilities', [AdminController::class, 'list_facilities'])->name('list_facilities');
+    Route::get('/admin/facilities/add', [AdminController::class, 'add_facilities'])->name('add_facilities');
+    Route::post('/admin/facilities/add', [AdminController::class, 'facilities_added'])->name('facilities_added');
+
+    Route::get('/admin/facilities/{id}/del', [AdminController::class, 'del_facilities'])->name('del_facilities');
+    Route::get('/admin/facilities/{id}/edit', [AdminController::class, 'edit_facilities'])->name('edit_facilities');
+    Route::post('/admin/facilities/{id}/edit', [AdminController::class, 'facilities_edited'])->name('facilities_edited');
+    //Facilities ends
 });
