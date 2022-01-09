@@ -69,4 +69,8 @@ Route::middleware([AuthCheck::class])->group(function () {
     Route::get('/admin/facilities/{id}/edit', [AdminController::class, 'edit_facilities'])->name('edit_facilities');
     Route::post('/admin/facilities/{id}/edit', [AdminController::class, 'facilities_edited'])->name('facilities_edited');
     //Facilities ends
+
+    //Property starts
+
+    //Property ends
 });
