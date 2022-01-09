@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\City;
 use App\Models\Facilities;
+use App\Models\Property;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
@@ -406,4 +407,89 @@ class AdminController extends Controller
     }
     //Facilities ends
 
+    //Properties starts
+    public function list_properties(Request $request)
+    {
+        $title = "Properties List";
+        $menu = "properties";
+        $user = $request->session()->get('AdminUser');
+        if ($user) {
+            $status = true;
+        }
+        $pro = Property::all();
+        $data = compact('status', 'user', 'title', 'menu', 'pro');
+
+        return view('AdminPanel.properties.list', $data);
+    }
+    public function add_properties(Request $request)
+    {
+        $title = "Add Property";
+        $menu = "properties";
+        $user = $request->session()->get('AdminUser');
+        if ($user) {
+            $status = true;
+        }
+        $city = City::select('id', 'city')->where('status', '=', '1')->get();
+        $cate = Category::select('id', 'name')->get();
+        $data = compact('status', 'user', 'title', 'menu', 'city', 'cate');
+
+        return view('AdminPanel.properties.form', $data);
+    }
+    public function properties_added(Request $request)
+    {
+        $valid = $request->validate([
+            'title' => 'required',
+            'price' => 'required|numeric|min:0|max:99999999',
+            'purpose' => 'required',
+            'category' => 'required',
+            'image' => 'mimes:png,jpg',
+            'floorplan' => 'mimes:png,jpg',
+            'rooms' => 'required|numeric',
+            'bathrooms' => 'required|numeric',
+            'city' => 'required',
+            'address' => 'required|max:191',
+            'area' => 'numeric',
+            'description' => 'string',
+        ]);
+        // dd($request);
+        $pro = new Property;
+        $pro->title = $request->title;
+        $pro->title_slug = str_slug($request->title);
+        $pro->price = $request->price;
+        $pro->purpose = $request->purpose;
+        $pro->category = $request->category;
+        $pro->city = $request->city;
+        $pro->rooms = $request->rooms;
+        $pro->bathrooms = $request->bathrooms;
+        $pro->address = $request->address;
+        $pro->featured = $request->featured ? true : false;
+        $pro->area = $request->area ? $request->area : null;
+        $pro->description = $request->description ? $request->description : null;
+        $pro->video = $request->video ? $request->video : null;
+        $pro->map = $request->map ? $request->map : null;
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $iname = date('Ym') . '-' . rand() . '.' . $image->extension();
+            $store = $image->storeAs('public/property', $iname);
+            if ($store) {
+                $pro->image = $iname;
+            }
+        }
+        if ($request->hasFile('floorplan')) {
+            $image = $request->file('floorplan');
+            $iname = date('Ym') . '-' . rand() . '.' . $image->extension();
+            $store = $image->storeAs('public/property', $iname);
+            if ($store) {
+                $pro->floorplan = $iname;
+            }
+        }
+        $pro->save();
+
+
+        $request->session()->flash('msg', 'Added...');
+        $request->session()->flash('msgst', 'success');
+        return redirect(route('list_properties'));
+    }
+
+    //Properties ends
 }
