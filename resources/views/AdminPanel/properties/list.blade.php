@@ -34,11 +34,11 @@
                                 <th scope="row">${{ $item->price }}</th>
                                 <th scope="row" @if ($item->featured == 1)class="text-success">Active @else class="text-danger"> Disabled @endif</th>
                                 <th scope="row">
-                                    <a class="btn btn-success btn-sm" href="{{ route('edit_facilities', $item->id) }}"><i class="fa fa-edit"
-                                            aria-hidden="true"></i></a>
+                                    <a class="btn btn-success btn-sm" href="{{ route('edit_properties', $item->id) }}">
+                                        <i class="fa fa-edit" aria-hidden="true"></i></a>
                                     <a class="btn btn-danger btn-sm" onclick="return confirm('Sure to delete?')"
-                                        href="{{ route('del_facilities', $item->id) }}"><i class="fa fa-trash"
-                                            aria-hidden="true"></i></a>
+                                        href="{{ route('del_properties', $item->id) }}">
+                                        <i class="fa fa-trash" aria-hidden="true"></i></a>
                                 </th>
                             </tr>
                         @endforeach

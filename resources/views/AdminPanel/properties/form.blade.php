@@ -19,12 +19,12 @@
                         <h4 class="">@if (!empty($pro))Edit @else Add @endif Property</h4>
                     </div>
                     <div class="card-body">
-                        <form class="row g-3" action="@if (!empty($pro)){{ route('category_edited', $pro->id) }}@else{{ route('properties_added') }}@endif" method="POST"
+                        <form class="row g-3" action="@if (!empty($pro)){{ route('properties_edited', $pro->id) }}@else{{ route('properties_added') }}@endif" method="POST"
                             enctype="multipart/form-data">
                             @csrf
 
                             <div class="row border-bottom border-2 m-auto mt-3">
-                                <div class="col mb-2">
+                                <div class="col mb-2  mx-auto">
                                     <div class="col-md-12">
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" value="1" name="featured"
@@ -76,8 +76,8 @@
                                                     <option selected>Choose...</option>
                                                     @foreach ($cate as $item)
                                                         @if (!empty($pro))
-                                                            @if ($pro->id == $item->id)
-                                                                <option selected value="{{ $item->id }}}">
+                                                            @if ($pro->category == $item->id)
+                                                                <option selected value="{{ $item->id }}">
                                                                     {{ $item->name }}</option>
                                                             @else
                                                                 <option value="{{ $item->id }}">{{ $item->name }}
@@ -85,7 +85,7 @@
                                                             @endif
                                                         @else
                                                             @if (old('category') == $item->id)
-                                                                <option selected value="{{ $item->id }}}">
+                                                                <option selected value="{{ $item->id }}">
                                                                     {{ $item->name }}</option>
                                                             @else
                                                                 <option value="{{ $item->id }}">{{ $item->name }}
@@ -133,8 +133,8 @@
                                                     <option selected>Choose...</option>
                                                     @foreach ($city as $item)
                                                         @if (!empty($pro))
-                                                            @if ($pro->id == $item->id)
-                                                                <option selected value="{{ $item->id }}}">
+                                                            @if ($pro->city == $item->id)
+                                                                <option selected value="{{ $item->id }}">
                                                                     {{ $item->city }}</option>
                                                             @else
                                                                 <option value="{{ $item->id }}">{{ $item->city }}
@@ -142,7 +142,7 @@
                                                             @endif
                                                         @else
                                                             @if (old('city') == $item->id)
-                                                                <option selected value="{{ $item->id }}}">
+                                                                <option selected value="{{ $item->id }}">
                                                                     {{ $item->city }}</option>
                                                             @else
                                                                 <option value="{{ $item->id }}">{{ $item->city }}
@@ -163,6 +163,20 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="row mb-2">
+                                        <div class="col-md-12 mb-2">
+                                            <label for="" class="form-label">Property Video</label>
+                                            <textarea class="form-control" rows="3"
+                                                name="video">@if (!empty($pro)){{ $pro->video }}@else{{ old('video') }}@endif</textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-md-12 mb-2">
+                                            <label for="" class="form-label">Property Map</label>
+                                            <textarea class="form-control" rows="3"
+                                                name="map">@if (!empty($pro)){{ $pro->map }}@else{{ old('map') }}@endif</textarea>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-md-4 mx-auto mb-2 ps-2 border-start">
                                     <div class="col-md-12 mb-2">
@@ -172,7 +186,14 @@
                                         </div>
                                         <div class="text-danger mt-0">@error('image') * {{ $message }} @enderror</div>
                                     </div>
-                                    <div class="col-md-12">
+                                    @if (!empty($pro->image))
+                                        <div class="mb-2">
+                                            <label for="" class="form-label">Old Image</label>
+                                            <img class="form-control"
+                                                src="{{ asset('/storage/property/' . $pro->image) }}" alt="Error">
+                                        </div>
+                                    @endif
+                                    <div class="col-md-12 mb-2">
                                         <label for="" class="form-label">Flooreplan Image</label>
                                         <div class="input-group">
                                             <input type="file" class="form-control" name="floorplan">
@@ -181,13 +202,15 @@
                                         </div>
                                     </div>
                                     @if (!empty($pro->image))
-                                        <label for="" class="form-label">Old Image</label>
-                                        <img class="form-control" src="{{ asset('/storage/images/' . $pro->image) }}"
-                                            alt="Error">
+                                        <div class="mb-2">
+                                            <label for="" class="form-label">Old Flooreplan</label>
+                                            <img class="form-control"
+                                                src="{{ asset('/storage/property/' . $pro->floorplan) }}" alt="Error">
+                                        </div>
                                     @endif
                                 </div>
                             </div>
-                            <div class="row border-bottom border-2 m-auto mt-3">
+                            {{-- <div class="row border-bottom border-2 m-auto mt-3">
                                 <div class="col-md-6 mb-2">
                                     <label for="" class="form-label">Property Video</label>
                                     <textarea class="form-control" name="video">
@@ -200,14 +223,14 @@
                                                 @if (!empty($pro)){{ $pro->map }}@else{{ old('map') }}@endif
                                             </textarea>
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="col-12">
                                 <button class="btn @if (!empty($pro)) btn-success @else btn-primary @endif" type="submit">@if (!empty($pro)) Update @else Submit @endif</button>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 @endsection

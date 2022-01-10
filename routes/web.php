@@ -75,8 +75,8 @@ Route::middleware([AuthCheck::class])->group(function () {
     Route::get('/admin/properties/add', [AdminController::class, 'add_properties'])->name('add_properties');
     Route::post('/admin/properties/add', [AdminController::class, 'properties_added'])->name('properties_added');
 
-    // Route::get('/admin/facilities/{id}/del', [AdminController::class, 'del_facilities'])->name('del_facilities');
-    // Route::get('/admin/facilities/{id}/edit', [AdminController::class, 'edit_facilities'])->name('edit_facilities');
-    // Route::post('/admin/facilities/{id}/edit', [AdminController::class, 'facilities_edited'])->name('facilities_edited');
+    Route::get('/admin/properties/{id}/del', [AdminController::class, 'del_properties'])->name('del_properties');
+    Route::get('/admin/properties/{id}/edit', [AdminController::class, 'edit_properties'])->name('edit_properties');
+    Route::post('/admin/properties/{id}/edit', [AdminController::class, 'properties_edited'])->name('properties_edited');
     //Property ends
 });
