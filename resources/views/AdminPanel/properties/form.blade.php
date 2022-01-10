@@ -45,7 +45,7 @@
                                         <div class="col-md-6">
                                             <label for="" class="form-label">Price</label>
                                             <div class="input-group">
-                                                <div class="input-group-text">$</div>
+                                                <div class="input-group-text">₹</div>
                                                 <input type="number" class="form-control" name="price" min="0"
                                                     max="99999999" value="@if (!empty($pro)){{ $pro->price }}@else{{ old('price') }}@endif">
                                             </div>
