@@ -416,7 +416,8 @@ class AdminController extends Controller
         if ($user) {
             $status = true;
         }
-        $pro = Property::all();
+        $pro = Property::with('Cate', 'City')->get();
+        // dd($pro);
         $data = compact('status', 'user', 'title', 'menu', 'pro');
 
         return view('AdminPanel.properties.list', $data);
@@ -594,6 +595,14 @@ class AdminController extends Controller
         $request->session()->flash('msgst', 'success');
         return redirect(route('list_properties'));
     }
-
     //Properties ends
+
+    //Gallary starts
+    public function add_gallary(Request $request)
+    {
+        if ($request->ajax()) {
+
+        }
+    }
+    //Gallary ends
 }

@@ -19,7 +19,7 @@
                         <h4 class="">@if (!empty($pro))Edit @else Add @endif Property</h4>
                     </div>
                     <div class="card-body">
-                        <form class="row g-3" action="@if (!empty($pro)){{ route('properties_edited', $pro->id) }}@else{{ route('properties_added') }}@endif" method="POST"
+                        <form class="row g-3" id="proForm" action="@if (!empty($pro)){{ route('properties_edited', $pro->id) }}@else{{ route('properties_added') }}@endif" method="POST"
                             enctype="multipart/form-data">
                             @csrf
 
@@ -201,7 +201,7 @@
                                         <div class="text-danger mt-0">@error('floorplan') * {{ $message }} @enderror
                                         </div>
                                     </div>
-                                    @if (!empty($pro->image))
+                                    @if (!empty($pro->flooreplan))
                                         <div class="mb-2">
                                             <label for="" class="form-label">Old Flooreplan</label>
                                             <img class="form-control"
@@ -210,27 +210,44 @@
                                     @endif
                                 </div>
                             </div>
-                            {{-- <div class="row border-bottom border-2 m-auto mt-3">
-                                <div class="col-md-6 mb-2">
-                                    <label for="" class="form-label">Property Video</label>
-                                    <textarea class="form-control" name="video">
-                                                @if (!empty($pro)){{ $pro->video }}@else{{ old('video') }}@endif
-                                            </textarea>
-                                </div>
-                                <div class="col-md-6 mb-2 border-start">
-                                    <label for="" class="form-label">Property Map</label>
-                                    <textarea class="form-control" name="map">
-                                                @if (!empty($pro)){{ $pro->map }}@else{{ old('map') }}@endif
-                                            </textarea>
-                                </div>
-                            </div> --}}
+                            <div class="row border-bottom border-2 m-auto mt-3">
+                                <form id="gallaryAjax" data-id="" action="javascript:void(0)" method="post">
+                                    @csrf
+                                    <div class="col-md-12 mb-2">
+                                        <label for="" class="form-label">Property Gallary</label>
+                                        <div class="input-group mb-2">
+                                            <input type="file" class="form-control" name="gallary[]" multiple>
+                                        </div>
+                                        <button type="submit" id="ajaxSave" class="btn btn-outline-secondary">Save</button>
+                                        <button id="ajaxDelete" class="btn btn-outline-danger">Delete</button>
+                                    </div>
+                                </form>
+                            </div>
                             <div class="col-12">
                                 <button class="btn @if (!empty($pro)) btn-success @else btn-primary @endif" type="submit">@if (!empty($pro)) Update @else Submit @endif</button>
-                                </div>
-                            </form>
-                        </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 @endsection
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function() {
+        $(document).on('click', '#ajaxSave', function(e) {
+            e.preventDefault();
+
+        });
+        $(document).on('click', '#ajaxDelete', function(e) {
+            e.preventDefault();
+        });
+        $('#gallaryAjax').submit(function (e) {
+            e.preventDefault();
+            console.log('submit');
+
+        });
+    });
+</script>
