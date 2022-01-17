@@ -210,7 +210,7 @@
                                     @endif
                                 </div>
                             </div>
-                            <div class="row border-bottom border-2 m-auto mt-3">
+                            {{-- <div class="row border-bottom border-2 m-auto mt-3">
                                 <form id="gallaryAjax" data-id="" action="javascript:void(0)" method="post">
                                     @csrf
                                     <div class="col-md-12 mb-2">
@@ -222,7 +222,7 @@
                                         <button id="ajaxDelete" class="btn btn-outline-danger">Delete</button>
                                     </div>
                                 </form>
-                            </div>
+                            </div> --}}
                             <div class="col-12">
                                 <button class="btn @if (!empty($pro)) btn-success @else btn-primary @endif" type="submit">@if (!empty($pro)) Update @else Submit @endif</button>
                             </div>
@@ -233,7 +233,7 @@
         </div>
     </div>
 @endsection
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+{{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"
 integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script>
     $(document).ready(function() {
@@ -250,4 +250,4 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
 
         });
     });
-</script>
+</script> --}}
