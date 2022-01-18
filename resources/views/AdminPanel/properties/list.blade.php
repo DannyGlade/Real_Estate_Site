@@ -27,6 +27,7 @@
                             <th scope="col">Category</th>
                             <th scope="col">Image</th>
                             <th scope="col">City</th>
+                            <th scope="col">Gallary</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -39,8 +40,11 @@
                                 <th scope="row" @if ($item->featured == 1)class="text-success">Active @else class="text-danger"> Disabled @endif</th>
                                 <th scope="row">{{ $item->purpose }}</th>
                                 <th scope="row">{{ $item->Cate->name }}</th>
-                                <th scope="row"><img height="30rem" class="rounded" src="{{ asset('/storage/property/' . $item->image) }}" alt="Error"></th>
+                                <th scope="row"><img height="30rem" class="rounded"
+                                        src="{{ asset('/storage/property/' . $item->image) }}" alt="Error"></th>
                                 <th scope="row">{{ $item->City->city }}</th>
+                                <th scope="row"><a href="{{ route('get_gallary', $item->id) }}"
+                                        class="btn btn-primary btn-sm"><i class="fas fa-images"></i></a></th>
                                 <th scope="row">
                                     <a class="btn btn-success btn-sm" href="{{ route('edit_properties', $item->id) }}">
                                         <i class="fa fa-edit" aria-hidden="true"></i></a>

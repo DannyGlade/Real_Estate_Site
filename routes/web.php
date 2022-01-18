@@ -81,6 +81,8 @@ Route::middleware([AuthCheck::class])->group(function () {
     //Property ends
 
     //Gallary starts
-    Route::post('/admin/properties/{id}/addgallary', [AdminController::class, 'add_gallary'])->name('add_gallary');
+    Route::get('/admin/properties/{id}/gallary', [AdminController::class, 'get_gallary'])->name('get_gallary');
+    Route::post('/admin/properties/{id}/gallary', [AdminController::class, 'set_gallary'])->name('set_gallary');
+    Route::get('/admin/properties/{id}/gallary/{gid}', [AdminController::class, 'del_gallary'])->name('del_gallary');
     //Gallary ends
 });

@@ -13,6 +13,6 @@ class gallary extends Model
 
     public function Pro()
     {
-        return $this->hasMany(Property::class, 'prod_id');
+        return $this->belongsTo(Property::class, 'pro_id');
     }
 }

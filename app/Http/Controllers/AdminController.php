@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\City;
 use App\Models\Facilities;
+use App\Models\gallary;
 use App\Models\Property;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -598,11 +599,71 @@ class AdminController extends Controller
     //Properties ends
 
     //Gallary starts
-    public function add_gallary(Request $request)
+    public function get_gallary(Request $request)
     {
-        if ($request->ajax()) {
-
+        $title = "Images Gallary";
+        $menu = "properties";
+        $user = $request->session()->get('AdminUser');
+        if ($user) {
+            $status = true;
         }
+        $valid = validator($request->route()->parameters(), [
+            'id' => 'exists:properties,id'
+        ])->validate();
+        $id = $request->route()->parameter('id');
+        $gal = gallary::with('Pro')->where('pro_id', '=', $id)->get();
+        // dd($gal);
+        $data = compact('status', 'user', 'title', 'menu', 'gal', 'id');
+
+        return view('AdminPanel.gallary.list', $data);
+    }
+    public function set_gallary(Request $request)
+    {
+        $request->validate([
+            'gallary[]' => 'image|mimes:png,jpg'
+        ]);
+        // dd($request->file('gallary')[0]);
+        $valid = validator($request->route()->parameters(), [
+            'id' => 'exists:properties,id'
+        ])->validate();
+        $id = $request->route()->parameter('id');
+        $images = $request->file('gallary');
+        // dd($images);
+
+        foreach ($images as $img) {
+            $image = $img;
+            $gal = new gallary;
+            $gal->pro_id = $id;
+            $iname = date('Ym') . '-' . rand() . '.' . $image->extension();
+            $store = $image->storeAs('public/gallary/' . $id . '/', $iname);
+            if ($store) {
+                $gal->gal_image = $iname;
+            }
+            $gal->save();
+        }
+
+        return redirect(route('get_gallary', $id));
+    }
+    public function del_gallary(Request $request)
+    {
+        $valid = validator($request->route()->parameters(), [
+            'id' => 'exists:properties,id',
+            'gid' => 'exists:gallaries,id'
+        ])->validate();
+        $id = $request->route()->parameter('id');
+        $gid = $request->route()->parameter('gid');
+
+        if ($valid) {
+            $gal = gallary::findorfail($gid);
+            if ($gal->gal_image) {
+                Storage::delete('public/gallary/' . $id . '/' . $gal->gal_image);
+            }
+            $gal->delete();
+        }
+        $request->session()->flash('msg', 'Deleted...');
+        $request->session()->flash('msgst', 'danger');
+
+        return redirect(route('get_gallary', $id));
     }
     //Gallary ends
 }
