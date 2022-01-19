@@ -12,7 +12,7 @@ class UserController extends Controller
     {
         $title = "Log In";
         $data = compact('title');
-        return view('User.UserLogIn')->with($data);
+        return view('User.UserLogIn', $data);
     }
     public function login(Request $request)
     {
@@ -26,7 +26,8 @@ class UserController extends Controller
 
         // dd($user);
 
-        if ($user[0]->password == md5($request->password)) {
+        // if ($user[0]->password == md5($request->password)) {
+        if (Hash::check($request->password, $user[0]->password)) {
             $request->session()->put('user', $user[0]->toArray());
             return redirect(route('userHome'));
         } else {
@@ -39,7 +40,9 @@ class UserController extends Controller
     //sending to sign up form
     public function signupForm()
     {
-        return view('User.UserSignUp');
+        $title = "Sign In";
+        $data = compact('title');
+        return view('User.UserSignUp', $data);
     }
 
     //signing up
