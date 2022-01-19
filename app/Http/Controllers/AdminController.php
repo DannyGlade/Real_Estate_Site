@@ -9,6 +9,7 @@ use App\Models\gallary;
 use App\Models\Property;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use phpDocumentor\Reflection\Types\This;
 use Symfony\Component\String\Slugger\SluggerInterface;
@@ -667,4 +668,20 @@ class AdminController extends Controller
         return redirect(route('get_gallary', $id));
     }
     //Gallary ends
+
+    //Users starts
+    public function list_users(Request $request)
+    {
+        $title = "Users List";
+        $menu = "users";
+        $user = $request->session()->get('AdminUser');
+        if ($user) {
+            $status = true;
+        }
+        $usersData = User::all()->where('type', '!=', 'R');
+        $data = compact('status', 'user', 'title', 'menu', 'usersData');
+        // dd($user);
+        return view('AdminPanel.users.list', $data);
+    }
+    //Users ends
 }

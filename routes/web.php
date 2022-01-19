@@ -85,4 +85,12 @@ Route::middleware([AuthCheck::class])->group(function () {
     Route::post('/admin/properties/{id}/gallary', [AdminController::class, 'set_gallary'])->name('set_gallary');
     Route::get('/admin/properties/{id}/gallary/{gid}', [AdminController::class, 'del_gallary'])->name('del_gallary');
     //Gallary ends
+
+    //Users starts
+    Route::get('/admin/users', [AdminController::class, 'list_users'])->name('list_users');
+
+    // Route::get('/admin/facilities/{id}/del', [AdminController::class, 'del_facilities'])->name('del_facilities');
+    // Route::get('/admin/facilities/{id}/edit', [AdminController::class, 'edit_facilities'])->name('edit_facilities');
+    // Route::post('/admin/facilities/{id}/edit', [AdminController::class, 'facilities_edited'])->name('facilities_edited');
+    //Users Ends
 });
