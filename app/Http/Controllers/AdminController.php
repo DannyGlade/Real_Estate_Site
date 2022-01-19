@@ -52,7 +52,8 @@ class AdminController extends Controller
 
         // dd($user);
 
-        if ($user[0]->password == md5($request->password)) {
+        // if ($user[0]->password == md5($request->password)) {
+        if (Hash::check($request->password, $user[0]->password)) {
 
             if ($user[0]->type == "A" || $user[0]->type == "R") {
 
