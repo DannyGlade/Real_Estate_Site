@@ -683,5 +683,42 @@ class AdminController extends Controller
         // dd($user);
         return view('AdminPanel.users.list', $data);
     }
+    public function del_users(Request $request)
+    {
+        $valid = validator($request->route()->parameters(), [
+            'id' => 'exists:users,id'
+        ])->validate();
+        $id = $request->route()->parameter('id');
+
+        // dd($valid);
+        if ($valid) {
+            $usersData = User::findorfail($id);
+            $usersData->delete();
+        }
+        $request->session()->flash('msg', 'Deleted...');
+        $request->session()->flash('msgst', 'danger');
+        return redirect(route('list_users'));
+    }
+    public function type_users(Request $request)
+    {
+        $valid = validator($request->all(), [
+            'id' => 'exists:users,id'
+        ])->validate();
+        // dd($request);
+        $id = $request->id;
+        $typ = $request->typ;
+
+        if ($valid) {
+            $usersData = User::findorfail($id);
+            $usersData->type = $typ;
+            $res = $usersData->save();
+
+            if ($res) {
+                return json_encode(array('message' => 'Account type Changed...', 'status' => true));
+            } else {
+                return json_encode(array('message' => 'Account type Changing failed', 'status' => false));
+            }
+        }
+    }
     //Users ends
 }
