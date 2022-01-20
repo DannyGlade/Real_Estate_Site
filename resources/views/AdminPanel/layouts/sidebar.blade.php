@@ -63,7 +63,7 @@
             </li> --}}
         </ul>
 
-        {{-- <h6
+        <h6
             class="
                 sidebar-heading
                 d-flex
@@ -74,19 +74,19 @@
                 mb-1
                 text-muted
               ">
-            <span>Saved reports</span>
+            <span>Root User Access</span>
             <a class="link-secondary" href="#" aria-label="Add a new report">
                 <span data-feather="plus-circle"></span>
             </a>
         </h6>
         <ul class="nav flex-column mb-2">
             <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <span data-feather="file-text"></span>
-                    Current month
+                <a class="nav-link @if ($menu == 'users')fw-bolder fs-6 active @endif " aria-current="page" href="{{ route('list_users') }}">
+                    <span data-feather="home"></span>
+                    Users
                 </a>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link" href="#">
                     <span data-feather="file-text"></span>
                     Last quarter
@@ -103,7 +103,7 @@
                     <span data-feather="file-text"></span>
                     Year-end sale
                 </a>
-            </li>
-        </ul> --}}
+            </li> --}}
+        </ul>
     </div>
 </nav>
