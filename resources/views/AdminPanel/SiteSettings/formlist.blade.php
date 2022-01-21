@@ -121,7 +121,7 @@
                                     </div>
                                     @if (!empty($pro->image))
                                         <div class="mb-2">
-                                            <label for="" class="form-label">Current Image</label>
+                                            <label for="" class="form-label">Current Logo</label>
                                             <img class="form-control"
                                                 src="{{ asset('/storage/property/' . $pro->image) }}" alt="Error">
                                         </div>
