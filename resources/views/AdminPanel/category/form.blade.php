@@ -15,7 +15,7 @@
             </div>
             {{-- <h1>This is Your Category</h1> --}}
             <div class="mt-4">
-                <div class="card" style="width:40rem;">
+                <div class="card" style="width:90%;">
                     <div class="card-header">
                         <h4 class="">@if (!empty($cate))Edit @else Add @endif Category</h4>
                     </div>
