@@ -36,6 +36,19 @@
             </div>
 
             <div class="col-4 offset-1">
+                <div class="mb-3 row">
+                    @if ($logo_image)
+                        <div class="col-2 me-3">
+                            <a class="navbar-brand" href="{{ route('userHome') }}">
+                                <img style="height: 80px" src="{{ asset('storage/siteSettings/' . $logo_image) }}"
+                                    alt="{{ $brand_title ?? 'DG-Estate' }}">
+                            </a>
+                        </div>
+                    @endif
+                    <div class="col-4 my-auto">
+                        <h4>{{ $brand_title ?? 'DG-Estate' }}</h4>
+                    </div>
+                </div>
                 <div class="mb-3">
                     <h5 class="mb-3">Contact Us</h5>
                     @if ($contacts['phone'])
