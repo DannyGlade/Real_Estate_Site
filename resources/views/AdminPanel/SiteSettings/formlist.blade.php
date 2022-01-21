@@ -13,13 +13,16 @@
                     </ol>
                 </div>
             </div>
+            <div class="{{ session()->get('msgst') ? 'alert  alert-' . session()->get('msgst') : 'm-0 border-0 p-0' }}">
+                {{ session()->get('msg') ?? null }}</div>
             <div class="mt-4">
                 <div class="card" style="width:90%;">
                     <div class="card-header">
                         <h4 class="">Edit Site Settings</h4>
                     </div>
                     <div class="card-body">
-                        <form class="row g-3" action="" method="POST" enctype="multipart/form-data">
+                        <form class="row g-3" action="{{ route('save_settings') }}" method="POST"
+                            enctype="multipart/form-data">
                             @csrf
                             <div class="row border-bottom border-2 m-auto mt-3">
                                 <div class="col mb-2 mx-auto">
@@ -28,14 +31,16 @@
                                         <div class="row mb-2">
                                             <div class="col-md-6">
                                                 <label for="" class="form-label">Site Title</label>
-                                                <input type="text" class="form-control" name="site_title">
+                                                <input type="text" class="form-control" name="site_title"
+                                                    value="{{ $siteSetting['site_title'] ?? '' }}">
                                                 <div class="text-danger">@error('site_title') * {{ $message }}
                                                     @enderror
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="" class="form-label">Brand Title</label>
-                                                <input type="text" class="form-control" name="brand_title">
+                                                <input type="text" class="form-control" name="brand_title"
+                                                    value="{{ $siteSetting['brand_title'] ?? '' }}">
                                                 <div class="text-danger">@error('brand_title') * {{ $message }}
                                                     @enderror
                                                 </div>
@@ -44,14 +49,16 @@
                                         <div class="row mb-2">
                                             <div class="col-md-6">
                                                 <label for="" class="form-label">Meta Discription</label>
-                                                <input type="text" class="form-control" name="meta_discription">
+                                                <input type="text" class="form-control" name="meta_discription"
+                                                    value="{{ $siteSetting['meta_discription'] ?? '' }}">
                                                 <div class="text-danger">@error('meta_discription') * {{ $message }}
                                                     @enderror
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="" class="form-label">Footer Content</label>
-                                                <input type="text" class="form-control" name="footer_content">
+                                                <input type="text" class="form-control" name="footer_content"
+                                                    value="{{ $siteSetting['footer_content'] ?? '' }}">
                                                 <div class="text-danger">@error('footer_content') * {{ $message }}
                                                     @enderror
                                                 </div>
@@ -60,14 +67,16 @@
                                         <div class="row mb-2">
                                             <div class="col-md-6">
                                                 <label for="" class="form-label">Site Email</label>
-                                                <input type="text" class="form-control" name="site_email">
+                                                <input type="text" class="form-control" name="site_email"
+                                                    value="{{ $siteSetting['site_email'] ?? '' }}">
                                                 <div class="text-danger">@error('site_email') * {{ $message }}
                                                     @enderror
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="" class="form-label">Site Contact</label>
-                                                <input type="text" class="form-control" name="site_contact">
+                                                <input type="text" class="form-control" name="site_contact"
+                                                    value="{{ $siteSetting['site_contact'] ?? '' }}">
                                                 <div class="text-danger">@error('site_contact') * {{ $message }}
                                                     @enderror
                                                 </div>
@@ -79,14 +88,16 @@
                                         <div class="row mb-2">
                                             <div class="col-md-6">
                                                 <label for="" class="form-label">Facebook URL</label>
-                                                <input type="text" class="form-control" name="facebook_url">
+                                                <input type="text" class="form-control" name="facebook_url"
+                                                    value="{{ $siteSetting['facebook_url'] ?? '' }}">
                                                 <div class="text-danger">@error('facebook_url') * {{ $message }}
                                                     @enderror
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="" class="form-label">Instagram URL</label>
-                                                <input type="text" class="form-control" name="instagram_url">
+                                                <input type="text" class="form-control" name="instagram_url"
+                                                    value="{{ $siteSetting['instagram_url'] ?? '' }}">
                                                 <div class="text-danger">@error('instagram_url') * {{ $message }}
                                                     @enderror
                                                 </div>
@@ -95,14 +106,16 @@
                                         <div class="row mb-2">
                                             <div class="col-md-6">
                                                 <label for="" class="form-label">Youtube URL</label>
-                                                <input type="text" class="form-control" name="youtube_url">
+                                                <input type="text" class="form-control" name="youtube_url"
+                                                    value="{{ $siteSetting['youtube_url'] ?? '' }}">
                                                 <div class="text-danger">@error('youtube_url') * {{ $message }}
                                                     @enderror
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="" class="form-label">Twitter URL</label>
-                                                <input type="text" class="form-control" name="twitter_url">
+                                                <input type="text" class="form-control" name="twitter_url"
+                                                    value="{{ $siteSetting['twitter_url'] ?? '' }}">
                                                 <div class="text-danger">@error('twitter_url') * {{ $message }}
                                                     @enderror
                                                 </div>

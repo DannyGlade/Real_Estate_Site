@@ -95,5 +95,6 @@ Route::middleware([AuthCheck::class])->group(function () {
 
     //Site Settings Starts
     Route::get('/admin/sitesettings', [SiteController::class, 'list_settings'])->name('list_settings');
+    Route::post('/admin/sitesettings', [SiteController::class, 'save_settings'])->name('save_settings');
     //Site Settings Ends
 });
