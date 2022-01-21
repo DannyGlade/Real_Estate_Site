@@ -86,6 +86,12 @@
                     Users
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link @if ($menu == 'site_settings')fw-bolder fs-6 active @endif " aria-current="page" href="{{ route('list_settings') }}">
+                    <span data-feather="home"></span>
+                    Site Settings
+                </a>
+            </li>
             {{-- <li class="nav-item">
                 <a class="nav-link" href="#">
                     <span data-feather="file-text"></span>

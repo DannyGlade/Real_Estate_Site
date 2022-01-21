@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\SiteController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\AuthCheck;
@@ -91,4 +92,10 @@ Route::middleware([AuthCheck::class])->group(function () {
     Route::get('/admin/users/{id}/del', [AdminController::class, 'del_users'])->name('del_users');
     Route::post('/admin/users/type', [AdminController::class, 'type_users'])->name('type_users');
     //Users Ends
+
+    //Site Settings Starts
+    Route::get('/admin/sitesettings', [SiteController::class, 'list_settings'])->name('list_settings');
+    Route::post('/admin/sitesettings', [SiteController::class, 'save_settings'])->name('save_settings');
+    Route::post('/admin/sitesettings/ajaxDelete', [SiteController::class, 'ajaxDelete'])->name('ajaxDelete');
+    //Site Settings Ends
 });
