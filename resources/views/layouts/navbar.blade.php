@@ -5,7 +5,7 @@
             <div class="container-fluid">
                 @if ($logo_image)
                     <a class="navbar-brand" href="{{ route('userHome') }}">
-                        <img style="height: 50px" src="{{ asset('storage/siteSettings/' . $logo_image) }}"
+                        <img style="height: 40px" src="{{ asset('storage/siteSettings/' . $logo_image) }}"
                             alt="{{ $brand_title ?? 'DG-Estate' }}">
                     </a>
                 @endif
