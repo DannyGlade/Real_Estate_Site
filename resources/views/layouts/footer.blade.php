@@ -37,27 +37,27 @@
 
             <div class="col-4 offset-1">
                 <div class="mb-3 row">
-                    @if ($logo_image)
+                    @if ($logo_image->value)
                         <div class="col-2 me-3">
                             <a class="navbar-brand" href="{{ route('userHome') }}">
-                                <img style="height: 80px" src="{{ asset('storage/siteSettings/' . $logo_image) }}"
-                                    alt="{{ $brand_title ?? 'DG-Estate' }}">
+                                <img style="height: 80px" src="{{ asset('storage/siteSettings/' . $logo_image->value) }}"
+                                    alt="{{ $brand_title->value ?? 'DG-Estate' }}">
                             </a>
                         </div>
                     @endif
                     <div class="col my-auto">
-                        <h4>{{ $brand_title ?? 'DG-Estate' }}</h4>
+                        <h4>{{ $brand_title->value ?? 'DG-Estate' }}</h4>
                     </div>
                 </div>
                 <div class="mb-3">
                     <h5 class="mb-3">Contact Us</h5>
-                    @if ($contacts['phone'])
+                    @if ($contacts['phone']->value)
                         <h6 class="mb-2">Phone - <a class="text-muted"
-                                href="tel:{{ $contacts['phone'] }}">{{ $contacts['phone'] }}</a></h6>
+                                href="tel:{{ $contacts['phone']->value }}">{{ $contacts['phone']->value }}</a></h6>
                     @endif
-                    @if ($contacts['email'])
+                    @if ($contacts['email']->value)
                         <h6 class="mb-2">Email - <a class="text-muted"
-                                href="mailto:{{ $contacts['email'] }}">{{ $contacts['email'] }}</a></h6>
+                                href="mailto:{{ $contacts['email']->value }}">{{ $contacts['email']->value }}</a></h6>
                     @endif
                 </div>
                 {{-- <form>
@@ -73,12 +73,12 @@
         </div>
 
         <div class="d-flex justify-content-between py-4 my-4 border-top">
-            <p>{{ $footer_content ?? '© 2022 Company, Inc. All rights reserved.' }}</p>
+            <p>{{ $footer_content->value ?? '© 2022 Company, Inc. All rights reserved.' }}</p>
             <ul class="list-unstyled d-flex">
                 @foreach ($social_links as $key => $value)
                     @if (!empty($value))
                         <li class="ms-3">
-                            <a class="link-dark" href="{{ $value ?? '#' }}">
+                            <a class="link-dark" href="{{ $value->value ?? '#' }}">
                                 <h4>
                                     <i class="fa {{ 'fa-' . $key }}" aria-hidden="true"></i>
                                 </h4>
