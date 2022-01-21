@@ -2,16 +2,16 @@
 <html lang="en">
 
 <head>
-    @if ($logo_image)
-        <link rel="icon" type="image/x-icon" href="{{ asset('/storage/siteSettings/' . $logo_image) }}">
+    @if ($logo_image->value)
+        <link rel="icon" type="image/x-icon" href="{{ asset('/storage/siteSettings/' . $logo_image->value) }}">
     @else
         <link rel="icon" href="favicon.ico" type="image/x-icon">
     @endif
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="{{ $meta_discription ?? '' }}" />    
+    <meta name="description" content="{{ $meta_discription->value ?? '' }}" />
     <title>
-        {{ $title ? $title : '' }} | Admin | {{ $site_title ?? config('dz.admin.title') }}
+        {{ $title ? $title : '' }} | Admin | {{ $site_title->value ?? config('dz.admin.title') }}
         {{-- @stack('title') --}}
     </title>
 

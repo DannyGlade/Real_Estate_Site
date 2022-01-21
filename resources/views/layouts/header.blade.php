@@ -21,16 +21,16 @@
     <link rel="stylesheet" href="{{ asset('css/headers.css') }}">
     <link rel="stylesheet" href="{{ asset('css/footers.css') }}"> --}}
 
-    @if ($logo_image)
-        <link rel="icon" type="image/x-icon" href="{{ asset('/storage/siteSettings/' . $logo_image) }}">
+    @if ($logo_image->value)
+        <link rel="icon" type="image/x-icon" href="{{ asset('/storage/siteSettings/' . $logo_image->value) }}">
     @else
         <link rel="icon" href="favicon.ico" type="image/x-icon">
     @endif
-    <meta charset="UTF-8">    
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="{{ $meta_discription ?? '' }}" />
+    <meta name="description" content="{{ $meta_discription->value ?? '' }}" />
     <title>
-        {{ $title ? $title : '' }} | {{ $site_title ?? config('dz.public.title') }}
+        {{ $title ? $title : '' }} | {{ $site_title->value ?? config('dz.public.title') }}
         {{-- @stack('title') --}}
     </title>
 
