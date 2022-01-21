@@ -3,7 +3,13 @@
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">DG-Estate</a>
+                @if ($logo_image)
+                    <a class="navbar-brand" href="{{ route('userHome') }}">
+                        <img style="height: 50px" src="{{ asset('storage/siteSettings/' . $logo_image) }}"
+                            alt="{{ $brand_title ?? 'DG-Estate' }}">
+                    </a>
+                @endif
+                <a class="navbar-brand" href="{{ route('userHome') }}">{{ $brand_title ?? 'DG-Estate' }}</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -12,7 +18,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                            <a class="nav-link active" aria-current="page" href="{{ route('userHome') }}">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Link</a>
@@ -54,7 +60,7 @@
                                 <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
                                     <li><a class="dropdown-item disabled" href="#">{{ $user['name'] }}</a></li>
                                     @if ($user['type'] == 'A' || $user['type'] == 'R')
-                                        <li><a class="dropdown-item" href="{{route('AdminHome')}}">Admin</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('AdminHome') }}">Admin</a></li>
                                     @endif
                                     <li><a class="dropdown-item" href="#">Profile</a></li>
                                     <li>
