@@ -2,13 +2,16 @@
 <html lang="en">
 
 <head>
+    @if ($logo_image)
+        <link rel="icon" type="image/x-icon" href="{{ asset('/storage/siteSettings/' . $logo_image) }}">
+    @else
+        <link rel="icon" href="favicon.ico" type="image/x-icon">
+    @endif
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="" />
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors" />
-    <meta name="generator" content="Hugo 0.88.1" />
+    <meta name="description" content="{{ $meta_discription ?? '' }}" />    
     <title>
-        {{ $title ? $title : '' }} | {{ config('dz.admin.title') }} |
+        {{ $title ? $title : '' }} | Admin | {{ $site_title ?? config('dz.admin.title') }}
         {{-- @stack('title') --}}
     </title>
 

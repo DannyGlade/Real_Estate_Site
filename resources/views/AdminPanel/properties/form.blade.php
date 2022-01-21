@@ -14,7 +14,7 @@
                 </div>
             </div>
             <div class="mt-4">
-                <div class="card" style="width:60rem;">
+                <div class="card" style="width:90%;">
                     <div class="card-header">
                         <h4 class="">@if (!empty($pro))Edit @else Add @endif Property</h4>
                     </div>

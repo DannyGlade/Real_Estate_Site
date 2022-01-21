@@ -6,17 +6,7 @@
                 <div aria-label="breadcrumb mt-5">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item" aria-current="page">Users</li>
-                        <li class="breadcrumb-item active">List</li>
-                        <div class="d-flex ms-auto">
-                            <form action="" method="post" enctype="multipart/form-data">
-                                @csrf
-                                {{-- <label for="" class="form-label">Property Gallary</label> --}}
-                                <div class="input-group">
-                                    <input type="file" class="form-control" name="gallary[]" multiple>
-                                    <button class="btn btn-primary" type="submit">Add</button>
-                                </div>
-                            </form>
-                        </div>
+                        <li class="breadcrumb-item active">List</li>                        
                     </ol>
                 </div>
             </div>
