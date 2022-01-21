@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\SiteSettings;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class SiteController extends Controller
 {
@@ -28,6 +29,18 @@ class SiteController extends Controller
             'logo_image' => 'mimes:png,jpg'
         ]);
         // dd($request);
+        if ($request->hasFile('logo_image')) {
+            $siteSetting = SiteSettings::where('key', 'logo_image')->first();
+            if (!empty($siteSetting->value)) {
+                Storage::delete('public/siteSettings/' . $siteSetting->value);
+            }
+            $image = $request->file('logo_image');
+            $iname = date('Ym') . '-' . rand() . '.' . $image->extension();
+            $store = $image->storeAs('public/siteSettings', $iname);
+            if ($store) {
+                $siteSetting = SiteSettings::create(['key' => 'logo_image', 'value' => $iname]);
+            }
+        }
         foreach ($request->except(['_token', 'logo_image']) as $key => $value) {
             $siteSetting = SiteSettings::where('key', $key)->first();
             if ($siteSetting) {

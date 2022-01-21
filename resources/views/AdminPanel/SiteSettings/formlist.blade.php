@@ -132,11 +132,12 @@
                                         <div class="text-danger mt-0">@error('logo_image') * {{ $message }} @enderror
                                         </div>
                                     </div>
-                                    @if (!empty($pro->image))
+                                    @if (!empty($siteSetting['logo_image']))
                                         <div class="mb-2">
                                             <label for="" class="form-label">Current Logo</label>
                                             <img class="form-control"
-                                                src="{{ asset('/storage/property/' . $pro->image) }}" alt="Error">
+                                                src="{{ asset('/storage/siteSettings/' . $siteSetting['logo_image']) }}"
+                                                alt="Error">
                                         </div>
                                     @endif
                                 </div>
