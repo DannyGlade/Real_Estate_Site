@@ -45,7 +45,7 @@
                             </a>
                         </div>
                     @endif
-                    <div class="col-4 my-auto">
+                    <div class="col my-auto">
                         <h4>{{ $brand_title ?? 'DG-Estate' }}</h4>
                     </div>
                 </div>
