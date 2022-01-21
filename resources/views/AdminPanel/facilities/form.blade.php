@@ -14,7 +14,7 @@
                 </div>
             </div>
             <div class="mt-4">
-                <div class="card" style="width:40rem;">
+                <div class="card" style="width:90%;">
                     <div class="card-header">
                         <h4 class="">@if (!empty($faci))Edit @else Add @endif Facility</h4>
                     </div>
