@@ -31,14 +31,23 @@ class SiteController extends Controller
         // dd($request);
         if ($request->hasFile('logo_image')) {
             $siteSetting = SiteSettings::where('key', 'logo_image')->first();
-            if (!empty($siteSetting->value)) {
-                Storage::delete('public/siteSettings/' . $siteSetting->value);
-            }
-            $image = $request->file('logo_image');
-            $iname = date('Ym') . '-' . rand() . '.' . $image->extension();
-            $store = $image->storeAs('public/siteSettings', $iname);
-            if ($store) {
-                $siteSetting = SiteSettings::create(['key' => 'logo_image', 'value' => $iname]);
+            if ($siteSetting) {
+                if (!empty($siteSetting->value)) {
+                    Storage::delete('public/siteSettings/' . $siteSetting->value);
+                }
+                $image = $request->file('logo_image');
+                $iname = date('Ym') . '-' . rand() . '.' . $image->extension();
+                $store = $image->storeAs('public/siteSettings', $iname);
+                if ($store) {
+                    $siteSetting->update(['value' => $iname]);
+                }
+            } else {
+                $image = $request->file('logo_image');
+                $iname = date('Ym') . '-' . rand() . '.' . $image->extension();
+                $store = $image->storeAs('public/siteSettings', $iname);
+                if ($store) {
+                    $siteSetting = SiteSettings::create(['key' => 'logo_image', 'value' => $iname]);
+                }
             }
         }
         foreach ($request->except(['_token', 'logo_image']) as $key => $value) {
@@ -52,6 +61,29 @@ class SiteController extends Controller
         $request->session()->flash('msg', 'Updated...');
         $request->session()->flash('msgst', 'success');
         return redirect(route('list_settings'));
+    }
+    public function ajaxDelete(Request $request)
+    {
+        $valid = validator($request->all(), [
+            'key' => 'exists:site_settings,key'
+        ])->validate();
+        // dd($request);
+        $key = $request->key;
+
+        if ($valid) {
+            $siteSetting = SiteSettings::where('key', $key)->first();
+            if ($siteSetting) {
+                if (!empty($siteSetting->value)) {
+                    Storage::delete('public/siteSettings/' . $siteSetting->value);
+                    $res = $siteSetting->update(['value' => null]);
+                }
+            }
+            if ($res) {
+                return json_encode(array('message' => 'Image Deleted', 'status' => true));
+            } else {
+                return json_encode(array('message' => 'No Image', 'status' => false));
+            }
+        }
     }
     //Site Settings Ends
 }

@@ -135,6 +135,9 @@
                                     @if (!empty($siteSetting['logo_image']))
                                         <div class="mb-2">
                                             <label for="" class="form-label">Current Logo</label>
+                                            <button data-name="Logo Image" data-key="logo_image"
+                                                class="btn btn-danger btn-sm ajaxDelete"><i class="fa fa-remove"
+                                                    aria-hidden="true"></i> Remove</button>
                                             <img class="form-control"
                                                 src="{{ asset('/storage/siteSettings/' . $siteSetting['logo_image']) }}"
                                                 alt="Error">
@@ -151,4 +154,35 @@
             </div>
         </div>
     </div>
+@endsection
+@section('scripts')
+    <script>
+        $(document).ready(function() {
+            $(document).on('click', '.ajaxDelete', function(e) {
+                e.preventDefault();
+                var _this = $(this);
+                var name = $(this).attr('data-name');
+                var key = $(this).attr('data-key');
+                var csrf = "{{ csrf_token() }}";
+
+                if (confirm('Are you sure to delete current ' + name + ' ?')) {
+                    data = {
+                        key: key,
+                        _token: csrf
+                    }
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ route('ajaxDelete') }}",
+                        data: data,
+                        dataType: "JSON",
+                        success: function(response) {
+                            alert(response.message);
+                            $(_this).parent('div').attr('hidden', 'true');
+                        }
+                    });
+                }
+                // console.log(key, name);
+            });
+        });
+    </script>
 @endsection
