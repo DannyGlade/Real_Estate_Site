@@ -678,7 +678,7 @@ class AdminController extends Controller
         if ($user) {
             $status = true;
         }
-        $usersData = User::all()->where('type', '!=', 'R');
+        $usersData = User::all()->where('type', '!=', 'R')->except($user['id']);
         $data = compact('status', 'user', 'title', 'menu', 'usersData');
         // dd($user);
         return view('AdminPanel.users.list', $data);
