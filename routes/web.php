@@ -22,7 +22,7 @@ use App\Http\Middleware\AuthCheck;
 // });
 
 //User Controller
-Route::get('/', [UserController::class, 'userHome'])->name('userHome');
+Route::get('/404', [UserController::class, 'not_found'])->name('not_found');
 
 Route::get('/signup', [UserController::class, 'signupForm']);
 Route::post('/signup', [UserController::class, 'signup']);
@@ -32,11 +32,15 @@ Route::post('/login', [UserController::class, 'login']);
 
 Route::get('/logout', [UserController::class, 'logout']);
 
+Route::get('/', [UserController::class, 'userHome'])->name('userHome');
+Route::get('/category/{cate}', [UserController::class, 'show_category'])->name('show_category');
+Route::get('/city/{city}', [UserController::class, 'show_city'])->name('show_city');
 
 //AdminPanel starts here
 Route::get('/admin/login', [AdminController::class, 'loginPage'])->name('AdminLoginPage');
 Route::post('/admin/login', [AdminController::class, 'login']);
 
+//All Admin routes are here
 Route::middleware([AuthCheck::class])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('AdminHome');
     Route::get('/admin/logout', [AdminController::class, 'logout'])->name('AdminLogout');

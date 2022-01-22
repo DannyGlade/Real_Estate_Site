@@ -18,7 +18,34 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{{ route('userHome') }}">Home</a>
+                            <a class="nav-link @if ($menu == 'home')active @endif" aria-current="page"
+                                href="{{ route('userHome') }}">Home</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link @if ($menu == 'category')active @endif dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Category
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                @foreach ($cate as $item)
+                                    <li><a class="dropdown-item"
+                                            href="{{ route('show_category', $item->slug_name) }}">{{ $item->name }}</a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                City
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                @foreach ($city as $item)
+                                    <li><a class="dropdown-item"
+                                            href="{{ route('show_city', $item->slug_city) }}">{{ $item->city }}</a>
+                                    </li>
+                                @endforeach
+                            </ul>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Link</a>
