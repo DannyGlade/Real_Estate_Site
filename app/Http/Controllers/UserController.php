@@ -67,27 +67,17 @@ class UserController extends Controller
     }
 
     //managing login logout
-    public function sessionManager(Request $request)
-    {
-        $title = "Guest";
-        $user = $request->session()->get('user');
-        $status = false;
-        if ($user) {
-            $status = true;
-            $title = $user['name'];
-            if ($user['type'] == "A" || $user['type'] == "R") {
-                $request->session()->put('AdminUser', $user);
-            }
-        }
-        $data = compact('status', 'user', 'title');
-        // dd($data);
-        return view('home')->with($data);
-    }
-
     public function logout(Request $request)
     {
         $request->session()->forget('user');
         // $request->session()->flush();
         return redirect(url(route('userHome')));
+    }
+
+    //sending home
+    public function userHome(Request $request)
+    {
+        // dd($data);
+        return view('frontend.home');
     }
 }

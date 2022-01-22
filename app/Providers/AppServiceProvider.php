@@ -59,6 +59,20 @@ class AppServiceProvider extends ServiceProvider
             }
             $view->with(compact(['user', 'status']));
         });
+        view()->composer(['layouts.app'], function ($view) {
+            $request = request();
+            $title = "Guest";
+            $user = $request->session()->get('user');
+            $status = false;
+            if ($user) {
+                $status = true;
+                $title = $user['name'];
+                if ($user['type'] == "A" || $user['type'] == "R") {
+                    $request->session()->put('AdminUser', $user);
+                }
+            }
+            $view->with(compact(['user', 'status', 'title']));
+        });
 
         Schema::defaultStringLength(191);
         Paginator::useBootstrap();

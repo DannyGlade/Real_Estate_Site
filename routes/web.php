@@ -22,7 +22,7 @@ use App\Http\Middleware\AuthCheck;
 // });
 
 //User Controller
-Route::get('/', [UserController::class, 'sessionManager'])->name('userHome');
+Route::get('/', [UserController::class, 'userHome'])->name('userHome');
 
 Route::get('/signup', [UserController::class, 'signupForm']);
 Route::post('/signup', [UserController::class, 'signup']);
