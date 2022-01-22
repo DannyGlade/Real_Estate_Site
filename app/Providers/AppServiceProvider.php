@@ -72,7 +72,7 @@ class AppServiceProvider extends ServiceProvider
                 }
             }
             $cate = Category::all();
-            $city = City::all()->where('status', true);            
+            $city = City::all()->where('status', true);
             $view->with(compact(['user', 'status', 'cate', 'city']));
         });
 
