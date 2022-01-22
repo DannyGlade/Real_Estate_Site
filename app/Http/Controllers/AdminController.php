@@ -405,7 +405,7 @@ class AdminController extends Controller
     {
         $valid = $request->validate([
             'title' => 'required',
-            'price' => 'required|numeric|min:0|max:99999999',
+            'price' => 'required|numeric|min:0|max:999999999',
             'purpose' => 'required',
             'category' => 'required',
             'image' => 'mimes:png,jpg',
@@ -505,7 +505,7 @@ class AdminController extends Controller
         $id = $request->route()->parameter('id');
         $request->validate([
             'title' => 'required',
-            'price' => 'required|numeric|min:0|max:99999999',
+            'price' => 'required|numeric|min:0|max:999999999',
             'purpose' => 'required',
             'category' => 'required',
             'image' => 'mimes:png,jpg',

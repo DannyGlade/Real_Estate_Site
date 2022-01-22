@@ -2,12 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Property;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    public function not_found()
+    {
+        $title = "Page Not Found";
+        $menu = 'none';
+        $data = compact('title', 'menu');
+        return view('errors.404', $data);
+    }
     public function loginForm()
     {
         $title = "Log In";
@@ -67,27 +75,40 @@ class UserController extends Controller
     }
 
     //managing login logout
-    public function sessionManager(Request $request)
-    {
-        $title = "Guest";
-        $user = $request->session()->get('user');
-        $status = false;
-        if ($user) {
-            $status = true;
-            $title = $user['name'];
-            if ($user['type'] == "A" || $user['type'] == "R") {
-                $request->session()->put('AdminUser', $user);
-            }
-        }
-        $data = compact('status', 'user', 'title');
-        // dd($data);
-        return view('home')->with($data);
-    }
-
     public function logout(Request $request)
     {
         $request->session()->forget('user');
         // $request->session()->flush();
         return redirect(url(route('userHome')));
+    }
+
+    //sending home
+    public function userHome(Request $request)
+    {
+        // dd($data);
+        $title = "Home";
+        $menu = "home";
+        $featuredPro = Property::with('Cate', 'City')->where('featured', true)->get();
+        // dd($featuredPro);
+        $data = compact('title', 'menu', 'featuredPro');
+        return view('frontend.home', $data);
+    }
+    public function show_category(Request $request)
+    {
+        $valid = validator($request->route()->parameters(), [
+            'cate' => 'exists:categories,slug_name'
+        ])->validate();
+        $cate = $request->route()->parameter('cate');
+        $title = $cate;
+        $menu = 'category';
+        $data = compact('title', 'menu');
+        return view('frontend.category', $data);
+    }
+    public function show_city(Request $request)
+    {
+        $valid = validator($request->route()->parameters(), [
+            'city' => 'exists:cities,slug_city'
+        ])->validate();
+        $city = $request->route()->parameter('city');
     }
 }

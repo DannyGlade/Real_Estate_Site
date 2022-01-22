@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Category;
+use App\Models\City;
 use App\Models\SiteSettings;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
@@ -58,6 +60,20 @@ class AppServiceProvider extends ServiceProvider
                 $status = true;
             }
             $view->with(compact(['user', 'status']));
+        });
+        view()->composer(['layouts.app'], function ($view) {
+            $request = request();
+            $user = $request->session()->get('user');
+            $status = false;
+            if ($user) {
+                $status = true;
+                if ($user['type'] == "A" || $user['type'] == "R") {
+                    $request->session()->put('AdminUser', $user);
+                }
+            }
+            $cate = Category::all();
+            $city = City::all()->where('status', true);            
+            $view->with(compact(['user', 'status', 'cate', 'city']));
         });
 
         Schema::defaultStringLength(191);

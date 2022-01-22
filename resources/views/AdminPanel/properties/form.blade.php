@@ -47,7 +47,7 @@
                                             <div class="input-group">
                                                 <div class="input-group-text">₹</div>
                                                 <input type="number" class="form-control" name="price" min="0"
-                                                    max="99999999" value="@if (!empty($pro)){{ $pro->price }}@else{{ old('price') }}@endif">
+                                                    max="999999999" value="@if (!empty($pro)){{ $pro->price }}@else{{ old('price') }}@endif">
                                             </div>
                                             <div class="text-danger">@error('price') * {{ $message }} @enderror
                                             </div>
@@ -59,7 +59,7 @@
                                             <div class="input-group">
                                                 <label class="input-group-text">Options</label>
                                                 <select class="form-select" name="purpose">
-                                                    <option selected>Choose...</option>
+                                                    <option value="" selected>Choose...</option>
                                                     <option @if (!empty($pro)) @if ($pro->purpose == 'sale') selected @endif @else @if (old('purpose') == 'sale') selected @endif @endif value="sale">Sale</option>
                                                     <option @if (!empty($pro)) @if ($pro->purpose == 'rent') selected @endif @else @if (old('purpose') == 'rent') selected @endif @endif value="rent">Rent</option>
                                                     <option @if (!empty($pro)) @if ($pro->purpose == 'pg') selected @endif @else @if (old('purpose') == 'pg') selected @endif @endif value="pg">PG</option>
@@ -73,7 +73,7 @@
                                             <div class="input-group">
                                                 <label class="input-group-text">Options</label>
                                                 <select class="form-select" name="category">
-                                                    <option selected>Choose...</option>
+                                                    <option value="" selected>Choose...</option>
                                                     @foreach ($cate as $item)
                                                         @if (!empty($pro))
                                                             @if ($pro->category == $item->id)
