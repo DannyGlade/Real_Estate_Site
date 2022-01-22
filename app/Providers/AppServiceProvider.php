@@ -50,6 +50,15 @@ class AppServiceProvider extends ServiceProvider
                 'footer_content', 'social_links', 'contacts'
             ]));
         });
+        view()->composer(['AdminPanel.layouts.main'], function ($view) {
+            $request = request();
+            $status = false;
+            $user = $request->session()->get('AdminUser');
+            if ($user) {
+                $status = true;
+            }
+            $view->with(compact(['user', 'status']));
+        });
 
         Schema::defaultStringLength(191);
         Paginator::useBootstrap();

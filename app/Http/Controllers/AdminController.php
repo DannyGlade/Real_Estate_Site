@@ -21,14 +21,9 @@ class AdminController extends Controller
     //sending to Dashboard
     public function dashboard(Request $request)
     {
-        $user = $request->session()->get('AdminUser');
-        // $status = false;
-        if ($user) {
-            $status = true;
-        }
-        $title = $user['name'];
+        $title = 'Dashboard';
         $menu = 'dashboard';
-        $data = compact('status', 'user', 'title', 'menu');
+        $data = compact('title', 'menu');
         // dd($data);
         return view('AdminPanel.dashboard')->with($data);
     }
@@ -84,12 +79,9 @@ class AdminController extends Controller
 
         $title = "Category List";
         $menu = "category";
-        $user = $request->session()->get('AdminUser');
-        if ($user) {
-            $status = true;
-        }
+
         $cate = Category::all();
-        $data = compact('status', 'user', 'title', 'menu', 'cate');
+        $data = compact('title', 'menu', 'cate');
 
         return view('AdminPanel.category.list', $data);
     }
@@ -98,11 +90,8 @@ class AdminController extends Controller
     {
         $title = "Add Category";
         $menu = "category";
-        $user = $request->session()->get('AdminUser');
-        if ($user) {
-            $status = true;
-        }
-        $data = compact('status', 'user', 'title', 'menu');
+
+        $data = compact('title', 'menu');
 
         return view('AdminPanel.category.form', $data);
     }
@@ -163,11 +152,8 @@ class AdminController extends Controller
 
         $title = "Edit Category";
         $menu = "category";
-        $user = $request->session()->get('AdminUser');
-        if ($user) {
-            $status = true;
-        }
-        $data = compact('status', 'user', 'title', 'menu', 'cate');
+
+        $data = compact('title', 'menu', 'cate');
         return view('AdminPanel.category.form', $data);
     }
 
@@ -208,12 +194,9 @@ class AdminController extends Controller
     {
         $title = "Cities List";
         $menu = "cities";
-        $user = $request->session()->get('AdminUser');
-        if ($user) {
-            $status = true;
-        }
+
         $city = City::all();
-        $data = compact('status', 'user', 'title', 'menu', 'city');
+        $data = compact('title', 'menu', 'city');
 
         return view('AdminPanel.cities.list', $data);
     }
@@ -221,11 +204,8 @@ class AdminController extends Controller
     {
         $title = "Add Cities";
         $menu = "cities";
-        $user = $request->session()->get('AdminUser');
-        if ($user) {
-            $status = true;
-        }
-        $data = compact('status', 'user', 'title', 'menu');
+
+        $data = compact('title', 'menu');
 
         return view('AdminPanel.cities.form', $data);
     }
@@ -279,11 +259,8 @@ class AdminController extends Controller
 
         $title = "Edit Cities";
         $menu = "cities";
-        $user = $request->session()->get('AdminUser');
-        if ($user) {
-            $status = true;
-        }
-        $data = compact('status', 'user', 'title', 'menu', 'city');
+
+        $data = compact('title', 'menu', 'city');
         return view('AdminPanel.cities.form', $data);
     }
     public function cities_edited(Request $request)
@@ -318,12 +295,9 @@ class AdminController extends Controller
     {
         $title = "Facilities List";
         $menu = "facilities";
-        $user = $request->session()->get('AdminUser');
-        if ($user) {
-            $status = true;
-        }
+
         $faci = Facilities::all();
-        $data = compact('status', 'user', 'title', 'menu', 'faci');
+        $data = compact('title', 'menu', 'faci');
 
         return view('AdminPanel.facilities.list', $data);
     }
@@ -331,11 +305,8 @@ class AdminController extends Controller
     {
         $title = "Add Facility";
         $menu = "facilities";
-        $user = $request->session()->get('AdminUser');
-        if ($user) {
-            $status = true;
-        }
-        $data = compact('status', 'user', 'title', 'menu');
+
+        $data = compact('title', 'menu');
 
         return view('AdminPanel.facilities.form', $data);
     }
@@ -382,11 +353,8 @@ class AdminController extends Controller
 
         $title = "Edit Facility";
         $menu = "facilities";
-        $user = $request->session()->get('AdminUser');
-        if ($user) {
-            $status = true;
-        }
-        $data = compact('status', 'user', 'title', 'menu', 'faci');
+
+        $data = compact('title', 'menu', 'faci');
         return view('AdminPanel.facilities.form', $data);
     }
     public function facilities_edited(Request $request)
@@ -415,13 +383,10 @@ class AdminController extends Controller
     {
         $title = "Properties List";
         $menu = "properties";
-        $user = $request->session()->get('AdminUser');
-        if ($user) {
-            $status = true;
-        }
+
         $pro = Property::with('Cate', 'City')->get();
         // dd($pro);
-        $data = compact('status', 'user', 'title', 'menu', 'pro');
+        $data = compact('title', 'menu', 'pro');
 
         return view('AdminPanel.properties.list', $data);
     }
@@ -429,13 +394,10 @@ class AdminController extends Controller
     {
         $title = "Add Property";
         $menu = "properties";
-        $user = $request->session()->get('AdminUser');
-        if ($user) {
-            $status = true;
-        }
+
         $city = City::select('id', 'city')->where('status', '=', '1')->get();
         $cate = Category::select('id', 'name')->get();
-        $data = compact('status', 'user', 'title', 'menu', 'city', 'cate');
+        $data = compact('title', 'menu', 'city', 'cate');
 
         return view('AdminPanel.properties.form', $data);
     }
@@ -529,13 +491,10 @@ class AdminController extends Controller
 
         $title = "Edit Property";
         $menu = "properties";
-        $user = $request->session()->get('AdminUser');
-        if ($user) {
-            $status = true;
-        }
+
         $city = City::select('id', 'city')->where('status', '=', '1')->get();
         $cate = Category::select('id', 'name')->get();
-        $data = compact('status', 'user', 'title', 'menu', 'pro', 'city', 'cate');
+        $data = compact('title', 'menu', 'pro', 'city', 'cate');
         return view('AdminPanel.properties.form', $data);
     }
     public function properties_edited(Request $request)
@@ -605,17 +564,14 @@ class AdminController extends Controller
     {
         $title = "Images Gallary";
         $menu = "properties";
-        $user = $request->session()->get('AdminUser');
-        if ($user) {
-            $status = true;
-        }
+
         $valid = validator($request->route()->parameters(), [
             'id' => 'exists:properties,id'
         ])->validate();
         $id = $request->route()->parameter('id');
         $gal = gallary::with('Pro')->where('pro_id', '=', $id)->get();
         // dd($gal);
-        $data = compact('status', 'user', 'title', 'menu', 'gal', 'id');
+        $data = compact('title', 'menu', 'gal', 'id');
 
         return view('AdminPanel.gallary.list', $data);
     }
@@ -675,11 +631,8 @@ class AdminController extends Controller
         $title = "Users List";
         $menu = "users";
         $user = $request->session()->get('AdminUser');
-        if ($user) {
-            $status = true;
-        }
         $usersData = User::all()->where('type', '!=', 'R')->except($user['id']);
-        $data = compact('status', 'user', 'title', 'menu', 'usersData');
+        $data = compact('title', 'menu', 'usersData');
         // dd($user);
         return view('AdminPanel.users.list', $data);
     }
