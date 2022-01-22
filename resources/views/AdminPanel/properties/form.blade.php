@@ -47,7 +47,7 @@
                                             <div class="input-group">
                                                 <div class="input-group-text">₹</div>
                                                 <input type="number" class="form-control" name="price" min="0"
-                                                    max="99999999" value="@if (!empty($pro)){{ $pro->price }}@else{{ old('price') }}@endif">
+                                                    max="999999999" value="@if (!empty($pro)){{ $pro->price }}@else{{ old('price') }}@endif">
                                             </div>
                                             <div class="text-danger">@error('price') * {{ $message }} @enderror
                                             </div>
@@ -59,7 +59,7 @@
                                             <div class="input-group">
                                                 <label class="input-group-text">Options</label>
                                                 <select class="form-select" name="purpose">
-                                                    <option selected>Choose...</option>
+                                                    <option value="" selected>Choose...</option>
                                                     <option @if (!empty($pro)) @if ($pro->purpose == 'sale') selected @endif @else @if (old('purpose') == 'sale') selected @endif @endif value="sale">Sale</option>
                                                     <option @if (!empty($pro)) @if ($pro->purpose == 'rent') selected @endif @else @if (old('purpose') == 'rent') selected @endif @endif value="rent">Rent</option>
                                                     <option @if (!empty($pro)) @if ($pro->purpose == 'pg') selected @endif @else @if (old('purpose') == 'pg') selected @endif @endif value="pg">PG</option>
@@ -73,7 +73,7 @@
                                             <div class="input-group">
                                                 <label class="input-group-text">Options</label>
                                                 <select class="form-select" name="category">
-                                                    <option selected>Choose...</option>
+                                                    <option value="" selected>Choose...</option>
                                                     @foreach ($cate as $item)
                                                         @if (!empty($pro))
                                                             @if ($pro->category == $item->id)
@@ -181,6 +181,7 @@
                                 <div class="col-md-4 mx-auto mb-2 ps-2 border-start">
                                     <div class="col-md-12 mb-2">
                                         <label for="" class="form-label">Property Image</label>
+                                        <p class="text-muted form-label">for best output upload [1903 x 513] Image</p>
                                         <div class="input-group">
                                             <input type="file" class="form-control" name="image">
                                         </div>
@@ -225,13 +226,13 @@
                             </div> --}}
                             <div class="col-12">
                                 <button class="btn @if (!empty($pro)) btn-success @else btn-primary @endif" type="submit">@if (!empty($pro)) Update @else Submit @endif</button>
-                            </div>
-                        </form>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 @endsection
 {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"
 integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>

@@ -3,7 +3,6 @@
 @endpush
 @include('layouts.header')
 @include('layouts.navbar')
-@include('layouts.carousel')
 
 @yield('content_box')
 
