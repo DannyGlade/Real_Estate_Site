@@ -47,7 +47,7 @@
                                             <div class="input-group">
                                                 <div class="input-group-text">₹</div>
                                                 <input type="number" class="form-control" name="price" min="0"
-                                                    max="99999999" value="@if (!empty($pro)){{ $pro->price }}@else{{ old('price') }}@endif">
+                                                    max="999999999" value="@if (!empty($pro)){{ $pro->price }}@else{{ old('price') }}@endif">
                                             </div>
                                             <div class="text-danger">@error('price') * {{ $message }} @enderror
                                             </div>
