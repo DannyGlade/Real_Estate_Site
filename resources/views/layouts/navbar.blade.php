@@ -22,8 +22,8 @@
                                 href="{{ route('userHome') }}">Home</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link @if ($menu == 'category')active @endif dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link @if ($menu == 'category')active @endif dropdown-toggle" href="#" id="navbarDropdown"
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Category
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -35,8 +35,8 @@
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link @if ($menu == 'city')active @endif dropdown-toggle" href="#" id="navbarDropdown"
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 City
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -50,7 +50,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#">Link</a>
                         </li>
-                        <li class="nav-item dropdown">
+                        {{-- <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 Dropdown
@@ -66,19 +66,24 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link disabled">Disabled</a>
-                        </li>
+                        </li> --}}
                     </ul>
                     <div class="d-flex">
                         <form class="me-2">
                             <div class="input-group">
-                                <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-                                <button class="btn btn-outline-success" type="submit">Search</button>
+                                <select class="form-select w-25" name="purpose" id="">
+                                    <option value="sale">Sale</option>
+                                    <option value="rent">Rent</option>
+                                    <option value="pg">PG</option>
+                                </select>
+                                <input class="form-control w-50" type="search" placeholder="Search" aria-label="Search">
+                                <button class="btn btn-outline-success w-25" type="submit">Search</button>
                             </div>
                         </form>
 
                         @if ($status)
                             {{-- Logged-In Icon --}}
-                            <div class="dropdown text-end">
+                            <div class="dropdown ms-1 text-end">
                                 <a href="#" class="d-block link-light text-decoration-none dropdown-toggle"
                                     id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                                     <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32"

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Property;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -88,9 +89,11 @@ class UserController extends Controller
         // dd($data);
         $title = "Home";
         $menu = "home";
-        $featuredPro = Property::with('Cate', 'City')->where('featured', true)->get();
-        // dd($featuredPro);
-        $data = compact('title', 'menu', 'featuredPro');
+        $featuredPro = Property::with('Cate', 'City')->where('featured', true)->latest()->limit(3)->get();
+        $newlyAdded = Property::with('Cate', 'City')->where('featured', false)->latest()->limit(6)->get();
+        // dd($newlyAdded);
+        $showcate = Category::all();
+        $data = compact('title', 'menu', 'featuredPro', 'newlyAdded', 'showcate');
         return view('frontend.home', $data);
     }
     public function show_category(Request $request)

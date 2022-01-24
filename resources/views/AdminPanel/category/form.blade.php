@@ -26,7 +26,7 @@
 
                             <div class="col">
 
-                                <div class="col-md-12">
+                                <div class="col-md-12 mb-2">
                                     <label for="" class="form-label">Category Name</label>
                                     <input type="text" class="form-control" name="name" value="@if (!empty($cate)){{ $cate->name }}@else{{ old('name') }}@endif"
                                         required>
@@ -34,6 +34,7 @@
                                 </div>
                                 <div class="col-md-12">
                                     <label for="" class="form-label">Category Image</label>
+                                    <p class="text-muted form-label">for best output upload [400 x 225] Image</p>
                                     <div class="input-group">
                                         <input type="file" class="form-control" name="image" id=""
                                             @if (empty($cate))required @endif>
@@ -51,14 +52,8 @@
                             </div>
                             <div class="col-12">
                                 <button class="btn @if (!empty($cate)) btn-success @else btn-primary @endif" type="submit">@if (!empty($cate)) Update @else Submit @endif</button>
-                                </div>
-
-                            </form>
-
-                        {{-- <h5 class="card-title">Card title</h5>
-                        <h6 class="card-subtitle mb-2 text-muted ">Card subtitle</h6>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p> --}}
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

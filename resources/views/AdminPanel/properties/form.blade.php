@@ -181,7 +181,7 @@
                                 <div class="col-md-4 mx-auto mb-2 ps-2 border-start">
                                     <div class="col-md-12 mb-2">
                                         <label for="" class="form-label">Property Image</label>
-                                        <p class="text-muted form-label">for best output upload [1903 x 513] Image</p>
+                                        <p class="text-muted form-label">for best featured output upload [1903 x 513] Image</p>
                                         <div class="input-group">
                                             <input type="file" class="form-control" name="image">
                                         </div>

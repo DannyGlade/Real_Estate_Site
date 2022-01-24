@@ -13,13 +13,23 @@
     </div>
     <div class="carousel-inner">
         @foreach ($featuredPro as $key => $item)
-            <div class="carousel-item @if ($key == 0)active @endif">                
-                <img class="bd-placeholder-img" src="{{ asset('/storage/property/' . $item->image) }}" alt="{{ $item->title }}">
+            <div class="carousel-item @if ($key == 0)active @endif">
+                <img class="bd-placeholder-img" src="{{ asset('/storage/property/' . $item->image) }}"
+                    alt="{{ $item->title }}">
                 <div class="container">
-                    <div class="carousel-caption @if($key%2 == 0)text-start @else text-end @endif">
+                    <div class="carousel-caption @if ($key % 2 == 0)text-start @else text-end @endif">
                         <h1>{{ $item->title }}</h1>
-                        <p>{{ $item->Cate->name }}, {{ $item->City->city }}.</p>
-                        <p><a class="btn btn-lg btn-primary" href="#">See More</a></p>
+                        <p>
+                            <a class="btn btn-sm btn-dark"
+                                href="{{ route('show_category', $item->Cate->slug_name) }}">
+                                {{ $item->Cate->name }}
+                            </a>
+                            <a class="btn btn-sm btn-secondary disabled" href="#">
+                                {{ $item->City->city }}
+                            </a>
+                        </p>
+                        <p><a class="btn btn-lg btn-primary" href="{{ route('show_pro', $item->title_slug) }}">See
+                                More</a></p>
                     </div>
                 </div>
             </div>
