@@ -110,7 +110,7 @@ class UserController extends Controller
             ->latest()
             // ->limit(6)
             ->paginate(10);
-            // ->get();
+        // ->get();
         $title = $cate->name;
         $menu = 'category';
         $data = compact('title', 'menu', 'show');
@@ -134,5 +134,19 @@ class UserController extends Controller
         $menu = 'city';
         $data = compact('title', 'menu', 'show');
         return view('frontend.show', $data);
+    }
+    public function show_pro(Request $request)
+    {
+        $valid = validator($request->route()->parameters(), [
+            'pro' => 'exists:properties,title_slug'
+        ])->validate();
+        $pro = $request->route()->parameter('pro');
+        $item = Property::with('Cate', 'City')
+            ->where('title_slug', '=', $pro)
+            ->first();
+        $title = $item->title;
+        $menu = 'none';
+        $data = compact('title', 'menu', 'item');
+        return view('frontend.property', $data);
     }
 }
