@@ -11,7 +11,7 @@
                     <h1>Categories</h1>
                 </div>
                 @foreach ($showcate as $item)
-                    <div class="col-lg-4">
+                    <div class="col-lg-4 mx-auto">
                         <div class="card shadow mx-auto w-75">
                             <a href="{{ route('show_category', $item->slug_name) }}">
                                 <img class="card-img-top" src="{{ asset('/storage/images/' . $item->image) }}"

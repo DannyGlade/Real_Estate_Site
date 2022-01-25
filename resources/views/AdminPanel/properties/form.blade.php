@@ -165,6 +165,15 @@
                                     </div>
                                     <div class="row mb-2">
                                         <div class="col-md-12 mb-2">
+                                            <label for="" class="form-label">Property Description</label>
+                                            <textarea class="form-control" rows="3"
+                                                name="description">@if (!empty($pro)){{ $pro->description }}@else{{ old('description') }}@endif</textarea>
+                                            <div class="text-danger">@error('description') * {{ $message }} @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-md-12 mb-2">
                                             <label for="" class="form-label">Property Video</label>
                                             <textarea class="form-control" rows="3"
                                                 name="video">@if (!empty($pro)){{ $pro->video }}@else{{ old('video') }}@endif</textarea>
@@ -180,8 +189,25 @@
                                 </div>
                                 <div class="col-md-4 mx-auto mb-2 ps-2 border-start">
                                     <div class="col-md-12 mb-2">
+                                        <label for="" class="form-label">Property Featured Image</label>
+                                        <p class="text-muted form-label">for best output upload [1903 x 513] Image
+                                        </p>
+                                        <div class="input-group">
+                                            <input type="file" class="form-control" name="fe_image">
+                                        </div>
+                                        <div class="text-danger mt-0">@error('fe_image') * {{ $message }} @enderror
+                                        </div>
+                                    </div>
+                                    @if (!empty($pro->fe_image))
+                                        <div class="mb-2">
+                                            <label for="" class="form-label">Old Featured Image</label>
+                                            <img class="form-control"
+                                                src="{{ asset('/storage/property/' . $pro->fe_image) }}" alt="Error">
+                                        </div>
+                                    @endif
+                                    <div class="col-md-12 mb-2">
                                         <label for="" class="form-label">Property Image</label>
-                                        <p class="text-muted form-label">for best featured output upload [1903 x 513] Image</p>
+                                        {{-- <p class="text-muted form-label">for best featured output upload [1903 x 513] Image</p> --}}
                                         <div class="input-group">
                                             <input type="file" class="form-control" name="image">
                                         </div>
@@ -226,13 +252,13 @@
                             </div> --}}
                             <div class="col-12">
                                 <button class="btn @if (!empty($pro)) btn-success @else btn-primary @endif" type="submit">@if (!empty($pro)) Update @else Submit @endif</button>
-                                </div>
-                            </form>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 @endsection
 {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"
 integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>

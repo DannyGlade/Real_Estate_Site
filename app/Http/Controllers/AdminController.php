@@ -409,13 +409,14 @@ class AdminController extends Controller
             'purpose' => 'required',
             'category' => 'required',
             'image' => 'mimes:png,jpg',
+            'fe_image' => 'mimes:png,jpg',
             'floorplan' => 'mimes:png,jpg',
             'rooms' => 'required|numeric',
             'bathrooms' => 'required|numeric',
             'city' => 'required',
             'address' => 'required|max:191',
             'area' => 'numeric',
-            'description' => 'string',
+            // 'description' => 'string',
         ]);
         // dd($request);
         $pro = new Property;
@@ -439,6 +440,14 @@ class AdminController extends Controller
             $store = $image->storeAs('public/property', $iname);
             if ($store) {
                 $pro->image = $iname;
+            }
+        }
+        if ($request->hasFile('fe_image')) {
+            $image = $request->file('fe_image');
+            $iname = date('Ym') . '-' . rand() . '.' . $image->extension();
+            $store = $image->storeAs('public/property', $iname);
+            if ($store) {
+                $pro->fe_image = $iname;
             }
         }
         if ($request->hasFile('floorplan')) {
@@ -509,13 +518,14 @@ class AdminController extends Controller
             'purpose' => 'required',
             'category' => 'required',
             'image' => 'mimes:png,jpg',
+            'fe_image' => 'mimes:png,jpg',
             'floorplan' => 'mimes:png,jpg',
             'rooms' => 'required|numeric',
             'bathrooms' => 'required|numeric',
             'city' => 'required',
             'address' => 'required|max:191',
             'area' => 'numeric',
-            'description' => 'string',
+            // 'description' => 'string',
         ]);
         // dd($request);
         $pro = Property::findorfail($id);
@@ -540,6 +550,15 @@ class AdminController extends Controller
             $store = $image->storeAs('public/property', $iname);
             if ($store) {
                 $pro->image = $iname;
+            }
+        }
+        if ($request->hasFile('fe_image')) {
+            Storage::delete('public/property/' . $pro->fe_image);
+            $image = $request->file('fe_image');
+            $iname = date('Ym') . '-' . rand() . '.' . $image->extension();
+            $store = $image->storeAs('public/property', $iname);
+            if ($store) {
+                $pro->fe_image = $iname;
             }
         }
         if ($request->hasFile('floorplan')) {
