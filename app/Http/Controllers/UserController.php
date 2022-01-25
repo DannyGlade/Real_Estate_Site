@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\City;
 use App\Models\Property;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -92,7 +93,7 @@ class UserController extends Controller
         $featuredPro = Property::with('Cate', 'City')->where('featured', true)->latest()->limit(3)->get();
         $newlyAdded = Property::with('Cate', 'City')->where('featured', false)->latest()->limit(6)->get();
         // dd($newlyAdded);
-        $showcate = Category::all();
+        $showcate = Category::latest()->limit(6)->get();
         $data = compact('title', 'menu', 'featuredPro', 'newlyAdded', 'showcate');
         return view('frontend.home', $data);
     }
@@ -102,10 +103,18 @@ class UserController extends Controller
             'cate' => 'exists:categories,slug_name'
         ])->validate();
         $cate = $request->route()->parameter('cate');
-        $title = $cate;
+        $cate = Category::where('slug_name', '=', $cate)->first();
+        $show = Property::with('Cate', 'City')
+            ->where('category', '=', $cate->id)
+            // ->where('featured', false)
+            ->latest()
+            // ->limit(6)
+            ->paginate(10);
+            // ->get();
+        $title = $cate->name;
         $menu = 'category';
-        $data = compact('title', 'menu');
-        return view('frontend.category', $data);
+        $data = compact('title', 'menu', 'show');
+        return view('frontend.show', $data);
     }
     public function show_city(Request $request)
     {
@@ -113,5 +122,17 @@ class UserController extends Controller
             'city' => 'exists:cities,slug_city'
         ])->validate();
         $city = $request->route()->parameter('city');
+        $city = City::where('slug_city', '=', $city)->first();
+        $show = Property::with('Cate', 'City')
+            ->where('city', '=', $city->id)
+            // ->where('featured', false)
+            ->latest()
+            // ->limit(6)
+            ->paginate(10);
+            // ->get();
+        $title = $city->city;
+        $menu = 'city';
+        $data = compact('title', 'menu', 'show');
+        return view('frontend.show', $data);
     }
 }
