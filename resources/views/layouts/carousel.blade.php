@@ -14,17 +14,17 @@
     <div class="carousel-inner">
         @foreach ($featuredPro as $key => $item)
             <div class="carousel-item @if ($key == 0)active @endif">
-                <img class="bd-placeholder-img" src="{{ asset('/storage/property/' . $item->image) }}"
+                <img class="bd-placeholder-img"
+                    src="{{ $item->fe_image ? asset('/storage/property/' . $item->fe_image) : asset('/storage/property/' . $item->image) }}"
                     alt="{{ $item->title }}">
                 <div class="container">
                     <div class="carousel-caption @if ($key % 2 == 0)text-start @else text-end @endif">
                         <h1>{{ $item->title }}</h1>
                         <p>
-                            <a class="btn btn-sm btn-dark"
-                                href="{{ route('show_category', $item->Cate->slug_name) }}">
+                            <a class="btn btn-sm btn-dark" href="{{ route('show_category', $item->Cate->slug_name) }}">
                                 {{ $item->Cate->name }}
                             </a>
-                            <a class="btn btn-sm btn-secondary disabled" href="#">
+                            <a class="btn btn-sm btn-secondary" href="{{ route('show_city', $item->City->slug_city) }}">
                                 {{ $item->City->city }}
                             </a>
                         </p>
