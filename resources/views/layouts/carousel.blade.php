@@ -24,7 +24,7 @@
                             <a class="btn btn-sm btn-dark" href="{{ route('show_category', $item->Cate->slug_name) }}">
                                 {{ $item->Cate->name }}
                             </a>
-                            <a class="btn btn-sm btn-secondary disabled" href="#">
+                            <a class="btn btn-sm btn-secondary" href="{{ route('show_city', $item->City->slug_city) }}">
                                 {{ $item->City->city }}
                             </a>
                         </p>
