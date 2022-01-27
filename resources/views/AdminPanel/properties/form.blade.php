@@ -207,7 +207,7 @@
                                     @endif
                                     <div class="col-md-12 mb-2">
                                         <label for="" class="form-label">Property Image</label>
-                                        {{-- <p class="text-muted form-label">for best featured output upload [1903 x 513] Image</p> --}}
+                                        <p class="text-muted form-label">for best output upload [1920 x 1440] [4:3] Image</p>
                                         <div class="input-group">
                                             <input type="file" class="form-control" name="image">
                                         </div>

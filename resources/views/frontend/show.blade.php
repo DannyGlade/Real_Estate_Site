@@ -17,7 +17,7 @@
                             <div class="row g-0">
                                 <div class="col-md-4">
                                     <a href="{{ route('show_pro', $item->title_slug) }}">
-                                        <img class="img-fluid rounded-start"
+                                        <img class="img-fluid rounded-start w-100 h-100" style=""
                                             src="{{ asset('/storage/property/' . $item->image) }}"
                                             alt="{{ $item->title }}">
                                     </a>

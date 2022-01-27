@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\City;
+use App\Models\gallary;
 use App\Models\Property;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -129,7 +130,7 @@ class UserController extends Controller
             ->latest()
             // ->limit(6)
             ->paginate(10);
-            // ->get();
+        // ->get();
         $title = $city->city;
         $menu = 'city';
         $data = compact('title', 'menu', 'show');
@@ -144,9 +145,10 @@ class UserController extends Controller
         $item = Property::with('Cate', 'City')
             ->where('title_slug', '=', $pro)
             ->first();
+        $gals = gallary::with('Pro')->where('pro_id', '=', $item->id)->get();
         $title = $item->title;
         $menu = 'none';
-        $data = compact('title', 'menu', 'item');
+        $data = compact('title', 'menu', 'item', 'gals');
         return view('frontend.property', $data);
     }
 }

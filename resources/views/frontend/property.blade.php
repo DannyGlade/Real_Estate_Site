@@ -13,10 +13,11 @@
             <div class="row">
                 <div class="col-12 mb-3">
                     <div class="card mb-3 p-0">
-                        <div class="row g-0">
+                        <div class="row g-0 mb-2 border-bottom">
                             <div class="col-md-4">
                                 <a href="{{ route('show_pro', $item->title_slug) }}">
-                                    <img class="img-fluid rounded-start"
+                                    <img class="img-fluid rounded-start" data-fancybox="gallery"
+                                        data-src="{{ asset('/storage/property/' . $item->image) }}"
                                         src="{{ asset('/storage/property/' . $item->image) }}" alt="{{ $item->title }}">
                                 </a>
                             </div>
@@ -40,7 +41,7 @@
                                                     {{ $item->City->city }}
                                                 </a>
                                             </p>
-                                            <div class="col-12 mb-3">
+                                            <div class="col-12 mb-3 w-75">
                                                 <p class="card-text">{{ $item->description }}</p>
                                             </div>
                                             <div class="col-12 mb-3">
@@ -56,71 +57,120 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="row g-0 mb-2 card-body">
                             <div class="row">
-                                <div class="col-12">
+                                <div class="col-4">
                                     <div class="card-body">
                                         <h4 class="card-title">For {{ ucfirst($item->purpose) }}...</h4>
                                     </div>
                                 </div>
-                                <div class="col-md-8">
+                                <div class="col-8">
                                     <div class="card-body">
                                         <div class="row">
-                                            <div class="col-12 mb-2">
-                                                <div class="row">
-                                                    <div class="col-2">
-                                                        <h5 class="card-title">Price :</h5>
-                                                    </div>
-                                                    <div class="col">
-                                                        <div class="card-text">
-                                                            ₹ {{ number_format($item->price) }}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-2">
-                                                        <h5 class="card-title">Address :</h5>
-                                                    </div>
-                                                    <div class="col">
-                                                        <div class="card-text"> {{ $item->address }}</div>
-                                                    </div>
+                                            <div class="col-2">
+                                                <h5 class="card-title">Price :</h5>
+                                            </div>
+                                            <div class="col-10">
+                                                <div class="card-text">
+                                                    ₹ {{ number_format($item->price) }}
                                                 </div>
                                             </div>
-                                            @if (!empty($item->video))
-                                                <div class="col-12 mb-2">
-                                                    <div class="">
-                                                        {!! $item->video !!}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-12 mb-2">
+                                            {{-- <div class="row">
+                                                <div class="col-2">
+                                                    <h5 class="card-title">Price :</h5>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="card-text">
+                                                        ₹ {{ number_format($item->price) }}
+                                                    </div>
+                                                </div>
+                                            </div> --}}
+                                            <div class="row">
+                                                <div class="col-2">
+                                                    <h5 class="card-title">Address :</h5>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="card-text"> {{ $item->address }}</div>
+                                                </div>
+                                            </div>
+                                            @if (!empty($gals))
+                                                <div class="row">
+                                                    <div class="col-2">
+                                                        <h5 class="card-title">Gallary :</h5>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="carousel">
+                                                            @foreach ($gals as $gal)
+                                                                <div class="carousel__slide">
+                                                                    <img class="w-100 rounded"
+                                                                        src="{{ asset('/storage/gallary/' . $gal->pro_id . '/' . $gal->gal_image) }}"
+                                                                        data-fancybox="gallery"
+                                                                        data-src="{{ asset('/storage/gallary/' . $gal->pro_id . '/' . $gal->gal_image) }}"
+                                                                        alt="Error">
+                                                                </div>
+                                                            @endforeach
+                                                        </div>
                                                     </div>
                                                 </div>
                                             @endif
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-3">
-                                                <h5 class="form-label">Area :</h5>
+                            </div>
+                            <div class="col-md-4 border-start">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-3">
+                                            <h5 class="form-label">Area :</h5>
+                                        </div>
+                                        <div class="col">
+                                            <div class="card-text">
+                                                {{ number_format($item->area) }} Sq. Ft.
                                             </div>
-                                            <div class="col">
-                                                <div class="card-text">
-                                                    {{ number_format($item->area) }} Sq. Ft.
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                @if (!empty($item->floorplan))
-                                                    <h5 class="card-title">
-                                                        Floorplan :
-                                                    </h5>
-                                                    <img class="w-100 rounded"
-                                                        src="{{ asset('/storage/property/' . $item->floorplan) }}"
-                                                        alt="Error">
-                                                @endif
-                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            @if (!empty($item->floorplan))
+                                                <h5 class="card-title">
+                                                    Floorplan :
+                                                </h5>
+                                                <img class="w-100 rounded"
+                                                    src="{{ asset('/storage/property/' . $item->floorplan) }}"
+                                                    data-fancybox="gallery"
+                                                    data-src="{{ asset('/storage/property/' . $item->floorplan) }}"
+                                                    alt="Error">
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        @if (!empty($item->video) || !empty($item->map))
+                            <div class="row g-0 mb-2 border-top">
+                                @if (!empty($item->video))
+                                    <div class="col-12 mb-2">
+                                        <div class="card-body">
+                                            {!! $item->video !!}
+                                        </div>
+                                    </div>
+                                @endif
+                                @if (!empty($item->map))
+                                    <div class="col-12 mb-2">
+                                        <div class="card-body">
+                                            {!! $item->map !!}
+                                        </div>
+                                    </div>
+                                @endif
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -130,8 +180,11 @@
 @section('scripts')
     <script>
         $(document).ready(function() {
-            $('iframe').addClass('mx-auto');
-            console.log('hello');
+            $('iframe').addClass('d-block mx-auto');
+            // console.log('hello');
+
+            Fancybox.bind("gallery", {});
+            const myCarousel = new Carousel(document.querySelector(".carousel"), {});
         });
     </script>
 @endsection
