@@ -228,7 +228,7 @@
                                         <div class="text-danger mt-0">@error('floorplan') * {{ $message }} @enderror
                                         </div>
                                     </div>
-                                    @if (!empty($pro->flooreplan))
+                                    @if (!empty($pro->floorplan))
                                         <div class="mb-2">
                                             <label for="" class="form-label">Old Flooreplan</label>
                                             <img class="form-control"

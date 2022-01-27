@@ -107,7 +107,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-12">
-                                                @if (!empty($item->flooreplan))
+                                                @if (!empty($item->floorplan))
                                                     <h5 class="card-title">
                                                         Floorplan :
                                                     </h5>
