@@ -58,23 +58,21 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row g-0 mb-2 card-body">
-                            <div class="row">
-                                <div class="col-4">
-                                    <div class="card-body">
-                                        <h4 class="card-title">For {{ ucfirst($item->purpose) }}...</h4>
-                                    </div>
+                        <div class="row g-0 mb-2 border-bottom card-body">
+                            <div class="col-4">
+                                <div class="card-body">
+                                    <h4 class="card-title">For {{ ucfirst($item->purpose) }}...</h4>
                                 </div>
-                                <div class="col-8">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-2">
-                                                <h5 class="card-title">Price :</h5>
-                                            </div>
-                                            <div class="col-10">
-                                                <div class="card-text">
-                                                    ₹ {{ number_format($item->price) }}
-                                                </div>
+                            </div>
+                            <div class="col-8">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <h5 class="card-title">Price :</h5>
+                                        </div>
+                                        <div class="col-10">
+                                            <div class="card-text">
+                                                ₹ {{ number_format($item->price) }}
                                             </div>
                                         </div>
                                     </div>
@@ -84,24 +82,6 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-12 mb-2">
-                                            {{-- <div class="row">
-                                                <div class="col-2">
-                                                    <h5 class="card-title">Price :</h5>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="card-text">
-                                                        ₹ {{ number_format($item->price) }}
-                                                    </div>
-                                                </div>
-                                            </div> --}}
-                                            <div class="row">
-                                                <div class="col-2">
-                                                    <h5 class="card-title">Address :</h5>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="card-text"> {{ $item->address }}</div>
-                                                </div>
-                                            </div>
                                             @if (!empty($gals))
                                                 <div class="row">
                                                     <div class="col-2">
@@ -109,7 +89,7 @@
                                                     </div>
                                                     <div class="col-12">
                                                         <div class="carousel">
-                                                            @foreach ($gals as $gal)
+                                                            @forelse ($gals as $gal)
                                                                 <div class="carousel__slide">
                                                                     <img class="w-100 rounded"
                                                                         src="{{ asset('/storage/gallary/' . $gal->pro_id . '/' . $gal->gal_image) }}"
@@ -117,8 +97,20 @@
                                                                         data-src="{{ asset('/storage/gallary/' . $gal->pro_id . '/' . $gal->gal_image) }}"
                                                                         alt="Error">
                                                                 </div>
-                                                            @endforeach
+                                                            @empty
+                                                                <h6>No Images Uploaded</h6>
+                                                            @endforelse
                                                         </div>
+                                                    </div>
+                                                </div>
+                                            @endif
+                                            @if (!empty($item->video))
+                                                <div class="row">
+                                                    <div class="col-2 mb-2">
+                                                        <h5 class="card-title">Video :</h5>
+                                                    </div>
+                                                    <div class="col-12 mb-2">
+                                                        {!! $item->video !!}
                                                     </div>
                                                 </div>
                                             @endif
@@ -130,7 +122,7 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-3">
-                                            <h5 class="form-label">Area :</h5>
+                                            <h5 class="card-title">Area :</h5>
                                         </div>
                                         <div class="col">
                                             <div class="card-text">
@@ -153,24 +145,25 @@
                                 </div>
                             </div>
                         </div>
-                        @if (!empty($item->video) || !empty($item->map))
-                            <div class="row g-0 mb-2 border-top">
-                                @if (!empty($item->video))
-                                    <div class="col-12 mb-2">
-                                        <div class="card-body">
-                                            {!! $item->video !!}
-                                        </div>
-                                    </div>
-                                @endif
-                                @if (!empty($item->map))
-                                    <div class="col-12 mb-2">
-                                        <div class="card-body">
-                                            {!! $item->map !!}
-                                        </div>
-                                    </div>
-                                @endif
+                        <div class="row g-0 mb-2 card-body">
+                            <div class="col-2">
+                                <div class="card-body">
+                                    <h5 class="card-title">Address :</h5>
+                                </div>
                             </div>
-                        @endif
+                            <div class="col">
+                                <div class="card-body">
+                                    <div class="card-text"> {{ $item->address }}</div>
+                                </div>
+                            </div>
+                            @if (!empty($item->map))
+                                <div class="col-12 mb-2">
+                                    <div class="card-body">
+                                        {!! $item->map !!}
+                                    </div>
+                                </div>
+                            @endif
+                        </div>
                     </div>
                 </div>
             </div>
@@ -181,6 +174,8 @@
     <script>
         $(document).ready(function() {
             $('iframe').addClass('d-block mx-auto');
+            $('iframe').css('width', '100%');
+            $('iframe').css('height', '25em');
             // console.log('hello');
 
             Fancybox.bind("gallery", {});
