@@ -157,6 +157,27 @@
                                                 </div>
                                             </div>
                                         @endif
+                                        <div class="col-12 mb-2">
+                                            <h5 class="card-title">
+                                                Contact :
+                                            </h5>
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    <h6 class="card-title">Phone :</h6>
+                                                </div>
+                                                <div class="col-8">
+                                                    <a href="tel:{{ $item->cont_ph }}"
+                                                        class="card-text text-muted">{{ $item->cont_ph }}</a>
+                                                </div>
+                                                <div class="col-4">
+                                                    <h6 class="card-title">Email :</h6>
+                                                </div>
+                                                <div class="col-8">
+                                                    <a href="mailto:{{ $item->cont_em }}"
+                                                        class="card-text text-muted">{{ $item->cont_em }}</a>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -173,8 +194,11 @@
                                 </div>
                             </div>
                             @if (!empty($item->map))
-                                <div class="col-12 mb-2">
-                                    <div class="card-body">
+                                <div class="row">
+                                    <div class="col-12 mb-2">
+                                        <h5 class="card-title">Map :</h5>
+                                    </div>
+                                    <div class="col-12 mb-2">
                                         {!! $item->map !!}
                                     </div>
                                 </div>

@@ -421,6 +421,8 @@ class AdminController extends Controller
             'bathrooms' => 'required|numeric',
             'city' => 'required',
             'address' => 'required|max:191',
+            'cont_ph' => 'required',
+            'cont_em' => 'required|email',
             'area' => 'numeric',
             // 'description' => 'string',
         ]);
@@ -435,6 +437,8 @@ class AdminController extends Controller
         $pro->rooms = $request->rooms;
         $pro->bathrooms = $request->bathrooms;
         $pro->address = $request->address;
+        $pro->cont_ph = $request->cont_ph;
+        $pro->cont_em = $request->cont_em;
         $pro->faci = $request->faci ? json_encode($request->faci) : null;
         $pro->featured = $request->featured ? true : false;
         $pro->area = $request->area ? $request->area : null;
@@ -532,6 +536,8 @@ class AdminController extends Controller
             'bathrooms' => 'required|numeric',
             'city' => 'required',
             'address' => 'required|max:191',
+            'cont_ph' => 'required',
+            'cont_em' => 'required|email',
             'area' => 'numeric',
             // 'description' => 'string',
         ]);
@@ -546,6 +552,8 @@ class AdminController extends Controller
         $pro->rooms = $request->rooms;
         $pro->bathrooms = $request->bathrooms;
         $pro->address = $request->address;
+        $pro->cont_ph = $request->cont_ph;
+        $pro->cont_em = $request->cont_em;
         $pro->faci = json_encode($request->faci);
         $pro->featured = $request->featured ? true : false;
         $pro->area = $request->area ? $request->area : null;

@@ -178,6 +178,24 @@
                                         </div>
                                     </div>
                                     <div class="row mb-2">
+                                        <div class="col-md-6 mb-2">
+                                            <label for="" class="form-label">Contact Phone</label>
+                                            <input type="text" name="cont_ph" value="@if (!empty($pro)){{ $pro->cont_ph }}@else{{ old('cont_ph') }}@endif"
+                                                class="form-control">
+                                            <div class="text-danger">@error('cont_ph') * {{ $message }}
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-2">
+                                            <label for="" class="form-label">Contact Email</label>
+                                            <input type="email" name="cont_em" value="@if (!empty($pro)){{ $pro->cont_em }}@else{{ old('cont_em') }}@endif"
+                                                class="form-control">
+                                            <div class="text-danger">@error('cont_em') * {{ $message }}
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
                                         <div class="col-md-12 mb-2">
                                             <label for="" class="form-label">Property Description</label>
                                             <textarea class="form-control" rows="3"

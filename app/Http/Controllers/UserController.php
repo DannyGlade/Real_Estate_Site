@@ -148,8 +148,10 @@ class UserController extends Controller
             ->first();
         $faci = [];
         $facis = json_decode($item->faci);
-        foreach ($facis as $key => $value) {
-            $faci[$key] = Facilities::where('slug_faci', '=', $value)->first();
+        if (!empty($facis)) {
+            foreach ($facis as $key => $value) {
+                $faci[$key] = Facilities::where('slug_faci', '=', $value)->first();
+            }
         }
         $gals = gallary::with('Pro')->where('pro_id', '=', $item->id)->get();
         $title = $item->title;
