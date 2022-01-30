@@ -30,7 +30,7 @@
                         @foreach ($faci as $item)
                             <tr>
                                 <th scope="row">{{ $item->id }}</th>
-                                <th class="{{ $item->color }}" scope="row">{!! $item->fa !!} {{ $item->faci }}
+                                <th class="bg-{{ $item->color }}" scope="row">{!! $item->fa !!} {{ $item->faci }}
                                 </th>
                                 {{-- <th scope="row">{!! $item->fa ?? 'No Icon' !!}</th> --}}
                                 <th scope="row">

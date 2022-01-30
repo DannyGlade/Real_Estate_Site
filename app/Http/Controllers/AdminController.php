@@ -402,7 +402,8 @@ class AdminController extends Controller
 
         $city = City::select('id', 'city')->where('status', '=', '1')->get();
         $cate = Category::select('id', 'name')->get();
-        $data = compact('title', 'menu', 'city', 'cate');
+        $faci = Facilities::select('*')->get();
+        $data = compact('title', 'menu', 'city', 'cate', 'faci');
 
         return view('AdminPanel.properties.form', $data);
     }
@@ -434,6 +435,7 @@ class AdminController extends Controller
         $pro->rooms = $request->rooms;
         $pro->bathrooms = $request->bathrooms;
         $pro->address = $request->address;
+        $pro->faci = $request->faci ? json_encode($request->faci) : null;
         $pro->featured = $request->featured ? true : false;
         $pro->area = $request->area ? $request->area : null;
         $pro->description = $request->description ? $request->description : null;
@@ -508,7 +510,8 @@ class AdminController extends Controller
 
         $city = City::select('id', 'city')->where('status', '=', '1')->get();
         $cate = Category::select('id', 'name')->get();
-        $data = compact('title', 'menu', 'pro', 'city', 'cate');
+        $faci = Facilities::select('*')->get();
+        $data = compact('title', 'menu', 'pro', 'city', 'cate', 'faci');
         return view('AdminPanel.properties.form', $data);
     }
     public function properties_edited(Request $request)
@@ -543,6 +546,7 @@ class AdminController extends Controller
         $pro->rooms = $request->rooms;
         $pro->bathrooms = $request->bathrooms;
         $pro->address = $request->address;
+        $pro->faci = json_encode($request->faci);
         $pro->featured = $request->featured ? true : false;
         $pro->area = $request->area ? $request->area : null;
         $pro->description = $request->description ? $request->description : null;

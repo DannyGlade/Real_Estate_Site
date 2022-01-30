@@ -38,22 +38,22 @@
                                 <div class="input-group">
                                     <select class="form-select" name="color">
                                         <option {{ $faci->color == '' ? 'selected' : '' }} value="">Choose...</option>
-                                        <option {{ $faci->color == 'bg-primary' ? 'selected' : '' }}
-                                            class="bg-primary" value="bg-primary">Blue</option>
-                                        <option {{ $faci->color == 'bg-secondary' ? 'selected' : '' }}
-                                            class="bg-secondary" value="bg-secondary">Grey</option>
-                                        <option {{ $faci->color == 'bg-success' ? 'selected' : '' }}
-                                            class="bg-success" value="bg-success">Green</option>
-                                        <option {{ $faci->color == 'bg-danger' ? 'selected' : '' }}
-                                            class="bg-danger" value="bg-danger">Red</option>
-                                        <option {{ $faci->color == 'bg-warning' ? 'selected' : '' }}
-                                            class="bg-warning" value="bg-warning">Yellow</option>
-                                        <option {{ $faci->color == 'bg-info' ? 'selected' : '' }} class="bg-info"
-                                            value="bg-info">Teal Blue</option>
-                                        <option {{ $faci->color == 'bg-light' ? 'selected' : '' }} class="bg-light"
-                                            value="bg-light">Light</option>
-                                        <option {{ $faci->color == 'bg-dark text-white' ? 'selected' : '' }}
-                                            class="bg-dark text-white" value="bg-dark text-white">Dark</option>
+                                        <option {{ $faci->color == 'primary' ? 'selected' : '' }} class="bg-primary"
+                                            value="primary">Blue</option>
+                                        <option {{ $faci->color == 'secondary' ? 'selected' : '' }}
+                                            class="bg-secondary" value="secondary">Grey</option>
+                                        <option {{ $faci->color == 'success' ? 'selected' : '' }} class="bg-success"
+                                            value="success">Green</option>
+                                        <option {{ $faci->color == 'danger' ? 'selected' : '' }} class="bg-danger"
+                                            value="danger">Red</option>
+                                        <option {{ $faci->color == 'warning' ? 'selected' : '' }} class="bg-warning"
+                                            value="warning">Yellow</option>
+                                        <option {{ $faci->color == 'info' ? 'selected' : '' }} class="bg-info"
+                                            value="info">Teal Blue</option>
+                                        <option {{ $faci->color == 'light' ? 'selected' : '' }} class="bg-light"
+                                            value="light">Light</option>
+                                        <option {{ $faci->color == 'dark text-white' ? 'selected' : '' }}
+                                            class="bg-dark text-white" value="dark text-white">Dark</option>
                                     </select>
                                 </div>
                                 <div class="text-danger">@error('color') * {{ $message }} @enderror</div>

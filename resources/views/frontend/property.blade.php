@@ -121,16 +121,16 @@
                             <div class="col-md-4 border-start">
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-3">
+                                        <div class="col-3 mb-2">
                                             <h5 class="card-title">Area :</h5>
                                         </div>
-                                        <div class="col">
+                                        <div class="col mb-2">
                                             <div class="card-text">
                                                 {{ number_format($item->area) }} Sq. Ft.
                                             </div>
                                         </div>
-                                        <div class="col-12">
-                                            @if (!empty($item->floorplan))
+                                        @if (!empty($item->floorplan))
+                                            <div class="col-12 mb-2">
                                                 <h5 class="card-title">
                                                     Floorplan :
                                                 </h5>
@@ -139,8 +139,24 @@
                                                     data-fancybox="gallery"
                                                     data-src="{{ asset('/storage/property/' . $item->floorplan) }}"
                                                     alt="Error">
-                                            @endif
-                                        </div>
+                                            </div>
+                                        @endif
+                                        @if (!empty($faci))
+                                            <div class="col-12 mb-2">
+                                                <h5 class="card-title">
+                                                    Facilities :
+                                                </h5>
+                                                <div class="row">
+                                                    <p>
+                                                        @foreach ($faci as $fac)
+                                                            <button class="btn btn-{{ $fac->color }}">
+                                                                {!! $fac->fa !!} {{ $fac->faci }}
+                                                            </button>
+                                                        @endforeach
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>

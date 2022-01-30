@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\City;
+use App\Models\Facilities;
 use App\Models\gallary;
 use App\Models\Property;
 use Illuminate\Http\Request;
@@ -145,10 +146,15 @@ class UserController extends Controller
         $item = Property::with('Cate', 'City')
             ->where('title_slug', '=', $pro)
             ->first();
+        $faci = [];
+        $facis = json_decode($item->faci);
+        foreach ($facis as $key => $value) {
+            $faci[$key] = Facilities::where('slug_faci', '=', $value)->first();
+        }
         $gals = gallary::with('Pro')->where('pro_id', '=', $item->id)->get();
         $title = $item->title;
         $menu = 'none';
-        $data = compact('title', 'menu', 'item', 'gals');
+        $data = compact('title', 'menu', 'item', 'gals', 'faci');
         return view('frontend.property', $data);
     }
 }
