@@ -314,11 +314,14 @@ class AdminController extends Controller
     {
         $valid = $request->validate([
             'faci' => 'required|unique:facilities,faci',
+            'color' => 'required',
         ]);
         // dd($request);
         $faci = new Facilities;
         $faci->faci = $request->faci;
         $faci->slug_faci = str_slug($request->faci);
+        $faci->fa = $request->fa;
+        $faci->color = $request->color;
         $faci->save();
         $request->session()->flash('msg', 'Added...');
         $request->session()->flash('msgst', 'success');
@@ -370,6 +373,8 @@ class AdminController extends Controller
         $faci = Facilities::findorfail($id);
         $faci->faci = $request->faci;
         $faci->slug_faci = str_slug($request->faci);
+        $faci->fa = $request->fa;
+        $faci->color = $request->color;
         $faci->save();
 
         $request->session()->flash('msg', 'Edited...');
@@ -397,7 +402,8 @@ class AdminController extends Controller
 
         $city = City::select('id', 'city')->where('status', '=', '1')->get();
         $cate = Category::select('id', 'name')->get();
-        $data = compact('title', 'menu', 'city', 'cate');
+        $faci = Facilities::select('*')->get();
+        $data = compact('title', 'menu', 'city', 'cate', 'faci');
 
         return view('AdminPanel.properties.form', $data);
     }
@@ -415,6 +421,8 @@ class AdminController extends Controller
             'bathrooms' => 'required|numeric',
             'city' => 'required',
             'address' => 'required|max:191',
+            'cont_ph' => 'required',
+            'cont_em' => 'required|email',
             'area' => 'numeric',
             // 'description' => 'string',
         ]);
@@ -429,6 +437,9 @@ class AdminController extends Controller
         $pro->rooms = $request->rooms;
         $pro->bathrooms = $request->bathrooms;
         $pro->address = $request->address;
+        $pro->cont_ph = $request->cont_ph;
+        $pro->cont_em = $request->cont_em;
+        $pro->faci = $request->faci ? json_encode($request->faci) : null;
         $pro->featured = $request->featured ? true : false;
         $pro->area = $request->area ? $request->area : null;
         $pro->description = $request->description ? $request->description : null;
@@ -503,7 +514,8 @@ class AdminController extends Controller
 
         $city = City::select('id', 'city')->where('status', '=', '1')->get();
         $cate = Category::select('id', 'name')->get();
-        $data = compact('title', 'menu', 'pro', 'city', 'cate');
+        $faci = Facilities::select('*')->get();
+        $data = compact('title', 'menu', 'pro', 'city', 'cate', 'faci');
         return view('AdminPanel.properties.form', $data);
     }
     public function properties_edited(Request $request)
@@ -524,6 +536,8 @@ class AdminController extends Controller
             'bathrooms' => 'required|numeric',
             'city' => 'required',
             'address' => 'required|max:191',
+            'cont_ph' => 'required',
+            'cont_em' => 'required|email',
             'area' => 'numeric',
             // 'description' => 'string',
         ]);
@@ -538,6 +552,9 @@ class AdminController extends Controller
         $pro->rooms = $request->rooms;
         $pro->bathrooms = $request->bathrooms;
         $pro->address = $request->address;
+        $pro->cont_ph = $request->cont_ph;
+        $pro->cont_em = $request->cont_em;
+        $pro->faci = json_encode($request->faci);
         $pro->featured = $request->featured ? true : false;
         $pro->area = $request->area ? $request->area : null;
         $pro->description = $request->description ? $request->description : null;

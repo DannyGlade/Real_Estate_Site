@@ -165,10 +165,43 @@
                                     </div>
                                     <div class="row mb-2">
                                         <div class="col-md-12 mb-2">
+                                            <label for="" class="form-label">Facilities</label>
+                                            <select class="form-select" name="faci[]" multiple>
+                                                @foreach ($faci as $item)
+                                                    <option value="{{ $item->slug_faci }}">{{ $item->faci }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                            <div class="text-danger">@error('faci[]') * {{ $message }}
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-md-6 mb-2">
+                                            <label for="" class="form-label">Contact Phone</label>
+                                            <input type="text" name="cont_ph" value="@if (!empty($pro)){{ $pro->cont_ph }}@else{{ old('cont_ph') }}@endif"
+                                                class="form-control">
+                                            <div class="text-danger">@error('cont_ph') * {{ $message }}
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-2">
+                                            <label for="" class="form-label">Contact Email</label>
+                                            <input type="email" name="cont_em" value="@if (!empty($pro)){{ $pro->cont_em }}@else{{ old('cont_em') }}@endif"
+                                                class="form-control">
+                                            <div class="text-danger">@error('cont_em') * {{ $message }}
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-md-12 mb-2">
                                             <label for="" class="form-label">Property Description</label>
                                             <textarea class="form-control" rows="3"
                                                 name="description">@if (!empty($pro)){{ $pro->description }}@else{{ old('description') }}@endif</textarea>
-                                            <div class="text-danger">@error('description') * {{ $message }} @enderror
+                                            <div class="text-danger">@error('description') * {{ $message }}
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
@@ -207,11 +240,13 @@
                                     @endif
                                     <div class="col-md-12 mb-2">
                                         <label for="" class="form-label">Property Image</label>
-                                        {{-- <p class="text-muted form-label">for best featured output upload [1903 x 513] Image</p> --}}
+                                        <p class="text-muted form-label">for best output upload [1920 x 1440] [4:3] Image
+                                        </p>
                                         <div class="input-group">
                                             <input type="file" class="form-control" name="image">
                                         </div>
-                                        <div class="text-danger mt-0">@error('image') * {{ $message }} @enderror</div>
+                                        <div class="text-danger mt-0">@error('image') * {{ $message }} @enderror
+                                        </div>
                                     </div>
                                     @if (!empty($pro->image))
                                         <div class="mb-2">
@@ -251,14 +286,19 @@
                                 </form>
                             </div> --}}
                             <div class="col-12">
-                                <button class="btn @if (!empty($pro)) btn-success @else btn-primary @endif" type="submit">@if (!empty($pro)) Update @else Submit @endif</button>
-                                    </div>
-                                </form>
+                                <button
+                                    class="btn
+                                @if (!empty($pro)) btn-success
+                                @else btn-primary
+                                @endif"
+                                    type="submit">@if (!empty($pro)) Update @else Submit @endif</button>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
 @endsection
 {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"
 integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
