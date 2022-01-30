@@ -147,13 +147,13 @@
                                                     Facilities :
                                                 </h5>
                                                 <div class="row">
-                                                    <p>
+                                                    <div class="card-text">
                                                         @foreach ($faci as $fac)
-                                                            <button class="btn btn-{{ $fac->color }}">
+                                                            <button class="btn btn-{{ $fac->color }} btn-lg mb-1">
                                                                 {!! $fac->fa !!} {{ $fac->faci }}
                                                             </button>
                                                         @endforeach
-                                                    </p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         @endif
