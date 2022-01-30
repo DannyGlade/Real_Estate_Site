@@ -22,6 +22,7 @@
                         <tr>
                             <th scope="col">Id</th>
                             <th scope="col">Facility</th>
+                            {{-- <th scope="col">FA icon</th> --}}
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -29,10 +30,12 @@
                         @foreach ($faci as $item)
                             <tr>
                                 <th scope="row">{{ $item->id }}</th>
-                                <th scope="row">{{ $item->faci }}</th>
+                                <th class="{{ $item->color }}" scope="row">{!! $item->fa !!} {{ $item->faci }}
+                                </th>
+                                {{-- <th scope="row">{!! $item->fa ?? 'No Icon' !!}</th> --}}
                                 <th scope="row">
-                                    <a class="btn btn-success btn-sm" href="{{ route('edit_facilities', $item->id) }}"><i class="fa fa-edit"
-                                            aria-hidden="true"></i></a>
+                                    <a class="btn btn-success btn-sm" href="{{ route('edit_facilities', $item->id) }}"><i
+                                            class="fa fa-edit" aria-hidden="true"></i></a>
                                     <a class="btn btn-danger btn-sm" onclick="return confirm('Sure to delete?')"
                                         href="{{ route('del_facilities', $item->id) }}"><i class="fa fa-trash"
                                             aria-hidden="true"></i></a>

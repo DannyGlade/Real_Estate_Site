@@ -314,11 +314,14 @@ class AdminController extends Controller
     {
         $valid = $request->validate([
             'faci' => 'required|unique:facilities,faci',
+            'color' => 'required',
         ]);
         // dd($request);
         $faci = new Facilities;
         $faci->faci = $request->faci;
         $faci->slug_faci = str_slug($request->faci);
+        $faci->fa = $request->fa;
+        $faci->color = $request->color;
         $faci->save();
         $request->session()->flash('msg', 'Added...');
         $request->session()->flash('msgst', 'success');
@@ -370,6 +373,8 @@ class AdminController extends Controller
         $faci = Facilities::findorfail($id);
         $faci->faci = $request->faci;
         $faci->slug_faci = str_slug($request->faci);
+        $faci->fa = $request->fa;
+        $faci->color = $request->color;
         $faci->save();
 
         $request->session()->flash('msg', 'Edited...');
