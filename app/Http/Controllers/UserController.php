@@ -209,13 +209,41 @@ class UserController extends Controller
                 $purposeS = ['purpose', '=', $purpose];
             }
             $sort = $request->sort;
+            switch ($sort) {
+                case 'latest':
+                    $sortW = 'created_at';
+                    $sortS = 'desc';
+                    break;
+                case 'oldest':
+                    $sortW = 'created_at';
+                    $sortS = 'asc';
+                    break;
+                case 'phtl':
+                    $sortW = 'price';
+                    $sortS = 'desc';
+                    break;
+                case 'plth':
+                    $sortW = 'price';
+                    $sortS = 'asc';
+                    break;
+                case 'ahtl':
+                    $sortW = 'area';
+                    $sortS = 'desc';
+                    break;
+                case 'alth':
+                    $sortW = 'area';
+                    $sortS = 'asc';
+                    break;
+            }
 
             $show = Property::with('Cate', 'City')
                 ->where([
                     $cateS,
                     $cityS,
                     $purposeS,
-                ])->paginate(10);
+                ])
+                ->orderBy($sortW, $sortS)
+                ->paginate(10);
 
             return view('frontend.showinitem', compact('show'));
         }

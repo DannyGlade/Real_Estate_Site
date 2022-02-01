@@ -47,8 +47,10 @@
                         <select class="form-select" name="sort">
                             <option value="latest">Latest</option>
                             <option value="oldest">Oldest</option>
-                            <option value="htl">High to Low</option>
-                            <option value="lth">Low to High</option>
+                            <option value="phtl">Price High to Low</option>
+                            <option value="plth">Price Low to High</option>
+                            <option value="ahtl">Area High to Low</option>
+                            <option value="alth">Area Low to High</option>
                         </select>
                     </div>
                 </div>
