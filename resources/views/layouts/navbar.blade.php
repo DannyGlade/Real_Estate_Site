@@ -22,6 +22,17 @@
                                 href="{{ route('userHome') }}">Home</a>
                         </li>
                         <li class="nav-item dropdown">
+                            <a class="nav-link @if ($menu == 'purpose')active @endif dropdown-toggle" href="#" id="navbarDropdown"
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Purpose
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="{{ route('show_purpose', 'sale') }}">Sale</a></li>
+                                <li><a class="dropdown-item" href="{{ route('show_purpose', 'rent') }}">Rent</a></li>
+                                <li><a class="dropdown-item" href="{{ route('show_purpose', 'pg') }}">PG</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
                             <a class="nav-link @if ($menu == 'category')active @endif dropdown-toggle" href="#" id="navbarDropdown"
                                 role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Category

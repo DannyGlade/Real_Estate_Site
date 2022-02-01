@@ -21,7 +21,7 @@
                         <tr>
                             <th scope="col">Id</th>
                             <th scope="col">Property</th>
-                            <th scope="col">Price</th>
+                            <th scope="col">Price ( ₹ )</th>
                             <th scope="col">Featured</th>
                             <th scope="col">Purpose</th>
                             <th scope="col">Category</th>
@@ -36,7 +36,7 @@
                             <tr>
                                 <th scope="row">{{ $item->id }}</th>
                                 <th scope="row">{{ $item->title }}</th>
-                                <th scope="row">₹ {{ number_format($item->price) }}</th>
+                                <th scope="row">{{ number_format($item->price) }}</th>
                                 <th scope="row" @if ($item->featured == 1)class="text-success">Active @else class="text-danger"> Disabled @endif</th>
                                 <th scope="row">{{ $item->purpose }}</th>
                                 <th scope="row">{{ $item->Cate->name }}</th>

@@ -84,11 +84,16 @@
                             <div class="card-body">
                                 <h4 class="card-title mb-1">{{ $item->title }}</h4>
                                 <p class="card-text mb-1">
-                                    <a class="btn btn-sm btn-outline-dark"
+                                    <a class="btn btn-sm btn-outline-primary"
+                                        href="{{ route('show_purpose', $item->purpose) }}">
+                                        {{ ucfirst($item->purpose) }}
+                                    </a>
+                                    <a class="btn btn-sm btn-outline-secondary"
                                         href="{{ route('show_category', $item->Cate->slug_name) }}">
                                         {{ $item->Cate->name }}
                                     </a>
-                                    <a class="btn btn-sm btn-outline-secondary" href="{{ route('show_city', $item->City->slug_city) }}">
+                                    <a class="btn btn-sm btn-outline-dark"
+                                        href="{{ route('show_city', $item->City->slug_city) }}">
                                         {{ $item->City->city }}
                                     </a>
                                 </p>

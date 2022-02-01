@@ -2,7 +2,19 @@
 <div class="container">
     <footer class="footer mt-auto py-5">
         <div class="row">
-            <div class="col-2">
+            <div class="col-3">
+                <h5><i class="fa fa-sitemap" aria-hidden="true"></i> Sitemap</h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2"><a href="{{ route('userHome') }}" class="nav-link p-0 text-muted">Home</a></li>
+                    <li class="nav-item mb-2"><a href="{{ route('show') }}" class="nav-link p-0 text-muted">Properties</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+                </ul>
+            </div>
+
+            <div class="col-3">
                 <h5>Section</h5>
                 <ul class="nav flex-column">
                     <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
@@ -13,7 +25,7 @@
                 </ul>
             </div>
 
-            <div class="col-2">
+            {{-- <div class="col-2">
                 <h5>Section</h5>
                 <ul class="nav flex-column">
                     <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
@@ -22,18 +34,7 @@
                     <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
                     <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
                 </ul>
-            </div>
-
-            <div class="col-2">
-                <h5>Section</h5>
-                <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
-                </ul>
-            </div>
+            </div> --}}
 
             <div class="col-4 offset-1">
                 <div class="mb-3 row">
@@ -46,18 +47,24 @@
                         </div>
                     @endif
                     <div class="col my-auto">
-                        <h4>{{ $brand_title->value ?? 'DG-Estate' }}</h4>
+                        <a class="text-muted btn p-0" href="{{ route('userHome') }}">
+                            <h4>{{ $brand_title->value ?? 'DG-Estate' }}</h4>
+                        </a>
                     </div>
                 </div>
                 <div class="mb-3">
-                    <h5 class="mb-3">Contact Us</h5>
+                    <h5 class="mb-3"><i class="far fa-address-book"></i> Contact Us</h5>
                     @if ($contacts['phone']->value)
-                        <h6 class="mb-2">Phone - <a class="text-muted"
-                                href="tel:{{ $contacts['phone']->value }}">{{ $contacts['phone']->value }}</a></h6>
+                        <h6 class="mb-2">
+                            <a class="btn btn-outline-success btn-sm"
+                                href="tel:{{ $contacts['phone']->value }}">
+                                <i class="fas fa-phone-alt"></i> {{ $contacts['phone']->value }}</a></h6>
                     @endif
                     @if ($contacts['email']->value)
-                        <h6 class="mb-2">Email - <a class="text-muted"
-                                href="mailto:{{ $contacts['email']->value }}">{{ $contacts['email']->value }}</a></h6>
+                        <h6 class="mb-2">
+                            <a class="btn btn-outline-primary btn-sm"
+                                href="mailto:{{ $contacts['email']->value }}">
+                                <i class="fas fa-envelope"></i> {{ $contacts['email']->value }}</a></h6>
                     @endif
                 </div>
                 {{-- <form>

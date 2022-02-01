@@ -35,6 +35,9 @@ Route::get('/logout', [UserController::class, 'logout']);
 Route::get('/', [UserController::class, 'userHome'])->name('userHome');
 Route::get('/category/{cate}', [UserController::class, 'show_category'])->name('show_category');
 Route::get('/city/{city}', [UserController::class, 'show_city'])->name('show_city');
+Route::get('/purpose/{purpose}', [UserController::class, 'show_purpose'])->name('show_purpose');
+Route::get('/show', [UserController::class, 'show'])->name('show');
+Route::get('/ajaxFilter', [UserController::class, 'ajaxFilter'])->name('ajaxFilter');
 Route::get('/property/{pro}', [UserController::class, 'show_pro'])->name('show_pro');
 
 //AdminPanel starts here

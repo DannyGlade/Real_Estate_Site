@@ -7,68 +7,110 @@
                     <h1>{{ $title }}</h1>
                 </div>
             </div>
-            <div class="row">
-                {{ $show->links() }}
-            </div>
-            <div class="row">
-                @foreach ($show as $item)
-                    <div class="col-12 mb-2">
-                        <div class="card mb-3 p-0">
-                            <div class="row g-0">
-                                <div class="col-md-4">
-                                    <a href="{{ route('show_pro', $item->title_slug) }}">
-                                        <img class="img-fluid rounded-start w-100 h-100" style=""
-                                            src="{{ asset('/storage/property/' . $item->image) }}"
-                                            alt="{{ $item->title }}">
-                                    </a>
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-12 mb-2">
-                                                <a class="btn p-0 text-secondary"
-                                                    href="{{ route('show_pro', $item->title_slug) }}">
-                                                    <h2 class="card-title">{{ $item->title }}</h2>
-                                                </a>
-                                            </div>
-                                            <div class="col-12 mb-2">
-                                                <p class="card-text mb-1">
-                                                    <a class="btn btn-sm btn-outline-dark"
-                                                        href="{{ route('show_category', $item->Cate->slug_name) }}">
-                                                        {{ $item->Cate->name }}
-                                                    </a>
-                                                    <a class="btn btn-sm btn-outline-secondary" href="{{ route('show_city', $item->City->slug_city) }}">
-                                                        {{ $item->City->city }}
-                                                    </a>
-                                                </p>
-                                            </div>
-                                            <div class="col-12 mb-2">
-                                                <p class="card-text">{{ $item->description }}</p>
-                                            </div>
-                                            <div class="col-12 mb-2">
-                                                <p class="card-text">
-                                                    <i class="fas fa-bed"></i> {{ $item->rooms }}
-                                                    <i class="fas fa-shower"></i> {{ $item->bathrooms }}
-                                                </p>
-                                            </div>
-                                            <div class="col-12 mt-4 mb-2">
-                                                <a class="btn btn-primary"
-                                                    href="{{ route('show_pro', $item->title_slug) }}">
-                                                    Read more
-                                                </a>
-                                            </div>
-                                            {{-- <p class="card-text"><small class="text-muted">Last updated 3 mins
-                                                ago</small>
-                                        </p> --}}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+            <form id="filter" class="row" enctype="multipart/form-data">
+                <div class="col-3 mb-3">
+                    <div class="input-group">
+                        <div class="input-group-text">Category</div>
+                        <select class="form-select fltr" name="category">
+                            <option value="*">All</option>
+                            @foreach ($cate as $item)
+                                <option value="{{ $item->slug_name }}">{{ $item->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
-                @endforeach
+                </div>
+                <div class="col-2 mb-3">
+                    <div class="input-group">
+                        <div class="input-group-text">City</div>
+                        <select class="form-select fltr" name="city">
+                            <option value="*">All</option>
+                            @foreach ($city as $item)
+                                <option value="{{ $item->slug_city }}">{{ $item->city }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="col-2 mb-3">
+                    <div class="input-group">
+                        <div class="input-group-text">For</div>
+                        <select class="form-select fltr" name="purpose">
+                            <option value="*">All</option>
+                            <option value="sale">Sale</option>
+                            <option value="rent">Rent</option>
+                            <option value="pg">PG</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-3 mb-3">
+                    <div class="input-group">
+                        <div class="input-group-text">Sort by</div>
+                        <select class="form-select fltr" name="sort">
+                            <option value="latest">Latest</option>
+                            <option value="oldest">Oldest</option>
+                            <option value="phtl">Price High to Low</option>
+                            <option value="plth">Price Low to High</option>
+                            <option value="ahtl">Area High to Low</option>
+                            <option value="alth">Area Low to High</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-2 mb-2">
+                    <button class="btn btn-primary w-100" type="submit"><i class="fas fa-filter"></i> Filter</button>
+                </div>
+            </form>
+            <div id="showbox">
+                @include('frontend.showinitem')
             </div>
         </div>
     </div>
 
+@endsection
+@section('scripts')
+    <script>
+        $(document).ready(function() {
+            // console.log('Hello');
+            $(document).on('submit', '#filter', function(e) {
+                e.preventDefault();
+                var formdata = $('#filter').serializeArray();
+                $.ajax({
+                    type: "GET",
+                    url: "{{ route('ajaxFilter') }}",
+                    data: formdata,
+                    dataType: "HTML",
+                    success: function(response) {
+                        $('#showbox').html(response);
+                    }
+                });
+                // console.log(formdata);
+            });
+            $(document).on('change', '#filter .fltr', function(e) {
+                e.preventDefault();
+                var formdata = $('#filter').serializeArray();
+                $.ajax({
+                    type: "GET",
+                    url: "{{ route('ajaxFilter') }}",
+                    data: formdata,
+                    dataType: "HTML",
+                    success: function(response) {
+                        $('#showbox').html(response);
+                    }
+                });
+            });
+            $(document).on('click', '#showbox .page-link', function(e) {
+                e.preventDefault();
+                var pagelink = $(this).attr('href');
+                var formdata = $('#filter').serializeArray();
+
+                $.ajax({
+                    type: "GET",
+                    url: pagelink,
+                    data: formdata,
+                    dataType: "HTML",
+                    success: function(response) {
+                        $('#showbox').html(response);
+                    }
+                });
+            });
+        });
+    </script>
 @endsection
