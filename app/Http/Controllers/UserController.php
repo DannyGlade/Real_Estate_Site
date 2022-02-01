@@ -190,21 +190,21 @@ class UserController extends Controller
             // dd($request);  
             $cate = $request->category;
             if ($cate == '*') {
-                $cateS = ['category', '>', 0];
+                $cateS = ['category', '!=', null];
             } else {
                 $cate = Category::where('slug_name', '=', $cate)->first();
                 $cateS = ['category', '=', $cate->id];
             }
             $city = $request->city;
             if ($city == '*') {
-                $cityS = ['city', '>', 0];
+                $cityS = ['city',  '!=', null];
             } else {
                 $city = City::where('slug_city', '=', $city)->first();
                 $cityS = ['city', '=', $city->id];
             }
             $purpose = $request->purpose;
             if ($purpose == '*') {
-                $purposeS = ['purpose', '>', 0];
+                $purposeS = ['purpose',  '!=', null];
             } else {
                 $purposeS = ['purpose', '=', $purpose];
             }
