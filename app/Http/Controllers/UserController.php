@@ -137,6 +137,21 @@ class UserController extends Controller
         $data = compact('title', 'menu', 'show');
         return view('frontend.show', $data);
     }
+    public function show_purpose(Request $request)
+    {
+        $purpose = $request->route()->parameter('purpose');
+        $show = Property::with('Cate', 'City')
+            ->where('purpose', '=', $purpose)
+            // ->where('featured', false)
+            ->latest()
+            // ->limit(6)
+            ->paginate(10);
+        // ->get();
+        $title = ucfirst($purpose);
+        $menu = 'purpose';
+        $data = compact('title', 'menu', 'show');
+        return view('frontend.show', $data);
+    }
     public function show_pro(Request $request)
     {
         $valid = validator($request->route()->parameters(), [
