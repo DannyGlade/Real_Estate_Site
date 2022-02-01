@@ -99,6 +99,16 @@ class UserController extends Controller
         $data = compact('title', 'menu', 'featuredPro', 'newlyAdded', 'showcate');
         return view('frontend.home', $data);
     }
+    public function show(Request $request)
+    {
+        $show = Property::with('Cate', 'City')
+            ->latest()
+            ->paginate(10);
+        $title = 'Propeties';
+        $menu = 'none';
+        $data = compact('title', 'menu', 'show');
+        return view('frontend.show', $data);
+    }
     public function show_category(Request $request)
     {
         $valid = validator($request->route()->parameters(), [
@@ -173,5 +183,41 @@ class UserController extends Controller
         $menu = 'none';
         $data = compact('title', 'menu', 'item', 'gals', 'faci');
         return view('frontend.property', $data);
+    }
+    public function ajaxFilter(Request $request)
+    {
+        if ($request->ajax()) {
+            // dd($request);  
+            $cate = $request->category;
+            if ($cate == '*') {
+                $cateS = ['category', '>', 0];
+            } else {
+                $cate = Category::where('slug_name', '=', $cate)->first();
+                $cateS = ['category', '=', $cate->id];
+            }
+            $city = $request->city;
+            if ($city == '*') {
+                $cityS = ['city', '>', 0];
+            } else {
+                $city = City::where('slug_city', '=', $city)->first();
+                $cityS = ['city', '=', $city->id];
+            }
+            $purpose = $request->purpose;
+            if ($purpose == '*') {
+                $purposeS = ['purpose', '>', 0];
+            } else {
+                $purposeS = ['purpose', '=', $purpose];
+            }
+            $sort = $request->sort;
+
+            $show = Property::with('Cate', 'City')
+                ->where([
+                    $cateS,
+                    $cityS,
+                    $purposeS,
+                ])->paginate(10);
+
+            return view('frontend.showinitem', compact('show'));
+        }
     }
 }
