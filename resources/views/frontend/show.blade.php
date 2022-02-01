@@ -11,7 +11,7 @@
                 <div class="col-3 mb-3">
                     <div class="input-group">
                         <div class="input-group-text">Category</div>
-                        <select class="form-select" name="category">
+                        <select class="form-select fltr" name="category">
                             <option value="*">All</option>
                             @foreach ($cate as $item)
                                 <option value="{{ $item->slug_name }}">{{ $item->name }}</option>
@@ -22,7 +22,7 @@
                 <div class="col-2 mb-3">
                     <div class="input-group">
                         <div class="input-group-text">City</div>
-                        <select class="form-select" name="city">
+                        <select class="form-select fltr" name="city">
                             <option value="*">All</option>
                             @foreach ($city as $item)
                                 <option value="{{ $item->slug_city }}">{{ $item->city }}</option>
@@ -33,7 +33,7 @@
                 <div class="col-2 mb-3">
                     <div class="input-group">
                         <div class="input-group-text">For</div>
-                        <select class="form-select" name="purpose">
+                        <select class="form-select fltr" name="purpose">
                             <option value="*">All</option>
                             <option value="sale">Sale</option>
                             <option value="rent">Rent</option>
@@ -44,7 +44,7 @@
                 <div class="col-3 mb-3">
                     <div class="input-group">
                         <div class="input-group-text">Sort by</div>
-                        <select class="form-select" name="sort">
+                        <select class="form-select fltr" name="sort">
                             <option value="latest">Latest</option>
                             <option value="oldest">Oldest</option>
                             <option value="phtl">Price High to Low</option>
@@ -72,7 +72,6 @@
             $(document).on('submit', '#filter', function(e) {
                 e.preventDefault();
                 var formdata = $('#filter').serializeArray();
-
                 $.ajax({
                     type: "GET",
                     url: "{{ route('ajaxFilter') }}",
@@ -80,10 +79,22 @@
                     dataType: "HTML",
                     success: function(response) {
                         $('#showbox').html(response);
-                        // console.log(response);
                     }
                 });
                 // console.log(formdata);
+            });
+            $(document).on('change', '#filter .fltr', function(e) {
+                e.preventDefault();
+                var formdata = $('#filter').serializeArray();
+                $.ajax({
+                    type: "GET",
+                    url: "{{ route('ajaxFilter') }}",
+                    data: formdata,
+                    dataType: "HTML",
+                    success: function(response) {
+                        $('#showbox').html(response);
+                    }
+                });
             });
             $(document).on('click', '#showbox .page-link', function(e) {
                 e.preventDefault();
