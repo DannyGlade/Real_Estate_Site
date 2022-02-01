@@ -83,7 +83,7 @@
                 });
                 // console.log(formdata);
             });
-            $(document).on('click', '#showbox a', function(e) {
+            $(document).on('click', '#showbox .page-link', function(e) {
                 e.preventDefault();
                 var pagelink = $(this).attr('href');
                 var formdata = $('#filter').serializeArray();
