@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content_box')
-    <img style="max-height: 513px"
+    <img style="max-height: 513px" class=""
         src="{{ $item->fe_image ? asset('/storage/property/' . $item->fe_image) : asset('/storage/property/' . $item->image) }}"
         alt="{{ $item->title }}">
     <div class="container">
@@ -15,7 +15,7 @@
                     <div class="card mb-3 p-0">
                         <div class="row g-0 mb-2 border-bottom">
                             <div class="col-md-4">
-                                <a href="{{ route('show_pro', $item->title_slug) }}">
+                                <a href="#">
                                     <img class="img-fluid rounded-start" data-fancybox="gallery"
                                         data-src="{{ asset('/storage/property/' . $item->image) }}"
                                         src="{{ asset('/storage/property/' . $item->image) }}" alt="{{ $item->title }}">
@@ -68,7 +68,7 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-2">
-                                            <h5 class="card-title">Price :</h5>
+                                            <h5 class="card-title"><i class="fas fa-tag"></i> Price :</h5>
                                         </div>
                                         <div class="col-10">
                                             <div class="card-text">
@@ -88,7 +88,7 @@
                                             @if (!empty($gals))
                                                 <div class="row">
                                                     <div class="col-2">
-                                                        <h5 class="card-title">Gallary :</h5>
+                                                        <h5 class="card-title"><i class="fas fa-images"></i> Gallary :</h5>
                                                     </div>
                                                     <div class="col-12">
                                                         <div class="carousel">
@@ -110,7 +110,7 @@
                                             @if (!empty($item->video))
                                                 <div class="row">
                                                     <div class="col-2 mb-2">
-                                                        <h5 class="card-title">Video :</h5>
+                                                        <h5 class="card-title"><i class="fab fa-youtube"></i> Video :</h5>
                                                     </div>
                                                     <div class="col-12 mb-2">
                                                         {!! $item->video !!}
@@ -124,18 +124,18 @@
                             <div class="col-md-4 border-start">
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-3 mb-2">
-                                            <h5 class="card-title">Area :</h5>
+                                        <div class="col-3 mb-3">
+                                            <h5 class="card-title"><i class="fas fa-th-large"></i> Area :</h5>
                                         </div>
-                                        <div class="col mb-2">
+                                        <div class="col-9 mb-3">
                                             <div class="card-text">
                                                 {{ number_format($item->area) }} Sq. Ft.
                                             </div>
                                         </div>
                                         @if (!empty($item->floorplan))
-                                            <div class="col-12 mb-2">
+                                            <div class="col-12 mb-3">
                                                 <h5 class="card-title">
-                                                    Floorplan :
+                                                    <i class="fas fa-drafting-compass"></i> Floorplan :
                                                 </h5>
                                                 <img class="w-100 rounded"
                                                     src="{{ asset('/storage/property/' . $item->floorplan) }}"
@@ -145,39 +145,33 @@
                                             </div>
                                         @endif
                                         @if (!empty($faci))
-                                            <div class="col-12 mb-2">
+                                            <div class="col-12 mb-3">
                                                 <h5 class="card-title">
-                                                    Facilities :
-                                                </h5>
-                                                <div class="row">
+                                                    <i class="fas fa-shapes"></i> Facilities :
+                                                </h5>                                                
                                                     <div class="card-text">
                                                         @foreach ($faci as $fac)
                                                             <button class="btn btn-{{ $fac->color }} btn-lg mb-1">
                                                                 {!! $fac->fa !!} {{ $fac->faci }}
                                                             </button>
                                                         @endforeach
-                                                    </div>
-                                                </div>
+                                                    </div>                                                
                                             </div>
                                         @endif
-                                        <div class="col-12 mb-2">
+                                        <div class="col-12 mb-3">
                                             <h5 class="card-title">
-                                                Contact :
+                                                <i class="fas fa-address-book"></i> Contact :
                                             </h5>
-                                            <div class="row">
-                                                <div class="col-4">
-                                                    <h6 class="card-title">Phone :</h6>
-                                                </div>
-                                                <div class="col-8">
+                                            <div class="row">                                                
+                                                <div class="col-6">
                                                     <a href="tel:{{ $item->cont_ph }}"
-                                                        class="card-text text-muted">{{ $item->cont_ph }}</a>
-                                                </div>
-                                                <div class="col-4">
-                                                    <h6 class="card-title">Email :</h6>
-                                                </div>
-                                                <div class="col-8">
+                                                        class="btn btn-success mb-1 w-100">
+                                                        <i class="fas fa-phone-alt"></i> {{ $item->cont_ph }}</a>
+                                                </div>                                                
+                                                <div class="col-6">
                                                     <a href="mailto:{{ $item->cont_em }}"
-                                                        class="card-text text-muted">{{ $item->cont_em }}</a>
+                                                        class="btn btn-primary mb-1 w-100">
+                                                        <i class="fas fa-envelope"></i> {{ $item->cont_em }}</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -188,7 +182,7 @@
                         <div class="row g-0 mb-2 card-body">
                             <div class="col-2">
                                 <div class="card-body">
-                                    <h5 class="card-title">Address :</h5>
+                                    <h5 class="card-title"><i class="fas fa-map"></i> Address :</h5>
                                 </div>
                             </div>
                             <div class="col">
@@ -201,7 +195,7 @@
                             <div class="row g-0 mb-2 card-body">
                                 <div class="col-12 mb-2">
                                     <div class="card-body">
-                                        <h5 class="card-title">Map :</h5>
+                                        <h5 class="card-title"><i class="fas fa-map-marked-alt"></i> Map :</h5>
                                     </div>
                                 </div>
                                 <div class="col-12 mb-2">
