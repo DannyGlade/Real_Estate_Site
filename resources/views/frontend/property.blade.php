@@ -193,17 +193,21 @@
                                     <div class="card-text"> {{ $item->address }}</div>
                                 </div>
                             </div>
-                            @if (!empty($item->map))
-                                <div class="row">
-                                    <div class="col-12 mb-2">
+                        </div>
+                        @if (!empty($item->map))
+                            <div class="row g-0 mb-2 card-body">
+                                <div class="col-12 mb-2">
+                                    <div class="card-body">
                                         <h5 class="card-title">Map :</h5>
                                     </div>
-                                    <div class="col-12 mb-2">
+                                </div>
+                                <div class="col-12 mb-2">
+                                    <div class="card-body">
                                         {!! $item->map !!}
                                     </div>
                                 </div>
-                            @endif
-                        </div>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
