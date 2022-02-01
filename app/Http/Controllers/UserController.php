@@ -99,6 +99,20 @@ class UserController extends Controller
         $data = compact('title', 'menu', 'featuredPro', 'newlyAdded', 'showcate');
         return view('frontend.home', $data);
     }
+    public function show(Request $request)
+    {
+        $show = Property::with('Cate', 'City')
+            ->latest()
+            ->paginate(10);
+        $title = 'Propeties';
+        $menu = 'none';
+        $data = compact('title', 'menu', 'show');
+        if ($request->ajax()) {
+            return view('frontend.showinitem', compact('show'));
+        } else {
+            return view('frontend.show', $data);
+        }
+    }
     public function show_category(Request $request)
     {
         $valid = validator($request->route()->parameters(), [
@@ -137,6 +151,21 @@ class UserController extends Controller
         $data = compact('title', 'menu', 'show');
         return view('frontend.show', $data);
     }
+    public function show_purpose(Request $request)
+    {
+        $purpose = $request->route()->parameter('purpose');
+        $show = Property::with('Cate', 'City')
+            ->where('purpose', '=', $purpose)
+            // ->where('featured', false)
+            ->latest()
+            // ->limit(6)
+            ->paginate(10);
+        // ->get();
+        $title = ucfirst($purpose);
+        $menu = 'purpose';
+        $data = compact('title', 'menu', 'show');
+        return view('frontend.show', $data);
+    }
     public function show_pro(Request $request)
     {
         $valid = validator($request->route()->parameters(), [
@@ -158,5 +187,69 @@ class UserController extends Controller
         $menu = 'none';
         $data = compact('title', 'menu', 'item', 'gals', 'faci');
         return view('frontend.property', $data);
+    }
+    public function ajaxFilter(Request $request)
+    {
+        if ($request->ajax()) {
+            // dd($request);  
+            $cate = $request->category;
+            if ($cate == '*') {
+                $cateS = ['category', '!=', null];
+            } else {
+                $cate = Category::where('slug_name', '=', $cate)->first();
+                $cateS = ['category', '=', $cate->id];
+            }
+            $city = $request->city;
+            if ($city == '*') {
+                $cityS = ['city',  '!=', null];
+            } else {
+                $city = City::where('slug_city', '=', $city)->first();
+                $cityS = ['city', '=', $city->id];
+            }
+            $purpose = $request->purpose;
+            if ($purpose == '*') {
+                $purposeS = ['purpose',  '!=', null];
+            } else {
+                $purposeS = ['purpose', '=', $purpose];
+            }
+            $sort = $request->sort;
+            switch ($sort) {
+                case 'latest':
+                    $sortW = 'created_at';
+                    $sortS = 'desc';
+                    break;
+                case 'oldest':
+                    $sortW = 'created_at';
+                    $sortS = 'asc';
+                    break;
+                case 'phtl':
+                    $sortW = 'price';
+                    $sortS = 'desc';
+                    break;
+                case 'plth':
+                    $sortW = 'price';
+                    $sortS = 'asc';
+                    break;
+                case 'ahtl':
+                    $sortW = 'area';
+                    $sortS = 'desc';
+                    break;
+                case 'alth':
+                    $sortW = 'area';
+                    $sortS = 'asc';
+                    break;
+            }
+
+            $show = Property::with('Cate', 'City')
+                ->where([
+                    $cateS,
+                    $cityS,
+                    $purposeS,
+                ])
+                ->orderBy($sortW, $sortS)
+                ->paginate(10);
+
+            return view('frontend.showinitem', compact('show'));
+        }
     }
 }

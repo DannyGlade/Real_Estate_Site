@@ -21,10 +21,16 @@
                     <div class="carousel-caption @if ($key % 2 == 0)text-start @else text-end @endif">
                         <h1>{{ $item->title }}</h1>
                         <p>
-                            <a class="btn btn-sm btn-dark" href="{{ route('show_category', $item->Cate->slug_name) }}">
+                            <a class="btn btn-sm btn-primary"
+                                href="{{ route('show_purpose', $item->purpose) }}">
+                                {{ ucfirst($item->purpose) }}
+                            </a>
+                            <a class="btn btn-sm btn-secondary"
+                                href="{{ route('show_category', $item->Cate->slug_name) }}">
                                 {{ $item->Cate->name }}
                             </a>
-                            <a class="btn btn-sm btn-secondary" href="{{ route('show_city', $item->City->slug_city) }}">
+                            <a class="btn btn-sm btn-dark"
+                                href="{{ route('show_city', $item->City->slug_city) }}">
                                 {{ $item->City->city }}
                             </a>
                         </p>

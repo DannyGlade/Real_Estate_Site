@@ -1,8 +1,8 @@
 $(document).ready(function () {
     $("#data").DataTable({
         lengthMenu: [
-            [5, 10, 15, 20, -1],
-            [5, 10, 15, 20, "All"],
+            [10, 20, 30, -1],
+            [10, 20, 30, "All"],
         ],
     });
 });

@@ -73,6 +73,9 @@
                                         <div class="col-10">
                                             <div class="card-text">
                                                 ₹ {{ number_format($item->price) }}
+                                                @if ($item->purpose != 'sale')
+                                                /month
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
