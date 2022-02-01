@@ -107,7 +107,11 @@ class UserController extends Controller
         $title = 'Propeties';
         $menu = 'none';
         $data = compact('title', 'menu', 'show');
-        return view('frontend.show', $data);
+        if ($request->ajax()) {
+            return view('frontend.showinitem', compact('show'));
+        } else {
+            return view('frontend.show', $data);
+        }
     }
     public function show_category(Request $request)
     {
