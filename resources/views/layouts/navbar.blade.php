@@ -80,14 +80,17 @@
                         </li> --}}
                     </ul>
                     <div class="d-flex">
-                        <form class="me-2">
+                        <form id="searchFrm" action="{{ route('propSearch') }}" method="POST" class="me-2">
+                            @csrf
                             <div class="input-group">
                                 <select class="form-select w-25" name="purpose" id="">
-                                    <option value="sale">Sale</option>
-                                    <option value="rent">Rent</option>
-                                    <option value="pg">PG</option>
+                                    <option @if(!empty($purpose)){{$purpose == 'sale' ? 'selected' : ''}} @endif value="sale">Sale</option>
+                                    <option @if(!empty($purpose)){{$purpose == 'rent' ? 'selected' : ''}} @endif value="rent">Rent</option>
+                                    <option @if(!empty($purpose)){{$purpose == 'pg' ? 'selected' : ''}} @endif value="pg">PG</option>
+                                    <option @if(!empty($purpose)){{$purpose == '*' ? 'selected' : ''}} @endif value="*">All</option>
                                 </select>
-                                <input class="form-control w-50" type="search" placeholder="Search" aria-label="Search">
+                                <input class="form-control w-50" name="search" type="search"
+                                    placeholder="Search by Name" value="{{ $SecStr ?? '' }}" aria-label="Search">
                                 <button class="btn btn-outline-success w-25" type="submit">Search</button>
                             </div>
                         </form>
@@ -125,3 +128,10 @@
         </nav>
     </div>
 </header>
+{{-- @section('scripts')
+    <script>
+        $(document).ready(function() {
+            console.log('navbar');
+        });
+    </script>
+@endsection --}}

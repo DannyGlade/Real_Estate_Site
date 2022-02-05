@@ -22,6 +22,7 @@ use App\Http\Middleware\AuthCheck;
 // });
 
 //User Controller
+// Route::get('/{any}', [UserController::class, 'not_found'])->name('not_found');
 Route::get('/404', [UserController::class, 'not_found'])->name('not_found');
 
 Route::get('/signup', [UserController::class, 'signupForm']);
@@ -39,6 +40,7 @@ Route::get('/purpose/{purpose}', [UserController::class, 'show_purpose'])->name(
 Route::get('/show', [UserController::class, 'show'])->name('show');
 Route::get('/ajaxFilter', [UserController::class, 'ajaxFilter'])->name('ajaxFilter');
 Route::get('/property/{pro}', [UserController::class, 'show_pro'])->name('show_pro');
+Route::post('/propSearch', [UserController::class, 'propSearch'])->name('propSearch');
 
 //AdminPanel starts here
 Route::get('/admin/login', [AdminController::class, 'loginPage'])->name('AdminLoginPage');
@@ -107,3 +109,5 @@ Route::middleware([AuthCheck::class])->group(function () {
     Route::post('/admin/sitesettings/ajaxDelete', [SiteController::class, 'ajaxDelete'])->name('ajaxDelete');
     //Site Settings Ends
 });
+
+Route::get('/{any}', [UserController::class, 'not_found'])->name('not_found');

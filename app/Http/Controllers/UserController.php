@@ -191,7 +191,7 @@ class UserController extends Controller
     public function ajaxFilter(Request $request)
     {
         if ($request->ajax()) {
-            // dd($request);  
+            // dd($request);
             $cate = $request->category;
             if ($cate == '*') {
                 $cateS = ['category', '!=', null];
@@ -251,5 +251,32 @@ class UserController extends Controller
 
             return view('frontend.showinitem', compact('show'));
         }
+    }
+    public function propSearch(Request $request)
+    {
+        $request->validate([
+            'purpose' => 'required',
+        ]);
+        // dd($request);
+        $SecStr = stripslashes(strip_tags($request->search));
+        $searchStr = '%' . $SecStr . '%';
+        $purpose = $request->purpose;
+        if ($purpose == '*') {
+            $purposeS = ['purpose', '!=', null];
+        } else {
+            $purposeS = ['purpose', '=', $purpose];
+        }
+        $show = Property::with('Cate', 'City')
+            ->where([
+                $purposeS,
+                ['title', 'LIKE', $searchStr]
+            ])
+            ->latest()
+            ->paginate(10);
+        $title = 'Propeties';
+        $menu = 'none';
+        $data = compact('title', 'menu', 'show', 'SecStr', 'purpose');
+
+        return view('frontend.show', $data);
     }
 }
