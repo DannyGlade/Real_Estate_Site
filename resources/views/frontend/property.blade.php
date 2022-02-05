@@ -61,7 +61,7 @@
                         <div class="row g-0 mb-2 border-bottom card-body">
                             <div class="col-4">
                                 <div class="card-body">
-                                    <h4 class="card-title">For {{ ucfirst($item->purpose) }}...</h4>
+                                    <h4 class="card-title"><i class="fas fa-sign"></i> For {{ ucfirst($item->purpose) }}...</h4>
                                 </div>
                             </div>
                             <div class="col-8">
@@ -148,26 +148,26 @@
                                             <div class="col-12 mb-3">
                                                 <h5 class="card-title">
                                                     <i class="fas fa-shapes"></i> Facilities :
-                                                </h5>                                                
+                                                </h5>
                                                     <div class="card-text">
                                                         @foreach ($faci as $fac)
                                                             <button class="btn btn-{{ $fac->color }} btn-lg mb-1">
                                                                 {!! $fac->fa !!} {{ $fac->faci }}
                                                             </button>
                                                         @endforeach
-                                                    </div>                                                
+                                                    </div>
                                             </div>
                                         @endif
                                         <div class="col-12 mb-3">
                                             <h5 class="card-title">
                                                 <i class="fas fa-address-book"></i> Contact :
                                             </h5>
-                                            <div class="row">                                                
+                                            <div class="row">
                                                 <div class="col-6">
                                                     <a href="tel:{{ $item->cont_ph }}"
                                                         class="btn btn-success mb-1 w-100">
                                                         <i class="fas fa-phone-alt"></i> {{ $item->cont_ph }}</a>
-                                                </div>                                                
+                                                </div>
                                                 <div class="col-6">
                                                     <a href="mailto:{{ $item->cont_em }}"
                                                         class="btn btn-primary mb-1 w-100">

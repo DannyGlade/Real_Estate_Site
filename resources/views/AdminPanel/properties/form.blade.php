@@ -3,6 +3,7 @@
     <div class="container">
         <div class="container-fluid">
             <div class="mt-4 ">
+                <h2>Properties</h2>
                 <div aria-label="breadcrumb mt-5">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item" aria-current="page">Property</li>
@@ -36,14 +37,14 @@
                                     </div>
                                     <div class="row mb-2">
                                         <div class="col-md-6">
-                                            <label for="" class="form-label">Property Title</label>
+                                            <label for="" class="form-label"><i class="fas fa-home"></i> Property Title</label>
                                             <input type="text" class="form-control" name="title"
                                                 value="@if (!empty($pro)){{ $pro->title }}@else{{ old('title') }}@endif">
                                             <div class="text-danger">@error('title') * {{ $message }} @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="" class="form-label">Price</label>
+                                            <label for="" class="form-label"><i class="fas fa-tag"></i> Price</label>
                                             <div class="input-group">
                                                 <div class="input-group-text">₹</div>
                                                 <input type="number" class="form-control" name="price" min="0"
@@ -55,7 +56,7 @@
                                     </div>
                                     <div class="row mb-2">
                                         <div class="col-md-6">
-                                            <label class="form-label">Purpose</label>
+                                            <label class="form-label"><i class="fas fa-sign"></i> Purpose</label>
                                             <div class="input-group">
                                                 <label class="input-group-text">Options</label>
                                                 <select class="form-select" name="purpose">
@@ -69,7 +70,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-6">
-                                            <label class="form-label">Category</label>
+                                            <label class="form-label"><i class="fas fa-cubes"></i> Category</label>
                                             <div class="input-group">
                                                 <label class="input-group-text">Options</label>
                                                 <select class="form-select" name="category">
@@ -101,21 +102,21 @@
                                     </div>
                                     <div class="row mb-2">
                                         <div class="col-md-3">
-                                            <div class="form-label">Bed Rooms</div>
+                                            <div class="form-label"><i class="fas fa-bed"></i> Bed Rooms</div>
                                             <input type="number" class="form-control" value="@if (!empty($pro)){{ $pro->rooms }}@else{{ old('rooms') ?? 1 }}@endif"
                                                 name="rooms" min="1">
                                             <div class="text-danger">@error('rooms') * {{ $message }} @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-3">
-                                            <div class="form-label">Bath Rooms</div>
+                                            <div class="form-label"><i class="fas fa-shower"></i> Bath Rooms</div>
                                             <input type="number" class="form-control" value="@if (!empty($pro)){{ $pro->bathrooms }}@else{{ old('bathrooms') ?? 1 }}@endif"
                                                 name="bathrooms" min="1">
                                             <div class="text-danger">@error('bathrooms') * {{ $message }} @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-6">
-                                            <div class="form-label">Area</div>
+                                            <div class="form-label"><i class="fas fa-th-large"></i> Area</div>
                                             <div class="input-group">
                                                 <label class="input-group-text">Sq. Ft.</label>
                                                 <input type="number" class="form-control"
@@ -127,7 +128,7 @@
                                     </div>
                                     <div class="row mb-2">
                                         <div class="col-md-3">
-                                            <label class="form-label">City</label>
+                                            <label class="form-label"><i class="fas fa-city"></i> City</label>
                                             <div class="input-group">
                                                 <select class="form-select" name="city">
                                                     <option selected>Choose...</option>
@@ -156,7 +157,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-9">
-                                            <label class="form-label">Address</label>
+                                            <label class="form-label"><i class="fas fa-map"></i> Address</label>
                                             <input type="text" class="form-control" value="@if (!empty($pro)){{ $pro->address }}@else{{ old('address') }}@endif"
                                                 name="address">
                                             <div class="text-danger">@error('address') * {{ $message }} @enderror
@@ -165,7 +166,7 @@
                                     </div>
                                     <div class="row mb-2">
                                         <div class="col-md-12 mb-2">
-                                            <label for="" class="form-label">Facilities</label>
+                                            <label for="" class="form-label"><i class="fas fa-shapes"></i> Facilities</label>
                                             <select class="form-select" name="faci[]" multiple>
                                                 @foreach ($faci as $item)
                                                     <option value="{{ $item->slug_faci }}">{{ $item->faci }}
@@ -179,7 +180,7 @@
                                     </div>
                                     <div class="row mb-2">
                                         <div class="col-md-6 mb-2">
-                                            <label for="" class="form-label">Contact Phone</label>
+                                            <label for="" class="form-label"><i class="fas fa-phone-alt"></i> Contact Phone</label>
                                             <input type="text" name="cont_ph" value="@if (!empty($pro)){{ $pro->cont_ph }}@else{{ old('cont_ph') }}@endif"
                                                 class="form-control">
                                             <div class="text-danger">@error('cont_ph') * {{ $message }}
@@ -187,7 +188,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-6 mb-2">
-                                            <label for="" class="form-label">Contact Email</label>
+                                            <label for="" class="form-label"><i class="fas fa-envelope"></i> Contact Email</label>
                                             <input type="email" name="cont_em" value="@if (!empty($pro)){{ $pro->cont_em }}@else{{ old('cont_em') }}@endif"
                                                 class="form-control">
                                             <div class="text-danger">@error('cont_em') * {{ $message }}
@@ -197,7 +198,7 @@
                                     </div>
                                     <div class="row mb-2">
                                         <div class="col-md-12 mb-2">
-                                            <label for="" class="form-label">Property Description</label>
+                                            <label for="" class="form-label"><i class="fas fa-info-circle"></i> Property Description</label>
                                             <textarea class="form-control" rows="3"
                                                 name="description">@if (!empty($pro)){{ $pro->description }}@else{{ old('description') }}@endif</textarea>
                                             <div class="text-danger">@error('description') * {{ $message }}
@@ -207,14 +208,14 @@
                                     </div>
                                     <div class="row mb-2">
                                         <div class="col-md-12 mb-2">
-                                            <label for="" class="form-label">Property Video</label>
+                                            <label for="" class="form-label"><i class="fab fa-youtube"></i> Property Video</label>
                                             <textarea class="form-control" rows="3"
                                                 name="video">@if (!empty($pro)){{ $pro->video }}@else{{ old('video') }}@endif</textarea>
                                         </div>
                                     </div>
                                     <div class="row mb-2">
                                         <div class="col-md-12 mb-2">
-                                            <label for="" class="form-label">Property Map</label>
+                                            <label for="" class="form-label"><i class="fas fa-map-marked-alt"></i> Property Map</label>
                                             <textarea class="form-control" rows="3"
                                                 name="map">@if (!empty($pro)){{ $pro->map }}@else{{ old('map') }}@endif</textarea>
                                         </div>
@@ -222,7 +223,7 @@
                                 </div>
                                 <div class="col-md-4 mx-auto mb-2 ps-2 border-start">
                                     <div class="col-md-12 mb-2">
-                                        <label for="" class="form-label">Property Featured Image</label>
+                                        <label for="" class="form-label"><i class="fas fa-image"></i> Property Featured Image</label>
                                         <p class="text-muted form-label">for best output upload [1903 x 513] Image
                                         </p>
                                         <div class="input-group">
@@ -239,7 +240,7 @@
                                         </div>
                                     @endif
                                     <div class="col-md-12 mb-2">
-                                        <label for="" class="form-label">Property Image</label>
+                                        <label for="" class="form-label"><i class="far fa-image"></i> Property Image</label>
                                         <p class="text-muted form-label">for best output upload [1920 x 1440] [4:3] Image
                                         </p>
                                         <div class="input-group">
@@ -256,7 +257,7 @@
                                         </div>
                                     @endif
                                     <div class="col-md-12 mb-2">
-                                        <label for="" class="form-label">Flooreplan Image</label>
+                                        <label for="" class="form-label"><i class="fas fa-drafting-compass"></i> Flooreplan Image</label>
                                         <div class="input-group">
                                             <input type="file" class="form-control" name="floorplan">
                                         </div>
@@ -272,19 +273,6 @@
                                     @endif
                                 </div>
                             </div>
-                            {{-- <div class="row border-bottom border-2 m-auto mt-3">
-                                <form id="gallaryAjax" data-id="" action="javascript:void(0)" method="post">
-                                    @csrf
-                                    <div class="col-md-12 mb-2">
-                                        <label for="" class="form-label">Property Gallary</label>
-                                        <div class="input-group mb-2">
-                                            <input type="file" class="form-control" name="gallary[]" multiple>
-                                        </div>
-                                        <button type="submit" id="ajaxSave" class="btn btn-outline-secondary">Save</button>
-                                        <button id="ajaxDelete" class="btn btn-outline-danger">Delete</button>
-                                    </div>
-                                </form>
-                            </div> --}}
                             <div class="col-12">
                                 <button
                                     class="btn

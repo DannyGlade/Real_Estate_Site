@@ -3,6 +3,7 @@
     <div class="container">
         <div class="container-fluid">
             <div class="mt-4 ">
+                <h2>Facilities</h2>
                 <div aria-label="breadcrumb mt-5">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item" aria-current="page">Facilities</li>
@@ -37,23 +38,22 @@
                                 <label for="" class="form-label">Color</label>
                                 <div class="input-group">
                                     <select class="form-select" name="color">
-                                        <option {{ $faci->color == '' ? 'selected' : '' }} value="">Choose...</option>
-                                        <option {{ $faci->color == 'primary' ? 'selected' : '' }} class="bg-primary"
-                                            value="primary">Blue</option>
-                                        <option {{ $faci->color == 'secondary' ? 'selected' : '' }}
-                                            class="bg-secondary" value="secondary">Grey</option>
-                                        <option {{ $faci->color == 'success' ? 'selected' : '' }} class="bg-success"
-                                            value="success">Green</option>
-                                        <option {{ $faci->color == 'danger' ? 'selected' : '' }} class="bg-danger"
-                                            value="danger">Red</option>
-                                        <option {{ $faci->color == 'warning' ? 'selected' : '' }} class="bg-warning"
-                                            value="warning">Yellow</option>
-                                        <option {{ $faci->color == 'info' ? 'selected' : '' }} class="bg-info"
-                                            value="info">Teal Blue</option>
-                                        <option {{ $faci->color == 'light' ? 'selected' : '' }} class="bg-light"
-                                            value="light">Light</option>
-                                        <option {{ $faci->color == 'dark text-white' ? 'selected' : '' }}
-                                            class="bg-dark text-white" value="dark text-white">Dark</option>
+                                        <option @if (!empty($faci)){{ $faci->color == '' ? 'selected' : '' }}@endif value="">Choose...</option>
+                                        <option @if (!empty($faci)){{ $faci->color == 'primary' ? 'selected' : '' }}@endif class="bg-primary" value="primary">Blue
+                                        </option>
+                                        <option @if (!empty($faci)){{ $faci->color == 'secondary' ? 'selected' : '' }}@endif class="bg-secondary" value="secondary">Grey
+                                        </option>
+                                        <option @if (!empty($faci)){{ $faci->color == 'success' ? 'selected' : '' }}@endif class="bg-success" value="success">Green
+                                        </option>
+                                        <option @if (!empty($faci)){{ $faci->color == 'danger' ? 'selected' : '' }}@endif class="bg-danger" value="danger">Red</option>
+                                        <option @if (!empty($faci)){{ $faci->color == 'warning' ? 'selected' : '' }}@endif class="bg-warning" value="warning">Yellow
+                                        </option>
+                                        <option @if (!empty($faci)){{ $faci->color == 'info' ? 'selected' : '' }}@endif class="bg-info" value="info">Teal Blue
+                                        </option>
+                                        <option @if (!empty($faci)){{ $faci->color == 'light' ? 'selected' : '' }}@endif class="bg-light" value="light">Light
+                                        </option>
+                                        <option @if (!empty($faci)){{ $faci->color == 'dark text-white' ? 'selected' : '' }}@endif class="bg-dark text-white"
+                                            value="dark text-white">Dark</option>
                                     </select>
                                 </div>
                                 <div class="text-danger">@error('color') * {{ $message }} @enderror</div>

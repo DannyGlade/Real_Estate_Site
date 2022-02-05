@@ -3,10 +3,11 @@
     <div class="container">
         <div class="container-fluid">
             <div class="mt-4 ">
+                <h2>Users</h2>
                 <div aria-label="breadcrumb mt-5">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item" aria-current="page">Users</li>
-                        <li class="breadcrumb-item active">List</li>                        
+                        <li class="breadcrumb-item active">List</li>
                     </ol>
                 </div>
             </div>
