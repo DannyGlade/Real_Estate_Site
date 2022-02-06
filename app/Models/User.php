@@ -44,4 +44,8 @@ class User extends Authenticatable
     protected $table = "users";
     protected $primaryKey = "id";
 
+    public function Data()
+    {
+        return $this->hasOne(UserData::class, 'id');
+    }
 }

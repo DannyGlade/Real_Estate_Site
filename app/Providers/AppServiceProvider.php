@@ -64,6 +64,7 @@ class AppServiceProvider extends ServiceProvider
         view()->composer(['layouts.app'], function ($view) {
             $request = request();
             $user = $request->session()->get('user');
+            // dd($user);
             $status = false;
             if ($user) {
                 $status = true;
