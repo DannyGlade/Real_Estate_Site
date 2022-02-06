@@ -18,6 +18,7 @@
                     <thead>
                         <tr>
                             {{-- <th scope="col">Id</th> --}}
+                            <th scope="col">Image</th>
                             <th scope="col">Name</th>
                             <th scope="col">Email</th>
                             <th scope="col">Type</th>
@@ -28,6 +29,7 @@
                         @foreach ($usersData as $item)
                             <tr>
                                 {{-- <th scope="row">{{ $item->id }}</th> --}}
+                                <th scope="row"><img class="rounded" height="32" width="32" src="{{ !empty($item->Data->image) ? asset('/storage/userdata/' . $item->Data->image) : asset('stockUser.png') }}" alt=""></th>
                                 <th scope="row">{{ $item->name }}</th>
                                 <th scope="row">{{ $item->email }}</th>
                                 <th scope="row">

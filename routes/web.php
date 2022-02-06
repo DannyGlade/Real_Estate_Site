@@ -5,6 +5,7 @@ use App\Http\Controllers\SiteController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\AuthCheck;
+use App\Http\Middleware\UserCheck;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,29 +26,37 @@ use App\Http\Middleware\AuthCheck;
 // Route::get('/{any}', [UserController::class, 'not_found'])->name('not_found');
 Route::get('/404', [UserController::class, 'not_found'])->name('not_found');
 
-Route::get('/signup', [UserController::class, 'signupForm']);
-Route::post('/signup', [UserController::class, 'signup']);
+Route::get('/signup', [UserController::class, 'signupForm'])->name('UserSignupForm');
+Route::post('/signup', [UserController::class, 'signup'])->name('UserSignup');
 
-Route::get('/login', [UserController::class, 'loginForm']);
-Route::post('/login', [UserController::class, 'login']);
+Route::get('/login', [UserController::class, 'loginForm'])->name('UserLoginForm');
+Route::post('/login', [UserController::class, 'login'])->name('UserLogin');
 
-Route::get('/logout', [UserController::class, 'logout']);
+Route::get('/logout', [UserController::class, 'logout'])->name('UserLogout');
 
 Route::get('/', [UserController::class, 'userHome'])->name('userHome');
 Route::get('/category/{cate}', [UserController::class, 'show_category'])->name('show_category');
 Route::get('/city/{city}', [UserController::class, 'show_city'])->name('show_city');
 Route::get('/purpose/{purpose}', [UserController::class, 'show_purpose'])->name('show_purpose');
-Route::get('/show', [UserController::class, 'show'])->name('show');
+Route::get('/property', [UserController::class, 'show'])->name('show');
 Route::get('/ajaxFilter', [UserController::class, 'ajaxFilter'])->name('ajaxFilter');
 Route::get('/property/{pro}', [UserController::class, 'show_pro'])->name('show_pro');
 Route::post('/propSearch', [UserController::class, 'propSearch'])->name('propSearch');
+
+Route::middleware([UserCheck::class])->group(function () {
+    Route::get('/user/profile', [UserController::class, 'userprofile'])->name('UserProfile');
+    Route::get('/user/profile/edit', [UserController::class, 'edituserprofile'])->name('editUserProfile');
+    Route::post('/user/profile/edit', [UserController::class, 'editeduserprofile'])->name('editedUserProfile');
+});
+
+//User Section Ends Here
 
 //AdminPanel starts here
 Route::get('/admin/login', [AdminController::class, 'loginPage'])->name('AdminLoginPage');
 Route::post('/admin/login', [AdminController::class, 'login']);
 
 //All Admin routes are here
-Route::middleware([AuthCheck::class])->group(function () {
+Route::middleware(AuthCheck::class)->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('AdminHome');
     Route::get('/admin/logout', [AdminController::class, 'logout'])->name('AdminLogout');
 

@@ -9,7 +9,10 @@ use App\Models\gallary;
 use App\Models\Property;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\UserData;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redis;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -33,7 +36,7 @@ class UserController extends Controller
             'password' => 'required'
         ]);
 
-        $user = User::select('*')->where('email', $request->email)->get();
+        $user = User::with('Data')->select('*')->where('email', $request->email)->get();
         // $user = User::get()->where('email', $request->email);
 
         // dd($user);
@@ -74,7 +77,7 @@ class UserController extends Controller
         // $user->password = md5($request->password);
         $user->save();
 
-        return redirect(url('/login'));
+        return redirect(route('UserLoginForm'));
         // dd($pass);
     }
 
@@ -84,6 +87,67 @@ class UserController extends Controller
         $request->session()->forget('user');
         // $request->session()->flush();
         return redirect(url(route('userHome')));
+    }
+
+    //User Profile Page
+    public function userprofile(Request $request)
+    {
+        $user = $request->session()->get('user');
+        $userId = $user['id'];
+        $user = User::with('Data')->findOrFail($userId);
+        // dd($user);
+        $title = $user->name . " | Profile";
+        $menu = "none";
+
+        $data = compact('title', 'menu', 'user');
+        return view('User.Profile', $data);
+    }
+    //edit profile Page
+    public function edituserprofile(Request $request)
+    {
+        $user = $request->session()->get('user');
+        $userId = $user['id'];
+        $user = User::with('Data')->findOrFail($userId);
+        // dd($user);
+        $title = $user->name . " | Edit Profile";
+        $menu = "none";
+
+        $data = compact('title', 'menu', 'user');
+        return view('User.editProfile', $data);
+    }
+    public function editeduserprofile(Request $request)
+    {
+        $user = $request->session()->get('user');
+        $userId = $user['id'];
+        $request->validate([
+            'name' => 'required|string',
+            'email' => 'required|email|unique:users,email,' . $userId . ',id',
+            'image' => 'mimes:png,jpg'
+        ]);
+        $user = User::with('Data')->findOrFail($userId);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user_data = UserData::find($user->id);
+        if ($user_data === null) {
+            $user_data = new UserData;
+            $user_data->id = $user->id;
+            $user_data->save();
+        }
+        $user_data->about = $request->about;
+        if ($request->hasFile('image')) {
+            Storage::delete('public/userdata/' . $user_data->image);
+            $image = $request->file('image');
+            $iname = date('Ym') . '-' . rand() . '.' . $image->extension();
+            $store = $image->storeAs('public/userdata', $iname);
+            if ($store) {
+                $user_data->image = $iname;
+            }
+        }
+        $user->save();
+        $user_data->save();
+        $request->session()->put('user', $user);
+        return redirect(route('UserProfile'));
+        // dd($user_data);
     }
 
     //sending home
@@ -99,6 +163,7 @@ class UserController extends Controller
         $data = compact('title', 'menu', 'featuredPro', 'newlyAdded', 'showcate');
         return view('frontend.home', $data);
     }
+    //Showing Properties
     public function show(Request $request)
     {
         $show = Property::with('Cate', 'City')
@@ -188,6 +253,7 @@ class UserController extends Controller
         $data = compact('title', 'menu', 'item', 'gals', 'faci');
         return view('frontend.property', $data);
     }
+    //filter Property
     public function ajaxFilter(Request $request)
     {
         if ($request->ajax()) {
@@ -255,6 +321,7 @@ class UserController extends Controller
             return view('frontend.showinitem', compact('show'));
         }
     }
+    //search Property
     public function propSearch(Request $request)
     {
         $request->validate([

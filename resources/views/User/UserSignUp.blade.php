@@ -14,7 +14,7 @@
             </p>
         </div>
         <div class="col-md-10 mx-auto col-lg-5">
-            <form class="p-4 p-md-5 border rounded-3 bg-light" method="POST" action="{{ url('/signup') }}">
+            <form class="p-4 p-md-5 border rounded-3 bg-light" method="POST" action="{{ route('UserSignup') }}">
 
                 @csrf
                 <x-log-input type="text" name="name" label="User Name" placeholder="name@example.com" />
@@ -29,7 +29,7 @@
                 <button class="w-100 btn btn-lg btn-primary" type="submit">Sign Up</button>
                 <hr class="my-4">
                 <small class="text-muted">By clicking Sign up, you agree to the terms of use.</small>
-                <small class="text-muted">Already have an account? <a href="{{ url('/login') }}">Log In</a></small>
+                <small class="text-muted">Already have an account? <a href="{{ route('UserLoginForm') }}">Log In</a></small>
             </form>
         </div>
     </div>
