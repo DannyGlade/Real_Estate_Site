@@ -110,7 +110,7 @@
                                         <div class="dropdown-item text-dark text-bold">{{ $user['name'] }}</div>
                                     </li>
                                     @if ($user['type'] == 'A' || $user['type'] == 'R')
-                                        <li><a class="dropdown-item" href="{{ route('AdminHome') }}">Admin</a></li>
+                                        <li><a class="dropdown-item" target="_blank" href="{{ route('AdminHome') }}">Admin</a></li>
                                     @endif
                                     <li><a class="dropdown-item" href="{{ route('UserProfile') }}">Profile</a></li>
                                     <li>
