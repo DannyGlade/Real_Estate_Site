@@ -9,6 +9,7 @@ use App\Models\gallary;
 use App\Models\Property;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\UserData;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use phpDocumentor\Reflection\Types\This;
@@ -43,7 +44,7 @@ class AdminController extends Controller
             'password' => 'required'
         ]);
 
-        $user = User::select('*')->where('email', $request->email)->get();
+        $user = User::with('Data')->select('*')->where('email', $request->email)->get();
         // $user = User::get()->where('email', $request->email);
 
         // dd($user);
@@ -667,7 +668,7 @@ class AdminController extends Controller
         $title = "Users List";
         $menu = "users";
         $user = $request->session()->get('AdminUser');
-        $usersData = User::all()->where('type', '!=', 'R')->except($user['id']);
+        $usersData = User::with('Data')->where('type', '!=', 'R')->get()->except($user['id']);
         $data = compact('title', 'menu', 'usersData');
         // dd($user);
         return view('AdminPanel.users.list', $data);
@@ -682,7 +683,10 @@ class AdminController extends Controller
         // dd($valid);
         if ($valid) {
             $usersData = User::findorfail($id);
+            $user_data = UserData::findorfail($id);
+            Storage::delete('public/userdata/' . $user_data->image);
             $usersData->delete();
+            $user_data->delete();
         }
         $request->session()->flash('msg', 'Deleted...');
         $request->session()->flash('msgst', 'danger');
