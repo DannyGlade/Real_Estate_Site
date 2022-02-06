@@ -1,5 +1,5 @@
 <!-- Header Bootstrap -->
-<header class="p-2 bg-dark sticky-top text-white">
+<header class="py-1 bg-dark sticky-top text-white">
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
@@ -58,9 +58,9 @@
                                 @endforeach
                             </ul>
                         </li>
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a class="nav-link" href="#">Link</a>
-                        </li>
+                        </li> --}}
                         {{-- <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
@@ -84,14 +84,16 @@
                             @csrf
                             <div class="input-group">
                                 <select class="form-select w-25" name="purpose" id="">
-                                    <option @if(!empty($purpose)){{$purpose == 'sale' ? 'selected' : ''}} @endif value="sale">Sale</option>
-                                    <option @if(!empty($purpose)){{$purpose == 'rent' ? 'selected' : ''}} @endif value="rent">Rent</option>
-                                    <option @if(!empty($purpose)){{$purpose == 'pg' ? 'selected' : ''}} @endif value="pg">PG</option>
-                                    <option @if(!empty($purpose)){{$purpose == '*' ? 'selected' : ''}} @endif value="*">All</option>
+                                    <option @if (!empty($purpose)){{ $purpose == 'sale' ? 'selected' : '' }} @endif value="sale">Sale</option>
+                                    <option @if (!empty($purpose)){{ $purpose == 'rent' ? 'selected' : '' }} @endif value="rent">Rent</option>
+                                    <option @if (!empty($purpose)){{ $purpose == 'pg' ? 'selected' : '' }} @endif value="pg">PG</option>
+                                    <option @if (!empty($purpose)){{ $purpose == '*' ? 'selected' : '' }} @endif value="*">All</option>
                                 </select>
                                 <input class="form-control w-50" name="search" type="search"
                                     placeholder="Search by Name" value="{{ $SecStr ?? '' }}" aria-label="Search">
-                                <button class="btn btn-outline-success w-25" type="submit"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
+                                <button class="btn btn-outline-success w-25" type="submit">
+                                    <i class="fas fa-search"></i>
+                                    Search</button>
                             </div>
                         </form>
 
@@ -100,25 +102,27 @@
                             <div class="dropdown ms-1 text-end">
                                 <a href="#" class="d-block link-light text-decoration-none dropdown-toggle"
                                     id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32"
-                                        class="rounded-circle">
+                                    <img src="{{ !empty($user['data']['image']) ? asset('/storage/userdata/' . $user['data']['image']) : asset('stockUser.png') }}"
+                                        alt="{{ $user['name'] }}" width="38" height="38" class="rounded-circle">
                                 </a>
                                 <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
-                                    <li><a class="dropdown-item disabled" href="#">{{ $user['name'] }}</a></li>
+                                    <li>
+                                        <div class="dropdown-item text-dark text-bold">{{ $user['name'] }}</div>
+                                    </li>
                                     @if ($user['type'] == 'A' || $user['type'] == 'R')
                                         <li><a class="dropdown-item" href="{{ route('AdminHome') }}">Admin</a></li>
                                     @endif
-                                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('UserProfile') }}">Profile</a></li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
-                                    <li><a class="dropdown-item" href="{{ url('/logout') }}">Log out</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('UserLogout') }}">Log out</a></li>
                                 </ul>
                             </div>
                         @else
                             <div class="me-2">
-                                <a class="btn btn-outline-primary me-1" href="{{ url('/login') }}">Login</a>
-                                <a class="btn btn-outline-warning" href="{{ url('/signup') }}">Sign-up</a>
+                                <a class="btn btn-outline-primary me-1" href="{{ route('UserLoginForm') }}">Login</a>
+                                <a class="btn btn-outline-warning" href="{{ route('UserSignupForm') }}">Sign-up</a>
                             </div>
                         @endif
 
