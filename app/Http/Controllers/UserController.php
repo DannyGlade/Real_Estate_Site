@@ -212,6 +212,8 @@ class UserController extends Controller
             } else {
                 $purposeS = ['purpose', '=', $purpose];
             }
+            $search = stripslashes(strip_tags($request->search));
+            $searchStr = ['title', 'LIKE', '%' . $search . '%'];
             $sort = $request->sort;
             switch ($sort) {
                 case 'latest':
@@ -245,6 +247,7 @@ class UserController extends Controller
                     $cateS,
                     $cityS,
                     $purposeS,
+                    $searchStr,
                 ])
                 ->orderBy($sortW, $sortS)
                 ->paginate(10);

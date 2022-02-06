@@ -1,5 +1,5 @@
 <!-- Header Bootstrap -->
-<header class="p-2 bg-dark text-white">
+<header class="p-2 bg-dark sticky-top text-white">
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
@@ -91,7 +91,7 @@
                                 </select>
                                 <input class="form-control w-50" name="search" type="search"
                                     placeholder="Search by Name" value="{{ $SecStr ?? '' }}" aria-label="Search">
-                                <button class="btn btn-outline-success w-25" type="submit">Search</button>
+                                <button class="btn btn-outline-success w-25" type="submit"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
                             </div>
                         </form>
 

@@ -2,7 +2,7 @@
     Admin Login
 @endpush
 @include('AdminPanel.layouts.start')
-@include('AdminPanel.layouts.navbar')
+{{-- @include('AdminPanel.layouts.navbar') --}}
 
 <div class="container-fluid">
     <div class="row">

@@ -8,6 +8,13 @@
                 </div>
             </div>
             <form id="filter" class="row" enctype="multipart/form-data">
+                <div class="col-12 mb-3">
+                    <div class="input-group">
+                        <div class="input-group-text">Search</div>
+                        <input class="form-control fltr" name="search" type="text" placeholder="Search by Name" value="{{ $SecStr ?? '' }}">
+                        <button class="btn btn-success" type="submit"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
+                    </div>
+                </div>
                 <div class="col-3 mb-3">
                     <div class="input-group">
                         <div class="input-group-text">Category</div>
@@ -83,7 +90,7 @@
                 });
                 // console.log(formdata);
             });
-            $(document).on('change', '#filter .fltr', function(e) {
+            $(document).on('change keyup', '#filter .fltr', function(e) {
                 e.preventDefault();
                 var formdata = $('#filter').serializeArray();
                 $.ajax({
