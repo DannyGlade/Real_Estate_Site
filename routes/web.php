@@ -47,6 +47,7 @@ Route::middleware([UserCheck::class])->group(function () {
     Route::get('/user/profile', [UserController::class, 'userprofile'])->name('UserProfile');
     Route::get('/user/profile/edit', [UserController::class, 'edituserprofile'])->name('editUserProfile');
     Route::post('/user/profile/edit', [UserController::class, 'editeduserprofile'])->name('editedUserProfile');
+    Route::get('/user/profile/del_profile_img', [UserController::class, 'del_profile_img'])->name('del_profile_img');
 });
 
 //User Section Ends Here

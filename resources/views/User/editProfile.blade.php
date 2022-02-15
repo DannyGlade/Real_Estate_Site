@@ -14,10 +14,13 @@
                             enctype="multipart/form-data">
                             @csrf
                             <div class="col-4">
-                                <div class="input-group">
-                                    <img class="img-rounded" height="420" width="420" src="{{ !empty($user->Data->image) ? asset('/storage/userdata/' . $user->Data->image) : asset('stockUser.png') }}"
-                                        alt="{{ $user->name }}">
-                                    <input class="form-control" width="420" name="image" type="file">
+                                <img id="pro-img" class="img-rounded" height="420" width="420"
+                                    src="{{ !empty($user->Data->image) ? asset('/storage/userdata/' . $user->Data->image) : asset('stockUser.png') }}"
+                                    alt="{{ $user->name }}">
+                                <div class="input-group w-100">
+                                    <input class="form-control" name="image" type="file">
+                                    <button class="btn btn-danger" id="rm-img"><i class="fa fa-trash"></i>
+                                        Remove</button>
                                 </div>
                             </div>
                             <div class="col-8">
@@ -69,4 +72,25 @@
             </div>
         </div>
     </div>
+@endsection
+@section('scripts')
+    <script>
+        $(document).ready(function() {
+            $(document).on('click', 'form #rm-img', function(e) {
+                e.preventDefault();
+                var def_img = "{{ asset('stockUser.png') }}";
+
+                $.ajax({
+                    type: "GET",
+                    url: "{{ route('del_profile_img') }}",
+                    success: function(response) {
+                        if (response) {
+                            $('#pro-img').attr('src', def_img);
+                        }
+                    }
+                });
+
+            });
+        });
+    </script>
 @endsection

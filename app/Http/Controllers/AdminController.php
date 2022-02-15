@@ -694,22 +694,24 @@ class AdminController extends Controller
     }
     public function type_users(Request $request)
     {
-        $valid = validator($request->all(), [
-            'id' => 'exists:users,id'
-        ])->validate();
-        // dd($request);
-        $id = $request->id;
-        $typ = $request->typ;
+        if ($request->ajax()) {
+            $valid = validator($request->all(), [
+                'id' => 'exists:users,id'
+            ])->validate();
+            // dd($request);
+            $id = $request->id;
+            $typ = $request->typ;
 
-        if ($valid) {
-            $usersData = User::findorfail($id);
-            $usersData->type = $typ;
-            $res = $usersData->save();
+            if ($valid) {
+                $usersData = User::findorfail($id);
+                $usersData->type = $typ;
+                $res = $usersData->save();
 
-            if ($res) {
-                return json_encode(array('message' => 'Account type Changed...', 'status' => true));
-            } else {
-                return json_encode(array('message' => 'Account type Changing failed', 'status' => false));
+                if ($res) {
+                    return json_encode(array('message' => 'Account type Changed...', 'status' => true));
+                } else {
+                    return json_encode(array('message' => 'Account type Changing failed', 'status' => false));
+                }
             }
         }
     }

@@ -149,6 +149,24 @@ class UserController extends Controller
         return redirect(route('UserProfile'));
         // dd($user_data);
     }
+    //delete profile image using AJAX
+    public function del_profile_img(Request $request)
+    {
+        if ($request->ajax()) {
+            $userId = $request->session()->get('user')->id;
+            $user_data = UserData::find($userId);
+            $res = Storage::delete('public/userdata/' . $user_data->image);
+            if ($res) {
+                $user_data->image = null;
+                $user_data->save();
+                $user = User::with('Data')->findOrFail($userId);
+                $request->session()->put('user', $user);
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
 
     //sending home
     public function userHome(Request $request)
