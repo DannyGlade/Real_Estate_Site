@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Storage;
 
+use function PHPUnit\Framework\isNull;
+
 class UserController extends Controller
 {
     public function not_found()
@@ -366,5 +368,30 @@ class UserController extends Controller
         $data = compact('title', 'menu', 'show', 'SecStr', 'purpose');
 
         return view('frontend.show', $data);
+    }
+    //saving Propert Ajax
+    public function save_pro($pro, Request $request)
+    {
+        // if ($request->ajax()) {
+        // dd($pro, $request);
+        $userId = $request->session()->get('user')->id;
+        $user_data = UserData::find($userId);
+        $saved = json_decode($user_data->saved, true);
+        if ($saved == null) {
+            $saved = [];
+        }
+        if (in_array($pro, $saved)) {
+            unset($saved[array_search($pro, $saved)]);
+        } else {
+            array_push($saved, $pro);
+        }
+        $user = User::with('Data')->findOrFail($userId);
+        $request->session()->put('user', $user);
+        $user_data->saved = json_encode($saved, true);
+        $user_data->save();
+
+        // return redirect()->route('UserProfile');
+        return redirect()->back();
+        // }
     }
 }

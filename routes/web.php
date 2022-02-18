@@ -23,41 +23,64 @@ use App\Http\Middleware\UserCheck;
 // });
 
 //User Controller
-// Route::get('/{any}', [UserController::class, 'not_found'])->name('not_found');
+
+//sending to 404
 Route::get('/404', [UserController::class, 'not_found'])->name('not_found');
 
+//User Signup
 Route::get('/signup', [UserController::class, 'signupForm'])->name('UserSignupForm');
 Route::post('/signup', [UserController::class, 'signup'])->name('UserSignup');
 
+//User login
 Route::get('/login', [UserController::class, 'loginForm'])->name('UserLoginForm');
 Route::post('/login', [UserController::class, 'login'])->name('UserLogin');
 
+//user logout
 Route::get('/logout', [UserController::class, 'logout'])->name('UserLogout');
 
+//User home
 Route::get('/', [UserController::class, 'userHome'])->name('userHome');
+
+//showing properties in various ways
 Route::get('/category/{cate}', [UserController::class, 'show_category'])->name('show_category');
 Route::get('/city/{city}', [UserController::class, 'show_city'])->name('show_city');
 Route::get('/purpose/{purpose}', [UserController::class, 'show_purpose'])->name('show_purpose');
 Route::get('/property', [UserController::class, 'show'])->name('show');
+
+//property search and filter by ajax
 Route::get('/ajaxFilter', [UserController::class, 'ajaxFilter'])->name('ajaxFilter');
 Route::get('/property/{pro}', [UserController::class, 'show_pro'])->name('show_pro');
 Route::post('/propSearch', [UserController::class, 'propSearch'])->name('propSearch');
 
+//checking user is loggged in
 Route::middleware([UserCheck::class])->group(function () {
+    //paths only for logged in users
+
+    //User profile
     Route::get('/user/profile', [UserController::class, 'userprofile'])->name('UserProfile');
     Route::get('/user/profile/edit', [UserController::class, 'edituserprofile'])->name('editUserProfile');
     Route::post('/user/profile/edit', [UserController::class, 'editeduserprofile'])->name('editedUserProfile');
     Route::get('/user/profile/del_profile_img', [UserController::class, 'del_profile_img'])->name('del_profile_img');
+
+    //Saving Property
+    Route::get('user/save/property/{pro}', [UserController::class, 'save_pro'])->name('save_pro_ajax');
 });
 
 //User Section Ends Here
 
 //AdminPanel starts here
+
+//admin login
 Route::get('/admin/login', [AdminController::class, 'loginPage'])->name('AdminLoginPage');
 Route::post('/admin/login', [AdminController::class, 'login']);
 
 //All Admin routes are here
+
+//checking admin is logged
 Route::middleware(AuthCheck::class)->group(function () {
+    //paths only for logged in admins
+
+    //Admin dashboard
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('AdminHome');
     Route::get('/admin/logout', [AdminController::class, 'logout'])->name('AdminLogout');
 
@@ -120,4 +143,5 @@ Route::middleware(AuthCheck::class)->group(function () {
     //Site Settings Ends
 });
 
+//if none of above route is used then sended to 404
 Route::get('/{any}', [UserController::class, 'not_found'])->name('not_found');

@@ -11,8 +11,10 @@
                 <div class="col-12 mb-3">
                     <div class="input-group">
                         <div class="input-group-text">Search</div>
-                        <input class="form-control fltr" name="search" type="text" placeholder="Search by Name" value="{{ $SecStr ?? '' }}">
-                        <button class="btn btn-success" type="submit"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
+                        <input class="form-control fltr" name="search" type="text" placeholder="Search by Name"
+                            value="{{ $SecStr ?? '' }}">
+                        <button class="btn btn-success" type="submit"><i class="fa fa-search" aria-hidden="true"></i>
+                            Search</button>
                     </div>
                 </div>
                 <div class="col-3 mb-3">
@@ -70,7 +72,6 @@
             </div>
         </div>
     </div>
-
 @endsection
 @section('scripts')
     <script>
@@ -118,6 +119,21 @@
                     }
                 });
             });
+            // $(document).on('click', '.save_pro', function(e) {
+            //     e.preventDefault();
+            //     var url = $(this).attr('href');
+            //     var text = $(this).html();
+
+            //     $.ajax({
+            //         type: "GET",
+            //         url: url,
+            //         success: function(response) {
+
+            //         }
+            //     });
+            //     console.log(url, text);
+
+            // });
         });
     </script>
 @endsection

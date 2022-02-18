@@ -34,7 +34,7 @@
                                         <a class="btn btn-sm btn-outline-dark"
                                             href="{{ route('show_city', $item->City->slug_city) }}">
                                             {{ $item->City->city }}
-                                        </a>                                        
+                                        </a>
                                     </p>
                                 </div>
                                 <div class="col-12 mb-2">
@@ -48,7 +48,20 @@
                                 </div>
                                 <div class="col-12 mt-4 mb-2">
                                     <a class="btn btn-primary" href="{{ route('show_pro', $item->title_slug) }}">
-                                        Read more
+                                        <i class="fab fa-readme" aria-hidden="true"></i> Read more
+                                    </a>
+                                    <a class="btn btn-outline-success save_pro"
+                                        href="{{ route('save_pro_ajax', $item->title_slug) }}">
+                                        <i class="fa fa-bookmark" aria-hidden="true"></i>
+                                        {{-- @php
+                                            // dd($saved);
+                                            if (in_array($item->title_slug, $saved[0])) {
+                                                echo 'Saved';
+                                            } else {
+                                                echo 'Save';
+                                            }
+                                        @endphp --}}
+                                        Save
                                     </a>
                                 </div>
                                 {{-- <p class="card-text"><small class="text-muted">Last updated 3 mins

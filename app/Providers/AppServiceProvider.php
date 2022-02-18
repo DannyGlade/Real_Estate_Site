@@ -81,6 +81,13 @@ class AppServiceProvider extends ServiceProvider
             $city = City::all()->where('status', true);
             $view->with(compact(['cate', 'city']));
         });
+        view()->composer(['frontend.showinitem'], function ($view) {
+            $request = request();
+            $user = $request->session()->get('user');
+            $saved = array(json_decode($user->Data->saved));
+            // dd($saved);
+            $view->with(compact(['user', 'saved']));
+        });
 
         Schema::defaultStringLength(191);
         Paginator::useBootstrap();
