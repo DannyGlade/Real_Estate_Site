@@ -50,9 +50,32 @@
                                                     <i class="fas fa-shower"></i> {{ $item->bathrooms }}
                                                 </p>
                                             </div>
-                                            {{-- <p class="card-text"><small class="text-muted">Last updated 3 mins
-                                                ago</small>
-                                        </p> --}}
+                                            <div class="col-12 mb-3">
+                                                @if ($status)
+                                                    <a class="btn btn-lg
+                                                @if (!empty($saved)) @if (in_array($item->title_slug, $saved)) btn-success
+                                                @else
+                                                btn-outline-success @endif
+                                                @else
+                                                btn-outline-success
+                                                @endif
+                                                save_pro"
+                                                        href="{{ route('save_pro_ajax', [$item->title_slug, $item->id]) }}">
+                                                        <i class="fa fa-bookmark" aria-hidden="true"></i>
+                                                        <span class="save_pro_text">
+                                                            @if (!empty($saved))
+                                                                @if (in_array($item->title_slug, $saved))
+                                                                    Saved
+                                                                @else
+                                                                    Save
+                                                                @endif
+                                                            @else
+                                                                Save
+                                                            @endif
+                                                        </span>
+                                                    </a>
+                                                @endif
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -61,7 +84,8 @@
                         <div class="row g-0 mb-2 border-bottom card-body">
                             <div class="col-4">
                                 <div class="card-body">
-                                    <h4 class="card-title"><i class="fas fa-sign"></i> For {{ ucfirst($item->purpose) }}...</h4>
+                                    <h4 class="card-title"><i class="fas fa-sign"></i> For
+                                        {{ ucfirst($item->purpose) }}...</h4>
                                 </div>
                             </div>
                             <div class="col-8">
@@ -74,7 +98,7 @@
                                             <div class="card-text">
                                                 ₹ {{ number_format($item->price) }}
                                                 @if ($item->purpose != 'sale')
-                                                /month
+                                                    /month
                                                 @endif
                                             </div>
                                         </div>
@@ -88,7 +112,8 @@
                                             @if (!empty($gals))
                                                 <div class="row">
                                                     <div class="col-2">
-                                                        <h5 class="card-title"><i class="fas fa-images"></i> Gallary :</h5>
+                                                        <h5 class="card-title"><i class="fas fa-images"></i> Gallary :
+                                                        </h5>
                                                     </div>
                                                     <div class="col-12">
                                                         <div class="carousel">
@@ -110,7 +135,8 @@
                                             @if (!empty($item->video))
                                                 <div class="row">
                                                     <div class="col-2 mb-2">
-                                                        <h5 class="card-title"><i class="fab fa-youtube"></i> Video :</h5>
+                                                        <h5 class="card-title"><i class="fab fa-youtube"></i> Video :
+                                                        </h5>
                                                     </div>
                                                     <div class="col-12 mb-2">
                                                         {!! $item->video !!}
@@ -149,13 +175,13 @@
                                                 <h5 class="card-title">
                                                     <i class="fas fa-shapes"></i> Facilities :
                                                 </h5>
-                                                    <div class="card-text">
-                                                        @foreach ($faci as $fac)
-                                                            <button class="btn btn-{{ $fac->color }} btn-lg mb-1">
-                                                                {!! $fac->fa !!} {{ $fac->faci }}
-                                                            </button>
-                                                        @endforeach
-                                                    </div>
+                                                <div class="card-text">
+                                                    @foreach ($faci as $fac)
+                                                        <button class="btn btn-{{ $fac->color }} btn-lg mb-1">
+                                                            {!! $fac->fa !!} {{ $fac->faci }}
+                                                        </button>
+                                                    @endforeach
+                                                </div>
                                             </div>
                                         @endif
                                         <div class="col-12 mb-3">
@@ -221,6 +247,27 @@
 
             Fancybox.bind("gallery", {});
             const myCarousel = new Carousel(document.querySelector(".carousel"), {});
+
+            $(document).on('click', '.save_pro', function(e) {
+                e.preventDefault();
+                var $this = $(this);
+                var url = $(this).attr('href');
+                var text = $(this).find('.save_pro_text').html().trim();
+
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    success: function(response) {
+                        if (response) {
+                            $this.find('.save_pro_text').html('Saved');
+                            $this.addClass('btn-success').removeClass('btn-outline-success');
+                        } else {
+                            $this.find('.save_pro_text').html('Save');
+                            $this.addClass('btn-outline-success').removeClass('btn-success');
+                        }
+                    }
+                });
+            });
         });
     </script>
 @endsection

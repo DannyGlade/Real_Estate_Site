@@ -82,7 +82,7 @@ class AppServiceProvider extends ServiceProvider
             $city = City::all()->where('status', true);
             $view->with(compact(['cate', 'city']));
         });
-        view()->composer(['frontend.showinitem'], function ($view) {
+        view()->composer(['frontend.showinitem', 'frontend.property'], function ($view) {
             $request = request();
             $userId = $request->session()->get('user')['id'] ?? null;
             if (!empty($userId)) {
