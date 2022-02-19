@@ -119,21 +119,26 @@
                     }
                 });
             });
-            // $(document).on('click', '.save_pro', function(e) {
-            //     e.preventDefault();
-            //     var url = $(this).attr('href');
-            //     var text = $(this).html();
+            $(document).on('click', '.save_pro', function(e) {
+                e.preventDefault();
+                var $this = $(this);
+                var url = $(this).attr('href');
+                var text = $(this).find('.save_pro_text').html().trim();
 
-            //     $.ajax({
-            //         type: "GET",
-            //         url: url,
-            //         success: function(response) {
-
-            //         }
-            //     });
-            //     console.log(url, text);
-
-            // });
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    success: function(response) {
+                        if (response) {
+                            $this.find('.save_pro_text').html('Saved');
+                            $this.addClass('btn-success').removeClass('btn-outline-success');
+                        } else {
+                            $this.find('.save_pro_text').html('Save');
+                            $this.addClass('btn-outline-success').removeClass('btn-success');
+                        }
+                    }
+                });
+            });
         });
     </script>
 @endsection

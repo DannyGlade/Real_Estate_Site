@@ -63,7 +63,9 @@ Route::middleware([UserCheck::class])->group(function () {
     Route::get('/user/profile/del_profile_img', [UserController::class, 'del_profile_img'])->name('del_profile_img');
 
     //Saving Property
-    Route::get('user/save/property/{pro}', [UserController::class, 'save_pro'])->name('save_pro_ajax');
+    Route::get('user/save/property/{pro}/{id}', [UserController::class, 'save_pro'])->name('save_pro_ajax');
+    //show saved Property
+    Route::get('/user/saved', [UserController::class, 'show_saved_pro'])->name('show_saved_pro');
 });
 
 //User Section Ends Here

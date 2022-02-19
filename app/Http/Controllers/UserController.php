@@ -13,6 +13,7 @@ use App\Models\UserData;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Storage;
+use stdClass;
 
 use function PHPUnit\Framework\isNull;
 
@@ -45,7 +46,10 @@ class UserController extends Controller
 
         // if ($user[0]->password == md5($request->password)) {
         if (Hash::check($request->password, $user[0]->password)) {
-            $request->session()->put('user', $user[0]->toArray());
+            $id = $user[0]->id;
+            $user = User::with('Data')->findOrFail($id);
+            // dd($user->toArray());
+            $request->session()->put('user', $user->toArray());
             return redirect(route('userHome'));
         } else {
             $request->validate([
@@ -162,7 +166,7 @@ class UserController extends Controller
                 $user_data->image = null;
                 $user_data->save();
                 $user = User::with('Data')->findOrFail($userId);
-                $request->session()->put('user', $user);
+                $request->session()->put('user', $user->toArray());
                 return true;
             } else {
                 return false;
@@ -370,28 +374,49 @@ class UserController extends Controller
         return view('frontend.show', $data);
     }
     //saving Propert Ajax
-    public function save_pro($pro, Request $request)
+    public function save_pro($pro, $id, Request $request)
     {
-        // if ($request->ajax()) {
-        // dd($pro, $request);
-        $userId = $request->session()->get('user')->id;
+        if ($request->ajax()) {
+            // dd($pro, $request);
+            $res = true;
+            $userId = $request->session()->get('user')['id'];
+            $user_data = UserData::find($userId);
+            $saved = json_decode($user_data->saved, true);
+            if ($saved == null) {
+                $saved = array();
+            }
+            if (in_array($pro, $saved)) {
+                unset($saved[$id]);
+                $res = false;
+            } else {
+                $saved[$id] = $pro;
+                $res = true;
+            }
+            $user = User::with('Data')->findOrFail($userId);
+            $request->session()->put('user', $user->toArray());
+            $user_data->saved = json_encode($saved, true);
+            $user_data->save();
+            // return redirect()->route('UserProfile');
+            // return redirect()->back();
+            return $res;
+        }
+    }
+    public function show_saved_pro(Request $request)
+    {
+        $userId = $request->session()->get('user')['id'];
         $user_data = UserData::find($userId);
         $saved = json_decode($user_data->saved, true);
-        if ($saved == null) {
-            $saved = [];
+        $ids = [];
+        foreach ($saved as $key => $save) {
+            array_push($ids, $key);
         }
-        if (in_array($pro, $saved)) {
-            unset($saved[array_search($pro, $saved)]);
-        } else {
-            array_push($saved, $pro);
-        }
-        $user = User::with('Data')->findOrFail($userId);
-        $request->session()->put('user', $user);
-        $user_data->saved = json_encode($saved, true);
-        $user_data->save();
-
-        // return redirect()->route('UserProfile');
-        return redirect()->back();
-        // }
+        $show = Property::with('Cate', 'City')
+            ->whereIn('id', $ids)
+            ->paginate(10);
+        // dd($show);
+        $title = 'Saved Properies';
+        $menu = 'none';
+        $data = compact('title', 'menu', 'show');
+        return view('User.savedPro', $data);
     }
 }
