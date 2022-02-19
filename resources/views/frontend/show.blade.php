@@ -11,8 +11,10 @@
                 <div class="col-12 mb-3">
                     <div class="input-group">
                         <div class="input-group-text">Search</div>
-                        <input class="form-control fltr" name="search" type="text" placeholder="Search by Name" value="{{ $SecStr ?? '' }}">
-                        <button class="btn btn-success" type="submit"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
+                        <input class="form-control fltr" name="search" type="text" placeholder="Search by Name"
+                            value="{{ $SecStr ?? '' }}">
+                        <button class="btn btn-success" type="submit"><i class="fa fa-search" aria-hidden="true"></i>
+                            Search</button>
                     </div>
                 </div>
                 <div class="col-3 mb-3">
@@ -70,7 +72,6 @@
             </div>
         </div>
     </div>
-
 @endsection
 @section('scripts')
     <script>
@@ -115,6 +116,26 @@
                     dataType: "HTML",
                     success: function(response) {
                         $('#showbox').html(response);
+                    }
+                });
+            });
+            $(document).on('click', '.save_pro', function(e) {
+                e.preventDefault();
+                var $this = $(this);
+                var url = $(this).attr('href');
+                var text = $(this).find('.save_pro_text').html().trim();
+
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    success: function(response) {
+                        if (response) {
+                            $this.find('.save_pro_text').html('Saved');
+                            $this.addClass('btn-success').removeClass('btn-outline-success');
+                        } else {
+                            $this.find('.save_pro_text').html('Save');
+                            $this.addClass('btn-outline-success').removeClass('btn-success');
+                        }
                     }
                 });
             });

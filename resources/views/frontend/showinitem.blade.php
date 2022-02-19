@@ -34,7 +34,7 @@
                                         <a class="btn btn-sm btn-outline-dark"
                                             href="{{ route('show_city', $item->City->slug_city) }}">
                                             {{ $item->City->city }}
-                                        </a>                                        
+                                        </a>
                                     </p>
                                 </div>
                                 <div class="col-12 mb-2">
@@ -48,12 +48,33 @@
                                 </div>
                                 <div class="col-12 mt-4 mb-2">
                                     <a class="btn btn-primary" href="{{ route('show_pro', $item->title_slug) }}">
-                                        Read more
+                                        <i class="fab fa-readme" aria-hidden="true"></i> Read more
                                     </a>
+                                    @if ($status)
+                                        <a class="btn
+                                                @if (!empty($saved)) @if (in_array($item->title_slug, $saved)) btn-success
+                                                @else
+                                                btn-outline-success @endif
+                                                @else
+                                                btn-outline-success
+                                                @endif
+                                                save_pro"
+                                            href="{{ route('save_pro_ajax', [$item->title_slug, $item->id]) }}">
+                                            <i class="fa fa-bookmark" aria-hidden="true"></i>
+                                            <span class="save_pro_text">
+                                                @if (!empty($saved))
+                                                    @if (in_array($item->title_slug, $saved))
+                                                        Saved
+                                                    @else
+                                                        Save
+                                                    @endif
+                                                @else
+                                                    Save
+                                                @endif
+                                            </span>
+                                        </a>
+                                    @endif
                                 </div>
-                                {{-- <p class="card-text"><small class="text-muted">Last updated 3 mins
-                                    ago</small>
-                            </p> --}}
                             </div>
                         </div>
                     </div>
@@ -63,7 +84,7 @@
     @empty
         <div class="col-12 mb-2">
             <div class="card mb-3 p-0">
-                <h2 class="text-center my-5">No Properties Fond For Your Critaria</h2>
+                <h2 class="text-center my-5">No Properties Fond</h2>
             </div>
         </div>
     @endforelse

@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Category;
 use App\Models\City;
 use App\Models\SiteSettings;
+use App\Models\UserData;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
@@ -80,6 +81,18 @@ class AppServiceProvider extends ServiceProvider
             $cate = Category::all();
             $city = City::all()->where('status', true);
             $view->with(compact(['cate', 'city']));
+        });
+        view()->composer(['frontend.showinitem', 'frontend.property'], function ($view) {
+            $request = request();
+            $userId = $request->session()->get('user')['id'] ?? null;
+            if (!empty($userId)) {
+                $saved = json_decode(UserData::find($userId)->saved, true);
+                $status = true;
+            } else {
+                $saved = [];
+                $status = false;
+            }
+            $view->with(compact(['status', 'saved']));
         });
 
         Schema::defaultStringLength(191);
