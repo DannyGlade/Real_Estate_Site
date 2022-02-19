@@ -9,7 +9,6 @@ use App\Models\UserData;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -65,7 +64,6 @@ class AppServiceProvider extends ServiceProvider
         view()->composer(['layouts.app'], function ($view) {
             $request = request();
             $user = $request->session()->get('user');
-            // dd($user);
             $status = false;
             if ($user) {
                 $status = true;

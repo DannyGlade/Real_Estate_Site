@@ -12,8 +12,6 @@ use App\Models\User;
 use App\Models\UserData;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
-use phpDocumentor\Reflection\Types\This;
-use Symfony\Component\String\Slugger\SluggerInterface;
 
 class AdminController extends Controller
 {
@@ -24,8 +22,8 @@ class AdminController extends Controller
     {
         $title = 'Dashboard';
         $menu = 'dashboard';
+
         $data = compact('title', 'menu');
-        // dd($data);
         return view('AdminPanel.dashboard')->with($data);
     }
     //sending to adminlogin page
@@ -33,6 +31,7 @@ class AdminController extends Controller
     {
         $title = "Log In";
         $status = false;
+
         $data = compact('status', 'title');
         return view('AdminPanel.AdminUser.AdminLogin')->with($data);
     }
@@ -45,15 +44,9 @@ class AdminController extends Controller
         ]);
 
         $user = User::with('Data')->select('*')->where('email', $request->email)->get();
-        // $user = User::get()->where('email', $request->email);
 
-        // dd($user);
-
-        // if ($user[0]->password == md5($request->password)) {
         if (Hash::check($request->password, $user[0]->password)) {
-
             if ($user[0]->type == "A" || $user[0]->type == "R") {
-
                 $request->session()->put('AdminUser', $user[0]->toArray());
                 return redirect(url(route('AdminHome')));
             } else {
@@ -69,6 +62,7 @@ class AdminController extends Controller
     {
         $request->session()->forget('AdminUser');
         // $request->session()->flush();
+
         return redirect(url(route('AdminLoginPage')));
     }
 
@@ -80,10 +74,9 @@ class AdminController extends Controller
 
         $title = "Category List";
         $menu = "category";
-
         $cate = Category::all();
-        $data = compact('title', 'menu', 'cate');
 
+        $data = compact('title', 'menu', 'cate');
         return view('AdminPanel.category.list', $data);
     }
 
@@ -93,7 +86,6 @@ class AdminController extends Controller
         $menu = "category";
 
         $data = compact('title', 'menu');
-
         return view('AdminPanel.category.form', $data);
     }
 
@@ -116,8 +108,8 @@ class AdminController extends Controller
 
         $request->session()->flash('msg', 'Added...');
         $request->session()->flash('msgst', 'success');
+
         return redirect(route('list_category'));
-        // dd($image);
     }
 
     public function del_category(Request $request)
@@ -127,16 +119,16 @@ class AdminController extends Controller
         ])->validate();
         $id = $request->route()->parameter('id');
 
-        // dd($valid);
         if ($valid) {
             $cate = Category::findorfail($id);
-            // dd($cate);
             $image = $cate->image;
             Storage::delete('public/images/' . $image);
             $cate->delete();
         }
+
         $request->session()->flash('msg', 'Deleted...');
         $request->session()->flash('msgst', 'danger');
+
         return redirect(route('list_category'));
     }
 
@@ -168,7 +160,6 @@ class AdminController extends Controller
             'name' => 'required|unique:categories,name,' . $id,
             'image' => 'mimes:png,jpg'
         ]);
-        // dd($request);
         $cate = Category::findorfail($id);
         $cate->name = $request->name;
         $cate->slug_name = str_slug($request->name);
@@ -185,6 +176,7 @@ class AdminController extends Controller
 
         $request->session()->flash('msg', 'Edited...');
         $request->session()->flash('msgst', 'success');
+
         return redirect(route('list_category'));
     }
     //category ends
@@ -195,10 +187,9 @@ class AdminController extends Controller
     {
         $title = "Cities List";
         $menu = "cities";
-
         $city = City::all();
-        $data = compact('title', 'menu', 'city');
 
+        $data = compact('title', 'menu', 'city');
         return view('AdminPanel.cities.list', $data);
     }
     public function add_cities(Request $request)
@@ -207,7 +198,6 @@ class AdminController extends Controller
         $menu = "cities";
 
         $data = compact('title', 'menu');
-
         return view('AdminPanel.cities.form', $data);
     }
     public function cities_added(Request $request)
@@ -216,7 +206,6 @@ class AdminController extends Controller
             'city' => 'required|unique:cities,city',
             'status' => 'boolean'
         ]);
-        // dd($request);
         $city = new City;
         $city->city = $request->city;
         $city->slug_city = str_slug($request->city);
@@ -226,10 +215,11 @@ class AdminController extends Controller
             $city->status = '0';
         }
         $city->save();
+
         $request->session()->flash('msg', 'Added...');
         $request->session()->flash('msgst', 'success');
+
         return redirect(route('list_cities'));
-        // dd($image);
     }
     public function del_cities(Request $request)
     {
@@ -238,13 +228,14 @@ class AdminController extends Controller
         ])->validate();
         $id = $request->route()->parameter('id');
 
-        // dd($valid);
         if ($valid) {
             $city = City::findorfail($id);
             $city->delete();
         }
+
         $request->session()->flash('msg', 'Deleted...');
         $request->session()->flash('msgst', 'danger');
+
         return redirect(route('list_cities'));
     }
     public function edit_cities(Request $request)
@@ -274,7 +265,6 @@ class AdminController extends Controller
             'city' => 'required|unique:cities,city,' . $id,
             'status' => 'boolean'
         ]);
-        // dd($request);
         $city = City::findorfail($id);
         $city->city = $request->city;
         $city->slug_city = str_slug($request->city);
@@ -287,6 +277,7 @@ class AdminController extends Controller
 
         $request->session()->flash('msg', 'Edited...');
         $request->session()->flash('msgst', 'success');
+
         return redirect(route('list_cities'));
     }
     //Cities Ends
@@ -296,10 +287,9 @@ class AdminController extends Controller
     {
         $title = "Facilities List";
         $menu = "facilities";
-
         $faci = Facilities::all();
-        $data = compact('title', 'menu', 'faci');
 
+        $data = compact('title', 'menu', 'faci');
         return view('AdminPanel.facilities.list', $data);
     }
     public function add_facilities(Request $request)
@@ -308,7 +298,6 @@ class AdminController extends Controller
         $menu = "facilities";
 
         $data = compact('title', 'menu');
-
         return view('AdminPanel.facilities.form', $data);
     }
     public function facilities_added(Request $request)
@@ -324,8 +313,10 @@ class AdminController extends Controller
         $faci->fa = $request->fa;
         $faci->color = $request->color;
         $faci->save();
+
         $request->session()->flash('msg', 'Added...');
         $request->session()->flash('msgst', 'success');
+
         return redirect(route('list_facilities'));
     }
     public function del_facilities(Request $request)
@@ -335,13 +326,14 @@ class AdminController extends Controller
         ])->validate();
         $id = $request->route()->parameter('id');
 
-        // dd($valid);
         if ($valid) {
             $faci = Facilities::findorfail($id);
             $faci->delete();
         }
+
         $request->session()->flash('msg', 'Deleted...');
         $request->session()->flash('msgst', 'danger');
+
         return redirect(route('list_facilities'));
     }
     public function edit_facilities(Request $request)
@@ -370,7 +362,6 @@ class AdminController extends Controller
         $request->validate([
             'faci' => 'required|unique:facilities,faci,' . $id,
         ]);
-        // dd($request);
         $faci = Facilities::findorfail($id);
         $faci->faci = $request->faci;
         $faci->slug_faci = str_slug($request->faci);
@@ -380,6 +371,7 @@ class AdminController extends Controller
 
         $request->session()->flash('msg', 'Edited...');
         $request->session()->flash('msgst', 'success');
+
         return redirect(route('list_facilities'));
     }
     //Facilities ends
@@ -389,23 +381,20 @@ class AdminController extends Controller
     {
         $title = "Properties List";
         $menu = "properties";
-
         $pro = Property::with('Cate', 'City')->get();
-        // dd($pro);
-        $data = compact('title', 'menu', 'pro');
 
+        $data = compact('title', 'menu', 'pro');
         return view('AdminPanel.properties.list', $data);
     }
     public function add_properties(Request $request)
     {
         $title = "Add Property";
         $menu = "properties";
-
         $city = City::select('id', 'city')->where('status', '=', '1')->get();
         $cate = Category::select('id', 'name')->get();
         $faci = Facilities::select('*')->get();
-        $data = compact('title', 'menu', 'city', 'cate', 'faci');
 
+        $data = compact('title', 'menu', 'city', 'cate', 'faci');
         return view('AdminPanel.properties.form', $data);
     }
     public function properties_added(Request $request)
@@ -427,7 +416,6 @@ class AdminController extends Controller
             'area' => 'numeric',
             // 'description' => 'string',
         ]);
-        // dd($request);
         $pro = new Property;
         $pro->title = $request->title;
         $pro->title_slug = str_slug($request->title);
@@ -475,6 +463,7 @@ class AdminController extends Controller
 
         $request->session()->flash('msg', 'Added...');
         $request->session()->flash('msgst', 'success');
+
         return redirect(route('list_properties'));
     }
     public function del_properties(Request $request)
@@ -484,7 +473,6 @@ class AdminController extends Controller
         ])->validate();
         $id = $request->route()->parameter('id');
 
-        // dd($valid);
         if ($valid) {
             $pro = Property::findorfail($id);
             if ($pro->image) {
@@ -495,8 +483,10 @@ class AdminController extends Controller
             }
             $pro->delete();
         }
+
         $request->session()->flash('msg', 'Deleted...');
         $request->session()->flash('msgst', 'danger');
+
         return redirect(route('list_properties'));
     }
     public function edit_properties(Request $request)
@@ -516,6 +506,7 @@ class AdminController extends Controller
         $city = City::select('id', 'city')->where('status', '=', '1')->get();
         $cate = Category::select('id', 'name')->get();
         $faci = Facilities::select('*')->get();
+
         $data = compact('title', 'menu', 'pro', 'city', 'cate', 'faci');
         return view('AdminPanel.properties.form', $data);
     }
@@ -542,7 +533,6 @@ class AdminController extends Controller
             'area' => 'numeric',
             // 'description' => 'string',
         ]);
-        // dd($request);
         $pro = Property::findorfail($id);
         $pro->title = $request->title;
         $pro->title_slug = str_slug($request->title);
@@ -592,6 +582,7 @@ class AdminController extends Controller
 
         $request->session()->flash('msg', 'Edited...');
         $request->session()->flash('msgst', 'success');
+
         return redirect(route('list_properties'));
     }
     //Properties ends
@@ -607,9 +598,8 @@ class AdminController extends Controller
         ])->validate();
         $id = $request->route()->parameter('id');
         $gal = gallary::with('Pro')->where('pro_id', '=', $id)->get();
-        // dd($gal);
-        $data = compact('title', 'menu', 'gal', 'id');
 
+        $data = compact('title', 'menu', 'gal', 'id');
         return view('AdminPanel.gallary.list', $data);
     }
     public function set_gallary(Request $request)
@@ -617,13 +607,12 @@ class AdminController extends Controller
         $request->validate([
             'gallary[]' => 'image|mimes:png,jpg'
         ]);
-        // dd($request->file('gallary')[0]);
+
         $valid = validator($request->route()->parameters(), [
             'id' => 'exists:properties,id'
         ])->validate();
         $id = $request->route()->parameter('id');
         $images = $request->file('gallary');
-        // dd($images);
 
         foreach ($images as $img) {
             $image = $img;
@@ -655,6 +644,7 @@ class AdminController extends Controller
             }
             $gal->delete();
         }
+
         $request->session()->flash('msg', 'Deleted...');
         $request->session()->flash('msgst', 'danger');
 
@@ -669,8 +659,8 @@ class AdminController extends Controller
         $menu = "users";
         $user = $request->session()->get('AdminUser');
         $usersData = User::with('Data')->where('type', '!=', 'R')->get()->except($user['id']);
+
         $data = compact('title', 'menu', 'usersData');
-        // dd($user);
         return view('AdminPanel.users.list', $data);
     }
     public function del_users(Request $request)
@@ -680,7 +670,6 @@ class AdminController extends Controller
         ])->validate();
         $id = $request->route()->parameter('id');
 
-        // dd($valid);
         if ($valid) {
             $usersData = User::findorfail($id);
             $user_data = UserData::findorfail($id);
@@ -688,8 +677,10 @@ class AdminController extends Controller
             $usersData->delete();
             $user_data->delete();
         }
+
         $request->session()->flash('msg', 'Deleted...');
         $request->session()->flash('msgst', 'danger');
+
         return redirect(route('list_users'));
     }
     public function type_users(Request $request)
@@ -698,7 +689,7 @@ class AdminController extends Controller
             $valid = validator($request->all(), [
                 'id' => 'exists:users,id'
             ])->validate();
-            // dd($request);
+
             $id = $request->id;
             $typ = $request->typ;
 

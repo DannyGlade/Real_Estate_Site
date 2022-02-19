@@ -18,9 +18,8 @@ class SiteController extends Controller
             $status = true;
         }
         $siteSetting = SiteSettings::pluck('value', 'key');
-        // dd($siteSetting);
-        $data = compact('status', 'user', 'title', 'menu', 'siteSetting');
 
+        $data = compact('status', 'user', 'title', 'menu', 'siteSetting');
         return view('AdminPanel.SiteSettings.formlist', $data);
     }
     public function save_settings(Request $request)
@@ -28,7 +27,7 @@ class SiteController extends Controller
         $request->validate([
             'logo_image' => 'mimes:png,jpg'
         ]);
-        // dd($request);
+
         if ($request->hasFile('logo_image')) {
             $siteSetting = SiteSettings::where('key', 'logo_image')->first();
             if ($siteSetting) {
@@ -58,8 +57,10 @@ class SiteController extends Controller
                 $siteSetting = SiteSettings::create(compact('key', 'value'));
             }
         }
+
         $request->session()->flash('msg', 'Updated...');
         $request->session()->flash('msgst', 'success');
+
         return redirect(route('list_settings'));
     }
     public function ajaxDelete(Request $request)
@@ -67,7 +68,7 @@ class SiteController extends Controller
         $valid = validator($request->all(), [
             'key' => 'exists:site_settings,key'
         ])->validate();
-        // dd($request);
+
         $key = $request->key;
 
         if ($valid) {

@@ -11,11 +11,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\UserData;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Storage;
-use stdClass;
-
-use function PHPUnit\Framework\isNull;
 
 class UserController extends Controller
 {
@@ -23,12 +19,14 @@ class UserController extends Controller
     {
         $title = "Page Not Found";
         $menu = 'none';
+
         $data = compact('title', 'menu');
         return view('errors.404', $data);
     }
     public function loginForm()
     {
         $title = "Log In";
+
         $data = compact('title');
         return view('User.UserLogIn', $data);
     }
@@ -40,15 +38,10 @@ class UserController extends Controller
         ]);
 
         $user = User::with('Data')->select('*')->where('email', $request->email)->get();
-        // $user = User::get()->where('email', $request->email);
 
-        // dd($user);
-
-        // if ($user[0]->password == md5($request->password)) {
         if (Hash::check($request->password, $user[0]->password)) {
             $id = $user[0]->id;
             $user = User::with('Data')->findOrFail($id);
-            // dd($user->toArray());
             $request->session()->put('user', $user->toArray());
             return redirect(route('userHome'));
         } else {
@@ -62,6 +55,7 @@ class UserController extends Controller
     public function signupForm()
     {
         $title = "Sign In";
+
         $data = compact('title');
         return view('User.UserSignUp', $data);
     }
@@ -80,11 +74,9 @@ class UserController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
-        // $user->password = md5($request->password);
         $user->save();
 
         return redirect(route('UserLoginForm'));
-        // dd($pass);
     }
 
     //managing login logout
@@ -92,6 +84,7 @@ class UserController extends Controller
     {
         $request->session()->forget('user');
         // $request->session()->flush();
+
         return redirect(url(route('userHome')));
     }
 
@@ -101,7 +94,6 @@ class UserController extends Controller
         $user = $request->session()->get('user');
         $userId = $user['id'];
         $user = User::with('Data')->findOrFail($userId);
-        // dd($user);
         $title = $user->name . " | Profile";
         $menu = "none";
 
@@ -114,7 +106,6 @@ class UserController extends Controller
         $user = $request->session()->get('user');
         $userId = $user['id'];
         $user = User::with('Data')->findOrFail($userId);
-        // dd($user);
         $title = $user->name . " | Edit Profile";
         $menu = "none";
 
@@ -152,8 +143,8 @@ class UserController extends Controller
         $user->save();
         $user_data->save();
         $request->session()->put('user', $user);
+
         return redirect(route('UserProfile'));
-        // dd($user_data);
     }
     //delete profile image using AJAX
     public function del_profile_img(Request $request)
@@ -177,13 +168,12 @@ class UserController extends Controller
     //sending home
     public function userHome(Request $request)
     {
-        // dd($data);
         $title = "Home";
         $menu = "home";
         $featuredPro = Property::with('Cate', 'City')->where('featured', true)->latest()->limit(3)->get();
         $newlyAdded = Property::with('Cate', 'City')->where('featured', false)->latest()->limit(6)->get();
-        // dd($newlyAdded);
         $showcate = Category::latest()->limit(6)->get();
+
         $data = compact('title', 'menu', 'featuredPro', 'newlyAdded', 'showcate');
         return view('frontend.home', $data);
     }
@@ -195,6 +185,7 @@ class UserController extends Controller
             ->paginate(10);
         $title = 'Propeties';
         $menu = 'none';
+
         $data = compact('title', 'menu', 'show');
         if ($request->ajax()) {
             return view('frontend.showinitem', compact('show'));
@@ -215,9 +206,10 @@ class UserController extends Controller
             ->latest()
             // ->limit(6)
             ->paginate(10);
-        // ->get();
+            // ->get();
         $title = $cate->name;
         $menu = 'category';
+
         $data = compact('title', 'menu', 'show');
         return view('frontend.show', $data);
     }
@@ -234,9 +226,10 @@ class UserController extends Controller
             ->latest()
             // ->limit(6)
             ->paginate(10);
-        // ->get();
+            // ->get();
         $title = $city->city;
         $menu = 'city';
+
         $data = compact('title', 'menu', 'show');
         return view('frontend.show', $data);
     }
@@ -249,9 +242,10 @@ class UserController extends Controller
             ->latest()
             // ->limit(6)
             ->paginate(10);
-        // ->get();
+            // ->get();
         $title = ucfirst($purpose);
         $menu = 'purpose';
+
         $data = compact('title', 'menu', 'show');
         return view('frontend.show', $data);
     }
@@ -274,6 +268,7 @@ class UserController extends Controller
         $gals = gallary::with('Pro')->where('pro_id', '=', $item->id)->get();
         $title = $item->title;
         $menu = 'none';
+
         $data = compact('title', 'menu', 'item', 'gals', 'faci');
         return view('frontend.property', $data);
     }
@@ -351,7 +346,7 @@ class UserController extends Controller
         $request->validate([
             'purpose' => 'required',
         ]);
-        // dd($request);
+
         $SecStr = stripslashes(strip_tags($request->search));
         $searchStr = '%' . $SecStr . '%';
         $purpose = $request->purpose;
@@ -369,8 +364,8 @@ class UserController extends Controller
             ->paginate(10);
         $title = 'Propeties';
         $menu = 'none';
-        $data = compact('title', 'menu', 'show', 'SecStr', 'purpose');
 
+        $data = compact('title', 'menu', 'show', 'SecStr', 'purpose');
         return view('frontend.show', $data);
     }
     //saving Propert Ajax
@@ -396,8 +391,7 @@ class UserController extends Controller
             $request->session()->put('user', $user->toArray());
             $user_data->saved = json_encode($saved, true);
             $user_data->save();
-            // return redirect()->route('UserProfile');
-            // return redirect()->back();
+
             return $res;
         }
     }
@@ -416,6 +410,7 @@ class UserController extends Controller
         // dd($show);
         $title = 'Saved Properies';
         $menu = 'none';
+
         $data = compact('title', 'menu', 'show');
         return view('User.savedPro', $data);
     }

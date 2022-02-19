@@ -142,10 +142,3 @@
         </nav>
     </div>
 </header>
-{{-- @section('scripts')
-    <script>
-        $(document).ready(function() {
-            console.log('navbar');
-        });
-    </script>
-@endsection --}}
