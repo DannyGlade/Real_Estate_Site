@@ -1,66 +1,65 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Real Estate Site 
+### Made By [***DannyGlade***](https://github.com/DannyGlade)
+This is a Real E-state Site Project Made with Laravel, Bootstarp, JQuery, DataTables, FacyApp.
+I only made it for my College Project, but if you are here that means I might have posted it online somewhere and you are here to steal it or see as refrence, but it's okay.
+> Please Note!
+> Beacause I am not good of a designer I have only used bootstrap, and nothing else, yet. So if you are looking for fancy site this might not be it. otherwise it looks decent enogh and funtionalities are also working... (obviously there will be some bugs)
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Dependencies
+- [Composer v2.2.3^](https://getcomposer.org/download/)
+- [Laravel v8.x](https://laravel.com/docs/8.x)
+- [Bootstap v5.1.3](https://getbootstrap.com/docs/5.1/getting-started/introduction/)
+- [Bootstrap v5.1 Examples](https://getbootstrap.com/docs/5.1/examples/) (Used Some of these as boiler plate)
+- [JQuery v3.6.0](https://releases.jquery.com/)
+- [DataTables v1.11.4](https://datatables.net/manual/) with [DataTables v1.11.4 Bootstap 5](https://datatables.net/examples/styling/bootstrap5.html)
+- [FancyApps](https://fancyapps.com/docs/ui/installation)
+  - [FancyBox](https://fancyapps.com/docs/ui/fancybox)
+  - [Carousal](https://fancyapps.com/docs/ui/carousel)
+- And Familiarity with Laravel, Can't remember anything else...
 
-## About Laravel
+## What needs to be installed...
+- [Composer v2.2.3^](https://getcomposer.org/download/)
+- [Git](https://git-scm.com/downloads)
+- [Laravel v8.x](https://laravel.com/docs/8.x)
+- [Wamp](https://www.wampserver.com/en/) (I used Wamp you can use Similar ones)
+- Can't remember anything else...
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Steps to Install
+### Clone The GitHub Repo first
+1. Open Cmd in folder you want to install project in...
+2. Type Command `git clone https://github.com/DannyGlade/Real_Estate_Site.git` and hit enter...
+3. Then cd into folder using `cd Real_Estate_Site`
+> Note from here On, You can also use Terminal from VS Code or Your IDE...
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Install All Composer Dependencies
+1. Use `composer install` to install all dependencies then wait till all process is complete...
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Create a .env file
+1. Duplicate *.env.example* as *.env* file
+2. Fill information of your DB **username** and **password** & other info if needed...
 
-## Learning Laravel
+### Create DataBase
+1. Create DataBase by PhpMyadmin (provided bt [Wamp](https://www.wampserver.com/en/)) or Any Other DB you use...
+> Note DataBase name should be same as typed in *.env* file
+### DataBase Structure
+> I recommend to import DB structure Using `php artisan` method but you can use *.sql* file to import if you want.
+1. Use Command `php artisan migrate` and wait till all migrations complete...
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Serve Project
+1. Use Command `php artisan serve`( [Wamp](https://www.wampserver.com/en/)/Other Should be Runnig ) to run project...
+> if some *key* related error appears then use command `php artisan key:generate` to generate AppKey.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## That's it...
+Go to the Link that `php artisan serve` command gives you and Hopefully it should be working, I hope you are capable of any troubleshooting if any error occurs.
 
-## Laravel Sponsors
+- Admin Email -> `admin@admin.com`
+- Admin Password -> `admin123`
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+I am writing this documentaion while this project is still in making, because I was bored...
 
-### Premium Partners
+I will add more soon, If my mind says, lol...
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[CMS Max](https://www.cmsmax.com/)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-- **[Romega Software](https://romegasoftware.com)**
+If You are still reading, then thanks and Welcome...
 
-## Contributing
+Hope My project helps you any ways...
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
