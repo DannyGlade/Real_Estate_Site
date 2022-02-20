@@ -2,6 +2,11 @@
 ### Made By [***DannyGlade***](https://github.com/DannyGlade)
 This is a Real E-state Site Project Made with Laravel, Bootstarp, JQuery, DataTables, FacyApp.
 I only made it for my College Project, but if you are here that means I might have posted it online somewhere and you are here to steal it or see as refrence, but it's okay.
+
+## What can you do in this website
+- Admin can handle facilities, cities, categories, properties, Users & Site settings
+- User can surf properties, handle their profile & Save and review properties if logged in
+- Yeah that's not much I know but I'm still making and It's a College Project so nothing Serious is gonna happen.
 > Please Note!
 > Beacause I am not good of a designer I have only used bootstrap, and nothing else, yet. So if you are looking for fancy site this might not be it. otherwise it looks decent enogh and funtionalities are also working... (obviously there will be some bugs)
 
