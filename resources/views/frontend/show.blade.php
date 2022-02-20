@@ -23,7 +23,15 @@
                         <select class="form-select fltr" name="category">
                             <option value="*">All</option>
                             @foreach ($cate as $item)
-                                <option value="{{ $item->slug_name }}">{{ $item->name }}</option>
+                                @if (!empty($cate_fltr))
+                                    @if ($cate_fltr == $item->slug_name)
+                                        <option selected value="{{ $item->slug_name }}">{{ $item->name }}</option>
+                                    @else
+                                        <option value="{{ $item->slug_name }}">{{ $item->name }}</option>
+                                    @endif
+                                @else
+                                    <option value="{{ $item->slug_name }}">{{ $item->name }}</option>
+                                @endif
                             @endforeach
                         </select>
                     </div>
@@ -34,7 +42,15 @@
                         <select class="form-select fltr" name="city">
                             <option value="*">All</option>
                             @foreach ($city as $item)
-                                <option value="{{ $item->slug_city }}">{{ $item->city }}</option>
+                                @if (!empty($city_fltr))
+                                    @if ($city_fltr == $item->slug_city)
+                                        <option selected value="{{ $item->slug_city }}">{{ $item->city }}</option>
+                                    @else
+                                        <option value="{{ $item->slug_city }}">{{ $item->city }}</option>
+                                    @endif
+                                @else
+                                    <option value="{{ $item->slug_city }}">{{ $item->city }}</option>
+                                @endif
                             @endforeach
                         </select>
                     </div>
@@ -43,10 +59,17 @@
                     <div class="input-group">
                         <div class="input-group-text">For</div>
                         <select class="form-select fltr" name="purpose">
-                            <option value="*">All</option>
-                            <option value="sale">Sale</option>
-                            <option value="rent">Rent</option>
-                            <option value="pg">PG</option>
+                            @if (!empty($purpose_fltr))
+                                <option {{ $purpose_fltr == '' ? 'selected' : '' }} value="*">All</option>
+                                <option {{ $purpose_fltr == 'sale' ? 'selected' : '' }} value="sale">Sale</option>
+                                <option {{ $purpose_fltr == 'rent' ? 'selected' : '' }} value="rent">Rent</option>
+                                <option {{ $purpose_fltr == 'pg' ? 'selected' : '' }} value="pg">PG</option>
+                            @else
+                                <option value="*">All</option>
+                                <option value="sale">Sale</option>
+                                <option value="rent">Rent</option>
+                                <option value="pg">PG</option>
+                            @endif
                         </select>
                     </div>
                 </div>

@@ -413,7 +413,7 @@ class AdminController extends Controller
             'address' => 'required|max:191',
             'cont_ph' => 'required',
             'cont_em' => 'required|email',
-            'area' => 'numeric',
+            'area' => 'required|numeric',
             // 'description' => 'string',
         ]);
         $pro = new Property;
@@ -428,7 +428,7 @@ class AdminController extends Controller
         $pro->address = $request->address;
         $pro->cont_ph = $request->cont_ph;
         $pro->cont_em = $request->cont_em;
-        $pro->faci = $request->faci ? json_encode($request->faci) : null;
+        $pro->faci = $request->faci ? json_encode($request->faci, true) : null;
         $pro->featured = $request->featured ? true : false;
         $pro->area = $request->area ? $request->area : null;
         $pro->description = $request->description ? $request->description : null;
@@ -498,6 +498,7 @@ class AdminController extends Controller
 
         if ($valid) {
             $pro = Property::findorfail($id);
+            $pro_faci = json_decode($pro->faci, true);
         }
 
         $title = "Edit Property";
@@ -507,7 +508,7 @@ class AdminController extends Controller
         $cate = Category::select('id', 'name')->get();
         $faci = Facilities::select('*')->get();
 
-        $data = compact('title', 'menu', 'pro', 'city', 'cate', 'faci');
+        $data = compact('title', 'menu', 'pro', 'pro_faci', 'city', 'cate', 'faci');
         return view('AdminPanel.properties.form', $data);
     }
     public function properties_edited(Request $request)
@@ -530,7 +531,7 @@ class AdminController extends Controller
             'address' => 'required|max:191',
             'cont_ph' => 'required',
             'cont_em' => 'required|email',
-            'area' => 'numeric',
+            'area' => 'required|numeric',
             // 'description' => 'string',
         ]);
         $pro = Property::findorfail($id);
@@ -545,7 +546,7 @@ class AdminController extends Controller
         $pro->address = $request->address;
         $pro->cont_ph = $request->cont_ph;
         $pro->cont_em = $request->cont_em;
-        $pro->faci = json_encode($request->faci);
+        $pro->faci = json_encode($request->faci, true);
         $pro->featured = $request->featured ? true : false;
         $pro->area = $request->area ? $request->area : null;
         $pro->description = $request->description ? $request->description : null;

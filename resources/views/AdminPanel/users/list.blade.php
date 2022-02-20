@@ -11,7 +11,8 @@
                     </ol>
                 </div>
             </div>
-            <div class="{{ session()->get('msgst') ? 'alert  alert-' . session()->get('msgst') : 'm-0 border-0 p-0' }}">
+            <div id="alert"
+                class="{{ session()->get('msgst') ? 'alert  alert-' . session()->get('msgst') : 'm-0 border-0 p-0' }}">
                 {{ session()->get('msg') ?? null }}</div>
             <div class="mt-4">
                 <table class="table table-hover table-striped" id="data">
@@ -29,14 +30,16 @@
                         @foreach ($usersData as $item)
                             <tr>
                                 {{-- <th scope="row">{{ $item->id }}</th> --}}
-                                <th scope="row"><img class="rounded" height="32" width="32" src="{{ !empty($item->Data->image) ? asset('/storage/userdata/' . $item->Data->image) : asset('stockUser.png') }}" alt=""></th>
+                                <th scope="row"><img class="rounded" height="32" width="32"
+                                        src="{{ !empty($item->Data->image) ? asset('/storage/userdata/' . $item->Data->image) : asset('stockUser.png') }}"
+                                        alt=""></th>
                                 <th scope="row">{{ $item->name }}</th>
                                 <th scope="row">{{ $item->email }}</th>
                                 <th scope="row">
                                     <select class="form-control type" id="{{ $item->id }}"
                                         data-name="{{ $item->name }}">
-                                        <option @if ($item->type == 'A')selected @endif value="A">Admin</option>
-                                        <option @if ($item->type == 'U')selected @endif value="U">User</option>
+                                        <option @if ($item->type == 'A') selected @endif value="A">Admin</option>
+                                        <option @if ($item->type == 'U') selected @endif value="U">User</option>
                                     </select>
                                 </th>
                                 <th scope="row">
@@ -55,6 +58,7 @@
 @section('scripts')
     <script>
         $(document).ready(function() {
+            $('.alert').fadeOut(3000);
             var old_val;
             $(document).on('focus', '.type', function(e) {
                 old_val = $(this).val();
@@ -81,7 +85,11 @@
                         data: data,
                         dataType: "JSON",
                         success: function(response) {
+                            $('.alert').fadeIn();
                             alert(response.message);
+                            $('#alert').addClass('alert alert-success')
+                                .removeClass('m-0 border-0 p-0').html('Edited...');
+                            $('.alert').fadeOut(3000);
                         }
                     });
                     old_val = new_val;

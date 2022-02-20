@@ -39,7 +39,7 @@
                                 <th scope="row">{{ $item->title }}</th>
                                 <th scope="row">{{ number_format($item->price) }}</th>
                                 <th scope="row" @if ($item->featured == 1)class="text-success">Active @else class="text-danger"> Disabled @endif</th>
-                                <th scope="row">{{ $item->purpose }}</th>
+                                <th scope="row">{{ ucfirst($item->purpose) }}</th>
                                 <th scope="row">{{ $item->Cate->name }}</th>
                                 <th scope="row"><img height="30rem" class="rounded"
                                         src="{{ asset('/storage/property/' . $item->image) }}" alt="Error"></th>
@@ -60,4 +60,11 @@
             </div>
         </div>
     </div>
+@endsection
+@section('scripts')
+    <script>
+        $(document).ready(function () {
+            $('.alert').fadeOut(3000);
+        });
+    </script>
 @endsection

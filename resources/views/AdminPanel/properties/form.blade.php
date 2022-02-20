@@ -15,13 +15,24 @@
                 </div>
             </div>
             <div class="mt-4">
-                <div class="card" style="width:90%;">
+                <form class="card" style="width:90%;" id="proForm" action="@if (!empty($pro)){{ route('properties_edited', $pro->id) }}@else{{ route('properties_added') }}@endif" method="POST"
+                    enctype="multipart/form-data">
                     <div class="card-header">
-                        <h4 class="">@if (!empty($pro))Edit @else Add @endif Property</h4>
+                        <div class="d-flex">
+                            <h4 class="">@if (!empty($pro))Edit @else Add @endif Property</h4>
+                            <div class="ms-auto">
+                                <button
+                                    class="btn
+                                    @if (!empty($pro)) btn-success
+                                    @else btn-primary
+                                    @endif"
+                                    type="submit">@if (!empty($pro)) Update @else Submit @endif
+                                </button>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-body">
-                        <form class="row g-3" id="proForm" action="@if (!empty($pro)){{ route('properties_edited', $pro->id) }}@else{{ route('properties_added') }}@endif" method="POST"
-                            enctype="multipart/form-data">
+                        <div class="row g-3">
                             @csrf
 
                             <div class="row border-bottom border-2 m-auto mt-3">
@@ -40,7 +51,7 @@
                                             <label for="" class="form-label"><i class="fas fa-home"></i> Property Title</label>
                                             <input type="text" class="form-control" name="title"
                                                 value="@if (!empty($pro)){{ $pro->title }}@else{{ old('title') }}@endif">
-                                            <div class="text-danger">@error('title') * {{ $message }} @enderror
+                                            <div class="text-danger fst-italic lh-1">* @error('title'){{ $message }} @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -50,7 +61,7 @@
                                                 <input type="number" class="form-control" name="price" min="0"
                                                     max="999999999" value="@if (!empty($pro)){{ $pro->price }}@else{{ old('price') }}@endif">
                                             </div>
-                                            <div class="text-danger">@error('price') * {{ $message }} @enderror
+                                            <div class="text-danger fst-italic lh-1">* @error('price'){{ $message }} @enderror
                                             </div>
                                         </div>
                                     </div>
@@ -66,7 +77,7 @@
                                                     <option @if (!empty($pro)) @if ($pro->purpose == 'pg') selected @endif @else @if (old('purpose') == 'pg') selected @endif @endif value="pg">PG</option>
                                                 </select>
                                             </div>
-                                            <div class="text-danger">@error('purpose') * {{ $message }} @enderror
+                                            <div class="text-danger fst-italic lh-1">* @error('purpose'){{ $message }} @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -96,7 +107,7 @@
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            <div class="text-danger">@error('category') * {{ $message }} @enderror
+                                            <div class="text-danger fst-italic lh-1">* @error('category'){{ $message }} @enderror
                                             </div>
                                         </div>
                                     </div>
@@ -105,14 +116,14 @@
                                             <div class="form-label"><i class="fas fa-bed"></i> Bed Rooms</div>
                                             <input type="number" class="form-control" value="@if (!empty($pro)){{ $pro->rooms }}@else{{ old('rooms') ?? 1 }}@endif"
                                                 name="rooms" min="1">
-                                            <div class="text-danger">@error('rooms') * {{ $message }} @enderror
+                                            <div class="text-danger fst-italic lh-1">* @error('rooms'){{ $message }} @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-label"><i class="fas fa-shower"></i> Bath Rooms</div>
                                             <input type="number" class="form-control" value="@if (!empty($pro)){{ $pro->bathrooms }}@else{{ old('bathrooms') ?? 1 }}@endif"
                                                 name="bathrooms" min="1">
-                                            <div class="text-danger">@error('bathrooms') * {{ $message }} @enderror
+                                            <div class="text-danger fst-italic lh-1">* @error('bathrooms'){{ $message }} @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -122,7 +133,7 @@
                                                 <input type="number" class="form-control"
                                                     value="@if (!empty($pro)){{ $pro->area }}@else{{ old('area') ?? 700 }}@endif" name="area" min="700">
                                             </div>
-                                            <div class="text-danger">@error('area') * {{ $message }} @enderror
+                                            <div class="text-danger fst-italic lh-1">* @error('area'){{ $message }} @enderror
                                             </div>
                                         </div>
                                     </div>
@@ -131,7 +142,7 @@
                                             <label class="form-label"><i class="fas fa-city"></i> City</label>
                                             <div class="input-group">
                                                 <select class="form-select" name="city">
-                                                    <option selected>Choose...</option>
+                                                    <option value="" selected>Choose...</option>
                                                     @foreach ($city as $item)
                                                         @if (!empty($pro))
                                                             @if ($pro->city == $item->id)
@@ -153,28 +164,14 @@
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            <div class="text-danger">@error('city') * {{ $message }} @enderror
+                                            <div class="text-danger fst-italic lh-1">* @error('city'){{ $message }} @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-9">
                                             <label class="form-label"><i class="fas fa-map"></i> Address</label>
                                             <input type="text" class="form-control" value="@if (!empty($pro)){{ $pro->address }}@else{{ old('address') }}@endif"
                                                 name="address">
-                                            <div class="text-danger">@error('address') * {{ $message }} @enderror
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-2">
-                                        <div class="col-md-12 mb-2">
-                                            <label for="" class="form-label"><i class="fas fa-shapes"></i> Facilities</label>
-                                            <select class="form-select" name="faci[]" multiple>
-                                                @foreach ($faci as $item)
-                                                    <option value="{{ $item->slug_faci }}">{{ $item->faci }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                            <div class="text-danger">@error('faci[]') * {{ $message }}
-                                                @enderror
+                                            <div class="text-danger fst-italic lh-1">* @error('address'){{ $message }} @enderror
                                             </div>
                                         </div>
                                     </div>
@@ -183,7 +180,7 @@
                                             <label for="" class="form-label"><i class="fas fa-phone-alt"></i> Contact Phone</label>
                                             <input type="text" name="cont_ph" value="@if (!empty($pro)){{ $pro->cont_ph }}@else{{ old('cont_ph') }}@endif"
                                                 class="form-control">
-                                            <div class="text-danger">@error('cont_ph') * {{ $message }}
+                                            <div class="text-danger fst-italic lh-1">* @error('cont_ph'){{ $message }}
                                                 @enderror
                                             </div>
                                         </div>
@@ -191,7 +188,34 @@
                                             <label for="" class="form-label"><i class="fas fa-envelope"></i> Contact Email</label>
                                             <input type="email" name="cont_em" value="@if (!empty($pro)){{ $pro->cont_em }}@else{{ old('cont_em') }}@endif"
                                                 class="form-control">
-                                            <div class="text-danger">@error('cont_em') * {{ $message }}
+                                            <div class="text-danger fst-italic lh-1">* @error('cont_em'){{ $message }}
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-md-12 mb-2">
+                                            <label for="" class="form-label mb-0"><i class="fas fa-shapes"></i> Facilities</label>
+                                            <p class="text-muted form-label">Use Ctrl + Click to multi select
+                                            </p>
+                                            <select class="form-select" name="faci[]" multiple>
+                                                @foreach ($faci as $item)
+                                                    @if (!empty($pro_faci))
+                                                        @if (in_array($item->slug_faci,$pro_faci))
+                                                            <option selected value="{{ $item->slug_faci }}">{{ $item->faci }}
+                                                            </option>
+                                                        @else
+                                                            <option value="{{ $item->slug_faci }}">{{ $item->faci }}
+                                                            </option>
+                                                        @endif
+                                                    @else
+                                                        <option value="{{ $item->slug_faci }}">{{ $item->faci }}
+                                                        </option>
+                                                    @endif
+
+                                                @endforeach
+                                            </select>
+                                            <div class="text-danger fst-italic lh-1">@error('faci[]') * {{ $message }}
                                                 @enderror
                                             </div>
                                         </div>
@@ -201,7 +225,7 @@
                                             <label for="" class="form-label"><i class="fas fa-info-circle"></i> Property Description</label>
                                             <textarea class="form-control" rows="3"
                                                 name="description">@if (!empty($pro)){{ $pro->description }}@else{{ old('description') }}@endif</textarea>
-                                            <div class="text-danger">@error('description') * {{ $message }}
+                                            <div class="text-danger fst-italic lh-1">@error('description') * {{ $message }}
                                                 @enderror
                                             </div>
                                         </div>
@@ -223,13 +247,13 @@
                                 </div>
                                 <div class="col-md-4 mx-auto mb-2 ps-2 border-start">
                                     <div class="col-md-12 mb-2">
-                                        <label for="" class="form-label"><i class="fas fa-image"></i> Property Featured Image</label>
+                                        <label for="" class="form-label mb-0"><i class="fas fa-image"></i> Property Featured Image</label>
                                         <p class="text-muted form-label">for best output upload [1903 x 513] Image
                                         </p>
                                         <div class="input-group">
                                             <input type="file" class="form-control" name="fe_image">
                                         </div>
-                                        <div class="text-danger mt-0">@error('fe_image') * {{ $message }} @enderror
+                                        <div class="text-danger fst-italic lh-1">* @error('fe_image'){{ $message }} @enderror
                                         </div>
                                     </div>
                                     @if (!empty($pro->fe_image))
@@ -240,13 +264,13 @@
                                         </div>
                                     @endif
                                     <div class="col-md-12 mb-2">
-                                        <label for="" class="form-label"><i class="far fa-image"></i> Property Image</label>
+                                        <label for="" class="form-label mb-0"><i class="far fa-image"></i> Property Image</label>
                                         <p class="text-muted form-label">for best output upload [1920 x 1440] [4:3] Image
                                         </p>
                                         <div class="input-group">
                                             <input type="file" class="form-control" name="image">
                                         </div>
-                                        <div class="text-danger mt-0">@error('image') * {{ $message }} @enderror
+                                        <div class="text-danger fst-italic lh-1">* @error('image'){{ $message }} @enderror
                                         </div>
                                     </div>
                                     @if (!empty($pro->image))
@@ -261,7 +285,7 @@
                                         <div class="input-group">
                                             <input type="file" class="form-control" name="floorplan">
                                         </div>
-                                        <div class="text-danger mt-0">@error('floorplan') * {{ $message }} @enderror
+                                        <div class="text-danger fst-italic lh-1">@error('floorplan') * {{ $message }} @enderror
                                         </div>
                                     </div>
                                     @if (!empty($pro->floorplan))
@@ -276,33 +300,16 @@
                             <div class="col-12">
                                 <button
                                     class="btn
-                                @if (!empty($pro)) btn-success
-                                @else btn-primary
-                                @endif"
-                                    type="submit">@if (!empty($pro)) Update @else Submit @endif</button>
+                                    @if (!empty($pro)) btn-success
+                                    @else btn-primary
+                                    @endif"
+                                    type="submit">@if (!empty($pro)) Update @else Submit @endif
+                                </button>
                             </div>
-                        </form>
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
 @endsection
-{{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<script>
-    $(document).ready(function() {
-        $(document).on('click', '#ajaxSave', function(e) {
-            e.preventDefault();
-
-        });
-        $(document).on('click', '#ajaxDelete', function(e) {
-            e.preventDefault();
-        });
-        $('#gallaryAjax').submit(function (e) {
-            e.preventDefault();
-            console.log('submit');
-
-        });
-    });
-</script> --}}

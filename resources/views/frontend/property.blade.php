@@ -42,7 +42,7 @@
                                                 </a>
                                             </p>
                                             <div class="col-12 mb-3 w-75">
-                                                <p class="card-text">{{ $item->description }}</p>
+                                                <p class="card-text" style="text-align: justify">{{ $item->description }}</p>
                                             </div>
                                             <div class="col-12 mb-3">
                                                 <p class="card-text">
@@ -95,12 +95,12 @@
                                             <h5 class="card-title"><i class="fas fa-tag"></i> Price :</h5>
                                         </div>
                                         <div class="col-10">
-                                            <div class="card-text">
+                                            <h5 class="card-text">
                                                 ₹ {{ number_format($item->price) }}
                                                 @if ($item->purpose != 'sale')
                                                     /month
                                                 @endif
-                                            </div>
+                                            </h5>
                                         </div>
                                     </div>
                                 </div>
@@ -154,9 +154,9 @@
                                             <h5 class="card-title"><i class="fas fa-th-large"></i> Area :</h5>
                                         </div>
                                         <div class="col-9 mb-3">
-                                            <div class="card-text">
+                                            <h5 class="card-text">
                                                 {{ number_format($item->area) }} Sq. Ft.
-                                            </div>
+                                            </h5>
                                         </div>
                                         @if (!empty($item->floorplan))
                                             <div class="col-12 mb-3">
@@ -177,7 +177,7 @@
                                                 </h5>
                                                 <div class="card-text">
                                                     @foreach ($faci as $fac)
-                                                        <button class="btn btn-{{ $fac->color }} btn-lg mb-1">
+                                                        <button class="btn btn-{{ $fac->color }} m-1 mb-2">
                                                             {!! $fac->fa !!} {{ $fac->faci }}
                                                         </button>
                                                     @endforeach
@@ -213,7 +213,7 @@
                             </div>
                             <div class="col">
                                 <div class="card-body">
-                                    <div class="card-text"> {{ $item->address }}</div>
+                                    <h5 class="card-text"> {{ $item->address }}</h5>
                                 </div>
                             </div>
                         </div>

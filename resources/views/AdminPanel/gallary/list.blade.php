@@ -17,61 +17,64 @@
                                     <button class="btn btn-primary" type="submit">Add</button>
                                 </div>
                                 <div class="text-danger">
-                                    @error('gallary[]'){{ $message }}@enderror
-                                    </div>
+                                    @error('gallary[]')
+                                        {{ $message }}
+                                    @enderror
+                                </div>
 
-                                </form>
-                            </div>
-                        </ol>
-                    </div>
-                </div>
-                <div class="{{ session()->get('msgst') ? 'alert  alert-' . session()->get('msgst') : 'm-0 border-0 p-0' }}">
-                    {{ session()->get('msg') ?? null }}
-                </div>
-                <div class="mt-4">
-                    <table class="table table-hover table-striped" id="data">
-                        <thead>
-                            <tr>
-                                <th scope="col">Id</th>
-                                <th scope="col">Property</th>
-                                <th scope="col">Image</th>
-                                <th scope="col">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @forelse ($gal as $item)
-                                <tr>
-                                    <th scope="row">{{ $item->id }}</th>
-                                    <th scope="row">{{ $item->Pro->title }}</th>
-                                    <th scope="row"><img height="100rem" class="rounded"
-                                            src="{{ asset('/storage/gallary/' . $item->pro_id . '/' . $item->gal_image) }}"
-                                            data-fancybox="gallery"
-                                            data-src="{{ asset('/storage/gallary/' . $item->pro_id . '/' . $item->gal_image) }}"
-                                            alt="Error"></th>
-                                    <th scope="row">
-                                        <a class="btn btn-danger btn-sm" onclick="return confirm('Sure to delete?')"
-                                            href="{{ route('del_gallary', [$item->pro_id, $item->id]) }}">
-                                            <i class="fa fa-trash" aria-hidden="true"></i>
-                                        </a>
-                                    </th>
-                                </tr>
-                            @empty
-                                <tr>
-                                    <th colspan="4">No Images Uploaded</th>
-                                </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
+                            </form>
+                        </div>
+                    </ol>
                 </div>
             </div>
+            <div class="{{ session()->get('msgst') ? 'alert  alert-' . session()->get('msgst') : 'm-0 border-0 p-0' }}">
+                {{ session()->get('msg') ?? null }}
+            </div>
+            <div class="mt-4">
+                <table class="table table-hover table-striped" id="data">
+                    <thead>
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Property</th>
+                            <th scope="col">Image</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse ($gal as $item)
+                            <tr>
+                                <th scope="row">{{ $item->id }}</th>
+                                <th scope="row">{{ $item->Pro->title }}</th>
+                                <th scope="row"><img height="100rem" class="rounded"
+                                        src="{{ asset('/storage/gallary/' . $item->pro_id . '/' . $item->gal_image) }}"
+                                        data-fancybox="gallery"
+                                        data-src="{{ asset('/storage/gallary/' . $item->pro_id . '/' . $item->gal_image) }}"
+                                        alt="Error"></th>
+                                <th scope="row">
+                                    <a class="btn btn-danger btn-sm" onclick="return confirm('Sure to delete?')"
+                                        href="{{ route('del_gallary', [$item->pro_id, $item->id]) }}">
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                    </a>
+                                </th>
+                            </tr>
+                        @empty
+                            <tr>
+                                <th colspan="4">No Images Uploaded</th>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
         </div>
-        </div>
-    @endsection
-    @section('scripts')
-        <script>
-            $(document).ready(function() {
-                Fancybox.bind("gallery", {});
-                // const myCarousel = new Carousel(document.querySelector(".carousel"), {});
-            });
-        </script>
-    @endsection
+    </div>
+    </div>
+@endsection
+@section('scripts')
+    <script>
+        $(document).ready(function() {
+            $('.alert').fadeOut(3000);
+            Fancybox.bind("gallery", {});
+            // const myCarousel = new Carousel(document.querySelector(".carousel"), {});
+        });
+    </script>
+@endsection

@@ -198,8 +198,8 @@ class UserController extends Controller
         $valid = validator($request->route()->parameters(), [
             'cate' => 'exists:categories,slug_name'
         ])->validate();
-        $cate = $request->route()->parameter('cate');
-        $cate = Category::where('slug_name', '=', $cate)->first();
+        $cate_fltr = $request->route()->parameter('cate');
+        $cate = Category::where('slug_name', '=', $cate_fltr)->first();
         $show = Property::with('Cate', 'City')
             ->where('category', '=', $cate->id)
             // ->where('featured', false)
@@ -210,7 +210,7 @@ class UserController extends Controller
         $title = $cate->name;
         $menu = 'category';
 
-        $data = compact('title', 'menu', 'show');
+        $data = compact('title', 'menu', 'show', 'cate_fltr');
         return view('frontend.show', $data);
     }
     public function show_city(Request $request)
@@ -218,8 +218,8 @@ class UserController extends Controller
         $valid = validator($request->route()->parameters(), [
             'city' => 'exists:cities,slug_city'
         ])->validate();
-        $city = $request->route()->parameter('city');
-        $city = City::where('slug_city', '=', $city)->first();
+        $city_fltr = $request->route()->parameter('city');
+        $city = City::where('slug_city', '=', $city_fltr)->first();
         $show = Property::with('Cate', 'City')
             ->where('city', '=', $city->id)
             // ->where('featured', false)
@@ -230,23 +230,23 @@ class UserController extends Controller
         $title = $city->city;
         $menu = 'city';
 
-        $data = compact('title', 'menu', 'show');
+        $data = compact('title', 'menu', 'show', 'city_fltr');
         return view('frontend.show', $data);
     }
     public function show_purpose(Request $request)
     {
-        $purpose = $request->route()->parameter('purpose');
+        $purpose_fltr = $request->route()->parameter('purpose');
         $show = Property::with('Cate', 'City')
-            ->where('purpose', '=', $purpose)
+            ->where('purpose', '=', $purpose_fltr)
             // ->where('featured', false)
             ->latest()
             // ->limit(6)
             ->paginate(10);
             // ->get();
-        $title = ucfirst($purpose);
+        $title = ucfirst($purpose_fltr);
         $menu = 'purpose';
 
-        $data = compact('title', 'menu', 'show');
+        $data = compact('title', 'menu', 'show', 'purpose_fltr');
         return view('frontend.show', $data);
     }
     public function show_pro(Request $request)

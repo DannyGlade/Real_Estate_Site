@@ -42,15 +42,15 @@ Route::get('/logout', [UserController::class, 'logout'])->name('UserLogout');
 Route::get('/', [UserController::class, 'userHome'])->name('userHome');
 
 //showing properties in various ways
-Route::get('/category/{cate}', [UserController::class, 'show_category'])->name('show_category');
-Route::get('/city/{city}', [UserController::class, 'show_city'])->name('show_city');
-Route::get('/purpose/{purpose}', [UserController::class, 'show_purpose'])->name('show_purpose');
+Route::get('/property/category/{cate}', [UserController::class, 'show_category'])->name('show_category');
+Route::get('/property/city/{city}', [UserController::class, 'show_city'])->name('show_city');
+Route::get('/property/purpose/{purpose}', [UserController::class, 'show_purpose'])->name('show_purpose');
 Route::get('/property', [UserController::class, 'show'])->name('show');
 
 //property search and filter by ajax
-Route::get('/ajaxFilter', [UserController::class, 'ajaxFilter'])->name('ajaxFilter');
+Route::get('/property/ajaxFilter', [UserController::class, 'ajaxFilter'])->name('ajaxFilter');
 Route::get('/property/{pro}', [UserController::class, 'show_pro'])->name('show_pro');
-Route::post('/propSearch', [UserController::class, 'propSearch'])->name('propSearch');
+Route::post('/property/propSearch', [UserController::class, 'propSearch'])->name('propSearch');
 
 //checking user is loggged in
 Route::middleware([UserCheck::class])->group(function () {

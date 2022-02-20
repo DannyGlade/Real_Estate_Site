@@ -159,6 +159,7 @@
 @section('scripts')
     <script>
         $(document).ready(function() {
+            $('.alert').fadeOut(3000);
             $(document).on('click', '.ajaxDelete', function(e) {
                 e.preventDefault();
                 var _this = $(this);

@@ -48,3 +48,10 @@
         </div>
     </div>
 @endsection
+@section('scripts')
+    <script>
+        $(document).ready(function () {
+            $('.alert').fadeOut(3000);
+        });
+    </script>
+@endsection
