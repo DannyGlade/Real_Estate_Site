@@ -3,10 +3,6 @@
 
 <head>
 
-    @foreach (config('dz.public.global.css') as $item)
-        <link rel="stylesheet" crossorigin="anonymous" href="{{ $item }}">
-    @endforeach
-
     @if ($logo_image->value)
         <link rel="icon" type="image/x-icon" href="{{ asset('/storage/siteSettings/' . $logo_image->value) }}">
     @else
@@ -19,6 +15,10 @@
         {{ $title ? $title : '' }} | {{ $site_title->value ?? config('dz.public.title') }}
         {{-- @stack('title') --}}
     </title>
+
+    @foreach (config('dz.public.global.css') as $item)
+        <link rel="stylesheet" crossorigin="anonymous" href="{{ $item }}">
+    @endforeach
 
     {{-- <title>Home Page</title> --}}
 </head>

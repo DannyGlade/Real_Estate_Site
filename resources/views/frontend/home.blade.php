@@ -6,11 +6,28 @@
         <div class="container marketing">
 
             <!-- Three columns of text below the carousel -->
+
             <div class="row">
                 <div class="col-12 mb-5 text-center">
                     <h1>Categories</h1>
                 </div>
-                @foreach ($showcate as $item)
+                <div id="cat_cara" class="carousel">
+                    @foreach ($showcate as $item)
+                        <div class="carousel__slide" style="width: 350px">
+                            {{-- <div class=""> --}}
+                            <div class="card shadow w-100 mx-auto">
+                                <a class="" href="{{ route('show_category', $item->slug_name) }}">
+                                    <img style="height: 100%" class="w-100"
+                                        src="{{ asset('/storage/images/' . $item->image) }}" alt="{{ $item->name }}">
+                                </a>
+                                <a class="btn btn-outline-primary btn-lg card-body"
+                                    href="{{ route('show_category', $item->slug_name) }}">{{ $item->name }}</a>
+                            </div>
+                            {{-- </div><!-- /.col-lg-4 --> --}}
+                        </div>
+                    @endforeach
+                </div>
+                {{-- @foreach ($showcate as $item)
                     <div class="col-lg-4 mx-auto">
                         <div class="card shadow mx-auto w-75">
                             <a href="{{ route('show_category', $item->slug_name) }}">
@@ -21,7 +38,7 @@
                                 href="{{ route('show_category', $item->slug_name) }}">{{ $item->name }}</a>
                         </div>
                     </div><!-- /.col-lg-4 -->
-                @endforeach
+                @endforeach --}}
                 {{-- <div class="col-lg-4">
                     <svg class="bd-placeholder-img rounded-circle" width="140" height="140"
                         xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140"
@@ -196,5 +213,11 @@
             <!-- /END THE FEATURETTES -->
         </div>
     </main>
-
+@endsection
+@section('scripts')
+    <script>
+        $(document).ready(function() {
+            const myCarousel = new Carousel(document.querySelector("#cat_cara"), {});
+        });
+    </script>
 @endsection

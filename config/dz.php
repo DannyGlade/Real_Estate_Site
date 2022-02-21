@@ -7,10 +7,10 @@ return [
         'global' => [
             'css' => [
                 'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css',
-                'https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css',
                 '/css/carousel.css',
                 '/css/headers.css',
-                '/css/footers.css'
+                '/css/footers.css',
+                'https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css',
             ],
             'js' => [
                 'https://kit.fontawesome.com/10cf85d80f.js',
