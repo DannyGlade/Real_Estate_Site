@@ -1,6 +1,6 @@
 # Real Estate Site 
 ### Made By [***DannyGlade***](https://github.com/DannyGlade)
-This is a Real E-state Site Project Made with Laravel, Bootstarp, JQuery, DataTables, FacyApp.
+This is a Real E-state Site Project Made with Laravel, Bootstarp, JQuery, DataTables, FancyApp.
 I only made it for my College Project, but if you are here that means I might have posted it online somewhere and you are here to steal it or see as refrence, but it's okay.
 
 ## What can you do in this website
@@ -44,7 +44,7 @@ I only made it for my College Project, but if you are here that means I might ha
 2. Fill information of your DB **username** and **password** & other info if needed...
 
 ### Create DataBase
-1. Create DataBase by PhpMyadmin (provided bt [Wamp](https://www.wampserver.com/en/)) or Any Other DB you use...
+1. Create DataBase by PhpMyadmin (provided by [Wamp](https://www.wampserver.com/en/)) or Any Other DB you use...
 > Note DataBase name should be same as typed in *.env* file
 ### DataBase Structure
 > I recommend to import DB structure Using `php artisan` method but you can use *.sql* file to import if you want.
@@ -64,7 +64,7 @@ I am writing this documentaion while this project is still in making, because I 
 
 I will add more soon, If my mind says, lol...
 
-If You are still reading, then thanks and Welcome...
+If You are still reading, then Thanks and Welcome...
 
 Hope My project helps you any ways...
 
