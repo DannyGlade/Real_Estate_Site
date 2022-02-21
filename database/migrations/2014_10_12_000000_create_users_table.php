@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->enum('type', ['U', 'R', 'A']);
+            $table->enum('type', ['U', 'R', 'A'])->comment('R=Root, A=Admin, U=User');
             $table->rememberToken();
             $table->timestamps();
         });
@@ -29,6 +29,7 @@ class CreateUsersTable extends Migration
         $user->name = 'Admin User';
         $user->email = 'admin@admin.com';
         $user->password = '$2y$10$2LhsQAcYRgUtaZaDxFnHdumQZAUVEScFap9tDxSCDePSyclbRXJp6';
+        $user->type = 'R';
         $user->save();
     }
 
