@@ -15,71 +15,18 @@
                     @foreach ($showcate as $item)
                         <div class="carousel__slide" style="width: 350px">
                             {{-- <div class=""> --}}
-                            <div class="card shadow w-100 mx-auto">
+                            <div class="shadow w-100 mx-auto">
                                 <a class="" href="{{ route('show_category', $item->slug_name) }}">
-                                    <img style="height: 100%" class="w-100"
+                                    <img style="height: 100%" class="w-100 rounded-top"
                                         src="{{ asset('/storage/images/' . $item->image) }}" alt="{{ $item->name }}">
                                 </a>
-                                <a class="btn btn-outline-primary btn-lg card-body"
+                                <a class="btn btn-outline-primary rounded-bottom btn-lg w-100"
                                     href="{{ route('show_category', $item->slug_name) }}">{{ $item->name }}</a>
                             </div>
                             {{-- </div><!-- /.col-lg-4 --> --}}
                         </div>
                     @endforeach
                 </div>
-                {{-- @foreach ($showcate as $item)
-                    <div class="col-lg-4 mx-auto">
-                        <div class="card shadow mx-auto w-75">
-                            <a href="{{ route('show_category', $item->slug_name) }}">
-                                <img class="card-img-top" src="{{ asset('/storage/images/' . $item->image) }}"
-                                    alt="{{ $item->name }}">
-                            </a>
-                            <a class="btn btn-outline-primary btn-lg card-body"
-                                href="{{ route('show_category', $item->slug_name) }}">{{ $item->name }}</a>
-                        </div>
-                    </div><!-- /.col-lg-4 -->
-                @endforeach --}}
-                {{-- <div class="col-lg-4">
-                    <svg class="bd-placeholder-img rounded-circle" width="140" height="140"
-                        xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140"
-                        preserveAspectRatio="xMidYMid slice" focusable="false">
-                        <title>Placeholder</title>
-                        <rect width="100%" height="100%" fill="#777" /><text x="50%" y="50%" fill="#777"
-                            dy=".3em">140x140</text>
-                    </svg>
-
-                    <h2>Heading</h2>
-                    <p>Some representative placeholder content for the three columns of text below the carousel. This is the
-                        first column.</p>
-                    <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
-                </div><!-- /.col-lg-4 -->
-                <div class="col-lg-4">
-                    <svg class="bd-placeholder-img rounded-circle" width="140" height="140"
-                        xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140"
-                        preserveAspectRatio="xMidYMid slice" focusable="false">
-                        <title>Placeholder</title>
-                        <rect width="100%" height="100%" fill="#777" /><text x="50%" y="50%" fill="#777"
-                            dy=".3em">140x140</text>
-                    </svg>
-
-                    <h2>Heading</h2>
-                    <p>Another exciting bit of representative placeholder content. This time, we've moved on to the second
-                        column.</p>
-                    <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
-                </div><!-- /.col-lg-4 -->
-                <div class="col-lg-4">
-                    <svg class="bd-placeholder-img rounded-circle" width="140" height="140"
-                        xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140"
-                        preserveAspectRatio="xMidYMid slice" focusable="false">
-                        <title>Placeholder</title>
-                        <rect width="100%" height="100%" fill="#777" /><text x="50%" y="50%" fill="#777"
-                            dy=".3em">140x140</text>
-                    </svg>
-
-                    <h2>Heading</h2>
-                    <p>And lastly this, the third column of representative placeholder content.</p>
-                    <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
-                </div><!-- /.col-lg-4 --> --}}
             </div><!-- /.row -->
 
             <!-- START THE FEATURETTES -->
@@ -92,7 +39,7 @@
             </div>
             <div class="row featurette">
                 @foreach ($newlyAdded as $item)
-                    <div class="col-4 mx-auto mb-4">
+                    <div class="col-4 mb-4">
                         <div class="card mx-auto shadow">
                             <a href="{{ route('show_pro', $item->title_slug) }}">
                                 <img class="card-img-top" src="{{ asset('/storage/property/' . $item->image) }}"
@@ -123,6 +70,56 @@
                     </div>
                 @endforeach
             </div>
+
+            @forelse ($catedata as $key => $cate)
+                @if (sizeof($cate->Pro) > 0)
+                    <hr class="featurette-divider">
+                    <div class="row featurette mb-3">
+                        <div class="col-12">
+                            <a class="text-decoration-none text-secondary" href="">
+                                <h1 class="">
+                                    {{ $cate->name }}
+                                </h1>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row featurette">
+                        @foreach ($cate->Pro as $item)
+                            <div class="col-4 mb-4">
+                                <div class="card mx-auto shadow">
+                                    <a href="{{ route('show_pro', $item->title_slug) }}">
+                                        <img class="card-img-top"
+                                            src="{{ asset('/storage/property/' . $item->image) }}"
+                                            alt="{{ $item->title }}">
+                                    </a>
+                                    <div class="card-body">
+                                        <h4 class="card-title mb-1">{{ $item->title }}</h4>
+                                        <p class="card-text mb-1">
+                                            <a class="btn btn-sm btn-outline-primary"
+                                                href="{{ route('show_purpose', $item->purpose) }}">
+                                                {{ ucfirst($item->purpose) }}
+                                            </a>
+                                            <a class="btn btn-sm btn-outline-secondary"
+                                                href="{{ route('show_category', $item->Cate->slug_name) }}">
+                                                {{ $item->Cate->name }}
+                                            </a>
+                                            <a class="btn btn-sm btn-outline-dark"
+                                                href="{{ route('show_city', $item->City->slug_city) }}">
+                                                {{ $item->City->city }}
+                                            </a>
+                                        </p>
+                                        <p class="card-text">
+                                            <i class="fas fa-bed"></i> {{ $item->rooms }}
+                                            <i class="fas fa-shower"></i> {{ $item->bathrooms }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
+            @empty
+            @endforelse
 
             <hr class="featurette-divider">
 
@@ -218,6 +215,7 @@
     <script>
         $(document).ready(function() {
             const myCarousel = new Carousel(document.querySelector("#cat_cara"), {});
+            // $(document).('.carousal__button').addClass(' text-white shadow-lg');
         });
     </script>
 @endsection
