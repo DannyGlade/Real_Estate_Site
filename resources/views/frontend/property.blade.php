@@ -42,7 +42,8 @@
                                                 </a>
                                             </p>
                                             <div class="col-12 mb-3 w-75">
-                                                <p class="card-text" style="text-align: justify">{{ $item->description }}</p>
+                                                <p class="card-text" style="text-align: justify">
+                                                    {{ $item->description }}</p>
                                             </div>
                                             <div class="col-12 mb-3">
                                                 <p class="card-text">
@@ -205,7 +206,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row g-0 mb-2 card-body">
+                        <div class="row g-0 mb-2 border-bottom card-body">
                             <div class="col-2">
                                 <div class="card-body">
                                     <h5 class="card-title"><i class="fas fa-map"></i> Address :</h5>
@@ -218,7 +219,7 @@
                             </div>
                         </div>
                         @if (!empty($item->map))
-                            <div class="row g-0 mb-2 card-body">
+                            <div class="row g-0 mb-2 border-bottom card-body">
                                 <div class="col-12 mb-2">
                                     <div class="card-body">
                                         <h5 class="card-title"><i class="fas fa-map-marked-alt"></i> Map :</h5>
@@ -231,6 +232,13 @@
                                 </div>
                             </div>
                         @endif
+                        <div class="row g-0 mb-2 card-body">
+                            <div class="col-12 mb-2">
+                                <div class="card-body">
+                                    <h5 class="card-title"><i class="fa-solid fa-pen-to-square"></i> Reviews</h5>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
