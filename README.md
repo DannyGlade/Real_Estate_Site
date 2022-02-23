@@ -32,12 +32,21 @@ I only made it for my College Project, but if you are here that means I might ha
 ## Steps to Install
 ### Clone The GitHub Repo first
 1. Open Cmd in folder you want to install project in...
-2. Type Command `git clone https://github.com/DannyGlade/Real_Estate_Site.git` and hit enter...
-3. Then cd into folder using `cd Real_Estate_Site`
+2. Type below Command and hit enter...
+```bash
+git clone https://github.com/DannyGlade/Real_Estate_Site.git
+```
+4. Then cd into folder using below Command
+```bash
+cd Real_Estate_Site
+```
 > Note from here On, You can also use Terminal from VS Code or Your IDE...
 
 ### Install All Composer Dependencies
-1. Use `composer install` to install all dependencies then wait till all process is complete...
+1. Use below command to install all dependencies then wait till all process is complete...
+```bash
+composer install
+```
 
 ### Create a .env file
 1. Duplicate *.env.example* as *.env* file
@@ -48,17 +57,30 @@ I only made it for my College Project, but if you are here that means I might ha
 > Note DataBase name should be same as typed in *.env* file
 ### DataBase Structure
 > I recommend to import DB structure Using `php artisan` method but you can use *.sql* file to import if you want.
-1. Use Command `php artisan migrate` and wait till all migrations complete...
+1. Use below Command and wait till all migrations complete...
+```bash
+php artisan migrate
+```
 
 ### Serve Project
-1. Use Command `php artisan serve`( [Wamp](https://www.wampserver.com/en/)/Other Should be Runnig ) to run project...
+1. Use below Command ( [Wamp](https://www.wampserver.com/en/)/Other Should be Runnig ) to run project...
+```bash
+php artisan serve
+```
 > if some *key* related error appears then use command `php artisan key:generate` to generate AppKey.
 
 ## That's it...
 Go to the Link that `php artisan serve` command gives you and Hopefully it should be working, I hope you are capable of any troubleshooting if any error occurs.
 
-- Admin Email -> `admin@admin.com`
-- Admin Password -> `admin123`
+- Admin Email
+```bash
+admin@admin.com
+```
+- Admin Password
+```bash
+
+admin123
+```
 
 I am writing this documentaion while this project is still in making, because I was bored...
 
