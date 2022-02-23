@@ -170,11 +170,12 @@ class UserController extends Controller
     {
         $title = "Home";
         $menu = "home";
-        $featuredPro = Property::with('Cate', 'City')->where('featured', true)->latest()->limit(3)->get();
+        $featuredPro = Property::with('Cate', 'City')->where('featured', true)->latest()->limit(4)->get();
         $newlyAdded = Property::with('Cate', 'City')->where('featured', false)->latest()->limit(6)->get();
         $showcate = Category::latest()->limit(6)->get();
+        $catedata = Category::with('Pro')->latest()->limit(3)->get();
 
-        $data = compact('title', 'menu', 'featuredPro', 'newlyAdded', 'showcate');
+        $data = compact('title', 'menu', 'featuredPro', 'newlyAdded', 'showcate', 'catedata');
         return view('frontend.home', $data);
     }
     //Showing Properties
@@ -206,7 +207,7 @@ class UserController extends Controller
             ->latest()
             // ->limit(6)
             ->paginate(10);
-            // ->get();
+        // ->get();
         $title = $cate->name;
         $menu = 'category';
 
@@ -226,7 +227,7 @@ class UserController extends Controller
             ->latest()
             // ->limit(6)
             ->paginate(10);
-            // ->get();
+        // ->get();
         $title = $city->city;
         $menu = 'city';
 
@@ -242,7 +243,7 @@ class UserController extends Controller
             ->latest()
             // ->limit(6)
             ->paginate(10);
-            // ->get();
+        // ->get();
         $title = ucfirst($purpose_fltr);
         $menu = 'purpose';
 
