@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content_box')
-    <img style="max-height: 513px" class=""
+    <img style="max-height: 513px" class="w-100"
         src="{{ $item->fe_image ? asset('/storage/property/' . $item->fe_image) : asset('/storage/property/' . $item->image) }}"
         alt="{{ $item->title }}">
     <div class="container">
@@ -238,6 +238,37 @@
                                     <h5 class="card-title"><i class="fa-solid fa-pen-to-square"></i> Reviews</h5>
                                 </div>
                             </div>
+                            @if ($status)
+                                <div class="ocl-12 mb-2">
+                                    <form action="" id="review_form" class="card-body">
+                                        @csrf
+                                        <div class="row">
+                                            <div class="col-1 text-center mb-2">
+                                                <a href="{{ route('UserProfile') }}">
+                                                    <img class="rounded-circle"
+                                                        src="{{ !empty($user['data']['image'])? asset('/storage/userdata/' . $user['data']['image']): asset('stockUser.png') }}"
+                                                        width="60px" alt="No Img">
+                                                </a>
+                                                <a href="{{ route('UserProfile') }}" class="text-decoration-none">
+                                                    <p class="m-0 text-muted">{{ $user['name'] }}</p>
+                                                </a>
+                                            </div>
+                                            <div class="col-11 mb-2">
+                                                <textarea name="review_text" id="review_form_input"
+                                                    class="form-control h-100"
+                                                    placeholder="Enter Your Review here..."></textarea>
+                                                <div id="review_form_btns" class="mt-2">
+                                                    <div class="d-flex">
+                                                        <button class="btn btn-success btn-sm ms-auto">Submit</button>
+                                                        <button id="review_cancel"
+                                                            class="btn btn-outline-danger btn-sm ms-2">Cancel</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -276,6 +307,38 @@
                     }
                 });
             });
+
+            $('#review_form_btns').hide();
+            $(document).on('focus', '#review_form_input', function(e) {
+                e.preventDefault();
+                $('#review_form_btns').fadeIn(100);
+            });
+            $(document).on('click', '#review_cancel', function(e) {
+                e.preventDefault();
+                $('#review_form_btns').fadeOut();
+                $('#review_form_input').val('');
+            });
+            $(document).on('submit', '#review_form', function(e) {
+                e.preventDefault();
+                var formdata = $('#review_form').serializeArray();
+                formdata.push({
+                    name: 'u_id',
+                    value: {{ $user['id'] }}
+                }, {
+                    name: 'pro_id',
+                    value: {{ $item->id }}
+                })
+                // console.log(formdata);
+                $.ajax({
+                    type: "POST",
+                    url: "{{ route('add_review') }}",
+                    data: formdata,
+                    success: function(response) {
+
+                    }
+                });
+            });
+
         });
     </script>
 @endsection

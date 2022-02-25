@@ -7,6 +7,7 @@ use App\Models\City;
 use App\Models\Facilities;
 use App\Models\gallary;
 use App\Models\Property;
+use App\Models\Reviews;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\UserData;
@@ -369,7 +370,7 @@ class UserController extends Controller
         $data = compact('title', 'menu', 'show', 'SecStr', 'purpose');
         return view('frontend.show', $data);
     }
-    //saving Propert Ajax
+    //saving Property Ajax
     public function save_pro($pro, $id, Request $request)
     {
         if ($request->ajax()) {
@@ -414,5 +415,22 @@ class UserController extends Controller
 
         $data = compact('title', 'menu', 'show');
         return view('User.savedPro', $data);
+    }
+
+    //adding property review using ajax
+    public function add_review(Request $request)
+    {
+        if ($request->ajax()) {
+            $request->validate([
+                'review_text' => 'required'
+            ]);
+            $review = new Reviews;
+            $review->u_id = $request->u_id;
+            $review->pro_id = $request->pro_id;
+            $review->review = $request->review_text;
+            $review->save();
+
+            return $review;
+        }
     }
 }

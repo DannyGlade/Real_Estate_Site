@@ -66,6 +66,9 @@ Route::middleware([UserCheck::class])->group(function () {
     Route::get('user/save/property/{pro}/{id}', [UserController::class, 'save_pro'])->name('save_pro_ajax');
     //show saved Property
     Route::get('/user/saved', [UserController::class, 'show_saved_pro'])->name('show_saved_pro');
+
+    //add_Review in Property
+    Route::post('/user/review', [UserController::class, 'add_review'])->name('add_review');
 });
 
 //User Section Ends Here

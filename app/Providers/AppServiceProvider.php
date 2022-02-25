@@ -82,15 +82,15 @@ class AppServiceProvider extends ServiceProvider
         });
         view()->composer(['frontend.showinitem', 'frontend.property'], function ($view) {
             $request = request();
-            $userId = $request->session()->get('user')['id'] ?? null;
-            if (!empty($userId)) {
-                $saved = json_decode(UserData::find($userId)->saved, true);
+            $user = $request->session()->get('user');
+            if (!empty($user['id'])) {
+                $saved = json_decode(UserData::find($user['id'])->saved, true);
                 $status = true;
             } else {
                 $saved = [];
                 $status = false;
             }
-            $view->with(compact(['status', 'saved']));
+            $view->with(compact(['status', 'user', 'saved']));
         });
 
         Schema::defaultStringLength(191);
