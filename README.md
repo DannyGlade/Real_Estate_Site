@@ -78,7 +78,6 @@ admin@admin.com
 ```
 - Admin Password
 ```bash
-
 admin123
 ```
 
