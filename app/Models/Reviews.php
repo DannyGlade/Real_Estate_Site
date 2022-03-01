@@ -11,4 +11,8 @@ class Reviews extends Model
     protected $table = 'reviews';
     protected $primaryKey = 'id';
 
+    public function Users()
+    {
+        return $this->hasMany(User::class,'id','u_id')->with('Data');
+    }
 }

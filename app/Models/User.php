@@ -48,4 +48,8 @@ class User extends Authenticatable
     {
         return $this->hasOne(UserData::class, 'id');
     }
+    public function Reviews()
+    {
+        return $this->hasMany(Reviews::class, 'u_id', 'id');
+    }
 }

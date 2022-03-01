@@ -38,11 +38,11 @@ class UserController extends Controller
             'password' => 'required'
         ]);
 
-        $user = User::with('Data')->select('*')->where('email', $request->email)->get();
+        $user = User::where('email', $request->email)->first();
 
-        if (Hash::check($request->password, $user[0]->password)) {
-            $id = $user[0]->id;
-            $user = User::with('Data')->findOrFail($id);
+        if (Hash::check($request->password, $user->password)) {
+            $id = $user->id;
+            $user = User::with('Data', 'Reviews')->findOrFail($id);
             $request->session()->put('user', $user->toArray());
             return redirect(route('userHome'));
         } else {
@@ -268,10 +268,17 @@ class UserController extends Controller
             }
         }
         $gals = gallary::with('Pro')->where('pro_id', '=', $item->id)->get();
+        $userId = $request->session()->get('user')['id'] ?? null;
+        $reviews = Reviews::with('Users')
+            ->where('u_id', '!=', $userId)->where('pro_id', $item->id)
+            ->latest()
+            ->limit(10)
+            ->get();
+        // dd($reviews);
         $title = $item->title;
         $menu = 'none';
 
-        $data = compact('title', 'menu', 'item', 'gals', 'faci');
+        $data = compact('title', 'menu', 'item', 'gals', 'faci', 'reviews');
         return view('frontend.property', $data);
     }
     //filter Property
