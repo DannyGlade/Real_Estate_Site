@@ -396,7 +396,7 @@ class UserController extends Controller
                 $saved[$id] = $pro;
                 $res = true;
             }
-            $user = User::with('Data')->findOrFail($userId);
+            $user = User::with('Data', 'Reviews')->findOrFail($userId);
             $request->session()->put('user', $user->toArray());
             $user_data->saved = json_encode($saved, true);
             $user_data->save();
@@ -431,13 +431,31 @@ class UserController extends Controller
             $request->validate([
                 'review_text' => 'required'
             ]);
+            $userId = $request->session()->get('user')['id'];
             $review = new Reviews;
             $review->u_id = $request->u_id;
             $review->pro_id = $request->pro_id;
             $review->review = $request->review_text;
             $review->save();
+            $user = User::with('Data', 'Reviews')->findOrFail($userId);
+            $request->session()->put('user', $user->toArray());
 
-            return $review;
+            $res = ['status' => true, 'review' => $review];
+            return json_encode($res, true);
+        }
+    }
+    //deleting review with ajax
+    public function del_review($id, Request $request)
+    {
+        if ($request->ajax()) {
+            $userId = $request->session()->get('user')['id'];
+            $review = Reviews::FindOrFail($id);
+            $review->delete();
+            $user = User::with('Data', 'Reviews')->findOrFail($userId);
+            $request->session()->put('user', $user->toArray());
+
+            $res = ['status' => true];
+            return json_encode($res, true);
         }
     }
 }

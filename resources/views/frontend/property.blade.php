@@ -269,38 +269,42 @@ btn-outline-success
                                     </form>
                                 </div>
                                 @forelse ($user['reviews'] as $userrev)
-                                    <div class="col-12 mb-2">
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <div class="col-1 text-center mb-2">
-                                                    <a href="{{ route('UserProfile') }}">
-                                                        <img class="rounded-circle"
-                                                            src="{{ !empty($user['data']['image'])? asset('/storage/userdata/' . $user['data']['image']): asset('stockUser.png') }}"
-                                                            width="60px" alt="No Img">
-                                                    </a>
-                                                    <a href="{{ route('UserProfile') }}" class="text-decoration-none">
-                                                        <p class="m-0 text-muted">{{ $user['name'] }}</p>
-                                                    </a>
-                                                </div>
-                                                <div class="col-11 mb-2">
-                                                    {{ $userrev['review'] }}
-                                                    <div class="mt-2">
-                                                        <div class="d-flex">
-                                                            <button class="btn btn-success btn-sm ms-auto">Submit</button>
-                                                            <button id="review_cancel"
-                                                                class="btn btn-outline-danger btn-sm ms-2">Cancel</button>
+                                    @if ($userrev['pro_id'] == $item->id)
+                                        <div id="review{{ $userrev['id'] }}" class="col-12 mb-2">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-1 text-center mb-2">
+                                                        <a href="{{ route('UserProfile') }}">
+                                                            <img class="rounded-circle"
+                                                                src="{{ !empty($user['data']['image'])? asset('/storage/userdata/' . $user['data']['image']): asset('stockUser.png') }}"
+                                                                width="60px" alt="No Img">
+                                                        </a>
+                                                        <a href="{{ route('UserProfile') }}"
+                                                            class="text-decoration-none">
+                                                            <p class="m-0 text-muted">{{ $user['name'] }}</p>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-11 mb-2">
+                                                        {{ $userrev['review'] }}
+                                                        <div class="mt-2">
+                                                            <div class="d-flex">
+                                                                {{-- <button
+                                                                    class="btn btn-success btn-sm ms-auto">Edit</button> --}}
+                                                                <button id="review_delete" data-id="{{ $userrev['id'] }}"
+                                                                    class="btn btn-outline-danger btn-sm ms-auto">Delete</button>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    @endif
                                 @empty
                                     <div class="col-12 mb-2">
                                         <div class="card-body">
                                             <div class="row">
                                                 <div class="col-12 mb-2 text-center">
-                                                    <h4>No reviews from you</h4>
+                                                    <h5>No reviews from you</h5>
                                                 </div>
                                             </div>
                                         </div>
@@ -308,9 +312,9 @@ btn-outline-success
                                 @endforelse
 
                             @endif
-                            <div class="col-12 mb-2">
-                                <div class="card-body">
-                                    @forelse ($reviews as $review)
+                            @forelse ($reviews as $review)
+                                <div class="col-12 mb-2">
+                                    <div class="card-body">
                                         <div class="row mb-1">
                                             <div class="col-1 text-center mb-2">
                                                 <img class="rounded-circle"
@@ -322,15 +326,17 @@ btn-outline-success
                                                 {{ $review->review }}
                                             </div>
                                         </div>
-                                    @empty
-                                        <div class="row">
-                                            <div class="col-12 mb-2 text-center">
-                                                <h4>No reviews yet</h4>
-                                            </div>
-                                        </div>
-                                    @endforelse
+                                    </div>
                                 </div>
-                            </div>
+                            @empty
+                                <div class="col-12 mb-2">
+                                    <div class="row">
+                                        <div class="col-12 mb-2 text-center">
+                                            <h5>No reviews from People yet...</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforelse
                         </div>
                     </div>
                 </div>
@@ -369,38 +375,51 @@ btn-outline-success
                     }
                 });
             });
-            @if ($status)
+            @if($status)
                 $('#review_form_btns').hide();
                 $(document).on('focus', '#review_form_input', function(e) {
-                e.preventDefault();
-                $('#review_form_btns').fadeIn(100);
+                    e.preventDefault();
+                    $('#review_form_btns').fadeIn(100);
                 });
                 $(document).on('click', '#review_cancel', function(e) {
-                e.preventDefault();
-                $('#review_form_btns').fadeOut();
-                $('#review_form_input').val('');
+                    e.preventDefault();
+                    $('#review_form_btns').fadeOut();
+                    $('#review_form_input').val('');
                 });
                 $(document).on('submit', '#review_form', function(e) {
-                e.preventDefault();
-                var formdata = $('#review_form').serializeArray();
-                formdata.push({
-                name: 'u_id',
-                value: {{ $user['id'] }}
-                }, {
-                name: 'pro_id',
-                value: {{ $item->id }}
-                })
-                // console.log(formdata);
-                $.ajax({
-                type: "POST",
-                url: "{{ route('add_review') }}",
-                data: formdata,
-                success: function(response) {
-
-                }
+                    e.preventDefault();
+                    var formdata = $('#review_form').serializeArray();
+                    formdata.push({
+                        name: 'u_id',
+                        value: {{ $user['id'] }}
+                    }, {
+                        name: 'pro_id',
+                        value: {{ $item->id }}
+                    })
+                    // console.log(formdata);
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ route('add_review') }}",
+                        data: formdata,
+                        success: function(response) {
+                            location.reload();
+                        }
+                    });
                 });
+                $(document).on('click', '#review_delete', function(e) {
+                    e.preventDefault();
+                    var id = $(this).data('id');
+                    console.log('delete ' + id);
+                    $.ajax({
+                        type: "GET",
+                        url: `{{ route('del_review') }}/${id}`,
+                        success: function(response) {
+                            location.reload();
+                        }
+                    });
                 });
             @endif
+
         });
     </script>
 @endsection

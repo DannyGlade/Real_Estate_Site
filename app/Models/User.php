@@ -50,6 +50,6 @@ class User extends Authenticatable
     }
     public function Reviews()
     {
-        return $this->hasMany(Reviews::class, 'u_id', 'id');
+        return $this->hasMany(Reviews::class, 'u_id', 'id')->latest();
     }
 }

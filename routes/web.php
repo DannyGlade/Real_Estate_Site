@@ -69,6 +69,7 @@ Route::middleware([UserCheck::class])->group(function () {
 
     //add_Review in Property
     Route::post('/user/review', [UserController::class, 'add_review'])->name('add_review');
+    Route::get('/user/review/delete/{id?}', [UserController::class, 'del_review'])->name('del_review');
 });
 
 //User Section Ends Here
