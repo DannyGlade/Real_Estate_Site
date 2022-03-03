@@ -235,7 +235,7 @@ btn-outline-success
                         <div class="row g-0 mb-2 card-body">
                             <div class="col-12 mb-2">
                                 <div class="card-body">
-                                    <h5 class="card-title"><i class="fa-solid fa-pen-to-square"></i> Reviews</h5>
+                                    <h5 class="card-title"><i class="fas fa-comment-alt"></i> Reviews</h5>
                                 </div>
                             </div>
                             @if ($status)

@@ -136,6 +136,10 @@ Route::middleware(AuthCheck::class)->group(function () {
     Route::get('/admin/properties/{id}/gallary/{gid}', [AdminController::class, 'del_gallary'])->name('del_gallary');
     //Gallary ends
 
+    //reviews starts
+    Route::get('/admin/properties/{id}/reviews', [AdminController::class, 'get_reviews'])->name('get_reviews');
+    //reviews ends
+
     //Users starts
     Route::get('/admin/users', [AdminController::class, 'list_users'])->name('list_users');
     Route::get('/admin/users/{id}/del', [AdminController::class, 'del_users'])->name('del_users');

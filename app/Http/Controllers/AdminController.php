@@ -653,6 +653,10 @@ class AdminController extends Controller
     }
     //Gallary ends
 
+    //Reviews starts
+
+    //Reviews ends
+
     //Users starts
     public function list_users(Request $request)
     {
