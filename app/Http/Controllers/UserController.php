@@ -44,7 +44,8 @@ class UserController extends Controller
             $id = $user->id;
             $user = User::with('Data', 'Reviews')->findOrFail($id);
             $request->session()->put('user', $user->toArray());
-            return redirect(route('userHome'));
+            // return redirect(route('userHome'));
+            return redirect()->intended();
         } else {
             $request->validate([
                 'password' => 'password'
@@ -86,7 +87,8 @@ class UserController extends Controller
         $request->session()->forget('user');
         // $request->session()->flush();
 
-        return redirect(url(route('userHome')));
+        // return redirect(url(route('userHome')));
+        return redirect()->back();
     }
 
     //User Profile Page
