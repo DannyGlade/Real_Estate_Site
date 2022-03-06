@@ -54,11 +54,13 @@
                                             <div class="col-12 mb-3">
                                                 @if ($status)
                                                     <a class="btn btn-lg
-                                                @if (!empty($saved)) @if (in_array($item->title_slug, $saved)) btn-success
+                                                    @if (!empty($saved))
+                                                        @if (in_array($item->title_slug, $saved)) btn-success
+                                                    @else
+                                                        btn-outline-success
+                                                    @endif
                                                 @else
-                                                btn-outline-success @endif
-@else
-btn-outline-success
+                                                    btn-outline-success
                                                 @endif
                                                 save_pro"
                                                         href="{{ route('save_pro_ajax', [$item->title_slug, $item->id]) }}">

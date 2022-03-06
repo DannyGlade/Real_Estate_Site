@@ -48,7 +48,7 @@
                                 <th scope="row">{{ $item->City->city }}</th>
                                 <th scope="row"><a href="{{ route('get_gallary', $item->id) }}"
                                         class="btn btn-info btn-sm"><i class="fas fa-images"></i></a></th>
-                                <th scope="row"><a href="{{ route('get_gallary', $item->id) }}"
+                                <th scope="row"><a href="{{ route('get_reviews', $item->id) }}"
                                         class="btn btn-secondary btn-sm"><i class="fas fa-comment-alt"></i></a></th>
                                 <th scope="row">
                                     <a class="btn btn-success btn-sm" href="{{ route('edit_properties', $item->id) }}">

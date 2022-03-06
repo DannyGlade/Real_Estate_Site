@@ -138,6 +138,7 @@ Route::middleware(AuthCheck::class)->group(function () {
 
     //reviews starts
     Route::get('/admin/properties/{id}/reviews', [AdminController::class, 'get_reviews'])->name('get_reviews');
+    Route::get('/admin/properties/{id}/reviews/{rid}', [AdminController::class, 'del_reviews'])->name('del_reviews');
     //reviews ends
 
     //Users starts
