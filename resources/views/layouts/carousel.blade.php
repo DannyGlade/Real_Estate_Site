@@ -2,7 +2,8 @@
     <div class="carousel-indicators">
         @foreach ($featuredPro as $key => $item)
             <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="{{ $key }}"
-                class="active" aria-label="Slide {{ $key + 1 }}" @if ($key == 0)aria-current="true" @endif></button>
+                aria-label="Slide {{ $key + 1 }}"
+                @if ($key == 0) class="active" aria-current="true" @endif></button>
         @endforeach
         {{-- <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active"
             aria-label="Slide 1" aria-current="true"></button>
@@ -13,24 +14,22 @@
     </div>
     <div class="carousel-inner">
         @foreach ($featuredPro as $key => $item)
-            <div class="carousel-item @if ($key == 0)active @endif">
+            <div class="carousel-item @if ($key == 0) active @endif">
                 <img class="bd-placeholder-img"
                     src="{{ $item->fe_image ? asset('/storage/property/' . $item->fe_image) : asset('/storage/property/' . $item->image) }}"
                     alt="{{ $item->title }}">
                 <div class="container">
-                    <div class="carousel-caption @if ($key % 2 == 0)text-start @else text-end @endif">
+                    <div class="carousel-caption @if ($key % 2 == 0) text-start @else text-end @endif">
                         <h1>{{ $item->title }}</h1>
                         <p>
-                            <a class="btn btn-sm btn-primary"
-                                href="{{ route('show_purpose', $item->purpose) }}">
+                            <a class="btn btn-sm btn-primary" href="{{ route('show_purpose', $item->purpose) }}">
                                 {{ ucfirst($item->purpose) }}
                             </a>
                             <a class="btn btn-sm btn-secondary"
                                 href="{{ route('show_category', $item->Cate->slug_name) }}">
                                 {{ $item->Cate->name }}
                             </a>
-                            <a class="btn btn-sm btn-dark"
-                                href="{{ route('show_city', $item->City->slug_city) }}">
+                            <a class="btn btn-sm btn-dark" href="{{ route('show_city', $item->City->slug_city) }}">
                                 {{ $item->City->city }}
                             </a>
                         </p>

@@ -34,6 +34,13 @@
                 </a>
             </li>
             {{-- <li class="nav-item">
+                <a class="nav-link @if ($menu == 'properties')fw-bolder fs-6 active @endif " aria-current="page"
+                    href="{{ route('list_properties') }}">
+                    <i class="fas fa-comment-alt"></i>
+                    Reviews
+                </a>
+            </li> --}}
+            {{-- <li class="nav-item">
                 <a class="nav-link" href="#">
                     <span data-feather="file"></span>
                     Orders

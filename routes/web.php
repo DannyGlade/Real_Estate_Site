@@ -66,6 +66,10 @@ Route::middleware([UserCheck::class])->group(function () {
     Route::get('user/save/property/{pro}/{id}', [UserController::class, 'save_pro'])->name('save_pro_ajax');
     //show saved Property
     Route::get('/user/saved', [UserController::class, 'show_saved_pro'])->name('show_saved_pro');
+
+    //add_Review in Property
+    Route::post('/user/review', [UserController::class, 'add_review'])->name('add_review');
+    Route::get('/user/review/delete/{id?}', [UserController::class, 'del_review'])->name('del_review');
 });
 
 //User Section Ends Here
@@ -131,6 +135,11 @@ Route::middleware(AuthCheck::class)->group(function () {
     Route::post('/admin/properties/{id}/gallary', [AdminController::class, 'set_gallary'])->name('set_gallary');
     Route::get('/admin/properties/{id}/gallary/{gid}', [AdminController::class, 'del_gallary'])->name('del_gallary');
     //Gallary ends
+
+    //reviews starts
+    Route::get('/admin/properties/{id}/reviews', [AdminController::class, 'get_reviews'])->name('get_reviews');
+    Route::get('/admin/properties/{id}/reviews/{rid}', [AdminController::class, 'del_reviews'])->name('del_reviews');
+    //reviews ends
 
     //Users starts
     Route::get('/admin/users', [AdminController::class, 'list_users'])->name('list_users');

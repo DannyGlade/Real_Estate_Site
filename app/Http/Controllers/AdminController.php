@@ -7,6 +7,7 @@ use App\Models\City;
 use App\Models\Facilities;
 use App\Models\gallary;
 use App\Models\Property;
+use App\Models\Reviews;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\UserData;
@@ -598,9 +599,10 @@ class AdminController extends Controller
             'id' => 'exists:properties,id'
         ])->validate();
         $id = $request->route()->parameter('id');
-        $gal = gallary::with('Pro')->where('pro_id', '=', $id)->get();
+        $pro = Property::where('id', $id)->first();
+        $gal = gallary::where('pro_id', '=', $id)->get();
 
-        $data = compact('title', 'menu', 'gal', 'id');
+        $data = compact('title', 'menu', 'pro', 'gal', 'id');
         return view('AdminPanel.gallary.list', $data);
     }
     public function set_gallary(Request $request)
@@ -652,6 +654,47 @@ class AdminController extends Controller
         return redirect(route('get_gallary', $id));
     }
     //Gallary ends
+
+    //Reviews starts
+    public function get_reviews(Request $request)
+    {
+        $title = "Reviews List";
+        $menu = "properties";
+
+        $valid = validator($request->route()->parameters(), [
+            'id' => 'exists:properties,id'
+        ])->validate();
+        $id = $request->route()->parameter('id');
+        $pro = Property::where('id', $id)->first();
+        $reviews = Reviews::with('Users')
+            ->where('pro_id', $id)
+            ->latest()
+            ->get();
+        // dd($reviews);
+
+        $data = compact('title', 'menu', 'pro', 'reviews', 'id');
+        return view('AdminPanel.reviews.list', $data);
+    }
+    public function del_reviews(Request $request)
+    {
+        $valid = validator($request->route()->parameters(), [
+            'id' => 'exists:properties,id',
+            'rid' => 'exists:reviews,id'
+        ])->validate();
+        $id = $request->route()->parameter('id');
+        $rid = $request->route()->parameter('rid');
+
+        if ($valid) {
+            $rev = Reviews::findorfail($rid);
+            $rev->delete();
+        }
+
+        $request->session()->flash('msg', 'Deleted...');
+        $request->session()->flash('msgst', 'danger');
+
+        return redirect(route('get_reviews', $id));
+    }
+    //Reviews ends
 
     //Users starts
     public function list_users(Request $request)

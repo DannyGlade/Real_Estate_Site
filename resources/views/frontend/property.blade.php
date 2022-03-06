@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content_box')
-    <img style="max-height: 513px" class=""
+    <img style="max-height: 513px" class="w-100"
         src="{{ $item->fe_image ? asset('/storage/property/' . $item->fe_image) : asset('/storage/property/' . $item->image) }}"
         alt="{{ $item->title }}">
     <div class="container">
@@ -42,7 +42,8 @@
                                                 </a>
                                             </p>
                                             <div class="col-12 mb-3 w-75">
-                                                <p class="card-text" style="text-align: justify">{{ $item->description }}</p>
+                                                <p class="card-text" style="text-align: justify">
+                                                    {{ $item->description }}</p>
                                             </div>
                                             <div class="col-12 mb-3">
                                                 <p class="card-text">
@@ -53,11 +54,13 @@
                                             <div class="col-12 mb-3">
                                                 @if ($status)
                                                     <a class="btn btn-lg
-                                                @if (!empty($saved)) @if (in_array($item->title_slug, $saved)) btn-success
+                                                    @if (!empty($saved))
+                                                        @if (in_array($item->title_slug, $saved)) btn-success
+                                                    @else
+                                                        btn-outline-success
+                                                    @endif
                                                 @else
-                                                btn-outline-success @endif
-                                                @else
-                                                btn-outline-success
+                                                    btn-outline-success
                                                 @endif
                                                 save_pro"
                                                         href="{{ route('save_pro_ajax', [$item->title_slug, $item->id]) }}">
@@ -205,7 +208,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row g-0 mb-2 card-body">
+                        <div class="row g-0 mb-2 border-bottom card-body">
                             <div class="col-2">
                                 <div class="card-body">
                                     <h5 class="card-title"><i class="fas fa-map"></i> Address :</h5>
@@ -218,7 +221,7 @@
                             </div>
                         </div>
                         @if (!empty($item->map))
-                            <div class="row g-0 mb-2 card-body">
+                            <div class="row g-0 mb-2 border-bottom card-body">
                                 <div class="col-12 mb-2">
                                     <div class="card-body">
                                         <h5 class="card-title"><i class="fas fa-map-marked-alt"></i> Map :</h5>
@@ -231,6 +234,112 @@
                                 </div>
                             </div>
                         @endif
+                        <div class="row g-0 mb-2 card-body">
+                            <div class="col-12 mb-2">
+                                <div class="card-body">
+                                    <h5 class="card-title"><i class="fas fa-comment-alt"></i> Reviews</h5>
+                                </div>
+                            </div>
+                            @if ($status)
+                                <div class="col-12 mb-2">
+                                    <form action="" id="review_form" class="card-body">
+                                        @csrf
+                                        <div class="row">
+                                            <div class="col-1 text-center mb-2">
+                                                <a href="{{ route('UserProfile') }}">
+                                                    <img class="rounded-circle"
+                                                        src="{{ !empty($user['data']['image'])? asset('/storage/userdata/' . $user['data']['image']): asset('stockUser.png') }}"
+                                                        width="60px" alt="No Img">
+                                                </a>
+                                                <a href="{{ route('UserProfile') }}" class="text-decoration-none">
+                                                    <p class="m-0 text-muted">{{ $user['name'] }}</p>
+                                                </a>
+                                            </div>
+                                            <div class="col-11 mb-2">
+                                                <textarea name="review_text" id="review_form_input"
+                                                    class="form-control h-100"
+                                                    placeholder="Enter Your Review here..."></textarea>
+                                                <div id="review_form_btns" class="mt-2">
+                                                    <div class="d-flex">
+                                                        <button class="btn btn-success btn-sm ms-auto">Submit</button>
+                                                        <button id="review_cancel"
+                                                            class="btn btn-outline-danger btn-sm ms-2">Cancel</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                @forelse ($user['reviews'] as $userrev)
+                                    @if ($userrev['pro_id'] == $item->id)
+                                        <div id="review{{ $userrev['id'] }}" class="col-12 mb-2">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-1 text-center mb-2">
+                                                        <a href="{{ route('UserProfile') }}">
+                                                            <img class="rounded-circle"
+                                                                src="{{ !empty($user['data']['image'])? asset('/storage/userdata/' . $user['data']['image']): asset('stockUser.png') }}"
+                                                                width="60px" alt="No Img">
+                                                        </a>
+                                                        <a href="{{ route('UserProfile') }}"
+                                                            class="text-decoration-none">
+                                                            <p class="m-0 text-muted">{{ $user['name'] }}</p>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-11 mb-2">
+                                                        {{ $userrev['review'] }}
+                                                        <div class="mt-2">
+                                                            <div class="d-flex">
+                                                                {{-- <button
+                                                                    class="btn btn-success btn-sm ms-auto">Edit</button> --}}
+                                                                <button id="review_delete" data-id="{{ $userrev['id'] }}"
+                                                                    class="btn btn-outline-danger btn-sm ms-auto">Delete</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
+                                @empty
+                                    <div class="col-12 mb-2">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-12 mb-2 text-center">
+                                                    <h5>No reviews from you</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforelse
+
+                            @endif
+                            @forelse ($reviews as $review)
+                                <div class="col-12 mb-2">
+                                    <div class="card-body">
+                                        <div class="row mb-1">
+                                            <div class="col-1 text-center mb-2">
+                                                <img class="rounded-circle"
+                                                    src="{{ !empty($review->Users[0]->Data->image)? asset('/storage/userdata/' . $review->Users[0]->Data->image): asset('stockUser.png') }}"
+                                                    width="60px" alt="No Img">
+                                                {{ $review->Users[0]->name }}
+                                            </div>
+                                            <div class="col-11 mb-2">
+                                                {{ $review->review }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @empty
+                                <div class="col-12 mb-2">
+                                    <div class="row">
+                                        <div class="col-12 mb-2 text-center">
+                                            <h5>No reviews from People yet...</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforelse
+                        </div>
                     </div>
                 </div>
             </div>
@@ -268,6 +377,51 @@
                     }
                 });
             });
+            @if($status)
+                $('#review_form_btns').hide();
+                $(document).on('focus', '#review_form_input', function(e) {
+                    e.preventDefault();
+                    $('#review_form_btns').fadeIn(100);
+                });
+                $(document).on('click', '#review_cancel', function(e) {
+                    e.preventDefault();
+                    $('#review_form_btns').fadeOut();
+                    $('#review_form_input').val('');
+                });
+                $(document).on('submit', '#review_form', function(e) {
+                    e.preventDefault();
+                    var formdata = $('#review_form').serializeArray();
+                    formdata.push({
+                        name: 'u_id',
+                        value: {{ $user['id'] }}
+                    }, {
+                        name: 'pro_id',
+                        value: {{ $item->id }}
+                    })
+                    // console.log(formdata);
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ route('add_review') }}",
+                        data: formdata,
+                        success: function(response) {
+                            location.reload();
+                        }
+                    });
+                });
+                $(document).on('click', '#review_delete', function(e) {
+                    e.preventDefault();
+                    var id = $(this).data('id');
+                    console.log('delete ' + id);
+                    $.ajax({
+                        type: "GET",
+                        url: `{{ route('del_review') }}/${id}`,
+                        success: function(response) {
+                            location.reload();
+                        }
+                    });
+                });
+            @endif
+
         });
     </script>
 @endsection

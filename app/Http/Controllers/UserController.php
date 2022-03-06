@@ -7,6 +7,7 @@ use App\Models\City;
 use App\Models\Facilities;
 use App\Models\gallary;
 use App\Models\Property;
+use App\Models\Reviews;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\UserData;
@@ -37,13 +38,14 @@ class UserController extends Controller
             'password' => 'required'
         ]);
 
-        $user = User::with('Data')->select('*')->where('email', $request->email)->get();
+        $user = User::where('email', $request->email)->first();
 
-        if (Hash::check($request->password, $user[0]->password)) {
-            $id = $user[0]->id;
-            $user = User::with('Data')->findOrFail($id);
+        if (Hash::check($request->password, $user->password)) {
+            $id = $user->id;
+            $user = User::with('Data', 'Reviews')->findOrFail($id);
             $request->session()->put('user', $user->toArray());
-            return redirect(route('userHome'));
+            // return redirect(route('userHome'));
+            return redirect()->intended();
         } else {
             $request->validate([
                 'password' => 'password'
@@ -85,7 +87,8 @@ class UserController extends Controller
         $request->session()->forget('user');
         // $request->session()->flush();
 
-        return redirect(url(route('userHome')));
+        // return redirect(url(route('userHome')));
+        return redirect()->back();
     }
 
     //User Profile Page
@@ -267,10 +270,17 @@ class UserController extends Controller
             }
         }
         $gals = gallary::with('Pro')->where('pro_id', '=', $item->id)->get();
+        $userId = $request->session()->get('user')['id'] ?? null;
+        $reviews = Reviews::with('Users')
+            ->where('u_id', '!=', $userId)->where('pro_id', $item->id)
+            ->latest()
+            ->limit(10)
+            ->get();
+        // dd($reviews);
         $title = $item->title;
         $menu = 'none';
 
-        $data = compact('title', 'menu', 'item', 'gals', 'faci');
+        $data = compact('title', 'menu', 'item', 'gals', 'faci', 'reviews');
         return view('frontend.property', $data);
     }
     //filter Property
@@ -369,7 +379,7 @@ class UserController extends Controller
         $data = compact('title', 'menu', 'show', 'SecStr', 'purpose');
         return view('frontend.show', $data);
     }
-    //saving Propert Ajax
+    //saving Property Ajax
     public function save_pro($pro, $id, Request $request)
     {
         if ($request->ajax()) {
@@ -388,7 +398,7 @@ class UserController extends Controller
                 $saved[$id] = $pro;
                 $res = true;
             }
-            $user = User::with('Data')->findOrFail($userId);
+            $user = User::with('Data', 'Reviews')->findOrFail($userId);
             $request->session()->put('user', $user->toArray());
             $user_data->saved = json_encode($saved, true);
             $user_data->save();
@@ -414,5 +424,40 @@ class UserController extends Controller
 
         $data = compact('title', 'menu', 'show');
         return view('User.savedPro', $data);
+    }
+
+    //adding property review using ajax
+    public function add_review(Request $request)
+    {
+        if ($request->ajax()) {
+            $request->validate([
+                'review_text' => 'required'
+            ]);
+            $userId = $request->session()->get('user')['id'];
+            $review = new Reviews;
+            $review->u_id = $request->u_id;
+            $review->pro_id = $request->pro_id;
+            $review->review = $request->review_text;
+            $review->save();
+            $user = User::with('Data', 'Reviews')->findOrFail($userId);
+            $request->session()->put('user', $user->toArray());
+
+            $res = ['status' => true, 'review' => $review];
+            return json_encode($res, true);
+        }
+    }
+    //deleting review with ajax
+    public function del_review($id, Request $request)
+    {
+        if ($request->ajax()) {
+            $userId = $request->session()->get('user')['id'];
+            $review = Reviews::FindOrFail($id);
+            $review->delete();
+            $user = User::with('Data', 'Reviews')->findOrFail($userId);
+            $request->session()->put('user', $user->toArray());
+
+            $res = ['status' => true];
+            return json_encode($res, true);
+        }
     }
 }

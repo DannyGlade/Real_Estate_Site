@@ -3,7 +3,7 @@
     <div class="container">
         <div class="container-fluid">
             <div class="mt-4 ">
-                <h2>Gallary</h2>
+                <h2>{{ $pro->title }} Gallary</h2>
                 <div aria-label="breadcrumb mt-5">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item" aria-current="page">Gallary</li>
@@ -35,7 +35,6 @@
                     <thead>
                         <tr>
                             <th scope="col">Id</th>
-                            <th scope="col">Property</th>
                             <th scope="col">Image</th>
                             <th scope="col">Action</th>
                         </tr>
@@ -44,7 +43,6 @@
                         @forelse ($gal as $item)
                             <tr>
                                 <th scope="row">{{ $item->id }}</th>
-                                <th scope="row">{{ $item->Pro->title }}</th>
                                 <th scope="row"><img height="100rem" class="rounded"
                                         src="{{ asset('/storage/gallary/' . $item->pro_id . '/' . $item->gal_image) }}"
                                         data-fancybox="gallery"
@@ -59,7 +57,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <th colspan="4">No Images Uploaded</th>
+                                <th colspan="4" class="text-center">No Images Uploaded</th>
                             </tr>
                         @endforelse
                     </tbody>
