@@ -168,6 +168,34 @@ class UserController extends Controller
         }
     }
 
+    //Changing User's Password
+    public function user_chng_password(Request $request)
+    {
+        // dd($request);
+        $user = $request->session()->get('user');
+        $userId = $user['id'];
+        $title = $user['name'] . " | Change Password";
+        $menu = "none";
+
+        $data = compact('title', 'menu', 'user');
+        return view('User.chngPassword', $data);
+    }
+    public function user_save_password(Request $request)
+    {
+        $request->validate([
+            'old_password' => 'required',
+            'new_password' => 'required|confirmed'
+        ]);
+        $id = $request->session()->get('user')['id'];
+        $user = User::findOrFail($id);
+
+        $user->password = Hash::make($request->new_password);
+        $user->save();
+        $request->session()->forget('user');
+
+        return redirect()->back();
+    }
+
     //sending home
     public function userHome(Request $request)
     {

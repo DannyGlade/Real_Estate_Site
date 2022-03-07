@@ -2,74 +2,40 @@
     <div class="position-sticky pt-3">
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link @if ($menu == 'dashboard')fw-bolder fs-6 active @endif " aria-current="page" href="{{ route('AdminHome') }}">
+                <a class="nav-link @if ($menu == 'dashboard') fw-bolder fs-6 active @endif " aria-current="page"
+                    href="{{ route('AdminHome') }}">
                     <i class="fas fa-tachometer-alt"></i>
                     Dashboard
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link @if ($menu == 'category')fw-bolder fs-6 active @endif " aria-current="page" href="{{ route('list_category') }}">
+                <a class="nav-link @if ($menu == 'category') fw-bolder fs-6 active @endif " aria-current="page"
+                    href="{{ route('list_category') }}">
                     <i class="fas fa-cubes"></i>
                     Category
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link @if ($menu == 'cities')fw-bolder fs-6 active @endif " aria-current="page" href="{{ route('list_cities') }}">
+                <a class="nav-link @if ($menu == 'cities') fw-bolder fs-6 active @endif " aria-current="page"
+                    href="{{ route('list_cities') }}">
                     <i class="fas fa-city"></i>
                     Cities
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link @if ($menu == 'facilities')fw-bolder fs-6 active @endif " aria-current="page"
+                <a class="nav-link @if ($menu == 'facilities') fw-bolder fs-6 active @endif " aria-current="page"
                     href="{{ route('list_facilities') }}">
                     <i class="fas fa-shapes"></i>
                     Facilities
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link @if ($menu == 'properties')fw-bolder fs-6 active @endif " aria-current="page"
+                <a class="nav-link @if ($menu == 'properties') fw-bolder fs-6 active @endif " aria-current="page"
                     href="{{ route('list_properties') }}">
                     <i class="fas fa-building"></i>
                     Properties
                 </a>
             </li>
-            {{-- <li class="nav-item">
-                <a class="nav-link @if ($menu == 'properties')fw-bolder fs-6 active @endif " aria-current="page"
-                    href="{{ route('list_properties') }}">
-                    <i class="fas fa-comment-alt"></i>
-                    Reviews
-                </a>
-            </li> --}}
-            {{-- <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <span data-feather="file"></span>
-                    Orders
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <span data-feather="shopping-cart"></span>
-                    Products
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <span data-feather="users"></span>
-                    Customers
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <span data-feather="bar-chart-2"></span>
-                    Reports
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <span data-feather="layers"></span>
-                    Integrations
-                </a>
-            </li> --}}
         </ul>
         @if ($user['type'] == 'R')
             <h6
@@ -90,17 +56,24 @@
             </h6>
             <ul class="nav flex-column mb-2">
                 <li class="nav-item">
-                    <a class="nav-link @if ($menu == 'users')fw-bolder fs-6 active @endif " aria-current="page"
-                        href="{{ route('list_users') }}">
+                    <a class="nav-link @if ($menu == 'users') fw-bolder fs-6 active @endif "
+                        aria-current="page" href="{{ route('list_users') }}">
                         <i class="fas fa-users"></i>
                         Users
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link @if ($menu == 'site_settings')fw-bolder fs-6 active @endif " aria-current="page"
-                        href="{{ route('list_settings') }}">
+                    <a class="nav-link @if ($menu == 'site_settings') fw-bolder fs-6 active @endif "
+                        aria-current="page" href="{{ route('list_settings') }}">
                         <i class="fas fa-cog"></i>
                         Site Settings
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link @if ($menu == 'chng_password') fw-bolder fs-6 active @endif "
+                        aria-current="page" href="{{ route('chng_password') }}">
+                        <i class="fas fa-key"></i>
+                        Change Password
                     </a>
                 </li>
             </ul>

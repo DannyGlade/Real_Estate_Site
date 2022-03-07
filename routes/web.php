@@ -70,6 +70,11 @@ Route::middleware([UserCheck::class])->group(function () {
     //add_Review in Property
     Route::post('/user/review', [UserController::class, 'add_review'])->name('add_review');
     Route::get('/user/review/delete/{id?}', [UserController::class, 'del_review'])->name('del_review');
+
+    //Change User Password
+    Route::get('/user/chng-password', [UserController::class, 'user_chng_password'])->name('user_chng_password');
+    Route::post('/user/chng-password', [UserController::class, 'user_save_password'])->name('user_save_password');
+
 });
 
 //User Section Ends Here
@@ -152,6 +157,11 @@ Route::middleware(AuthCheck::class)->group(function () {
     Route::post('/admin/sitesettings', [SiteController::class, 'save_settings'])->name('save_settings');
     Route::post('/admin/sitesettings/ajaxDelete', [SiteController::class, 'ajaxDelete'])->name('ajaxDelete');
     //Site Settings Ends
+
+    //Change Password Starts
+    Route::get('/admin/chng-password', [AdminController::class, 'chng_password'])->name('chng_password');
+    Route::post('/admin/chng-password', [AdminController::class, 'save_password'])->name('save_password');
+    //Change Password Ends
 });
 
 //if none of above route is used then sended to 404

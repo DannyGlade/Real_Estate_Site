@@ -44,12 +44,14 @@ class AdminController extends Controller
             'password' => 'required'
         ]);
 
-        $user = User::with('Data')->select('*')->where('email', $request->email)->get();
+        $user = User::where('email', $request->email)->first();
 
-        if (Hash::check($request->password, $user[0]->password)) {
-            if ($user[0]->type == "A" || $user[0]->type == "R") {
-                $request->session()->put('AdminUser', $user[0]->toArray());
-                return redirect(url(route('AdminHome')));
+        if (Hash::check($request->password, $user->password)) {
+            $id = $user->id;
+            $user = User::with('Data', 'Reviews')->findOrFail($id);
+            if ($user->type == "A" || $user->type == "R") {
+                $request->session()->put('AdminUser', $user->toArray());
+                return redirect(route('AdminHome'));
             } else {
                 return redirect(route('userHome'));
             }
@@ -751,4 +753,30 @@ class AdminController extends Controller
         }
     }
     //Users ends
+
+    //Chng Password Starts
+    public function chng_password(Request $request)
+    {
+        $title = "Change Password";
+        $menu = "chng_password";
+
+        $data = compact('title', 'menu');
+        return view('AdminPanel.chng_password.form', $data);
+    }
+    public function save_password(Request $request)
+    {
+        $request->validate([
+            'old_password' => 'required',
+            'new_password' => 'required|confirmed'
+        ]);
+        $id = $request->session()->get('AdminUser')['id'];
+        $user = User::findOrFail($id);
+
+        $user->password = Hash::make($request->new_password);
+        $user->save();
+        $request->session()->forget('AdminUser');
+
+        return redirect()->back();
+    }
+    //Chng Password Ends
 }

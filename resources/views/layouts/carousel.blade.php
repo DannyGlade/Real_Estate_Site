@@ -20,7 +20,7 @@
                     alt="{{ $item->title }}">
                 <div class="container">
                     <div class="carousel-caption @if ($key % 2 == 0) text-start @else text-end @endif">
-                        <h1>{{ $item->title }}</h1>
+                        <h1 style="text-shadow: 3px 3px 3px black;">{{ $item->title }}</h1>
                         <p>
                             <a class="btn btn-sm btn-primary" href="{{ route('show_purpose', $item->purpose) }}">
                                 {{ ucfirst($item->purpose) }}

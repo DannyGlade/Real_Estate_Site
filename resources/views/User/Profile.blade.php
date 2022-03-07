@@ -32,9 +32,13 @@
                                             <p class="card-text h6">{{ $user->Data->about ?? 'No Detail Added by You' }}
                                             </p>
                                         </div>
+                                        <div class="col-12 mt-auto mb-2">
+                                            <a class="btn btn-outline-success" href="{{ route('editUserProfile') }}">
+                                                <i class="fa fa-pencil" aria-hidden="true"></i> Edit Profile</a>
+                                        </div>
                                         <div class="col-12 mt-auto mb-0">
-                                            <a class="btn btn-outline-primary" href="{{ route('editUserProfile') }}"><i
-                                                    class="fa fa-pencil" aria-hidden="true"></i> Edit Profile</a>
+                                            <a class="btn btn-outline-primary" href="{{ route('user_chng_password') }}">
+                                                <i class="fas fa-key"></i> Change Password</a>
                                         </div>
                                     </div>
                                 </div>
