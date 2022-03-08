@@ -5,6 +5,9 @@
             <div class="row">
                 <div class="col-12 mb-3">
                     <div class="card mb-3 p-0">
+                        <div class="card-header">
+                            <h3>Change Password</h3>
+                        </div>
                         <form class="row" action="{{ route('user_save_password') }}" method="POST">
                             @csrf
                             <div class="col-8">

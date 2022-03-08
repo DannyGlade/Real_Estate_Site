@@ -78,6 +78,11 @@ class UserController extends Controller
         $user->password = Hash::make($request->password);
         $user->save();
 
+        $user_data = new UserData;
+        $user_data->id = $user->id;
+        $user_data->save();
+
+
         return redirect(route('UserLoginForm'));
     }
 
@@ -299,6 +304,8 @@ class UserController extends Controller
         }
         $gals = gallary::with('Pro')->where('pro_id', '=', $item->id)->get();
         $userId = $request->session()->get('user')['id'] ?? null;
+        $user_reviews = Reviews::
+            where('u_id', $userId)->where('pro_id', $item->id)->latest()->get();
         $reviews = Reviews::with('Users')
             ->where('u_id', '!=', $userId)->where('pro_id', $item->id)
             ->latest()
@@ -308,7 +315,7 @@ class UserController extends Controller
         $title = $item->title;
         $menu = 'none';
 
-        $data = compact('title', 'menu', 'item', 'gals', 'faci', 'reviews');
+        $data = compact('title', 'menu', 'item', 'gals', 'faci', 'user_reviews', 'reviews');
         return view('frontend.property', $data);
     }
     //filter Property
@@ -415,6 +422,11 @@ class UserController extends Controller
             $res = true;
             $userId = $request->session()->get('user')['id'];
             $user_data = UserData::find($userId);
+            if ($user_data === null) {
+                $user_data = new UserData;
+                $user_data->id = $userId;
+                $user_data->save();
+            }
             $saved = json_decode($user_data->saved, true);
             if ($saved == null) {
                 $saved = array();

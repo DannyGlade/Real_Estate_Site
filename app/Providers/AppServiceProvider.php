@@ -84,7 +84,13 @@ class AppServiceProvider extends ServiceProvider
             $request = request();
             $user = $request->session()->get('user');
             if (!empty($user['id'])) {
-                $saved = json_decode(UserData::find($user['id'])->saved, true);
+                $user_data = UserData::find($user['id']);
+                if ($user_data === null) {
+                    $user_data = new UserData;
+                    $user_data->id = $user['id'];
+                    $user_data->save();
+                }
+                $saved = json_decode($user_data->saved, true);
                 $status = true;
             } else {
                 $saved = [];
