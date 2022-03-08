@@ -32,10 +32,16 @@
                             <tr>
                                 <th scope="row">{{ $item->id }}</th>
                                 <th scope="row">{{ $item->name }}</th>
-                                <th scope="row"><img height="40rem" class="rounded" src="{{ asset('/storage/images/' . $item->image) }}" alt="Error"></th>
+                                <th scope="row"><img height="40rem" class="rounded"
+                                        src="{{ asset('/storage/images/' . $item->image) }}" alt="Error"></th>
                                 <th scope="row">
-                                    <a class="btn btn-success btn-sm" href="{{ route('edit_category', $item->id) }}"><i class="fa fa-edit" aria-hidden="true"></i></a>
-                                    <a class="btn btn-danger btn-sm" onclick="return confirm('Sure to delete?')" href="{{ route('del_category',$item->id ) }}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                    <a class="btn btn-success btn-sm" href="{{ route('edit_category', $item->id) }}"><i
+                                            class="fa fa-edit" aria-hidden="true"></i></a>
+                                    @if (session()->get('AdminUser')['type'] == 'R')
+                                        <a class="btn btn-danger btn-sm" onclick="return confirm('Sure to delete?')"
+                                            href="{{ route('del_category', $item->id) }}"><i class="fa fa-trash"
+                                                aria-hidden="true"></i></a>
+                                    @endif
                                 </th>
                             </tr>
                         @endforeach
@@ -64,7 +70,7 @@
 @endsection
 @section('scripts')
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             $('.alert').fadeOut(3000);
         });
     </script>

@@ -52,8 +52,8 @@
                                         </option>
                                         <option @if (!empty($faci)){{ $faci->color == 'light' ? 'selected' : '' }}@endif class="bg-light" value="light">Light
                                         </option>
-                                        <option @if (!empty($faci)){{ $faci->color == 'dark text-white' ? 'selected' : '' }}@endif class="bg-dark text-white"
-                                            value="dark text-white">Dark</option>
+                                        <option @if (!empty($faci)){{ $faci->color == 'dark' ? 'selected' : '' }}@endif class="bg-dark text-white"
+                                            value="dark">Dark</option>
                                     </select>
                                 </div>
                                 <div class="text-danger">@error('color') * {{ $message }} @enderror</div>

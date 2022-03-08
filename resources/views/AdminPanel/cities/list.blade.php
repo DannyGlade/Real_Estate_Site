@@ -32,13 +32,16 @@
                             <tr>
                                 <th scope="row">{{ $item->id }}</th>
                                 <th scope="row">{{ $item->city }}</th>
-                                <th scope="row" @if ($item->status == 1)class="text-success">Active @else class="text-danger"> Disabled @endif</th>
+                                <th scope="row"
+                                    @if ($item->status == 1) class="text-success">Active @else class="text-danger"> Disabled @endif</th>
                                 <th scope="row">
                                     <a class="btn btn-success btn-sm" href="{{ route('edit_cities', $item->id) }}"><i
                                             class="fa fa-edit" aria-hidden="true"></i></a>
-                                    <a class="btn btn-danger btn-sm" onclick="return confirm('Sure to delete?')"
-                                        href="{{ route('del_cities', $item->id) }}"><i class="fa fa-trash"
-                                            aria-hidden="true"></i></a>
+                                    @if (session()->get('AdminUser')['type'] == 'R')
+                                        <a class="btn btn-danger btn-sm" onclick="return confirm('Sure to delete?')"
+                                            href="{{ route('del_cities', $item->id) }}"><i class="fa fa-trash"
+                                                aria-hidden="true"></i></a>
+                                    @endif
                                 </th>
                             </tr>
                         @endforeach
@@ -50,7 +53,7 @@
 @endsection
 @section('scripts')
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             $('.alert').fadeOut(3000);
         });
     </script>

@@ -31,15 +31,17 @@
                         @foreach ($faci as $item)
                             <tr>
                                 <th scope="row">{{ $item->id }}</th>
-                                <th class="bg-{{ $item->color }}" scope="row">{!! $item->fa !!} {{ $item->faci }}
+                                <th class="text-{{ $item->color }}" scope="row">{!! $item->fa !!} {{ $item->faci }}
                                 </th>
                                 {{-- <th scope="row">{!! $item->fa ?? 'No Icon' !!}</th> --}}
                                 <th scope="row">
                                     <a class="btn btn-success btn-sm" href="{{ route('edit_facilities', $item->id) }}"><i
                                             class="fa fa-edit" aria-hidden="true"></i></a>
-                                    <a class="btn btn-danger btn-sm" onclick="return confirm('Sure to delete?')"
-                                        href="{{ route('del_facilities', $item->id) }}"><i class="fa fa-trash"
-                                            aria-hidden="true"></i></a>
+                                    @if (session()->get('AdminUser')['type'] == 'R')
+                                        <a class="btn btn-danger btn-sm" onclick="return confirm('Sure to delete?')"
+                                            href="{{ route('del_facilities', $item->id) }}"><i class="fa fa-trash"
+                                                aria-hidden="true"></i></a>
+                                    @endif
                                 </th>
                             </tr>
                         @endforeach
@@ -51,7 +53,7 @@
 @endsection
 @section('scripts')
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             $('.alert').fadeOut(3000);
         });
     </script>
