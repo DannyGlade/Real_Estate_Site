@@ -478,11 +478,22 @@ class AdminController extends Controller
 
         if ($valid) {
             $pro = Property::findorfail($id);
+            if ($pro->fe_image) {
+                Storage::delete('public/property/' . $pro->fe_image);
+            }
             if ($pro->image) {
                 Storage::delete('public/property/' . $pro->image);
             }
             if ($pro->floorplan) {
                 Storage::delete('public/property/' . $pro->floorplan);
+            }
+            $gal = gallary::where('pro_id', $id)->get();
+            if ($gal) {
+                foreach ($gal as $img) {
+                    Storage::delete('public/gallary/' . $id . '/' . $img->gal_image);
+                }
+                $gal = gallary::where('pro_id', $id);
+                $gal->delete();
             }
             $pro->delete();
         }
