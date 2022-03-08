@@ -25,7 +25,7 @@ class AdminController extends Controller
         $menu = 'dashboard';
 
         $data = compact('title', 'menu');
-        return view('AdminPanel.dashboard')->with($data);
+        return view('AdminPanel.dashboard.dashboard')->with($data);
     }
     //sending to adminlogin page
     public function loginPage()

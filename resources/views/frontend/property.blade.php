@@ -142,7 +142,9 @@
                                                         </h5>
                                                     </div>
                                                     <div class="col-12 mb-2">
-                                                        {!! $item->video !!}
+                                                        {{-- <div class="ratio ratio-16x9"> --}}
+                                                            {!! $item->video !!}
+                                                        {{-- </div> --}}
                                                     </div>
                                                 </div>
                                             @endif
@@ -229,7 +231,9 @@
                                 </div>
                                 <div class="col-12 mb-2">
                                     <div class="card-body">
-                                        {!! $item->map !!}
+                                        {{-- <div class="ratio ratio-21x9"> --}}
+                                            {!! $item->map !!}
+                                        {{-- </div> --}}
                                     </div>
                                 </div>
                             </div>
@@ -269,7 +273,7 @@
                                             </div>
                                         </div>
                                     </form>
-                                </div>                                
+                                </div>
                                 @forelse ($user_reviews as $userrev)
                                     {{-- @if ($userrev['pro_id'] == $item->id) --}}
                                     <div id="review{{ $userrev['id'] }}" class="col-12 mb-2">
