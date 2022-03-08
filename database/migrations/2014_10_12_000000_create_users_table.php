@@ -1,8 +1,10 @@
 <?php
 
 use App\Models\User;
+use App\Models\UserData;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
 
 class CreateUsersTable extends Migration
@@ -28,9 +30,14 @@ class CreateUsersTable extends Migration
         $user = new User;
         $user->name = 'Admin User';
         $user->email = 'admin@admin.com';
-        $user->password = '$2y$10$2LhsQAcYRgUtaZaDxFnHdumQZAUVEScFap9tDxSCDePSyclbRXJp6';
+        $user->password = Hash::make('admin123');
+        // $user->password = '$2y$10$2LhsQAcYRgUtaZaDxFnHdumQZAUVEScFap9tDxSCDePSyclbRXJp6';
         $user->type = 'R';
         $user->save();
+
+        $user_data = new UserData;
+        $user_data->id = $user->id;
+        $user_data->save();
     }
 
     /**

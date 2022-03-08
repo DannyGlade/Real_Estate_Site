@@ -269,38 +269,37 @@
                                             </div>
                                         </div>
                                     </form>
-                                </div>
-                                @forelse ($user['reviews'] as $userrev)
-                                    @if ($userrev['pro_id'] == $item->id)
-                                        <div id="review{{ $userrev['id'] }}" class="col-12 mb-2">
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="col-1 text-center mb-2">
-                                                        <a href="{{ route('UserProfile') }}">
-                                                            <img class="rounded-circle"
-                                                                src="{{ !empty($user['data']['image'])? asset('/storage/userdata/' . $user['data']['image']): asset('stockUser.png') }}"
-                                                                width="60px" alt="No Img">
-                                                        </a>
-                                                        <a href="{{ route('UserProfile') }}"
-                                                            class="text-decoration-none">
-                                                            <p class="m-0 text-muted">{{ $user['name'] }}</p>
-                                                        </a>
-                                                    </div>
-                                                    <div class="col-11 mb-2">
-                                                        {{ $userrev['review'] }}
-                                                        <div class="mt-2">
-                                                            <div class="d-flex">
-                                                                {{-- <button
+                                </div>                                
+                                @forelse ($user_reviews as $userrev)
+                                    {{-- @if ($userrev['pro_id'] == $item->id) --}}
+                                    <div id="review{{ $userrev['id'] }}" class="col-12 mb-2">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-1 text-center mb-2">
+                                                    <a href="{{ route('UserProfile') }}">
+                                                        <img class="rounded-circle"
+                                                            src="{{ !empty($user['data']['image'])? asset('/storage/userdata/' . $user['data']['image']): asset('stockUser.png') }}"
+                                                            width="60px" alt="No Img">
+                                                    </a>
+                                                    <a href="{{ route('UserProfile') }}" class="text-decoration-none">
+                                                        <p class="m-0 text-muted">{{ $user['name'] }}</p>
+                                                    </a>
+                                                </div>
+                                                <div class="col-11 mb-2">
+                                                    {{ $userrev['review'] }}
+                                                    <div class="mt-2">
+                                                        <div class="d-flex">
+                                                            {{-- <button
                                                                     class="btn btn-success btn-sm ms-auto">Edit</button> --}}
-                                                                <button id="review_delete" data-id="{{ $userrev['id'] }}"
-                                                                    class="btn btn-outline-danger btn-sm ms-auto">Delete</button>
-                                                            </div>
+                                                            <button id="review_delete" data-id="{{ $userrev['id'] }}"
+                                                                class="btn btn-outline-danger btn-sm ms-auto">Delete</button>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    @endif
+                                    </div>
+                                    {{-- @endif --}}
                                 @empty
                                     <div class="col-12 mb-2">
                                         <div class="card-body">
