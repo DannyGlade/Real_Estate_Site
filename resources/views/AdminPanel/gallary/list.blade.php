@@ -3,27 +3,30 @@
     <div class="container">
         <div class="container-fluid">
             <div class="mt-4 ">
-                <h2>{{ $pro->title }} Gallary</h2>
+                <h2>{{ $pro->title ?? '' }} Gallary</h2>
                 <div aria-label="breadcrumb mt-5">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item" aria-current="page">Gallary</li>
                         <li class="breadcrumb-item active">List</li>
-                        <div class="d-flex ms-auto">
-                            <form action="{{ route('set_gallary', $id) }}" method="post" enctype="multipart/form-data">
-                                @csrf
-                                {{-- <label for="" class="form-label">Property Gallary</label> --}}
-                                <div class="input-group">
-                                    <input type="file" class="form-control" name="gallary[]" multiple>
-                                    <button class="btn btn-primary" type="submit">Add</button>
-                                </div>
-                                <div class="text-danger">
-                                    @error('gallary[]')
-                                        {{ $message }}
-                                    @enderror
-                                </div>
+                        @if (!empty($id))
+                            <div class="d-flex ms-auto">
+                                <form action="{{ route('set_gallary', $id) }}" method="post"
+                                    enctype="multipart/form-data">
+                                    @csrf
+                                    {{-- <label for="" class="form-label">Property Gallary</label> --}}
+                                    <div class="input-group">
+                                        <input type="file" class="form-control" name="gallary[]" multiple>
+                                        <button class="btn btn-primary" type="submit">Add</button>
+                                    </div>
+                                    <div class="text-danger">
+                                        @error('gallary[]')
+                                            {{ $message }}
+                                        @enderror
+                                    </div>
 
-                            </form>
-                        </div>
+                                </form>
+                            </div>
+                        @endif
                     </ol>
                 </div>
             </div>
@@ -36,6 +39,7 @@
                         <tr>
                             <th scope="col">Id</th>
                             <th scope="col">Image</th>
+                            <th scope="col">Property</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -48,6 +52,7 @@
                                         data-fancybox="gallery"
                                         data-src="{{ asset('/storage/gallary/' . $item->pro_id . '/' . $item->gal_image) }}"
                                         alt="Error"></th>
+                                <th scope="row">{{ $item->Property->title }}</th>
                                 <th scope="row">
                                     <a class="btn btn-danger btn-sm" onclick="return confirm('Sure to delete?')"
                                         href="{{ route('del_gallary', [$item->pro_id, $item->id]) }}">

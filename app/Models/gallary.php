@@ -11,8 +11,8 @@ class gallary extends Model
     protected $table = 'gallaries';
     protected $primaryKey = 'id';
 
-    public function Pro()
+    public function Property()
     {
-        return $this->belongsTo(Property::class, 'pro_id');
+        return $this->hasOne(Property::class, 'id', 'pro_id')->select('id', 'title', 'title_slug');
     }
 }
