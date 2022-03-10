@@ -74,7 +74,6 @@ Route::middleware([UserCheck::class])->group(function () {
     //Change User Password
     Route::get('/user/chng-password', [UserController::class, 'user_chng_password'])->name('user_chng_password');
     Route::post('/user/chng-password', [UserController::class, 'user_save_password'])->name('user_save_password');
-
 });
 
 //User Section Ends Here
@@ -136,14 +135,16 @@ Route::middleware(AuthCheck::class)->group(function () {
     //Property ends
 
     //Gallary starts
+    Route::get('/admin/gallary', [AdminController::class, 'list_gallary'])->name('list_gallary');
     Route::get('/admin/properties/{id}/gallary', [AdminController::class, 'get_gallary'])->name('get_gallary');
     Route::post('/admin/properties/{id}/gallary', [AdminController::class, 'set_gallary'])->name('set_gallary');
     Route::get('/admin/properties/{id}/gallary/{gid}', [AdminController::class, 'del_gallary'])->name('del_gallary');
     //Gallary ends
 
     //reviews starts
+    Route::get('/admin/reviews', [AdminController::class, 'list_reviews'])->name('list_reviews');
     Route::get('/admin/properties/{id}/reviews', [AdminController::class, 'get_reviews'])->name('get_reviews');
-    Route::get('/admin/properties/{id}/reviews/{rid}', [AdminController::class, 'del_reviews'])->name('del_reviews');
+    Route::get('/admin/reviews/del/{rid}', [AdminController::class, 'del_reviews'])->name('del_reviews');
     //reviews ends
 
     //Users starts

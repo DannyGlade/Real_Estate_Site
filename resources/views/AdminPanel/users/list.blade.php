@@ -23,7 +23,9 @@
                             <th scope="col">Name</th>
                             <th scope="col">Email</th>
                             <th scope="col">Type</th>
-                            <th scope="col">Action</th>
+                            @if (session()->get('AdminUser')['type'] == 'R')
+                                <th scope="col">Action</th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
@@ -42,11 +44,13 @@
                                         <option @if ($item->type == 'U') selected @endif value="U">User</option>
                                     </select>
                                 </th>
-                                <th scope="row">
-                                    <a class="btn btn-danger btn-sm" onclick="confirm('Sure to delete?')"
-                                        href="{{ route('del_users', $item->id) }}">
-                                        <i class="fa fa-trash" aria-hidden="true"></i></a>
-                                </th>
+                                @if (session()->get('AdminUser')['type'] == 'R')
+                                    <th scope="row">
+                                        <a class="btn btn-danger btn-sm" onclick="confirm('Sure to delete?')"
+                                            href="{{ route('del_users', $item->id) }}">
+                                            <i class="fa fa-trash" aria-hidden="true"></i></a>
+                                    </th>
+                                @endif
                             </tr>
                         @endforeach
                     </tbody>

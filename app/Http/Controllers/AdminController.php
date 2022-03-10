@@ -11,6 +11,7 @@ use App\Models\Reviews;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\UserData;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
@@ -24,7 +25,12 @@ class AdminController extends Controller
         $title = 'Dashboard';
         $menu = 'dashboard';
 
-        $data = compact('title', 'menu');
+        $newUsers = User::whereMonth('created_at', Carbon::now()->month)->get()->count();
+        $newReviews = Reviews::whereMonth('created_at', Carbon::now()->month)->get()->count();
+        $newProperty = Property::whereMonth('created_at', Carbon::now()->month)->get()->count();
+        // dd($newUsers);
+
+        $data = compact('title', 'menu', 'newUsers', 'newReviews', 'newProperty');
         return view('AdminPanel.dashboard.dashboard')->with($data);
     }
     //sending to adminlogin page
@@ -603,17 +609,27 @@ class AdminController extends Controller
     //Properties ends
 
     //Gallary starts
+    public function list_gallary(Request $request)
+    {
+        $title = "Images Gallary";
+        $menu = "gallary";
+
+        $gal = gallary::with('Property')->get();
+
+        $data = compact('title', 'menu', 'gal');
+        return view('AdminPanel.gallary.list', $data);
+    }
     public function get_gallary(Request $request)
     {
         $title = "Images Gallary";
-        $menu = "properties";
+        $menu = "gallary";
 
         $valid = validator($request->route()->parameters(), [
             'id' => 'exists:properties,id'
         ])->validate();
         $id = $request->route()->parameter('id');
         $pro = Property::where('id', $id)->first();
-        $gal = gallary::where('pro_id', '=', $id)->get();
+        $gal = gallary::with('Property')->where('pro_id', '=', $id)->get();
 
         $data = compact('title', 'menu', 'pro', 'gal', 'id');
         return view('AdminPanel.gallary.list', $data);
@@ -664,22 +680,37 @@ class AdminController extends Controller
         $request->session()->flash('msg', 'Deleted...');
         $request->session()->flash('msgst', 'danger');
 
-        return redirect(route('get_gallary', $id));
+        // return redirect(route('get_gallary', $id));
+        return redirect()->back();
     }
     //Gallary ends
 
     //Reviews starts
+    public function list_reviews(Request $request)
+    {
+        $title = "Reviews List";
+        $menu = "reviews";
+
+        $reviews = Reviews::with('Users', 'Property')
+            // ->where('pro_id', $id)
+            ->latest()
+            ->get();
+        // dd($reviews);
+
+        $data = compact('title', 'menu', 'reviews');
+        return view('AdminPanel.reviews.list', $data);
+    }
     public function get_reviews(Request $request)
     {
         $title = "Reviews List";
-        $menu = "properties";
+        $menu = "reviews";
 
         $valid = validator($request->route()->parameters(), [
             'id' => 'exists:properties,id'
         ])->validate();
         $id = $request->route()->parameter('id');
         $pro = Property::where('id', $id)->first();
-        $reviews = Reviews::with('Users')
+        $reviews = Reviews::with('Users', 'Property')
             ->where('pro_id', $id)
             ->latest()
             ->get();
@@ -691,10 +722,10 @@ class AdminController extends Controller
     public function del_reviews(Request $request)
     {
         $valid = validator($request->route()->parameters(), [
-            'id' => 'exists:properties,id',
+            // 'id' => 'exists:properties,id',
             'rid' => 'exists:reviews,id'
         ])->validate();
-        $id = $request->route()->parameter('id');
+        // $id = $request->route()->parameter('id');
         $rid = $request->route()->parameter('rid');
 
         if ($valid) {
@@ -705,7 +736,8 @@ class AdminController extends Controller
         $request->session()->flash('msg', 'Deleted...');
         $request->session()->flash('msgst', 'danger');
 
-        return redirect(route('get_reviews', $id));
+        // return redirect(route('get_reviews', $id));
+        return redirect()->back();
     }
     //Reviews ends
 

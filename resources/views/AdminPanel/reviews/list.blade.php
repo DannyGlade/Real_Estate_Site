@@ -3,7 +3,7 @@
     <div class="container">
         <div class="container-fluid">
             <div class="mt-4 ">
-                <h2>{{ $pro->title }} Reviews</h2>
+                <h2>{{ $pro->title ?? '' }} Reviews</h2>
                 <div aria-label="breadcrumb mt-5">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item" aria-current="page">Reviews</li>
@@ -19,6 +19,7 @@
                     <thead>
                         <tr>
                             <th scope="col">Id</th>
+                            <th scope="col">Property</th>
                             <th scope="col">User</th>
                             <th scope="col">Review</th>
                             <th scope="col">Action</th>
@@ -28,13 +29,14 @@
                         @forelse ($reviews as $item)
                             <tr>
                                 <th scope="row">{{ $item->id }}</th>
+                                <th scope="row">{{ $item->Property->title }}</th>
                                 <th scope="row">{{ $item->Users[0]->name }}</th>
                                 <th scope="row">
                                     <p>{{ $item->review }}</p>
                                 </th>
                                 <th scope="row">
                                     <a class="btn btn-danger btn-sm" onclick="return confirm('Sure to delete?')"
-                                        href="{{ route('del_reviews', [$item->pro_id, $item->id]) }}">
+                                        href="{{ route('del_reviews', $item->id) }}">
                                         <i class="fa fa-trash" aria-hidden="true"></i>
                                     </a>
                                 </th>
