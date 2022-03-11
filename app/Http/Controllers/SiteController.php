@@ -87,4 +87,15 @@ class SiteController extends Controller
         }
     }
     //Site Settings Ends
+
+    //CMS starts here
+    public function list_cms(Request $request)
+    {
+        $title = "CMS";
+        $menu = "cms";
+
+        $data = compact('title', 'menu');
+        return view('AdminPanel.cms.formlist', $data);
+    }
+    //CMS ends here
 }

@@ -42,6 +42,7 @@ return [
                 'https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js',
                 'https://cdn.datatables.net/1.11.4/js/jquery.dataTables.js',
                 'https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap5.min.js',
+                'https://cdn.ckeditor.com/4.17.2/standard/ckeditor.js',
                 '/js/adminjs.js'
             ]
         ],

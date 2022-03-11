@@ -136,9 +136,11 @@
                                     @if (!empty($siteSetting['logo_image']))
                                         <div class="mb-2">
                                             <label for="" class="form-label">Current Logo</label>
-                                            <button data-name="Logo Image" data-key="logo_image"
-                                                class="btn btn-danger btn-sm ajaxDelete"><i class="fa fa-remove"
+                                            @if (session()->get('AdminUser')['type'] == 'R')
+                                                <button data-name="Logo Image" data-key="logo_image"
+                                                    class="mb-2 btn btn-danger btn-sm ajaxDelete"><i class="fa fa-remove"
                                                     aria-hidden="true"></i> Remove</button>
+                                            @endif
                                             <img class="form-control"
                                                 src="{{ asset('/storage/siteSettings/' . $siteSetting['logo_image']) }}"
                                                 alt="Error">
@@ -146,9 +148,11 @@
                                     @endif
                                 </div>
                             </div>
-                            <div class="col-12">
-                                <button class="btn btn-success" type="submit">Update</button>
-                            </div>
+                            @if (session()->get('AdminUser')['type'] == 'R')
+                                <div class="col-12">
+                                    <button class="btn btn-success" type="submit">Update</button>
+                                </div>
+                            @endif
                         </form>
                     </div>
                 </div>

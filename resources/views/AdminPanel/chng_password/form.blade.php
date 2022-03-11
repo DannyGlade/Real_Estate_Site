@@ -54,9 +54,11 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12 mb-3">
-                                        <button class="btn btn-success" type="submit">Update</button>
-                                    </div>
+                                    @if (session()->get('AdminUser')['type'] == 'R')
+                                        <div class="col-12 mb-3">
+                                            <button class="btn btn-success" type="submit">Update</button>
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                         </form>

@@ -126,6 +126,19 @@
             <ul class="nav flex-column mb-2">
 
                 <li class="nav-item">
+                    <a class="py-0 nav-link @if ($menu == 'cms') fw-bolder fs-6 active @endif "
+                        aria-current="page" href="{{ route('list_cms') }}">
+                        <div class="d-flex">
+                            <div style="width: 25px" class="fs-5 text-center">
+                                <i class="fas fa-cog"></i>
+                            </div>
+                            <span class="ms-2 my-auto">
+                                CMS
+                            </span>
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a class="py-0 nav-link @if ($menu == 'site_settings') fw-bolder fs-6 active @endif "
                         aria-current="page" href="{{ route('list_settings') }}">
                         <div class="d-flex">
