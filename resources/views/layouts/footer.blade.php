@@ -10,7 +10,7 @@
                     <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
                     <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
                     <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+                    <li class="nav-item mb-2"><a href="{{ route('show_about') }}" class="nav-link p-0 text-muted">About</a></li>
                 </ul>
             </div>
 
@@ -83,9 +83,9 @@
             <p>{{ $footer_content->value ?? '© 2022 Company, Inc. All rights reserved.' }}</p>
             <ul class="list-unstyled d-flex">
                 @foreach ($social_links as $key => $value)
-                    @if (!empty($value))
+                    @if (!empty($value->value))
                         <li class="ms-3">
-                            <a class="link-dark" href="{{ $value->value ?? '#' }}">
+                            <a class="link-dark" href="{{ $value->value }}">
                                 <h4>
                                     <i class="fa {{ 'fa-' . $key }}" aria-hidden="true"></i>
                                 </h4>
