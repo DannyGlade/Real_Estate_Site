@@ -304,8 +304,7 @@ class UserController extends Controller
         }
         $gals = gallary::with('Pro')->where('pro_id', '=', $item->id)->get();
         $userId = $request->session()->get('user')['id'] ?? null;
-        $user_reviews = Reviews::
-            where('u_id', $userId)->where('pro_id', $item->id)->latest()->get();
+        $user_reviews = Reviews::where('u_id', $userId)->where('pro_id', $item->id)->latest()->get();
         $reviews = Reviews::with('Users')
             ->where('u_id', '!=', $userId)->where('pro_id', $item->id)
             ->latest()
@@ -499,5 +498,15 @@ class UserController extends Controller
             $res = ['status' => true];
             return json_encode($res, true);
         }
+    }
+
+    //showing about page
+    public function show_about(Request $request)
+    {
+        $title = 'About';
+        $menu = 'none';
+
+        $data = compact('title', 'menu');
+        return view('frontend.about', $data);
     }
 }

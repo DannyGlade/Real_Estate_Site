@@ -52,6 +52,9 @@ Route::get('/property/ajaxFilter', [UserController::class, 'ajaxFilter'])->name(
 Route::get('/property/{pro}', [UserController::class, 'show_pro'])->name('show_pro');
 Route::post('/property/propSearch', [UserController::class, 'propSearch'])->name('propSearch');
 
+//AboutUs Page
+Route::get('/about', [UserController::class, 'show_about'])->name('show_about');
+
 //checking user is loggged in
 Route::middleware([UserCheck::class])->group(function () {
     //paths only for logged in users

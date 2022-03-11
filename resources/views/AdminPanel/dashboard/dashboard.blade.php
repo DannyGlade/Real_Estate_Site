@@ -62,10 +62,10 @@
                     </div>
                     <div class="col-3">
                         <div class="card">
-                            <div class="card-header bg-danger">
+                            <div class="card-header bg-info">
                                 <h4>An Item</h4>
                             </div>
-                            <div class="card-body bg-danger bg-gradient bg-opacity-75 text-dark">
+                            <div class="card-body bg-info bg-gradient bg-opacity-75 text-dark">
                                 <p class="m-0">description</p>
                             </div>
                         </div>
