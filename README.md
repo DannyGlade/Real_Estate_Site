@@ -12,14 +12,16 @@ I only made it for my College Project, but if you are here that means I might ha
 
 ## Dependencies
 - [Composer v2.2.3^](https://getcomposer.org/download/)
-- [Laravel v8.x](https://laravel.com/docs/8.x)
+- [Laravel v8.x](https://laravel.com/docs/8.x#the-laravel-installer)
 - [Bootstap v5.1.3](https://getbootstrap.com/docs/5.1/getting-started/introduction/)
 - [Bootstrap v5.1 Examples](https://getbootstrap.com/docs/5.1/examples/) (Used Some of these as boiler plate)
+- [Font Awesome](https://fontawesome.com/docs/web/setup/get-started)
 - [JQuery v3.6.0](https://releases.jquery.com/)
 - [DataTables v1.11.4](https://datatables.net/manual/) with [DataTables v1.11.4 Bootstap 5](https://datatables.net/examples/styling/bootstrap5.html)
 - [FancyApps](https://fancyapps.com/docs/ui/installation)
   - [FancyBox](https://fancyapps.com/docs/ui/fancybox)
   - [Carousal](https://fancyapps.com/docs/ui/carousel)
+- [CKEditor v4](https://ckeditor.com/docs/ckeditor4/latest/guide/index.html)
 - And Familiarity with Laravel, Can't remember anything else...
 
 ## What needs to be installed...
@@ -69,8 +71,10 @@ php artisan serve
 ```
 > if some *key* related error appears then use command `php artisan key:generate` to generate AppKey.
 
-## That's it...
+## Update Admin
 Go to the Link that `php artisan serve` command gives you and Hopefully it should be working, I hope you are capable of any troubleshooting if any error occurs.
+
+Admin site: `your_site_link/admin/dashboard`
 
 - Admin Email
 ```bash
@@ -80,6 +84,8 @@ admin@admin.com
 ```bash
 admin123
 ```
+Update CMS and Site Settings inside Admin Panel (/admin/dashboard) Once (empty or filled doesn't matter), and then goto frontend
+> when project loads for first time db won't have values of CMS and Site setting, by updating those fields will be created, so frontend wouldn't show errors after that...
 
 I am writing this documentaion while this project is still in making, because I was bored...
 
