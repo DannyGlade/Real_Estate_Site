@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@push('title')
+    {{ $CMS['home_title'] }}
+@endpush
+@push('meta')
+    {{ $CMS['home_meta'] }}
+@endpush
 @section('content_box')
     <main>
         @include('layouts.carousel')
@@ -34,24 +40,27 @@
             <hr class="featurette-divider">
 
             <div class="row featurette">
-                <div class="col-md-5">
-                    <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500"
-                        height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500"
-                        preserveAspectRatio="xMidYMid slice" focusable="false">
-                        <title>Placeholder</title>
-                        <rect width="100%" height="100%" fill="#eee" /><text x="50%" y="50%" fill="#aaa"
-                            dy=".3em">500x500</text>
-                    </svg>
-
-                </div>
-                <div class="col-md-7">
-                    <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It’ll blow your
-                            mind.</span></h2>
-                    <p class="lead">Some great placeholder content for the first featurette here. Imagine some
-                        exciting prose here.</p>
-                </div>                
+                @if (!empty($CMS['home_image']))
+                    <div class="col-md-5">
+                        <img width="500px" class="h-auto" src="{{ asset('/storage/cms/' . $CMS['home_image']) }}"
+                            alt="Error">
+                    </div>
+                @endif
+                @if (empty($CMS['home_image']))
+                    <div class="col-md-12 d-flex align-items-center">
+                        <div class="text-center w-100" style="text-align: justify">
+                            {!! $CMS['home_content'] !!}
+                        </div>
+                    </div>
+                @else
+                    <div class="col-md-7 d-flex align-items-center">
+                        <div class="w-100" style="text-align: justify">
+                            {!! $CMS['home_content'] !!}
+                        </div>
+                    </div>
+                @endif
             </div>
-            
+
             <hr class="featurette-divider">
             <div class="row featurette mb-3">
                 <div class="col-12">
@@ -142,7 +151,7 @@
             @empty
             @endforelse
 
-            <hr class="featurette-divider">
+            {{-- <hr class="featurette-divider">
 
             <div class="row featurette">
                 <div class="col-md-7">
@@ -161,7 +170,7 @@
                     </svg>
 
                 </div>
-            </div>
+            </div> --}}
 
             {{-- <div class="row featurette">
                 <div class="col-md-7">

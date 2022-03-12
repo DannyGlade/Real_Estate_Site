@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Category;
 use App\Models\City;
+use App\Models\cms;
 use App\Models\SiteSettings;
 use App\Models\UserData;
 use Illuminate\Pagination\Paginator;
@@ -51,6 +52,11 @@ class AppServiceProvider extends ServiceProvider
                 'site_title', 'logo_image', 'meta_discription', 'brand_title',
                 'footer_content', 'social_links', 'contacts'
             ]));
+        });
+        view()->composer(['frontend.home', 'frontend.about', 'frontend.faq', 'frontend.terms'], function ($view) {
+            $CMS = cms::pluck('value', 'key');
+
+            $view->with(compact(['CMS']));
         });
         view()->composer(['AdminPanel.layouts.main'], function ($view) {
             $request = request();

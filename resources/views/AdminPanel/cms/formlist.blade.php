@@ -207,8 +207,8 @@
                                         <h5 class="card-title">Terms Head</h5>
                                         <div class="col-md-6 mb-2">
                                             <label for="" class="form-label">Title</label>
-                                            <input type="text" class="form-control" name="tems_title"
-                                                value="{{ $cms['tems_title'] ?? '' }}">
+                                            <input type="text" class="form-control" name="terms_title"
+                                                value="{{ $cms['terms_title'] ?? '' }}">
                                             <div class="text-danger">
                                                 @error('tems_title')
                                                     * {{ $message }}
@@ -228,8 +228,8 @@
                                         <h5 class="card-title">Terms Content</h5>
                                         <div class="col-md-12 mb-2">
                                             <label for="" class="form-label">Content</label>
-                                            <textarea name="tems_content" class="ckeditor"
-                                                id="tems_content">{{ $cms['tems_content'] ?? '' }}</textarea>
+                                            <textarea name="terms_content" class="ckeditor"
+                                                id="terms_content">{{ $cms['terms_content'] ?? '' }}</textarea>
                                         </div>
                                         @if (session()->get('AdminUser')['type'] == 'R')
                                             <div class="col-md-12">

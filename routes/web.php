@@ -54,6 +54,8 @@ Route::post('/property/propSearch', [UserController::class, 'propSearch'])->name
 
 //AboutUs Page
 Route::get('/about', [UserController::class, 'show_about'])->name('show_about');
+Route::get('/faq', [UserController::class, 'show_faq'])->name('show_faq');
+Route::get('/terms', [UserController::class, 'show_terms'])->name('show_terms');
 
 //checking user is loggged in
 Route::middleware([UserCheck::class])->group(function () {
