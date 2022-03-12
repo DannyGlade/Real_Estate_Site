@@ -208,7 +208,9 @@ class UserController extends Controller
         $title = "Home";
         $menu = "home";
         $featuredPro = Property::with('Cate', 'City')->where('featured', true)->latest()->limit(4)->get();
-        $newlyAdded = Property::with('Cate', 'City')->where('featured', false)->latest()->limit(6)->get();
+        $newlyAdded = Property::with('Cate', 'City')
+        // ->where('featured', false)
+        ->latest()->limit(6)->get();
         $showcate = Category::latest()->limit(6)->get();
         $catedata = Category::with('Pro')->latest()->limit(3)->get();
 
