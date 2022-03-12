@@ -162,6 +162,12 @@ Route::middleware(AuthCheck::class)->group(function () {
     Route::post('/admin/sitesettings/ajaxDelete', [SiteController::class, 'ajaxDelete'])->name('ajaxDelete');
     //Site Settings Ends
 
+    //CMS starts
+    Route::get('/admin/cms', [SiteController::class, 'list_cms'])->name('list_cms');
+    Route::post('/admin/cms', [SiteController::class, 'save_cms'])->name('save_cms');
+    Route::post('/admin/cms/ajaxDelete', [SiteController::class, 'cmsajaxDelete'])->name('cmsajaxDelete');
+    //CMS ends
+
     //Change Password Starts
     Route::get('/admin/chng-password', [AdminController::class, 'chng_password'])->name('chng_password');
     Route::post('/admin/chng-password', [AdminController::class, 'save_password'])->name('save_password');
