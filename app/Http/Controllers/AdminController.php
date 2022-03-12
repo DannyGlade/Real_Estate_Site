@@ -25,9 +25,9 @@ class AdminController extends Controller
         $title = 'Dashboard';
         $menu = 'dashboard';
 
-        $newUsers = User::whereMonth('created_at', Carbon::now()->month)->get()->count();
-        $newReviews = Reviews::whereMonth('created_at', Carbon::now()->month)->get()->count();
-        $newProperty = Property::whereMonth('created_at', Carbon::now()->month)->get()->count();
+        $newUsers = User::with('Data')->whereMonth('created_at', Carbon::now()->month)->latest()->get();
+        $newReviews = Reviews::with('Users')->whereMonth('created_at', Carbon::now()->month)->latest()->get();
+        $newProperty = Property::whereMonth('created_at', Carbon::now()->month)->latest()->get();
         // dd($newUsers);
 
         $data = compact('title', 'menu', 'newUsers', 'newReviews', 'newProperty');
@@ -46,7 +46,7 @@ class AdminController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'email' => 'required|email',
+            'email' => 'required|email|exists:users,email',
             'password' => 'required'
         ]);
 
@@ -83,7 +83,7 @@ class AdminController extends Controller
 
         $title = "Category List";
         $menu = "category";
-        $cate = Category::all();
+        $cate = Category::latest()->get();
 
         $data = compact('title', 'menu', 'cate');
         return view('AdminPanel.category.list', $data);
@@ -196,7 +196,7 @@ class AdminController extends Controller
     {
         $title = "Cities List";
         $menu = "cities";
-        $city = City::all();
+        $city = City::latest()->get();
 
         $data = compact('title', 'menu', 'city');
         return view('AdminPanel.cities.list', $data);
@@ -296,7 +296,7 @@ class AdminController extends Controller
     {
         $title = "Facilities List";
         $menu = "facilities";
-        $faci = Facilities::all();
+        $faci = Facilities::latest()->get();
 
         $data = compact('title', 'menu', 'faci');
         return view('AdminPanel.facilities.list', $data);
@@ -390,7 +390,7 @@ class AdminController extends Controller
     {
         $title = "Properties List";
         $menu = "properties";
-        $pro = Property::with('Cate', 'City')->get();
+        $pro = Property::with('Cate', 'City')->latest()->get();
 
         $data = compact('title', 'menu', 'pro');
         return view('AdminPanel.properties.list', $data);
@@ -614,7 +614,7 @@ class AdminController extends Controller
         $title = "Images Gallary";
         $menu = "gallary";
 
-        $gal = gallary::with('Property')->get();
+        $gal = gallary::with('Property')->latest()->get();
 
         $data = compact('title', 'menu', 'gal');
         return view('AdminPanel.gallary.list', $data);
@@ -747,7 +747,7 @@ class AdminController extends Controller
         $title = "Users List";
         $menu = "users";
         $user = $request->session()->get('AdminUser');
-        $usersData = User::with('Data')->where('type', '!=', 'R')->get()->except($user['id']);
+        $usersData = User::with('Data')->where('type', '!=', 'R')->latest()->get()->except($user['id']);
 
         $data = compact('title', 'menu', 'usersData');
         return view('AdminPanel.users.list', $data);
@@ -763,6 +763,8 @@ class AdminController extends Controller
             $usersData = User::findorfail($id);
             $user_data = UserData::findorfail($id);
             Storage::delete('public/userdata/' . $user_data->image);
+            $user_reviews = Reviews::where('u_id', $id);
+            $user_reviews->delete();
             $usersData->delete();
             $user_data->delete();
         }

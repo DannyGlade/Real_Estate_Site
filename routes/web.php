@@ -177,4 +177,4 @@ Route::middleware(AuthCheck::class)->group(function () {
 });
 
 //if none of above route is used then sended to 404
-Route::get('/{any}', [UserController::class, 'not_found'])->name('not_found');
+Route::get('/{any}', [UserController::class, 'not_found'])->where('any', '.*')->name('not_found');

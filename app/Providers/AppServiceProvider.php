@@ -31,7 +31,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //Sending SiteSettings to every page
-        view()->composer(['layouts.app', 'AdminPanel.layouts.main', 'AdminPanel.AdminUser.AdminLogin', 'User.UserLogIn', 'User.UserSignUp'], function ($view) {
+        view()->composer(['layouts.app', 'AdminPanel.layouts.main', 'AdminPanel.AdminUser.AdminLogin', 'User.UserLogIn', 'User.UserSignUp', 'errors.404'], function ($view) {
             $site_title = SiteSettings::where('key', 'site_title')->first();
             $logo_image = SiteSettings::where('key', 'logo_image')->first();
             $meta_discription = SiteSettings::where('key', 'meta_discription')->first();

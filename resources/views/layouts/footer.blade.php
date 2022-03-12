@@ -6,21 +6,23 @@
                 <h5><i class="fa fa-sitemap" aria-hidden="true"></i> Sitemap</h5>
                 <ul class="nav flex-column">
                     <li class="nav-item mb-2"><a href="{{ route('userHome') }}" class="nav-link p-0 text-muted">Home</a></li>
-                    <li class="nav-item mb-2"><a href="{{ route('show') }}" class="nav-link p-0 text-muted">Properties</a></li>                    
+                    <li class="nav-item mb-2"><a href="{{ route('show') }}" class="nav-link p-0 text-muted">Properties</a></li>
+                    <li class="nav-item mb-2"><a href="{{ route('show_about') }}" class="nav-link p-0 text-muted">About</a></li>
                     <li class="nav-item mb-2"><a href="{{ route('show_faq') }}" class="nav-link p-0 text-muted">FAQs</a></li>
                     <li class="nav-item mb-2"><a href="{{ route('show_terms') }}" class="nav-link p-0 text-muted">Terms</a></li>
-                    <li class="nav-item mb-2"><a href="{{ route('show_about') }}" class="nav-link p-0 text-muted">About</a></li>
                 </ul>
             </div>
 
             <div class="col-3">
-                <h5>Section</h5>
+                <h5>Quick Links</h5>
                 <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+                    <li class="nav-item mb-2"><a href="{{ route('userHome') }}" class="nav-link p-0 text-muted">Home</a></li>
+                    <li class="nav-item mb-2"><a href="{{ route('show') }}" class="nav-link p-0 text-muted">Properties</a></li>
+                    <li class="nav-item mb-2"><a href="{{ route('UserProfile') }}" class="nav-link p-0 text-muted">Profile</a></li>
+                    <li class="nav-item mb-2"><a href="{{ route('show_saved_pro') }}" class="nav-link p-0 text-muted">Saved</a></li>
+                    {{-- <li class="nav-item mb-2"><a href="{{ route('show_about') }}" class="nav-link p-0 text-muted">About</a></li> --}}
+                    {{-- <li class="nav-item mb-2"><a href="{{ route('show_faq') }}" class="nav-link p-0 text-muted">FAQs</a></li> --}}
+                    {{-- <li class="nav-item mb-2"><a href="{{ route('show_terms') }}" class="nav-link p-0 text-muted">Terms</a></li> --}}
                 </ul>
             </div>
 
