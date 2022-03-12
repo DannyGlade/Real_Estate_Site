@@ -1,6 +1,6 @@
-@push('title')
+{{-- @push('title')
     Home
-@endpush
+@endpush --}}
 @include('layouts.header')
 @include('layouts.navbar')
 

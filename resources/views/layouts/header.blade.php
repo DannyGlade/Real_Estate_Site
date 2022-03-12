@@ -10,8 +10,9 @@
     @endif
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="{{ $meta_discription->value ?? '' }}" />
+    <meta name="description" content="{{ $meta_discription->value ?? '' }}@stack('meta')" />
     <title>
+        @stack('title') |
         {{ $title ? $title : '' }} | {{ $site_title->value ?? config('dz.public.title') }}
         {{-- @stack('title') --}}
     </title>

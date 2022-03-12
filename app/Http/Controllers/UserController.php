@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\City;
+use App\Models\cms;
 use App\Models\Facilities;
 use App\Models\gallary;
 use App\Models\Property;
@@ -508,5 +509,21 @@ class UserController extends Controller
 
         $data = compact('title', 'menu');
         return view('frontend.about', $data);
+    }
+    public function show_faq(Request $request)
+    {
+        $title = 'FAQ';
+        $menu = 'none';
+
+        $data = compact('title', 'menu');
+        return view('frontend.faq', $data);
+    }
+    public function show_terms(Request $request)
+    {
+        $title = 'Terms';
+        $menu = 'none';
+
+        $data = compact('title', 'menu');
+        return view('frontend.terms', $data);
     }
 }

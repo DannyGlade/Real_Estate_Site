@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@push('title')
+    {{ $CMS['home_title'] }}
+@endpush
+@push('meta')
+    {{ $CMS['home_meta'] }}
+@endpush
 @section('content_box')
     <main>
         @include('layouts.carousel')
@@ -30,6 +36,30 @@
             </div><!-- /.row -->
 
             <!-- START THE FEATURETTES -->
+
+            <hr class="featurette-divider">
+
+            <div class="row featurette">
+                @if (!empty($CMS['home_image']))
+                    <div class="col-md-5">
+                        <img width="500px" class="h-auto" src="{{ asset('/storage/cms/' . $CMS['home_image']) }}"
+                            alt="Error">
+                    </div>
+                @endif
+                @if (empty($CMS['home_image']))
+                    <div class="col-md-12 d-flex align-items-center">
+                        <div class="text-center w-100" style="text-align: justify">
+                            {!! $CMS['home_content'] !!}
+                        </div>
+                    </div>
+                @else
+                    <div class="col-md-7 d-flex align-items-center">
+                        <div class="w-100" style="text-align: justify">
+                            {!! $CMS['home_content'] !!}
+                        </div>
+                    </div>
+                @endif
+            </div>
 
             <hr class="featurette-divider">
             <div class="row featurette mb-3">
@@ -121,7 +151,7 @@
             @empty
             @endforelse
 
-            <hr class="featurette-divider">
+            {{-- <hr class="featurette-divider">
 
             <div class="row featurette">
                 <div class="col-md-7">
@@ -140,7 +170,7 @@
                     </svg>
 
                 </div>
-            </div>
+            </div> --}}
 
             {{-- <div class="row featurette">
                 <div class="col-md-7">

@@ -54,6 +54,8 @@ Route::post('/property/propSearch', [UserController::class, 'propSearch'])->name
 
 //AboutUs Page
 Route::get('/about', [UserController::class, 'show_about'])->name('show_about');
+Route::get('/faq', [UserController::class, 'show_faq'])->name('show_faq');
+Route::get('/terms', [UserController::class, 'show_terms'])->name('show_terms');
 
 //checking user is loggged in
 Route::middleware([UserCheck::class])->group(function () {
@@ -161,6 +163,12 @@ Route::middleware(AuthCheck::class)->group(function () {
     Route::post('/admin/sitesettings', [SiteController::class, 'save_settings'])->name('save_settings');
     Route::post('/admin/sitesettings/ajaxDelete', [SiteController::class, 'ajaxDelete'])->name('ajaxDelete');
     //Site Settings Ends
+
+    //CMS starts
+    Route::get('/admin/cms', [SiteController::class, 'list_cms'])->name('list_cms');
+    Route::post('/admin/cms', [SiteController::class, 'save_cms'])->name('save_cms');
+    Route::post('/admin/cms/ajaxDelete', [SiteController::class, 'cmsajaxDelete'])->name('cmsajaxDelete');
+    //CMS ends
 
     //Change Password Starts
     Route::get('/admin/chng-password', [AdminController::class, 'chng_password'])->name('chng_password');
