@@ -164,6 +164,8 @@ Route::middleware(AuthCheck::class)->group(function () {
 
     //CMS starts
     Route::get('/admin/cms', [SiteController::class, 'list_cms'])->name('list_cms');
+    Route::post('/admin/cms', [SiteController::class, 'save_cms'])->name('save_cms');
+    Route::post('/admin/cms/ajaxDelete', [SiteController::class, 'cmsajaxDelete'])->name('cmsajaxDelete');
     //CMS ends
 
     //Change Password Starts

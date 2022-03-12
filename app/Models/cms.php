@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class cms extends Model
 {
     use HasFactory;
+
+    protected $table = 'cms';
+
+    protected $fillable = ['key', 'value'];
 }
