@@ -21,6 +21,7 @@
                     <thead>
                         <tr>
                             <th scope="col">Id</th>
+                            <th scope="col">Public</th>
                             <th scope="col">Property</th>
                             <th scope="col">Price ( ₹ )</th>
                             <th scope="col">Featured</th>
@@ -37,6 +38,8 @@
                         @foreach ($pro as $item)
                             <tr>
                                 <th scope="row">{{ $item->id }}</th>
+                                <th scope="row"
+                                    @if ($item->public == 1) class="text-success">Public @else class="text-danger"> Hidden @endif</th>
                                 <th scope="row">{{ $item->title }}</th>
                                 <th scope="row">{{ number_format($item->price) }}</th>
                                 <th scope="row"

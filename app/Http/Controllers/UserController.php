@@ -207,10 +207,14 @@ class UserController extends Controller
     {
         $title = "Home";
         $menu = "home";
-        $featuredPro = Property::with('Cate', 'City')->where('featured', true)->latest()->limit(4)->get();
+        $featuredPro = Property::with('Cate', 'City')
+            ->where('public', true)
+            ->where('featured', true)
+            ->latest()->limit(4)->get();
         $newlyAdded = Property::with('Cate', 'City')
-        // ->where('featured', false)
-        ->latest()->limit(6)->get();
+            ->where('public', true)
+            // ->where('featured', false)
+            ->latest()->limit(6)->get();
         $showcate = Category::latest()->limit(6)->get();
         $catedata = Category::with('Pro')->latest()->limit(3)->get();
 
@@ -221,6 +225,7 @@ class UserController extends Controller
     public function show(Request $request)
     {
         $show = Property::with('Cate', 'City')
+            ->where('public', true)
             ->latest()
             ->paginate(10);
         $title = 'Propeties';
@@ -241,6 +246,7 @@ class UserController extends Controller
         $cate_fltr = $request->route()->parameter('cate');
         $cate = Category::where('slug_name', '=', $cate_fltr)->first();
         $show = Property::with('Cate', 'City')
+            ->where('public', true)
             ->where('category', '=', $cate->id)
             // ->where('featured', false)
             ->latest()
@@ -261,6 +267,7 @@ class UserController extends Controller
         $city_fltr = $request->route()->parameter('city');
         $city = City::where('slug_city', '=', $city_fltr)->first();
         $show = Property::with('Cate', 'City')
+            ->where('public', true)
             ->where('city', '=', $city->id)
             // ->where('featured', false)
             ->latest()
@@ -277,6 +284,7 @@ class UserController extends Controller
     {
         $purpose_fltr = $request->route()->parameter('purpose');
         $show = Property::with('Cate', 'City')
+            ->where('public', true)
             ->where('purpose', '=', $purpose_fltr)
             // ->where('featured', false)
             ->latest()
@@ -376,6 +384,7 @@ class UserController extends Controller
             }
 
             $show = Property::with('Cate', 'City')
+                ->where('public', true)
                 ->where([
                     $cateS,
                     $cityS,
@@ -404,6 +413,7 @@ class UserController extends Controller
             $purposeS = ['purpose', '=', $purpose];
         }
         $show = Property::with('Cate', 'City')
+            ->where('public', true)
             ->where([
                 $purposeS,
                 ['title', 'LIKE', $searchStr]

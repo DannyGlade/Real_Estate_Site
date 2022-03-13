@@ -439,6 +439,7 @@ class AdminController extends Controller
         $pro->cont_em = $request->cont_em;
         $pro->faci = $request->faci ? json_encode($request->faci, true) : null;
         $pro->featured = $request->featured ? true : false;
+        $pro->public = $request->public ? true : false;
         $pro->area = $request->area ? $request->area : null;
         $pro->description = $request->description ? $request->description : null;
         $pro->video = $request->video ? $request->video : null;
@@ -568,6 +569,7 @@ class AdminController extends Controller
         $pro->cont_em = $request->cont_em;
         $pro->faci = json_encode($request->faci, true);
         $pro->featured = $request->featured ? true : false;
+        $pro->public = $request->public ? true : false;
         $pro->area = $request->area ? $request->area : null;
         $pro->description = $request->description ? $request->description : null;
         $pro->video = $request->video ? $request->video : null;

@@ -37,13 +37,24 @@
 
                             <div class="row border-bottom border-2 m-auto mt-3">
                                 <div class="col mb-2  mx-auto">
-                                    <div class="col-md-12">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" name="featured"
+                                    <div class="row mb-2">
+                                        <div class="col-md-6">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="1" name="featured"
                                                 @if (!empty($pro)) @if ($pro->featured == 1) checked @endif @endif>
-                                            <label class="form-check-label">
-                                                Featured
-                                            </label>
+                                                <label class="form-check-label">
+                                                    Featured
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="1" name="public"
+                                                @if (!empty($pro)) @if ($pro->public == 1) checked @endif @endif>
+                                                <label class="form-check-label">
+                                                    Public
+                                                </label>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row mb-2">
