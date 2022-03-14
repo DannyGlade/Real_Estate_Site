@@ -48,6 +48,7 @@
                             <tr>
                                 <th scope="row">{{ $item->id }}</th>
                                 <th scope="row"><img height="100rem" class="rounded"
+                                        style="cursor: pointer"
                                         src="{{ asset('/storage/gallary/' . $item->pro_id . '/' . $item->gal_image) }}"
                                         data-fancybox="gallery"
                                         data-src="{{ asset('/storage/gallary/' . $item->pro_id . '/' . $item->gal_image) }}"

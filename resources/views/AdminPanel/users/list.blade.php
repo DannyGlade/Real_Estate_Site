@@ -89,11 +89,13 @@
                         data: data,
                         dataType: "JSON",
                         success: function(response) {
-                            $('.alert').fadeIn();
-                            alert(response.message);
-                            $('#alert').addClass('alert alert-success')
-                                .removeClass('m-0 border-0 p-0').html('Edited...');
-                            $('.alert').fadeOut(3000);
+                            if (response.status) {
+                                $('.alert').fadeIn();
+                                // alert(response.message);
+                                $('#alert').addClass('alert alert-success')
+                                    .removeClass('m-0 border-0 p-0').html('Edited...');
+                                $('.alert').fadeOut(3000);
+                            }
                         }
                     });
                     old_val = new_val;

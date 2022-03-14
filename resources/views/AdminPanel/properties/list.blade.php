@@ -46,7 +46,9 @@
                                     @if ($item->featured == 1) class="text-success">Active @else class="text-danger"> Disabled @endif</th>
                                 <th scope="row">{{ ucfirst($item->purpose) }}</th>
                                 <th scope="row">{{ $item->Cate->name }}</th>
-                                <th scope="row"><img height="30rem" class="rounded"
+                                <th scope="row"><img height="30rem" class="rounded" style="cursor: pointer"
+                                        data-fancybox="gallery"
+                                        data-src="{{ asset('/storage/property/' . $item->image) }}"
                                         src="{{ asset('/storage/property/' . $item->image) }}" alt="Error"></th>
                                 <th scope="row">{{ $item->City->city }}</th>
                                 <th scope="row"><a href="{{ route('get_gallary', $item->id) }}"
@@ -74,6 +76,7 @@
     <script>
         $(document).ready(function() {
             $('.alert').fadeOut(3000);
+            Fancybox.bind("gallery", {});
         });
     </script>
 @endsection

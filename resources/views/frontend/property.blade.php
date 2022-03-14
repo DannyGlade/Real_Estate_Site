@@ -15,11 +15,11 @@
                     <div class="card mb-3 p-0">
                         <div class="row g-0 mb-2 border-bottom">
                             <div class="col-md-4">
-                                <a href="#">
-                                    <img class="img-fluid rounded-start" data-fancybox="gallery"
+                                {{-- <a href="#"> --}}
+                                    <img class="img-fluid rounded-start" style="cursor: pointer" data-fancybox="gallery"
                                         data-src="{{ asset('/storage/property/' . $item->image) }}"
                                         src="{{ asset('/storage/property/' . $item->image) }}" alt="{{ $item->title }}">
-                                </a>
+                                {{-- </a> --}}
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body">
@@ -122,7 +122,7 @@
                                                         <div class="carousel">
                                                             @forelse ($gals as $gal)
                                                                 <div class="carousel__slide">
-                                                                    <img class="w-100 rounded"
+                                                                    <img class="w-100 rounded"                                                                    
                                                                         src="{{ asset('/storage/gallary/' . $gal->pro_id . '/' . $gal->gal_image) }}"
                                                                         data-fancybox="gallery"
                                                                         data-src="{{ asset('/storage/gallary/' . $gal->pro_id . '/' . $gal->gal_image) }}"
@@ -169,6 +169,7 @@
                                                     <i class="fas fa-drafting-compass"></i> Floorplan :
                                                 </h5>
                                                 <img class="w-100 rounded"
+                                                    style="cursor: pointer"
                                                     src="{{ asset('/storage/property/' . $item->floorplan) }}"
                                                     data-fancybox="gallery"
                                                     data-src="{{ asset('/storage/property/' . $item->floorplan) }}"
