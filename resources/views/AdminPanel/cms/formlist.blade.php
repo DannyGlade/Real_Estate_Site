@@ -11,7 +11,7 @@
                     </ol>
                 </div>
             </div>
-            <div class="{{ session()->get('msgst') ? 'alert  alert-' . session()->get('msgst') : 'm-0 border-0 p-0' }}">
+            <div id="alert" class="{{ session()->get('msgst') ? 'alert  alert-' . session()->get('msgst') : 'm-0 border-0 p-0' }}">
                 {{ session()->get('msg') ?? null }}</div>
             <div class="mt-4">
                 <div class="card" style="width:90%;">
@@ -278,8 +278,15 @@
                         data: data,
                         dataType: "JSON",
                         success: function(response) {
-                            alert(response.message);
-                            $(_this).parent('div').attr('hidden', 'true');
+                            if (response.status) {
+                                $('.alert').fadeIn();
+                                // alert(response.message);
+                                // $(_this).parent('div').attr('hidden', 'true');
+                                $(_this).parent('div').html('');
+                                $('#alert').addClass('alert alert-danger')
+                                    .removeClass('m-0 border-0 p-0').html('Image Deleted...');
+                                $('.alert').fadeOut(3000);
+                            }
                         }
                     });
                 }
