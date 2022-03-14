@@ -12,7 +12,7 @@ I only made it for my College Project, but if you are here that means I might ha
 
 ## Dependencies
 - [Composer v2.2.3^](https://getcomposer.org/download/)
-- [Laravel v8.x](https://laravel.com/docs/8.x#the-laravel-installer)
+- [Laravel v8.x](https://laravel.com/docs/8.x)
 - [Bootstap v5.1.3](https://getbootstrap.com/docs/5.1/getting-started/introduction/)
 - [Bootstrap v5.1 Examples](https://getbootstrap.com/docs/5.1/examples/) (Used Some of these as boiler plate)
 - [Font Awesome](https://fontawesome.com/docs/web/setup/get-started)
@@ -27,7 +27,7 @@ I only made it for my College Project, but if you are here that means I might ha
 ## What needs to be installed...
 - [Composer v2.2.3^](https://getcomposer.org/download/)
 - [Git](https://git-scm.com/downloads)
-- [Laravel v8.x](https://laravel.com/docs/8.x)
+- [Laravel v8.x](https://laravel.com/docs/8.x#the-laravel-installer)
 - [Wamp](https://www.wampserver.com/en/) (I used Wamp you can use Similar ones)
 - Can't remember anything else...
 
