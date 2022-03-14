@@ -11,7 +11,8 @@
                     </ol>
                 </div>
             </div>
-            <div id="alert" class="{{ session()->get('msgst') ? 'alert  alert-' . session()->get('msgst') : 'm-0 border-0 p-0' }}">
+            <div id="alert"
+                class="{{ session()->get('msgst') ? 'alert  alert-' . session()->get('msgst') : 'm-0 border-0 p-0' }}">
                 {{ session()->get('msg') ?? null }}</div>
             <div class="mt-4">
                 <div class="card" style="width:90%;">
@@ -90,7 +91,9 @@
                                                         Remove
                                                     </button>
                                                 @endif
-                                                <img height="200px" class="form-control w-auto"
+                                                <img height="200px" class="form-control w-auto" style="cursor: pointer"
+                                                    data-fancybox="gallery"
+                                                    data-src="{{ asset('/storage/cms/' . $cms['home_image']) }}"
                                                     src="{{ asset('/storage/cms/' . $cms['home_image']) }}" alt="Error">
                                             @endif
                                         </div>
@@ -149,7 +152,9 @@
                                                         Remove
                                                     </button>
                                                 @endif
-                                                <img height="200px" class="form-control w-auto"
+                                                <img height="200px" class="form-control w-auto" style="cursor: pointer"
+                                                    data-fancybox="gallery"
+                                                    data-src="{{ asset('/storage/cms/' . $cms['about_image']) }}"
                                                     src="{{ asset('/storage/cms/' . $cms['about_image']) }}" alt="Error">
                                             @endif
                                         </div>
@@ -254,6 +259,7 @@
         $(document).ready(function() {
             $('.alert').fadeOut(3000);
 
+            Fancybox.bind("gallery", {});
             // var ckeditor = new CKEDITOR
             $(window).on('load', function() {
                 $('.ckeditor').ckeditor();

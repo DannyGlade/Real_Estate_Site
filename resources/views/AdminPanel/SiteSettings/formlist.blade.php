@@ -14,7 +14,8 @@
                     </ol>
                 </div>
             </div>
-            <div id="alert" class="{{ session()->get('msgst') ? 'alert  alert-' . session()->get('msgst') : 'm-0 border-0 p-0' }}">
+            <div id="alert"
+                class="{{ session()->get('msgst') ? 'alert  alert-' . session()->get('msgst') : 'm-0 border-0 p-0' }}">
                 {{ session()->get('msg') ?? null }}</div>
             <div class="mt-4">
                 <div class="card" style="width:90%;">
@@ -34,7 +35,9 @@
                                                 <label for="" class="form-label">Site Title</label>
                                                 <input type="text" class="form-control" name="site_title"
                                                     value="{{ $siteSetting['site_title'] ?? '' }}">
-                                                <div class="text-danger">@error('site_title') * {{ $message }}
+                                                <div class="text-danger">
+                                                    @error('site_title')
+                                                        * {{ $message }}
                                                     @enderror
                                                 </div>
                                             </div>
@@ -42,7 +45,9 @@
                                                 <label for="" class="form-label">Brand Title</label>
                                                 <input type="text" class="form-control" name="brand_title"
                                                     value="{{ $siteSetting['brand_title'] ?? '' }}">
-                                                <div class="text-danger">@error('brand_title') * {{ $message }}
+                                                <div class="text-danger">
+                                                    @error('brand_title')
+                                                        * {{ $message }}
                                                     @enderror
                                                 </div>
                                             </div>
@@ -52,7 +57,9 @@
                                                 <label for="" class="form-label">Meta Discription</label>
                                                 <input type="text" class="form-control" name="meta_discription"
                                                     value="{{ $siteSetting['meta_discription'] ?? '' }}">
-                                                <div class="text-danger">@error('meta_discription') * {{ $message }}
+                                                <div class="text-danger">
+                                                    @error('meta_discription')
+                                                        * {{ $message }}
                                                     @enderror
                                                 </div>
                                             </div>
@@ -60,7 +67,9 @@
                                                 <label for="" class="form-label">Footer Content</label>
                                                 <input type="text" class="form-control" name="footer_content"
                                                     value="{{ $siteSetting['footer_content'] ?? '' }}">
-                                                <div class="text-danger">@error('footer_content') * {{ $message }}
+                                                <div class="text-danger">
+                                                    @error('footer_content')
+                                                        * {{ $message }}
                                                     @enderror
                                                 </div>
                                             </div>
@@ -70,7 +79,9 @@
                                                 <label for="" class="form-label">Site Email</label>
                                                 <input type="text" class="form-control" name="site_email"
                                                     value="{{ $siteSetting['site_email'] ?? '' }}">
-                                                <div class="text-danger">@error('site_email') * {{ $message }}
+                                                <div class="text-danger">
+                                                    @error('site_email')
+                                                        * {{ $message }}
                                                     @enderror
                                                 </div>
                                             </div>
@@ -78,7 +89,9 @@
                                                 <label for="" class="form-label">Site Contact</label>
                                                 <input type="text" class="form-control" name="site_contact"
                                                     value="{{ $siteSetting['site_contact'] ?? '' }}">
-                                                <div class="text-danger">@error('site_contact') * {{ $message }}
+                                                <div class="text-danger">
+                                                    @error('site_contact')
+                                                        * {{ $message }}
                                                     @enderror
                                                 </div>
                                             </div>
@@ -91,7 +104,9 @@
                                                 <label for="" class="form-label">Facebook URL</label>
                                                 <input type="text" class="form-control" name="facebook_url"
                                                     value="{{ $siteSetting['facebook_url'] ?? '' }}">
-                                                <div class="text-danger">@error('facebook_url') * {{ $message }}
+                                                <div class="text-danger">
+                                                    @error('facebook_url')
+                                                        * {{ $message }}
                                                     @enderror
                                                 </div>
                                             </div>
@@ -99,7 +114,9 @@
                                                 <label for="" class="form-label">Instagram URL</label>
                                                 <input type="text" class="form-control" name="instagram_url"
                                                     value="{{ $siteSetting['instagram_url'] ?? '' }}">
-                                                <div class="text-danger">@error('instagram_url') * {{ $message }}
+                                                <div class="text-danger">
+                                                    @error('instagram_url')
+                                                        * {{ $message }}
                                                     @enderror
                                                 </div>
                                             </div>
@@ -109,7 +126,9 @@
                                                 <label for="" class="form-label">Youtube URL</label>
                                                 <input type="text" class="form-control" name="youtube_url"
                                                     value="{{ $siteSetting['youtube_url'] ?? '' }}">
-                                                <div class="text-danger">@error('youtube_url') * {{ $message }}
+                                                <div class="text-danger">
+                                                    @error('youtube_url')
+                                                        * {{ $message }}
                                                     @enderror
                                                 </div>
                                             </div>
@@ -117,7 +136,9 @@
                                                 <label for="" class="form-label">Twitter URL</label>
                                                 <input type="text" class="form-control" name="twitter_url"
                                                     value="{{ $siteSetting['twitter_url'] ?? '' }}">
-                                                <div class="text-danger">@error('twitter_url') * {{ $message }}
+                                                <div class="text-danger">
+                                                    @error('twitter_url')
+                                                        * {{ $message }}
                                                     @enderror
                                                 </div>
                                             </div>
@@ -130,7 +151,10 @@
                                         <div class="input-group">
                                             <input type="file" class="form-control" name="logo_image">
                                         </div>
-                                        <div class="text-danger mt-0">@error('logo_image') * {{ $message }} @enderror
+                                        <div class="text-danger mt-0">
+                                            @error('logo_image')
+                                                * {{ $message }}
+                                            @enderror
                                         </div>
                                     </div>
                                     @if (!empty($siteSetting['logo_image']))
@@ -139,9 +163,10 @@
                                             @if (session()->get('AdminUser')['type'] == 'R')
                                                 <button data-name="Logo Image" data-key="logo_image"
                                                     class="mb-2 btn btn-danger btn-sm ajaxDelete"><i class="fa fa-remove"
-                                                    aria-hidden="true"></i> Remove</button>
+                                                        aria-hidden="true"></i> Remove</button>
                                             @endif
-                                            <img class="form-control"
+                                            <img class="form-control" style="cursor: pointer" data-fancybox="gallery"
+                                                data-src="{{ asset('/storage/siteSettings/' . $siteSetting['logo_image']) }}"
                                                 src="{{ asset('/storage/siteSettings/' . $siteSetting['logo_image']) }}"
                                                 alt="Error">
                                         </div>
@@ -164,6 +189,7 @@
     <script>
         $(document).ready(function() {
             $('.alert').fadeOut(3000);
+            Fancybox.bind("gallery", {});
             $(document).on('click', '.ajaxDelete', function(e) {
                 e.preventDefault();
                 var _this = $(this);
