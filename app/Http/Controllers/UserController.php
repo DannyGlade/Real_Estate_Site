@@ -450,7 +450,7 @@ class UserController extends Controller
                 $saved[$id] = $pro;
                 $res = true;
             }
-            $user = User::with('Data', 'Reviews')->findOrFail($userId);
+            $user = User::with('Data')->findOrFail($userId);
             $request->session()->put('user', $user->toArray());
             $user_data->saved = json_encode($saved, true);
             $user_data->save();
@@ -491,7 +491,7 @@ class UserController extends Controller
             $review->pro_id = $request->pro_id;
             $review->review = $request->review_text;
             $review->save();
-            $user = User::with('Data', 'Reviews')->findOrFail($userId);
+            $user = User::with('Data')->findOrFail($userId);
             $request->session()->put('user', $user->toArray());
 
             $res = ['status' => true, 'review' => $review];
@@ -505,7 +505,7 @@ class UserController extends Controller
             $userId = $request->session()->get('user')['id'];
             $review = Reviews::FindOrFail($id);
             $review->delete();
-            $user = User::with('Data', 'Reviews')->findOrFail($userId);
+            $user = User::with('Data')->findOrFail($userId);
             $request->session()->put('user', $user->toArray());
 
             $res = ['status' => true];
