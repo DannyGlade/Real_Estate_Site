@@ -72,7 +72,7 @@
                     <div class="col-4 mb-4">
                         <div class="card mx-auto shadow">
                             <a href="{{ route('show_pro', $item->title_slug) }}">
-                                <img class="card-img-top" src="{{ asset('/storage/property/' . $item->image) }}"
+                                <img height="300px" class="card-img-top" src="{{ asset('/storage/property/' . $item->image) }}"
                                     alt="{{ $item->title }}">
                             </a>
                             <div class="card-body">
@@ -118,7 +118,7 @@
                             <div class="col-4 mb-4">
                                 <div class="card mx-auto shadow">
                                     <a href="{{ route('show_pro', $item->title_slug) }}">
-                                        <img class="card-img-top"
+                                        <img height="300px" class="card-img-top"
                                             src="{{ asset('/storage/property/' . $item->image) }}"
                                             alt="{{ $item->title }}">
                                     </a>
