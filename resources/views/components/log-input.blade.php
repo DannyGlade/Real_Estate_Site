@@ -7,7 +7,7 @@
         }
     @endphp
     <input class="form-control" type="{{ $type }}" name="{{ $name }}"
-        placeholder="{{ $placeholder }}" value="{{ $finVal }}" {{ $status }} />
+        placeholder="{{ $placeholder }}" value="{{ $finVal }}" {{ $status }} required/>
     <label for="{{ $name }}">{{ $label }}</label>
     <div class="text-danger">
         @error($name)

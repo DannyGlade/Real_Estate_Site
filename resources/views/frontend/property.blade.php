@@ -122,7 +122,7 @@
                                                         <div class="carousel">
                                                             @forelse ($gals as $gal)
                                                                 <div class="carousel__slide">
-                                                                    <img class="w-100 rounded"                                                                    
+                                                                    <img class="w-100 rounded"
                                                                         src="{{ asset('/storage/gallary/' . $gal->pro_id . '/' . $gal->gal_image) }}"
                                                                         data-fancybox="gallery"
                                                                         data-src="{{ asset('/storage/gallary/' . $gal->pro_id . '/' . $gal->gal_image) }}"
@@ -197,12 +197,12 @@
                                             <div class="row">
                                                 <div class="col-6">
                                                     <a href="tel:{{ $item->cont_ph }}"
-                                                        class="btn btn-success mb-1 w-100">
+                                                        class="btn btn-success mb-1 w-auto">
                                                         <i class="fas fa-phone-alt"></i> {{ $item->cont_ph }}</a>
                                                 </div>
                                                 <div class="col-6">
                                                     <a href="mailto:{{ $item->cont_em }}"
-                                                        class="btn btn-primary mb-1 w-100">
+                                                        class="btn btn-primary mb-1 w-auto">
                                                         <i class="fas fa-envelope"></i> {{ $item->cont_em }}</a>
                                                 </div>
                                             </div>
