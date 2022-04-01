@@ -27,7 +27,7 @@
                                 <label for="" class="form-label">Facility</label>
                                 <input type="text" class="form-control" name="faci" value="@if (!empty($faci)){{ $faci->faci }}@else{{ old('faci') }}@endif"
                                     required>
-                                <div class="text-danger">@error('faci') * {{ $message }} @enderror</div>
+                                <div class="text-danger">* @error('faci'){{ $message }} @enderror</div>
                             </div>
                             <div class="col-md-5">
                                 <label for="" class="form-label">Font Awesome</label>
@@ -56,7 +56,7 @@
                                             value="dark">Dark</option>
                                     </select>
                                 </div>
-                                <div class="text-danger">@error('color') * {{ $message }} @enderror</div>
+                                <div class="text-danger">* @error('color'){{ $message }} @enderror</div>
                             </div>
                             <div class="col-12">
                                 <button

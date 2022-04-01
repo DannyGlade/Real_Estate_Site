@@ -61,7 +61,7 @@
                                         <div class="col-md-6">
                                             <label for="" class="form-label"><i class="fas fa-home"></i> Property Title</label>
                                             <input type="text" class="form-control" name="title"
-                                                value="@if (!empty($pro)){{ $pro->title }}@else{{ old('title') }}@endif">
+                                                value="@if (!empty($pro)){{ $pro->title }}@else{{ old('title') }}@endif" required>
                                             <div class="text-danger fst-italic lh-1">* @error('title'){{ $message }} @enderror
                                             </div>
                                         </div>
@@ -70,7 +70,7 @@
                                             <div class="input-group">
                                                 <div class="input-group-text">₹</div>
                                                 <input type="number" class="form-control" name="price" min="0"
-                                                    max="999999999" value="@if (!empty($pro)){{ $pro->price }}@else{{ old('price') }}@endif">
+                                                    max="999999999" value="@if (!empty($pro)){{ $pro->price }}@else{{ old('price') }}@endif" required>
                                             </div>
                                             <div class="text-danger fst-italic lh-1">* @error('price'){{ $message }} @enderror
                                             </div>
@@ -81,7 +81,7 @@
                                             <label class="form-label"><i class="fas fa-sign"></i> Purpose</label>
                                             <div class="input-group">
                                                 <label class="input-group-text">Options</label>
-                                                <select class="form-select" name="purpose">
+                                                <select class="form-select" name="purpose" required>
                                                     <option value="" selected>Choose...</option>
                                                     <option @if (!empty($pro)) @if ($pro->purpose == 'sale') selected @endif @else @if (old('purpose') == 'sale') selected @endif @endif value="sale">Sale</option>
                                                     <option @if (!empty($pro)) @if ($pro->purpose == 'rent') selected @endif @else @if (old('purpose') == 'rent') selected @endif @endif value="rent">Rent</option>
@@ -95,7 +95,7 @@
                                             <label class="form-label"><i class="fas fa-cubes"></i> Category</label>
                                             <div class="input-group">
                                                 <label class="input-group-text">Options</label>
-                                                <select class="form-select" name="category">
+                                                <select class="form-select" name="category" required>
                                                     <option value="" selected>Choose...</option>
                                                     @foreach ($cate as $item)
                                                         @if (!empty($pro))
@@ -126,14 +126,14 @@
                                         <div class="col-md-3">
                                             <div class="form-label"><i class="fas fa-bed"></i> Bed Rooms</div>
                                             <input type="number" class="form-control" value="@if (!empty($pro)){{ $pro->rooms }}@else{{ old('rooms') ?? 1 }}@endif"
-                                                name="rooms" min="1">
+                                                name="rooms" min="1" required>
                                             <div class="text-danger fst-italic lh-1">* @error('rooms'){{ $message }} @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-label"><i class="fas fa-shower"></i> Bath Rooms</div>
                                             <input type="number" class="form-control" value="@if (!empty($pro)){{ $pro->bathrooms }}@else{{ old('bathrooms') ?? 1 }}@endif"
-                                                name="bathrooms" min="1">
+                                                name="bathrooms" min="1" required>
                                             <div class="text-danger fst-italic lh-1">* @error('bathrooms'){{ $message }} @enderror
                                             </div>
                                         </div>
@@ -142,7 +142,7 @@
                                             <div class="input-group">
                                                 <label class="input-group-text">Sq. Ft.</label>
                                                 <input type="number" class="form-control"
-                                                    value="@if (!empty($pro)){{ $pro->area }}@else{{ old('area') ?? 700 }}@endif" name="area" min="700">
+                                                    value="@if (!empty($pro)){{ $pro->area }}@else{{ old('area') ?? 700 }}@endif" name="area" min="700" required>
                                             </div>
                                             <div class="text-danger fst-italic lh-1">* @error('area'){{ $message }} @enderror
                                             </div>
@@ -152,7 +152,7 @@
                                         <div class="col-md-3">
                                             <label class="form-label"><i class="fas fa-city"></i> City</label>
                                             <div class="input-group">
-                                                <select class="form-select" name="city">
+                                                <select class="form-select" name="city" required>
                                                     <option value="" selected>Choose...</option>
                                                     @foreach ($city as $item)
                                                         @if (!empty($pro))
@@ -181,7 +181,7 @@
                                         <div class="col-md-9">
                                             <label class="form-label"><i class="fas fa-map"></i> Address</label>
                                             <input type="text" class="form-control" value="@if (!empty($pro)){{ $pro->address }}@else{{ old('address') }}@endif"
-                                                name="address">
+                                                name="address" required>
                                             <div class="text-danger fst-italic lh-1">* @error('address'){{ $message }} @enderror
                                             </div>
                                         </div>
@@ -189,8 +189,8 @@
                                     <div class="row mb-2">
                                         <div class="col-md-6 mb-2">
                                             <label for="" class="form-label"><i class="fas fa-phone-alt"></i> Contact Phone</label>
-                                            <input type="text" name="cont_ph" value="@if (!empty($pro)){{ $pro->cont_ph }}@else{{ old('cont_ph') }}@endif"
-                                                class="form-control">
+                                            <input type="tel" name="cont_ph" value="@if (!empty($pro)){{ $pro->cont_ph }}@else{{ old('cont_ph') }}@endif"
+                                                class="form-control" required>
                                             <div class="text-danger fst-italic lh-1">* @error('cont_ph'){{ $message }}
                                                 @enderror
                                             </div>
@@ -198,7 +198,7 @@
                                         <div class="col-md-6 mb-2">
                                             <label for="" class="form-label"><i class="fas fa-envelope"></i> Contact Email</label>
                                             <input type="email" name="cont_em" value="@if (!empty($pro)){{ $pro->cont_em }}@else{{ old('cont_em') }}@endif"
-                                                class="form-control">
+                                                class="form-control" required>
                                             <div class="text-danger fst-italic lh-1">* @error('cont_em'){{ $message }}
                                                 @enderror
                                             </div>
@@ -262,7 +262,7 @@
                                         <p class="text-muted form-label">for best output upload [1903 x 513] Image
                                         </p>
                                         <div class="input-group">
-                                            <input type="file" class="form-control" name="fe_image">
+                                            <input type="file" class="form-control" name="fe_image" @if(empty($pro->fe_image)) required @endif>
                                         </div>
                                         <div class="text-danger fst-italic lh-1">* @error('fe_image'){{ $message }} @enderror
                                         </div>
@@ -279,7 +279,7 @@
                                         <p class="text-muted form-label">for best output upload [1920 x 1440] [4:3] Image
                                         </p>
                                         <div class="input-group">
-                                            <input type="file" class="form-control" name="image">
+                                            <input type="file" class="form-control" name="image" @if (empty($pro->image))required @endif>
                                         </div>
                                         <div class="text-danger fst-italic lh-1">* @error('image'){{ $message }} @enderror
                                         </div>

@@ -22,6 +22,9 @@
                                     <button class="btn btn-danger" id="rm-img"><i class="fa fa-trash"></i>
                                         Remove</button>
                                 </div>
+                                @error('image')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="col-8">
                                 <div class="card-body">

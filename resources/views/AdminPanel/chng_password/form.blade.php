@@ -26,7 +26,7 @@
                                     <div class="row mb-3">
                                         <div class="col-md-6">
                                             <label for="" class="form-label">Old Password</label>
-                                            <input type="password" class="form-control" name="old_password">
+                                            <input type="password" class="form-control" name="old_password" required>
                                             <div class="text-danger">
                                                 @error('old_password')
                                                     * {{ $message }}
@@ -37,7 +37,7 @@
                                     <div class="row mb-3">
                                         <div class="col-md-6">
                                             <label for="" class="form-label">New Password</label>
-                                            <input type="password" class="form-control" name="new_password">
+                                            <input type="password" class="form-control" name="new_password" required>
                                             <div class="text-danger">
                                                 @error('new_password')
                                                     * {{ $message }}
@@ -46,7 +46,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <label for="" class="form-label">Confirm New Password</label>
-                                            <input type="password" class="form-control" name="new_password_confirmation">
+                                            <input type="password" class="form-control" name="new_password_confirmation" required>
                                             <div class="text-danger">
                                                 @error('new_password_confirmation')
                                                     * {{ $message }}

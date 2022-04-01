@@ -31,7 +31,7 @@
                                     <label for="" class="form-label">City Name</label>
                                     <input type="text" class="form-control" name="city" value="@if (!empty($city)){{ $city->city }}@else{{ old('city') }}@endif"
                                         required>
-                                    <div class="text-danger">@error('city') * {{ $message }} @enderror</div>
+                                    <div class="text-danger">* @error('city') {{ $message }} @enderror</div>
                                 </div>
                                 <div class="col-12">
                                     <label for="" class="form-label">City Status</label>

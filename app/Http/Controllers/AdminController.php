@@ -370,6 +370,7 @@ class AdminController extends Controller
         $id = $request->route()->parameter('id');
         $request->validate([
             'faci' => 'required|unique:facilities,faci,' . $id,
+            'color' => 'required',
         ]);
         $faci = Facilities::findorfail($id);
         $faci->faci = $request->faci;
@@ -413,14 +414,14 @@ class AdminController extends Controller
             'price' => 'required|numeric|min:0|max:999999999',
             'purpose' => 'required',
             'category' => 'required',
-            'image' => 'mimes:png,jpg',
-            'fe_image' => 'mimes:png,jpg',
+            'image' => 'required|mimes:png,jpg',
+            'fe_image' => 'required|mimes:png,jpg',
             'floorplan' => 'mimes:png,jpg',
             'rooms' => 'required|numeric',
             'bathrooms' => 'required|numeric',
             'city' => 'required',
             'address' => 'required|max:191',
-            'cont_ph' => 'required',
+            'cont_ph' => 'required|min:9|max:11',
             'cont_em' => 'required|email',
             'area' => 'required|numeric',
             // 'description' => 'string',

@@ -31,7 +31,7 @@
                                     <label for="" class="form-label">Category Name</label>
                                     <input type="text" class="form-control" name="name" value="@if (!empty($cate)){{ $cate->name }}@else{{ old('name') }}@endif"
                                         required>
-                                    <div class="text-danger">@error('name') * {{ $message }} @enderror</div>
+                                    <div class="text-danger">* @error('name') {{ $message }} @enderror</div>
                                 </div>
                                 <div class="col-md-12">
                                     <label for="" class="form-label">Category Image</label>
@@ -40,7 +40,7 @@
                                         <input type="file" class="form-control" name="image" id=""
                                             @if (empty($cate))required @endif>
                                     </div>
-                                    <div class="text-danger mt-0">@error('image') * {{ $message }} @enderror</div>
+                                    <div class="text-danger mt-0">* @error('image') {{ $message }} @enderror</div>
                                 </div>
 
                             </div>

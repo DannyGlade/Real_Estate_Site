@@ -263,7 +263,7 @@
                                             <div class="col-11 mb-2">
                                                 <textarea name="review_text" id="review_form_input"
                                                     class="form-control h-100"
-                                                    placeholder="Enter Your Review here..."></textarea>
+                                                    placeholder="Enter Your Review here..." required></textarea>
                                                 <div id="review_form_btns" class="mt-2">
                                                     <div class="d-flex">
                                                         <button class="btn btn-success btn-sm ms-auto">Submit</button>
