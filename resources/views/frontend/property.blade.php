@@ -183,9 +183,11 @@
                                                 </h5>
                                                 <div class="card-text">
                                                     @foreach ($faci as $fac)
-                                                        <button class="btn btn-{{ $fac->color }} m-1 mb-2">
-                                                            {!! $fac->fa !!} {{ $fac->faci }}
-                                                        </button>
+                                                        @if($fac)
+                                                            <button class="btn btn-{{ $fac->color }} m-1 mb-2">
+                                                                {!! $fac->fa !!} {{ $fac->faci }}
+                                                            </button>
+                                                        @endif
                                                     @endforeach
                                                 </div>
                                             </div>

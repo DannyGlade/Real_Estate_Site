@@ -130,13 +130,18 @@ class AdminController extends Controller
 
         if ($valid) {
             $cate = Category::findorfail($id);
-            $image = $cate->image;
-            Storage::delete('public/images/' . $image);
-            $cate->delete();
+            $pro = Property::where('category', $id)->get();
+            if ($pro->count() > 0) {
+                $request->session()->flash('msg', 'Can not delete this category, there are properties listed in this category');
+                $request->session()->flash('msgst', 'danger');                
+            } else {
+                $image = $cate->image;
+                Storage::delete('public/images/' . $image);
+                $cate->delete();
+                $request->session()->flash('msg', 'Deleted...');
+                $request->session()->flash('msgst', 'success');                
+            }            
         }
-
-        $request->session()->flash('msg', 'Deleted...');
-        $request->session()->flash('msgst', 'danger');
 
         return redirect(route('list_category'));
     }
@@ -239,11 +244,16 @@ class AdminController extends Controller
 
         if ($valid) {
             $city = City::findorfail($id);
-            $city->delete();
+            $pro = Property::where('city', $id)->get();
+            if ($pro->count() > 0) {
+                $request->session()->flash('msg', 'Can not delete this city, there are properties listed in this city');
+                $request->session()->flash('msgst', 'danger');                
+            } else {
+                $city->delete();
+                $request->session()->flash('msg', 'Deleted...');
+                $request->session()->flash('msgst', 'success');                
+            }            
         }
-
-        $request->session()->flash('msg', 'Deleted...');
-        $request->session()->flash('msgst', 'danger');
 
         return redirect(route('list_cities'));
     }
