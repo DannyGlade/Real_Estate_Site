@@ -19,11 +19,11 @@
                 <x-log-input type="email" name="email" label="Email address" placeholder="name@example.com" />
                 <x-log-input type="password" name="password" label="Password" placeholder="Password" />
 
-                <div class="checkbox mb-3">
+                {{-- <div class="checkbox mb-3">
                     <label>
-                        <input type="checkbox" value="remember-me"> Remember me
+                        <input type="checkbox" name="remember-me"> Remember me
                     </label>
-                </div>
+                </div> --}}
                 <button class="w-100 btn btn-lg btn-primary" type="submit">Log In</button>
                 <hr class="my-4">
                 <small class="text-muted">By clicking Sign up, you agree to the terms of use.</small>

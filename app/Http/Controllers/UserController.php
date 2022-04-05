@@ -228,7 +228,7 @@ class UserController extends Controller
             ->where('public', true)
             ->latest()
             ->paginate(10);
-        $title = 'Propeties';
+        $title = 'Properties';
         $menu = 'none';
 
         $data = compact('title', 'menu', 'show');
@@ -310,7 +310,7 @@ class UserController extends Controller
         $facis = json_decode($item->faci);
         if (!empty($facis)) {
             foreach ($facis as $key => $value) {
-                $faci[$key] = Facilities::where('slug_faci', '=', $value)->first();
+                $faci[$key] = Facilities::where('slug_faci', '=', $value)->first() ?? null;
             }
         }
         $gals = gallary::with('Pro')->where('pro_id', '=', $item->id)->get();
