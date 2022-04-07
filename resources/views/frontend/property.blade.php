@@ -16,7 +16,7 @@
                         <div class="row g-0 mb-2 border-bottom">
                             <div class="col-md-4">
                                 {{-- <a href="#"> --}}
-                                    <img class="img-fluid rounded-start" style="cursor: pointer" data-fancybox="gallery"
+                                    <img class="img-fluid rounded-start h-100 w-100" style="cursor: pointer" data-fancybox="gallery"
                                         data-src="{{ asset('/storage/property/' . $item->image) }}"
                                         src="{{ asset('/storage/property/' . $item->image) }}" alt="{{ $item->title }}">
                                 {{-- </a> --}}

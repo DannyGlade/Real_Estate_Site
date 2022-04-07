@@ -41,7 +41,7 @@
                                         <div class="col-md-6">
                                             <div class="form-check">
                                                 <input class="form-check-input" type="checkbox" value="1" name="featured"
-                                                @if (!empty($pro)) @if ($pro->featured == 1) checked @endif @endif>
+                                                @if (!empty($pro)) @if ($pro->featured == 1) checked @endif @else {{ old('featured') ? 'checked' : '' }} @endif>
                                                 <label class="form-check-label">
                                                     Featured
                                                 </label>
@@ -50,7 +50,7 @@
                                         <div class="col-md-6">
                                             <div class="form-check">
                                                 <input class="form-check-input" type="checkbox" value="1" name="public"
-                                                @if (!empty($pro)) @if ($pro->public == 1) checked @endif @endif>
+                                                @if (!empty($pro)) @if ($pro->public == 1) checked @endif @else {{ old('public') ? 'checked' : '' }} @endif>
                                                 <label class="form-check-label">
                                                     Public
                                                 </label>
