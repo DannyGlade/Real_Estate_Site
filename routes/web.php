@@ -87,7 +87,7 @@ Route::middleware([UserCheck::class])->group(function () {
 
 //admin login
 Route::get('/admin/login', [AdminController::class, 'loginPage'])->name('AdminLoginPage');
-Route::post('/admin/login', [AdminController::class, 'login']);
+Route::post('/admin/login', [AdminController::class, 'login'])->name('AdminLogin');
 
 //All Admin routes are here
 

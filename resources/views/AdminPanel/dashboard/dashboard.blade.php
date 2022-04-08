@@ -85,20 +85,22 @@
                             <div class="card-body">
                                 <div class="row">
                                     @forelse ($newUsers as $User)
-                                        <div class="col-3 mb-2">
-                                            <img class="rounded-circle"
-                                                src="{{ !empty($User->Data->image) ? asset('/storage/userdata/' . $User->Data->image) : asset('stockUser.png') }}"
-                                                width="60px" alt="No Img">
-                                        </div>
-                                        <div class="col-9 mb-2">
-                                            <div class="d-flex align-items-center">
-                                                <div class="w-100">
-                                                    <div class="fs-6">{{ $User->name }}</div>
-                                                    <a class="text-muted"
-                                                        href="mailto:{{ $User->email }}">{{ $User->email }}</a>
+                                        @if ($loop->index < 6)
+                                            <div class="col-3 mb-2">
+                                                <img class="rounded-circle"
+                                                    src="{{ !empty($User->Data->image) ? asset('/storage/userdata/' . $User->Data->image) : asset('stockUser.png') }}"
+                                                    width="60px" alt="No Img">
+                                            </div>
+                                            <div class="col-9 mb-2">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="w-100">
+                                                        <div class="fs-6">{{ $User->name }}</div>
+                                                        <a class="text-muted"
+                                                            href="mailto:{{ $User->email }}">{{ $User->email }}</a>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        @endif
                                     @empty
                                         <div class="col-12">
                                             <h6>No new Users This month.</h6>
@@ -120,15 +122,17 @@
                             <div class="card-body">
                                 <div class="row">
                                     @forelse ($newReviews as $review)
-                                        <div class="col-3 text-center mb-2">
-                                            <img class="rounded-circle"
-                                                src="{{ !empty($review->Users[0]->Data->image)? asset('/storage/userdata/' . $review->Users[0]->Data->image): asset('stockUser.png') }}"
-                                                width="60px" alt="No Img">
-                                        </div>
-                                        <div class="col-9 mb-2">
-                                            <div class="fs-6">{{ $review->Users[0]->name }}</div>
-                                            {{ $review->review }}
-                                        </div>
+                                        @if ($loop->index < 6)
+                                            <div class="col-3 text-center mb-2">
+                                                <img class="rounded-circle"
+                                                    src="{{ !empty($review->Users[0]->Data->image)? asset('/storage/userdata/' . $review->Users[0]->Data->image): asset('stockUser.png') }}"
+                                                    width="60px" alt="No Img">
+                                            </div>
+                                            <div class="col-9 mb-2">
+                                                <div class="fs-6">{{ $review->Users[0]->name }}</div>
+                                                {{ $review->review }}
+                                            </div>
+                                        @endif
                                     @empty
                                         <div class="col-12">
                                             <h6>No new reviews this month.</h6>
@@ -151,15 +155,18 @@
                             <div class="card-body">
                                 <div class="row">
                                     @forelse ($newProperty as $property)
-                                        <div class="col-3 mb-2">
-                                            <img width="60px" class="rounded-circle"
-                                                src="{{ asset('/storage/property/' . $property->image) }}" alt="Error">
-                                        </div>
-                                        <div class="col-9 mb-2">
-                                            <div class="fs-6">{{ $property->title }}</div>
-                                            <a class="text-muted"
-                                                href="{{ route('edit_properties', $property->id) }}">See more</a>
-                                        </div>
+                                        @if ($loop->index < 6)
+                                            <div class="col-3 mb-2">
+                                                <img width="60px" class="rounded-circle"
+                                                    src="{{ asset('/storage/property/' . $property->image) }}"
+                                                    alt="Error">
+                                            </div>
+                                            <div class="col-9 mb-2">
+                                                <div class="fs-6">{{ $property->title }}</div>
+                                                <a class="text-muted"
+                                                    href="{{ route('edit_properties', $property->id) }}">See more</a>
+                                            </div>
+                                        @endif
                                     @empty
                                         <div class="col-12">
                                             <h6>No new properties this month.</h6>

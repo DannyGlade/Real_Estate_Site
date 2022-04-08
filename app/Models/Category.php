@@ -13,6 +13,8 @@ class Category extends Model
 
     public function Pro()
     {
-        return $this->hasMany(Property::class, 'category', 'id')->latest()->limit(6);
+        return $this->hasMany(Property::class, 'category', 'id')->latest();
+            // ->limit(6)
+            // ->get();
     }
 }

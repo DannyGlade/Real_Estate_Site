@@ -12,7 +12,7 @@
                 <div class="col-md-10 mx-auto col-lg-5">
                     <h1 class="display-5 lh-1 mb-3">Welcome <b class="fw-bold ">Admin</b></h1>
                     <form class="p-4 p-md-5 border rounded-3 bg-light" method="POST"
-                        action="{{ url('/admin/login') }}">
+                        action="{{ route('AdminLogin') }}">
 
                         @csrf
                         <x-log-input type="email" name="email" label="Email address" placeholder="name@example.com" />

@@ -133,14 +133,14 @@ class AdminController extends Controller
             $pro = Property::where('category', $id)->get();
             if ($pro->count() > 0) {
                 $request->session()->flash('msg', 'Can not delete this category, there are properties listed in this category');
-                $request->session()->flash('msgst', 'danger');                
+                $request->session()->flash('msgst', 'danger');
             } else {
                 $image = $cate->image;
                 Storage::delete('public/images/' . $image);
                 $cate->delete();
                 $request->session()->flash('msg', 'Deleted...');
-                $request->session()->flash('msgst', 'success');                
-            }            
+                $request->session()->flash('msgst', 'success');
+            }
         }
 
         return redirect(route('list_category'));
@@ -247,12 +247,12 @@ class AdminController extends Controller
             $pro = Property::where('city', $id)->get();
             if ($pro->count() > 0) {
                 $request->session()->flash('msg', 'Can not delete this city, there are properties listed in this city');
-                $request->session()->flash('msgst', 'danger');                
+                $request->session()->flash('msgst', 'danger');
             } else {
                 $city->delete();
                 $request->session()->flash('msg', 'Deleted...');
-                $request->session()->flash('msgst', 'success');                
-            }            
+                $request->session()->flash('msgst', 'success');
+            }
         }
 
         return redirect(route('list_cities'));
@@ -513,6 +513,8 @@ class AdminController extends Controller
                 $gal = gallary::where('pro_id', $id);
                 $gal->delete();
             }
+            $reviews = Reviews::where('pro_id', $id);
+            $reviews->delete();
             $pro->delete();
         }
 
@@ -708,7 +710,7 @@ class AdminController extends Controller
             // ->where('pro_id', $id)
             ->latest()
             ->get();
-        // dd($reviews);
+        // dd($reviews->toArray());
 
         $data = compact('title', 'menu', 'reviews');
         return view('AdminPanel.reviews.list', $data);

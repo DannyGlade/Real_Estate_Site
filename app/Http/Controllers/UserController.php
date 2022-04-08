@@ -36,8 +36,9 @@ class UserController extends Controller
     {
         $request->validate([
             'email' => 'required|email|exists:users,email',
-            'password' => 'required'
+            'password' => 'required',
         ]);
+        // dd('error');
 
         $user = User::where('email', $request->email)->first();
 
@@ -45,8 +46,8 @@ class UserController extends Controller
             $id = $user->id;
             $user = User::with('Data', 'Reviews')->findOrFail($id);
             $request->session()->put('user', $user->toArray());
-            // return redirect(route('userHome'));
-            return redirect()->intended();
+            return redirect(route('userHome'));
+            // return redirect()->intended();
         } else {
             $request->validate([
                 'password' => 'password'
@@ -159,7 +160,7 @@ class UserController extends Controller
     public function del_profile_img(Request $request)
     {
         if ($request->ajax()) {
-            $userId = $request->session()->get('user')->id;
+            $userId = $request->session()->get('user')['id'];
             $user_data = UserData::find($userId);
             $res = Storage::delete('public/userdata/' . $user_data->image);
             if ($res) {
@@ -216,7 +217,9 @@ class UserController extends Controller
             // ->where('featured', false)
             ->latest()->limit(6)->get();
         $showcate = Category::latest()->limit(6)->get();
-        $catedata = Category::with('Pro')->latest()->limit(3)->get();
+        $catedata = Category::with('Pro')->latest()
+            // ->limit(3)
+            ->get();
 
         $data = compact('title', 'menu', 'featuredPro', 'newlyAdded', 'showcate', 'catedata');
         return view('frontend.home', $data);

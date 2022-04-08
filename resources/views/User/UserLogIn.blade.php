@@ -19,6 +19,27 @@
                 <x-log-input type="email" name="email" label="Email address" placeholder="name@example.com" />
                 <x-log-input type="password" name="password" label="Password" placeholder="Password" />
 
+                {{-- <div class="form-floating mb-3">
+                    <input class="form-control" type="email" name="email" placeholder="name@example.com"
+                        value="{{ old('email') }}" required />
+                    <label for="email">Email address</label>
+                    <div class="text-danger">
+                        @error('email')
+                            {{ $message }}
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input class="form-control" type="password" name="password" placeholder="Password" required />
+                    <label for="password">Password</label>
+                    <div class="text-danger">
+                        @error('password')
+                            {{ $message }}
+                        @enderror
+                    </div>
+                </div> --}}
+
                 {{-- <div class="checkbox mb-3">
                     <label>
                         <input type="checkbox" name="remember-me"> Remember me
@@ -27,7 +48,8 @@
                 <button class="w-100 btn btn-lg btn-primary" type="submit">Log In</button>
                 <hr class="my-4">
                 <small class="text-muted">By clicking Sign up, you agree to the terms of use.</small>
-                <small class="text-muted">Don't have an account? <a href="{{ route('UserSignupForm') }}">Sign Up</a></small>
+                <small class="text-muted">Don't have an account? <a href="{{ route('UserSignupForm') }}">Sign
+                        Up</a></small>
             </form>
         </div>
     </div>
