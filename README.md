@@ -63,6 +63,10 @@ composer install
 ```bash
 php artisan migrate
 ```
+2. Use below Command to Link Storage to Public folder
+```bash
+php artisan storage:link
+```
 
 ### Serve Project
 1. Use below Command ( [Wamp](https://www.wampserver.com/en/)/Other Should be Runnig ) to run project...
