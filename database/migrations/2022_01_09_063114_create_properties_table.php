@@ -15,6 +15,7 @@ class CreatePropertiesTable extends Migration
     {
         Schema::create('properties', function (Blueprint $table) {
             $table->id();
+            $table->boolean('public')->default(1);
             $table->string('title');
             $table->string('title_slug');
             $table->decimal('price', 10, 2);
@@ -22,10 +23,14 @@ class CreatePropertiesTable extends Migration
             $table->enum('purpose', ['sale', 'rent', 'pg']);
             $table->bigInteger('category');
             $table->string('image')->nullable();
+            $table->string('fe_image')->nullable();
+            $table->string('faci')->nullable();
             $table->integer('rooms');
             $table->integer('bathrooms');
             $table->bigInteger('city');
             $table->string('address');
+            $table->string('cont_ph')->nullable();
+            $table->string('cont_em')->nullable();
             $table->integer('area')->nullable();
             $table->text('description')->nullable();
             $table->text('video')->nullable();

@@ -17,6 +17,7 @@ class CreateUserDataTable extends Migration
             $table->id();
             $table->string('image')->nullable();
             $table->string('about')->nullable();
+            $table->text('saved')->nullable();
             $table->timestamps();
         });
     }

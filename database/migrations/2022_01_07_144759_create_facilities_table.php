@@ -17,6 +17,8 @@ class CreateFacilitiesTable extends Migration
             $table->id();
             $table->string('faci')->unique();
             $table->string('slug_faci');
+            $table->string('fa')->nullable();
+            $table->string('color')->nullable();
             $table->timestamps();
         });
     }
