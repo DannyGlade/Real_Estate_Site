@@ -1,9 +1,9 @@
 @extends('layouts.app')
 @push('title')
-    {{ $CMS['home_title'] }}
+    {{ $CMS['home_title'] ?? '' }}
 @endpush
 @push('meta')
-    {{ $CMS['home_meta'] }}
+    {{ $CMS['home_meta'] ?? '' }}
 @endpush
 @section('content_box')
     <main>
@@ -18,7 +18,7 @@
                     <h1>Categories</h1>
                 </div>
                 <div id="cat_cara" class="carousel">
-                    @foreach ($showcate as $item)
+                    @forelse ($showcate as $item)
                         <div class="carousel__slide" style="width: 350px">
                             {{-- <div class=""> --}}
                             <div class="shadow w-100 mx-auto">
@@ -31,7 +31,18 @@
                             </div>
                             {{-- </div><!-- /.col-lg-4 --> --}}
                         </div>
-                    @endforeach
+                    @empty
+                    <div class="carousel__slide" style="width: 350px">
+                        <div class="shadow w-100 mx-auto">
+                            {{-- <a class="" href="{{ route('show_category', $item->slug_name) }}">
+                                <img style="height: 100%" class="w-100 rounded-top"
+                                    src="{{ asset('/storage/images/' . $item->image) }}" alt="{{ $item->name }}">
+                            </a> --}}
+                            <a class="btn btn-outline-primary rounded-bottom btn-lg w-100"
+                                href="">No Categories</a>
+                        </div>
+                    </div>
+                    @endforelse
                 </div>
             </div><!-- /.row -->
 
@@ -46,7 +57,7 @@
                             alt="Error">
                     </div>
                 @endif
-                @if (empty($CMS['home_image']))
+                @if (!empty($CMS['home_image']))
                     <div class="col-md-12 d-flex align-items-center">
                         <div class="text-center w-100" style="text-align: justify">
                             {!! $CMS['home_content'] !!}
@@ -55,7 +66,7 @@
                 @else
                     <div class="col-md-7 d-flex align-items-center">
                         <div class="w-100" style="text-align: justify">
-                            {!! $CMS['home_content'] !!}
+                            {!! $CMS['home_content'] ?? '' !!}
                         </div>
                     </div>
                 @endif
@@ -68,12 +79,12 @@
                 </div>
             </div>
             <div class="row featurette">
-                @foreach ($newlyAdded as $item)
+                @forelse ($newlyAdded as $item)
                     <div class="col-4 mb-4">
                         <div class="card mx-auto shadow">
                             <a href="{{ route('show_pro', $item->title_slug) }}">
-                                <img height="300px" class="card-img-top" src="{{ asset('/storage/property/' . $item->image) }}"
-                                    alt="{{ $item->title }}">
+                                <img height="300px" class="card-img-top"
+                                    src="{{ asset('/storage/property/' . $item->image) }}" alt="{{ $item->title }}">
                             </a>
                             <div class="card-body">
                                 <h4 class="card-title mb-1">{{ $item->title }}</h4>
@@ -98,7 +109,13 @@
                             </div>
                         </div>
                     </div>
-                @endforeach
+                @empty
+                    {{-- <div class="card mx-auto shadow">
+                        <div class="card mx-auto shadow"> --}}
+                    <h4>Nothing new added recently...</h4>
+                    {{-- </div>
+                    </div> --}}
+                @endforelse
             </div>
 
             @forelse ($catedata as $key => $cate)

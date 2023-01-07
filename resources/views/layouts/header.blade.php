@@ -3,7 +3,7 @@
 
 <head>
 
-    @if ($logo_image->value)
+    @if (!empty($logo_image->value))
         <link rel="icon" type="image/x-icon" href="{{ asset('/storage/siteSettings/' . $logo_image->value) }}">
     @else
         <link rel="icon" href="favicon.ico" type="image/x-icon">

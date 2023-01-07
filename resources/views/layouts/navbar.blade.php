@@ -3,7 +3,7 @@
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
-                @if ($logo_image->value)
+                @if (!empty($logo_image->value))
                     <a class="navbar-brand" href="{{ route('userHome') }}">
                         <img style="height: 40px" src="{{ asset('storage/siteSettings/' . $logo_image->value) }}"
                             alt="{{ $brand_title->value ?? 'DG-Estate' }}">

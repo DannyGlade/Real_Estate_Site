@@ -39,7 +39,7 @@
 
             <div class="col-4 offset-1">
                 <div class="mb-3 row">
-                    @if ($logo_image->value)
+                    @if (!empty($logo_image->value))
                         <div class="col-2 me-3">
                             <a class="navbar-brand" href="{{ route('userHome') }}">
                                 <img style="height: 80px" src="{{ asset('storage/siteSettings/' . $logo_image->value) }}"
@@ -55,13 +55,13 @@
                 </div>
                 <div class="mb-3">
                     <h5 class="mb-3"><i class="far fa-address-book"></i> Contact Us</h5>
-                    @if ($contacts['phone']->value)
+                    @if (!empty($contacts['phone']->value))
                         <h6 class="mb-2">
                             <a class="btn btn-outline-success btn-sm"
                                 href="tel:{{ $contacts['phone']->value }}">
                                 <i class="fas fa-phone-alt"></i> {{ $contacts['phone']->value }}</a></h6>
                     @endif
-                    @if ($contacts['email']->value)
+                    @if (!empty($contacts['email']->value))
                         <h6 class="mb-2">
                             <a class="btn btn-outline-primary btn-sm"
                                 href="mailto:{{ $contacts['email']->value }}">
