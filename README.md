@@ -91,9 +91,69 @@ admin123
 Update CMS and Site Settings inside Admin Panel (/admin/dashboard) Once (empty or filled doesn't matter), and then goto frontend
 > when project loads for first time db won't have values of CMS and Site setting, by updating those fields will be created, so frontend wouldn't show errors after that...
 
-I am writing this documentaion while this project is still in making, because I was bored...
+Reach out if you face any problems, Here are some Screenshots of this site with some dummy data, for more detailed documentation go to [Documentation](/Documentation)
 
-I will add more soon, If my mind says, lol...
+### Home Page
+<img width="452" alt="image" src="https://github.com/DannyGlade/Real_Estate_Site/assets/82282219/1dbf28b5-4a5e-4822-827b-00339ad6a785">
+<img width="452" alt="image" src="https://github.com/DannyGlade/Real_Estate_Site/assets/82282219/657bc271-165d-47e9-9da1-6a641d581d46">
+<img width="452" alt="image" src="https://github.com/DannyGlade/Real_Estate_Site/assets/82282219/29f17a70-1b75-48ba-9399-1ad6714f6925">
+<img width="452" alt="image" src="https://github.com/DannyGlade/Real_Estate_Site/assets/82282219/1478f847-9851-4a78-8233-20b590d7d8d2">
+
+### Properties Page
+<img width="452" alt="image" src="https://github.com/DannyGlade/Real_Estate_Site/assets/82282219/bae2a283-29e3-40ac-9b5d-f4482ac9ed5c">
+<img width="452" alt="image" src="https://github.com/DannyGlade/Real_Estate_Site/assets/82282219/993809d4-c9f9-4e25-8cea-3796168f75b2">
+<img width="452" alt="image" src="https://github.com/DannyGlade/Real_Estate_Site/assets/82282219/2f997e8c-7617-4f1a-9848-5bb8eb6469f2">
+<img width="452" alt="image" src="https://github.com/DannyGlade/Real_Estate_Site/assets/82282219/1ce4b7b2-c6f6-47f3-abb7-4c090495672d">
+<img width="452" alt="image" src="https://github.com/DannyGlade/Real_Estate_Site/assets/82282219/d74869b4-4222-49e1-afd5-c36b612c7ed9">
+
+### Login/Signup Page
+<img width="452" alt="image" src="https://github.com/DannyGlade/Real_Estate_Site/assets/82282219/503d8ca5-b15f-477e-8929-c5d2c997a8e4">
+
+### Profile Page
+<img width="452" alt="image" src="https://github.com/DannyGlade/Real_Estate_Site/assets/82282219/2086034c-b170-41c1-8017-8280928a3760">
+
+### Saved Properties Page
+<img width="452" alt="image" src="https://github.com/DannyGlade/Real_Estate_Site/assets/82282219/641a89a1-7a40-4771-8d16-0a4440e3e11a">
+
+### About Us/FAQs/Terms Pages
+<img width="452" alt="image" src="https://github.com/DannyGlade/Real_Estate_Site/assets/82282219/a384acd8-994f-4d9f-a8ba-5a4b9c261edd">
+<img width="452" alt="image" src="https://github.com/DannyGlade/Real_Estate_Site/assets/82282219/67557b0e-db15-46aa-8cab-2816d6015e66">
+<img width="452" alt="image" src="https://github.com/DannyGlade/Real_Estate_Site/assets/82282219/da3943ee-fae7-43ff-a789-2affeafe3984">
+
+### CMS
+<img width="452" alt="image" src="https://github.com/DannyGlade/Real_Estate_Site/assets/82282219/be3a86ca-a896-4ac4-b8de-5218457b76da">
+<img width="452" alt="image" src="https://github.com/DannyGlade/Real_Estate_Site/assets/82282219/e05e2170-3eb3-4719-a485-4d861c685bb0">
+<img width="452" alt="image" src="https://github.com/DannyGlade/Real_Estate_Site/assets/82282219/c7b1dcf6-8de6-437d-9241-53229927b67c">
+<img width="452" alt="image" src="https://github.com/DannyGlade/Real_Estate_Site/assets/82282219/996f47fd-ec3f-4ec0-9bf0-ff84fa76eda6">
+<img width="452" alt="image" src="https://github.com/DannyGlade/Real_Estate_Site/assets/82282219/8805529c-aa10-48e0-a779-430742434482">
+<img width="452" alt="image" src="https://github.com/DannyGlade/Real_Estate_Site/assets/82282219/30434b2b-5a9f-441a-9223-682db1c5ead4">
+<img width="452" alt="image" src="https://github.com/DannyGlade/Real_Estate_Site/assets/82282219/1b3753ae-f0fc-489d-8f69-878245643fd5">
+<img width="452" alt="image" src="https://github.com/DannyGlade/Real_Estate_Site/assets/82282219/6c6394f6-ad70-4d1c-9697-c29d848edd1b">
+<img width="452" alt="image" src="https://github.com/DannyGlade/Real_Estate_Site/assets/82282219/7f1fec5d-9212-44f1-93f1-0faab061aa66">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 If You are still reading, then Thanks and Welcome...
 
